@@ -1,0 +1,15 @@
+{
+  "license": "Apache-2.0",
+  "devDependencies": {
+
+  },
+  "author": "",
+  "name": "@react-native-community/netinfo",
+  "description": "Please describe the basic information.",
+  "main": "ts.ts",
+  "version": "1.0.0",
+  "dependencies": {
+    "@rnoh/react-native-openharmony": "file:../react_native_openharmony_release.har"
+  },
+  "types": 'har'
+}

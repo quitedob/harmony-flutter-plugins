@@ -1,0 +1,23 @@
+{
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "jsx": "react",
+    "sourceMap": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/__tests__/*",
+    "node_modules/**",
+    "example*/**",
+    "android/**",
+    "ios/**",
+    "dist/**",
+    "**/.*/**",
+    "**/*.test.*",
+    "**/*.spec.*"
+  ]
+}

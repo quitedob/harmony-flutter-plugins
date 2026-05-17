@@ -1,0 +1,244 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rn-ohos-adaptation/02-planning.schema.json",
+  "title": "Planning Stage Output",
+  "description": "React Native 模块鸿蒙适配方案制定阶段（阶段2）的产物。包含 API 映射、依赖替代方案、权限映射、实现策略等，指导后续 coding-library 阶段的编码工作。",
+  "version": "1.0.0",
+  "type": "object",
+  "required": [
+    "target_module_types",
+    "ohos_api_mapping",
+    "native_dependency_mapping",
+    "permission_mapping",
+    "implementation_strategy",
+    "risk_items"
+  ],
+  "properties": {
+    "target_module_types": {
+      "type": "array",
+      "description": "适配目标类型列表（一对多，仅新架构类型）",
+      "items": {
+        "type": "string",
+        "enum": ["turbo-module", "fabric-component", "cpp-turbo-module", "fabric-cpp-component", "js-only"]
+      }
+    },
+    "migration_plan": {
+      "type": ["object", "null"],
+      "description": "新架构迁移规划（arch_type=old-arch 时非空）",
+      "properties": {
+        "needed": { "type": "boolean" },
+        "spec_files": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/MigrationSpecFile" }
+        },
+        "js_changes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/MigrationJsChange" }
+        },
+        "package_json_config": { "$ref": "#/$defs/MigrationPackageJsonConfig" }
+      },
+      "additionalProperties": false
+    },
+    "ohos_api_mapping": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ApiMapping" }
+    },
+    "native_dependency_mapping": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/NativeDependencyMapping" }
+    },
+    "permission_mapping": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/PermissionMapping" }
+    },
+    "reference_plugins": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ReferencePlugin" }
+    },
+    "implementation_strategy": {
+      "$ref": "#/$defs/ImplementationStrategy"
+    },
+    "risk_items": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/RiskItem" }
+    },
+    "example_deps_solutions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ExampleDepSolution" }
+    },
+    "implementation_notes": {
+      "type": ["string", "null"]
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "MigrationSpecFile": {
+      "type": "object",
+      "required": ["source_type", "target_type", "name"],
+      "properties": {
+        "source_type": {
+          "type": "string",
+          "enum": ["native-module", "native-ui-component"],
+          "description": "原模块类型"
+        },
+        "target_type": {
+          "type": "string",
+          "enum": ["turbo-module", "fabric-component"],
+          "description": "迁移目标类型"
+        },
+        "name": { "type": "string", "description": "Spec 文件名（不含扩展名）" },
+        "methods": {
+          "type": "array",
+          "items": { "type": "object" },
+          "description": "方法签名列表"
+        },
+        "target_path": { "type": "string", "description": "Spec 文件放置路径" }
+      },
+      "additionalProperties": false
+    },
+    "MigrationJsChange": {
+      "type": "object",
+      "required": ["file", "change_type"],
+      "properties": {
+        "file": { "type": "string", "description": "需修改的 JS/TS 文件路径" },
+        "change_type": {
+          "type": "string",
+          "enum": ["modify_export", "add_import", "replace_native_modules"],
+          "description": "修改类型"
+        },
+        "description": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "MigrationPackageJsonConfig": {
+      "type": "object",
+      "properties": {
+        "harmony_codegenConfig": { "type": "object" }
+      },
+      "additionalProperties": true
+    },
+    "ApiMapping": {
+      "type": "object",
+      "required": ["feature", "ohos_module", "ohos_api", "ohos_import", "since_version", "syscap", "is_async", "confidence", "source"],
+      "properties": {
+        "feature": { "type": "string" },
+        "turbo_module_method": { "type": ["string", "null"], "description": "关联的 TurboModule 方法名" },
+        "android_api": { "type": ["string", "null"] },
+        "ios_api": { "type": ["string", "null"] },
+        "ohos_module": { "type": "string" },
+        "ohos_api": { "type": "string" },
+        "ohos_import": { "type": "string" },
+        "file_path": { "type": ["string", "null"] },
+        "since_version": { "type": "integer", "minimum": 1 },
+        "syscap": { "type": "string" },
+        "required_permission": { "type": ["string", "null"] },
+        "is_async": { "type": "boolean" },
+        "confidence": { "type": "string", "enum": ["high", "medium", "low"] },
+        "source": { "type": "string", "enum": ["mapping_db", "sdk_search", "doc_search", "finished_lookup"] },
+        "notes": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "NativeDependencyMapping": {
+      "type": "object",
+      "required": ["original_platform", "original_lib", "original_usage", "ohos_solution_type", "confidence"],
+      "properties": {
+        "original_platform": { "type": "string", "enum": ["android", "ios", "cpp"] },
+        "original_lib": { "type": "string" },
+        "original_usage": { "type": "string" },
+        "ohos_solution_type": { "type": "string", "enum": ["ohpm_package", "system_api", "custom_implementation", "not_available"] },
+        "ohos_package": { "type": ["string", "null"] },
+        "ohos_module": { "type": ["string", "null"] },
+        "install_command": { "type": ["string", "null"] },
+        "confidence": { "type": "string", "enum": ["high", "medium", "low"] },
+        "notes": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "PermissionMapping": {
+      "type": "object",
+      "required": ["source_platform", "source_permission", "ohos_permission", "permission_level", "needs_user_grant"],
+      "properties": {
+        "source_platform": { "type": "string", "enum": ["android", "ios"] },
+        "source_permission": { "type": "string" },
+        "ohos_permission": { "type": "string" },
+        "permission_level": { "type": "string", "enum": ["normal", "restricted"] },
+        "needs_user_grant": { "type": "boolean" },
+        "notes": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "ReferencePlugin": {
+      "type": "object",
+      "required": ["name", "url", "relevance"],
+      "properties": {
+        "name": { "type": "string" },
+        "url": { "type": "string" },
+        "relevance": { "type": "string", "enum": ["direct", "similar", "partial"] },
+        "key_patterns": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "ImplementationStrategy": {
+      "type": "object",
+      "required": ["approach"],
+      "properties": {
+        "approach": { "type": "string" },
+        "architecture_decisions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["topic", "decision", "rationale"],
+            "properties": {
+              "topic": { "type": "string" },
+              "decision": { "type": "string" },
+              "rationale": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "planned_files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["path", "purpose"],
+            "properties": {
+              "path": { "type": "string" },
+              "purpose": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "module_json5_config": {
+          "type": "object",
+          "properties": {
+            "permissions": { "type": "array", "items": { "type": "string" } },
+            "syscap_requirements": { "type": "array", "items": { "type": "string" } }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "RiskItem": {
+      "type": "object",
+      "required": ["description", "severity"],
+      "properties": {
+        "description": { "type": "string" },
+        "severity": { "type": "string", "enum": ["high", "medium", "low"] },
+        "mitigation": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "ExampleDepSolution": {
+      "type": "object",
+      "required": ["dep", "solution", "solution_type"],
+      "properties": {
+        "dep": { "type": "string" },
+        "solution": { "type": "string" },
+        "solution_type": { "type": "string", "enum": ["adapted", "alternative", "remove", "mock"] }
+      },
+      "additionalProperties": false
+    }
+  }
+}
