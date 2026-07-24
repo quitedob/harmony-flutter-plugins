@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:media_scanner/media_scanner.dart';
 
 import 'zoom_drawer_test_page.dart';
+import 'media_scanner_full_test_page.dart';
 
 void main() {
   runApp(const TestHubApp());
@@ -50,6 +51,14 @@ class TestHubPage extends StatelessWidget {
             const SizedBox(height: 12),
             _testCard(
               context,
+              icon: Icons.checklist,
+              title: 'MediaScanner 完整测试',
+              subtitle: '18 项测试用例一键覆盖',
+              page: const MediaScannerFullTestPage(),
+            ),
+            const SizedBox(height: 12),
+            _testCard(
+              context,
               icon: Icons.menu_open,
               title: 'ZoomDrawer',
               subtitle: '纯 Dart 抽屉组件测试',
@@ -84,6 +93,9 @@ class TestHubPage extends StatelessWidget {
   }
 }
 
+// ============================================================
+// 原有 MediaScanner 测试页（保留不变）
+// ============================================================
 class MediaScannerTestPage extends StatefulWidget {
   const MediaScannerTestPage({super.key});
 
@@ -319,5 +331,4 @@ class _MediaScannerTestPageState extends State<MediaScannerTestPage> {
 
     File(filePath).writeAsBytesSync(pngBytes);
   }
-
 }
