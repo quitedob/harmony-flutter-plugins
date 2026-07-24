@@ -1,0 +1,145 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SDK Demo Gen Stage Output",
+  "description": "SDK 鸿蒙化适配 Demo 生成阶段产物 Schema（测试路径）",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["sdk_name", "demo_design", "demo_ets_files", "demo_build_status"],
+  "properties": {
+    "sdk_name": {
+      "type": "string",
+      "description": "SDK 名称"
+    },
+    "test_cases_source": {
+      "type": "string",
+      "description": "测试用例 JSON 文件路径",
+      "default": "04-test-cases-revised.json"
+    },
+    "prd_source": {
+      "type": "string",
+      "description": "PRD 文件路径",
+      "default": "01-analysis-prd.md"
+    },
+    "analysis_source": {
+      "type": "string",
+      "description": "SDK 分析 JSON 路径",
+      "default": "01-analysis.json"
+    },
+    "demo_design": {
+      "type": "object",
+      "required": ["verification_plan", "demo_module_plan"],
+      "properties": {
+        "verification_plan": {
+          "type": "array",
+          "description": "验证点计划",
+          "items": {
+            "type": "object",
+            "required": ["prd_ref", "feature_name", "test_cases_covered", "demo_page", "design_notes"],
+            "properties": {
+              "prd_ref": {
+                "type": "string",
+                "description": "PRD 功能编号，如 F-01"
+              },
+              "feature_name": {
+                "type": "string",
+                "description": "功能名称"
+              },
+              "test_cases_covered": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "覆盖的测试用例 ID 列表"
+              },
+              "demo_page": {
+                "type": "string",
+                "description": "Demo 页面路径，如 pages/Feature01Page"
+              },
+              "design_notes": {
+                "type": "string",
+                "description": "设计说明"
+              }
+            }
+          }
+        },
+        "demo_module_plan": {
+          "type": "array",
+          "description": "Demo 模块计划",
+          "items": {
+            "type": "object",
+            "required": ["file", "title", "features_covered", "ui_sections"],
+            "properties": {
+              "file": {
+                "type": "string",
+                "description": "页面文件路径"
+              },
+              "title": {
+                "type": "string",
+                "description": "页面标题"
+              },
+              "features_covered": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "覆盖的功能模块编号列表"
+              },
+              "ui_sections": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "UI 区域描述列表"
+              }
+            }
+          }
+        }
+      }
+    },
+    "prd_capability_coverage": {
+      "type": "array",
+      "description": "PRD 能力覆盖矩阵",
+      "items": {
+        "type": "object",
+        "required": ["prd_ref", "capability_id", "demo_trace"],
+        "properties": {
+          "prd_ref": {
+            "type": "string",
+            "description": "PRD 功能编号"
+          },
+          "capability_id": {
+            "type": "string",
+            "description": "能力 ID"
+          },
+          "portability_class": {
+            "type": "string",
+            "enum": ["direct_migration", "adapter_layer", "host_proxy", "cut"],
+            "description": "可移植性分类"
+          },
+          "demo_trace": {
+            "type": "string",
+            "description": "Demo 验证路径"
+          },
+          "downgrade_validation": {
+            "type": "string",
+            "description": "降级验证说明"
+          }
+        }
+      }
+    },
+    "demo_ets_files": {
+      "type": "array",
+      "description": "Demo ETS 文件列表",
+      "items": {
+        "type": "string"
+      }
+    },
+    "demo_build_status": {
+      "type": "string",
+      "enum": ["pass", "warning", "fail", "skipped"],
+      "description": "Demo 构建状态"
+    },
+    "assemble_hap_command": {
+      "type": "string",
+      "description": "构建 HAP 命令"
+    },
+    "run_instructions_zh": {
+      "type": "string",
+      "description": "运行说明（中文）"
+    }
+  }
+}

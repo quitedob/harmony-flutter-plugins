@@ -1,0 +1,2 @@
+* **[验证匿名证书链](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/devicesecurity-taas-verifycertchain)**
+* **[验证签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/devicesecurity-taas-verifysignature)**

@@ -1,0 +1,2 @@
+* **[标准转化事件](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/store-attribution-trigger-standard)**
+* **[自定义转化事件](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/store-attribution-trigger-custom)**

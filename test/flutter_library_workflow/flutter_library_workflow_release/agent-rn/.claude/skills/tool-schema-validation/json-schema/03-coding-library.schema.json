@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rn-ohos-adaptation/03-coding-library.schema.json",
+  "title": "Coding Library Stage Output",
+  "description": "React Native 模块鸿蒙适配编码阶段（阶段3）的产物。记录工程搭建、已实现方法、编译状态、修复记录等信息。",
+  "version": "1.0.0",
+  "type": "object",
+  "required": [
+    "target_module_types",
+    "build_status",
+    "build_attempts",
+    "engineering_setup",
+    "implemented_methods",
+    "not_implemented",
+    "files_created",
+    "files_modified",
+    "build_log_summary",
+    "migration_executed",
+    "lib_static_check"
+  ],
+  "properties": {
+    "target_module_types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["turbo-module", "fabric-component", "cpp-turbo-module", "fabric-cpp-component", "js-only"]
+      },
+      "description": "适配目标类型列表（一对多）"
+    },
+    "migration_executed": {
+      "type": "boolean",
+      "description": "是否执行了新架构迁移"
+    },
+    "migration_changes": {
+      "type": ["object", "null"],
+      "description": "迁移变更记录",
+      "properties": {
+        "spec_files_created": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "js_files_modified": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "package_json_modified": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "build_status": { "type": "string", "enum": ["pass", "fail"] },
+    "build_attempts": { "type": "integer", "minimum": 1 },
+    "engineering_setup": { "$ref": "#/$defs/EngineeringSetup" },
+    "implemented_methods": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ImplementedMethod" }
+    },
+    "not_implemented": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/NotImplementedMethod" }
+    },
+    "js_changes": {
+      "type": "array",
+      "description": "JS/TS 层文件改动",
+      "items": { "$ref": "#/$defs/FileChange" }
+    },
+    "files_created": { "type": "array", "items": { "type": "string" } },
+    "files_modified": { "type": "array", "items": { "type": "string" } },
+    "compilation_fixes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/CompilationFix" }
+    },
+    "cross_boundary_check": {
+      "type": "array",
+      "description": "跨边界合约自查结果（按 rnoh-cross-boundary-contract.md 附件A 逐项检查）",
+      "items": { "$ref": "#/$defs/QualityCheckItem" }
+    },
+    "behavior_baseline_check": {
+      "type": "array",
+      "description": "行为基线对照结果（按 behavior-baseline.md 对照）",
+      "items": { "$ref": "#/$defs/QualityCheckItem" }
+    },
+    "napi_bridge_check": {
+      "type": "array",
+      "description": "NAPI 桥类型安全核查结果（按 napi-bridge-types.md 对照）",
+      "items": { "$ref": "#/$defs/QualityCheckItem" }
+    },
+    "lib_static_check": {
+      "type": "object",
+      "description": "03 阶段库侧静态门禁（check_lib_static.py）执行结果。必须实际运行脚本后填入。",
+      "required": ["status", "command", "summary"],
+      "properties": {
+        "status": { "type": "string", "enum": ["pass", "fail", "skipped"] },
+        "command": { "type": "string", "description": "执行的命令行（含参数）" },
+        "summary": { "type": "string", "description": "脚本 stdout/stderr 的精简摘要（不贴全量日志）" }
+      },
+      "additionalProperties": false
+    },
+    "build_log_summary": { "type": "string" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "EngineeringSetup": {
+      "type": "object",
+      "required": ["harmony_directory"],
+      "properties": {
+        "create_command": { "type": ["string", "null"] },
+        "harmony_directory": { "type": ["string", "null"], "description": "鸿蒙原生工程目录路径（如 harmony/library/）。js-only 模块设为 null" },
+        "config_changes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/FileChange" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImplementedMethod": {
+      "type": "object",
+      "required": ["channel", "method", "status"],
+      "properties": {
+        "channel": { "type": "string", "description": "TurboModule/FabricComponent 名称" },
+        "method": { "type": "string" },
+        "status": { "type": "string", "const": "implemented" },
+        "ohos_api": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "NotImplementedMethod": {
+      "type": "object",
+      "required": ["channel", "method", "reason"],
+      "properties": {
+        "channel": { "type": "string" },
+        "method": { "type": "string" },
+        "reason": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "FileChange": {
+      "type": "object",
+      "required": ["file", "change"],
+      "properties": {
+        "file": { "type": "string" },
+        "change": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "CompilationFix": {
+      "type": "object",
+      "required": ["attempt", "error", "fix"],
+      "properties": {
+        "attempt": { "type": "integer", "minimum": 1 },
+        "error": { "type": "string" },
+        "fix": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "QualityCheckItem": {
+      "type": "object",
+      "required": ["check_item", "status"],
+      "properties": {
+        "check_item": { "type": "string", "description": "检查项名称" },
+        "status": { "type": "string", "enum": ["pass", "warning", "fail", "na"], "description": "pass=通过 warning=需注意 fail=未通过 na=不适用" },
+        "detail": { "type": "string", "description": "检查详情或说明" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

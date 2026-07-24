@@ -1,0 +1,71 @@
+{
+  "$schema": "./shard.schema.json",
+  "category": "contract",
+  "version": "1.1.0",
+  "updated_at": "2026-07-10",
+  "lessons": [
+    {
+      "id": "emitter-not-subscribe-device-event",
+      "stage": "coding",
+      "plugin_type": ["turbo", "fabric", "cpp"],
+      "symptom": "ArkTS 找不到 subscribeToDeviceEvent",
+      "wrong": "在原生侧调 rnInstance.subscribeToDeviceEvent 监听 JS 事件",
+      "fix": "RNInstance 只有 emitDeviceEvent(ArkTS→JS)；ArkTS 进程内监听用 @kit.BasicServicesKit 的 emitter.on/emit；JS 侧监听 ArkTS 事件用 DeviceEventEmitter",
+      "why": "两个通信方向用不同 API，RNInstance 无 subscribe 能力，混用即报错"
+    },
+    {
+      "id": "native-strip-file-uri",
+      "stage": "coding",
+      "plugin_type": ["turbo", "fabric", "cpp"],
+      "symptom": "原生加载本地文件失败",
+      "wrong": "把 JS 传来的 file:///... 直接透传给鸿蒙原生 API",
+      "fix": "原生侧先归一化：剥 file:// 前缀 + decodeURIComponent；多数鸿蒙文件类 API 只认 context.filesDir + '/x' 裸沙箱路径",
+      "why": "鸿蒙原生 API 不识别 file:// scheme（Android/iOS 才接受）"
+    },
+    {
+      "id": "cpp-rawvalue-folly-dynamic",
+      "stage": "coding",
+      "plugin_type": ["fabric", "cpp"],
+      "symptom": "C++ 编译报 calling a private constructor of 'RawValue' / no matching castValue",
+      "wrong": "在 Props.h 用 (std::unordered_map<std::string, RawValue>)value 等转换提取嵌套结构",
+      "fix": "转成 folly::dynamic 操作：auto dyn=(folly::dynamic)value; 用 dyn.count('k') 判键、dyn['k'].asBool()/.asString()/.asInt() 取值，嵌套直接遍历",
+      "why": "把 RawValue 放进容器会触发其私有构造；应绕开 RawValue 用底层 folly::dynamic"
+    },
+    {
+      "id": "param-type-match",
+      "stage": "coding",
+      "plugin_type": ["turbo", "fabric", "cpp"],
+      "symptom": "桥接参数/返回类型不匹配 → 运行时取值 undefined 或类型错",
+      "wrong": "ETS 实现的参数/返回类型与 JS Spec 声明不一致（如 Spec number 实现写 string，Object 未映射成 Record）",
+      "fix": "逐方法按对照核对：string↔string、number↔number、boolean↔boolean、Array<T>↔Array<T>、Object↔Record 或具体对象类型、Promise<T>↔Promise<T>、null↔null",
+      "why": "RNOH 按 Spec 类型做编解码，类型不符在边界处静默错位"
+    },
+    {
+      "id": "return-structure-match",
+      "stage": "both",
+      "plugin_type": ["turbo", "fabric"],
+      "symptom": "JS 侧拿到的对象字段缺失/为 undefined",
+      "wrong": "原生返回的对象结构（字段名/层级/可选性）与原库 JS 约定或 Spec 不一致",
+      "fix": "以原库返回结构为准逐字段对齐（字段名、嵌套层级、数组/对象、可选字段），用真实数据核对而非猜",
+      "why": "字段名或层级差一处，JS 解构即得 undefined，功能静默失效"
+    },
+    {
+      "id": "behavior-equivalence",
+      "stage": "both",
+      "plugin_type": ["all"],
+      "symptom": "适配版与原库行为不等价（选项/默认值/边界表现不同）",
+      "wrong": "只搬主路径，忽略原库的选项分支、默认值、错误语义、边界处理",
+      "fix": "对照原库逐条复刻：选项参数效果、默认值、失败时 reject/返回约定、空值/越界行为；不确定就读原库源码",
+      "why": "适配是行为对等迁移，不是重写；缺失的分支语义是隐性回归"
+    },
+    {
+      "id": "native-context-cache-stale",
+      "stage": "coding",
+      "plugin_type": ["turbo", "fabric", "cpp"],
+      "symptom": "首次/重建后取到旧值：深色模式误判成 light、评分弹窗拉不起（错误码 1021500005 应用上下文无效）、getConstants 返回与实际不符",
+      "wrong": "TurboModule 构造函数里读 this.ctx.uiAbilityContext 或 .config.colorMode，把派生值缓存进实例字段（private abilityContext / initialMode 等），之后 getConstants/方法直接返回缓存",
+      "fix": "别在构造时缓存易失上下文：UITurboModule 可能在上下文/配置就绪前被急切实例化（colorMode=COLOR_MODE_NOT_SET、uiAbilityContext 尚未初始化）。改为每个方法/getConstants 被调用时即时读 this.ctx.uiAbilityContext（getter，每次取最新）；getConstants 若要返回初值，也在调用时重读真实 config 再返回。rnohos.py check 对『构造时读 context 并写字段』给 WARNING",
+      "why": "this.ctx.uiAbilityContext 是 getter，构造时机常早于系统配置就绪；缓存的是那一刻（可能无效/未就绪）的快照，系统配置后续更新不会回灌到缓存字段，JS 侧拿到的就是错的初值"
+    }
+  ]
+}

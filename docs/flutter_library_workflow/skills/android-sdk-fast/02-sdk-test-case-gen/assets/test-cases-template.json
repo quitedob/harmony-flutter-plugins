@@ -1,0 +1,38 @@
+{
+  "$schema": "https://raw.githubusercontent.com/HarmonyOS-AI/json-schema/main/droidrun/test_suite.schema.json",
+  "suite": {
+    "id": "{sdk_name}_test_suite",
+    "name": "{sdk_name} 测试套件",
+    "app_package": "{app_package}",
+    "app_card": "file:./01-analysis-prd.md"
+  },
+  "modules": [
+    {
+      "moduleCode": "F-01",
+      "moduleName": "{模块名称}",
+      "moduleDescription": "{模块描述}",
+      "priority": "{P0/P1/P2}",
+      "test_cases": [
+        {
+          "id": "F-01-01",
+          "featurePointId": "F-01-01",
+          "title": "{测试标题}",
+          "level": "{L0/L1/L2}",
+          "coveredApis": {
+            "android": ["setMax", "setProgress"],
+            "harmony": []
+          },
+          "preconditions": "应用已启动",
+          "test_steps": [
+            {
+              "action": "{纯功能语义操作描述，不含 API 名}",
+              "checkpoint": "{可观察的 UI 状态变化}"
+            }
+          ],
+          "expected_result": "{预期结果}",
+          "postconditions": ""
+        }
+      ]
+    }
+  ]
+}

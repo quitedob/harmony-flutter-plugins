@@ -1,0 +1,199 @@
+/*
+* Copyright (c) 2023 Hunan OpenValley Digital Industry Development Co., Ltd. All rights reserved.
+* Use of this source code is governed by a BSD-style license that can be
+* found in the LICENSE_KHZG file.
+*
+* Based on NavigationChannel.java originally written by
+* Copyright (C) 2013 The Flutter Authors.
+*
+*/
+
+import hiTraceMeter from '@ohos.hiTraceMeter';
+
+import JSONMethodCodec from '../../../plugin/common/JSONMethodCodec';
+import MethodCall from '../../../plugin/common/MethodCall';
+import MethodChannel, { MethodCallHandler, MethodResult } from '../../../plugin/common/MethodChannel';
+import Log from '../../../util/Log';
+import DartExecutor from '../dart/DartExecutor';
+import FlutterManager from '../../ohos/FlutterManager';
+import Any from '../../../plugin/common/Any';
+
+/**
+ * Navigator activity types.
+ */
+export enum NavigatorActivity {
+  PUSH = "push",
+  POP = "pop",
+}
+
+/**
+ * Navigator status types.
+ */
+export enum NavigatorStatus {
+  START = "start",
+  FINISH = "finish",
+}
+
+/**
+ * Channel for handling navigation-related communication between Flutter and OpenHarmony.
+ * This channel manages route navigation, including setting initial routes, pushing routes,
+ * and popping routes.
+ */
+export default class NavigationChannel {
+  private static TAG = "NavigationChannel";
+  private channel: MethodChannel;
+
+  /**
+   * Constructs a new NavigationChannel instance.
+   * @param dartExecutor - The DartExecutor for sending messages to Dart
+   */
+  constructor(dartExecutor: DartExecutor) {
+    this.channel = new MethodChannel(dartExecutor, "flutter/navigation", JSONMethodCodec.INSTANCE);
+    // Provide a default handler that returns an empty response to any messages
+    // on this channel.
+    this.channel.setMethodCallHandler(new NavigationCallback());
+  }
+
+  /**
+   * Sets the initial route for navigation.
+   * @param initialRoute - The initial route string
+   */
+  setInitialRoute(initialRoute: string): void {
+    Log.i(NavigationChannel.TAG, "Sending message to set initial route to '" + initialRoute + "'");
+    this.channel.invokeMethod("setInitialRoute", initialRoute);
+  }
+
+  /**
+   * Pushes a new route onto the navigation stack.
+   * @param route - The route string to push
+   */
+  pushRoute(route: string): void {
+    Log.i(NavigationChannel.TAG, "Sending message to push route '" + route + "'");
+    this.channel.invokeMethod("pushRoute", route);
+  }
+
+  /**
+   * Pushes route information onto the navigation stack.
+   * @param route - The route information string to push
+   */
+  pushRouteInformation(route: string): void {
+    Log.i(NavigationChannel.TAG, "Sending message to push route information '" + route + "'");
+    this.channel.invokeMethod("pushRouteInformation", new Map().set("location", route));
+  }
+
+  /**
+   * Pops the current route from the navigation stack.
+   */
+  popRoute(): void {
+    Log.i(NavigationChannel.TAG, "Sending message to pop route.");
+    this.channel.invokeMethod("popRoute", null);
+  }
+
+  /**
+   * Sets a custom method call handler for navigation events.
+   * @param handler - The MethodCallHandler to handle navigation method calls
+   */
+  setMethodCallHandler(handler: MethodCallHandler) {
+    this.channel.setMethodCallHandler(handler);
+  }
+}
+
+/**
+ * Default callback handler for navigation channel that returns empty responses.
+ */
+class NavigationCallback implements MethodCallHandler {
+  private static TAG = "NavigationChannel";
+
+  onMethodCall(call: MethodCall, result: MethodResult) {
+    let method: string = call.method;
+    let args: Any = call.args;
+    Log.i(NavigationCallback.TAG, "method = " + method);
+    switch (method) {
+      case "reportNavigatorActivity": {
+        let activity: string = args.get("activity");
+        if (activity === undefined) {
+          Log.e(NavigationCallback.TAG, "reportNavigatorActivity, incorrect parameter activity");
+          break;
+        }
+
+        let status: string = args.get("status");
+        if (status === undefined) {
+          Log.e(NavigationCallback.TAG, "reportNavigatorActivity, incorrect parameter status");
+          break;
+        }
+        let navigatorStatus: NavigatorStatus = this.getNavigatorStatusFromValue(status);
+
+        let navigatorActivity: NavigatorActivity = this.getNavigatorActivityFromValue(activity);
+        switch(navigatorActivity) {
+          case NavigatorActivity.PUSH:
+            this.reportNavigatorPush(navigatorStatus);
+            break;
+          case NavigatorActivity.POP:
+            this.reportNavigatorPop(navigatorStatus);
+            break;
+        }
+        break;
+      }
+      default: {
+        result.success(null);
+        break;
+      }
+    }
+  }
+
+  /**
+   * Gets a NavigatorActivity from an encoded activity string.
+   * @param activity - The encoded activity string
+   * @returns The NavigatorActivity
+   * @throws Error if the activity string is not recognized
+   */
+  private getNavigatorActivityFromValue(activity: string): NavigatorActivity {
+    let activityTypes: string[] = [
+      NavigatorActivity.PUSH,
+      NavigatorActivity.POP
+    ];
+    if (activityTypes.includes(activity as NavigatorActivity)) {
+      return activity as NavigatorActivity;
+    }
+    throw new Error("No such NavigatorActivity: " + activity);
+  }
+
+  /**
+   * Gets a NavigatorStatus from an encoded status string.
+   * @param status - The encoded status string
+   * @returns The NavigatorStatus
+   * @throws Error if the status string is not recognized
+   */
+  private getNavigatorStatusFromValue(status: string): NavigatorStatus {
+    let statusTypes: string[] = [
+      NavigatorStatus.START,
+      NavigatorStatus.FINISH
+    ];
+    if (statusTypes.includes(status as NavigatorStatus)) {
+      return status as NavigatorStatus;
+    }
+    throw new Error("No such NavigatorStatus: " + status);
+  }
+
+  private reportNavigatorPush(navigatorStatus: NavigatorStatus) {
+    switch(navigatorStatus) {
+      case NavigatorStatus.START:
+        hiTraceMeter.startTrace("flutter::NAVIGATOR_PUSH", 0);
+        break;
+      case NavigatorStatus.FINISH:
+        hiTraceMeter.finishTrace("flutter::NAVIGATOR_PUSH", 0);
+        break;
+    }
+  }
+
+  private reportNavigatorPop(navigatorStatus: NavigatorStatus) {
+    switch(navigatorStatus) {
+      case NavigatorStatus.START:
+        hiTraceMeter.startTrace("flutter::NAVIGATOR_POP", 0);
+        break;
+      case NavigatorStatus.FINISH:
+        hiTraceMeter.finishTrace("flutter::NAVIGATOR_POP", 0);
+        break;
+    }
+  }
+}

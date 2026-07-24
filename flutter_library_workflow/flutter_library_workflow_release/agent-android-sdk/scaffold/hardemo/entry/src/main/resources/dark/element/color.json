@@ -1,0 +1,36 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#000000"
+    },
+    {
+      "name": "text_primary",
+      "value": "#E5E5E5"
+    },
+    {
+      "name": "text_secondary",
+      "value": "#999999"
+    },
+    {
+      "name": "text_tertiary",
+      "value": "#666666"
+    },
+    {
+      "name": "bg_page",
+      "value": "#1A1A1A"
+    },
+    {
+      "name": "bg_card",
+      "value": "#2D2D2D"
+    },
+    {
+      "name": "divider",
+      "value": "#3D3D3D"
+    },
+    {
+      "name": "scrollbar",
+      "value": "#555555"
+    }
+  ]
+}

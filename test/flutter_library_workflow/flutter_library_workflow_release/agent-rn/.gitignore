@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Node
+node_modules/
+
+# Template lock files (users generate their own)
+.claude/skills/tool-ohos-plugin-repo/templates/**/oh-package-lock.json5
+.claude/skills/tool-ohos-plugin-repo/templates/**/package-lock.json
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary
+*.tmp
+*.temp
+
+# Backup files
+*_bak*.md
+
+# LangGraph (local only, not synced to remote)
+.scripts/langgraph/
+.scripts/coding/langgraph/
+.scripts/testing/langgraph/

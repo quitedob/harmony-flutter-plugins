@@ -1,0 +1,24 @@
+name: media_scanner_example
+description: Demonstrates how to use the media_scanner plugin on OpenHarmony.
+publish_to: none
+
+environment:
+  sdk: ">=2.18.0 <4.0.0"
+  flutter: ">=3.3.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  media_scanner:
+    path: ../../media_scanner
+
+dependency_overrides:
+  media_scanner_ohos:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

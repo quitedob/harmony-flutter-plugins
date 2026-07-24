@@ -1,0 +1,89 @@
+{
+  "$schema": "./index.schema.json",
+  "version": "2.1.0",
+  "updated_at": "2026-07-10",
+  "_usage": "瘦索引。02/03 开工只读本文件；再按本库 plugin_type(js-only/turbo/fabric/cpp) + 当前 stage(coding/validation) 命中的 category，逐个 read 对应 file 分片；分片内再按每张卡的 plugin_type+stage 过滤、对照 wrong→fix。load_when 用于进一步判断是否真的需要该分片（如未涉权限/加密则可不读 review 的相应卡）。stage/plugin_type 为该分片所含卡的并集，含 'all' 表示任意类型都可能命中。",
+  "categories": [
+    {
+      "category": "registration",
+      "file": "registration.json",
+      "title": "原生注册/桥接缺失（白屏·找不到模块/组件·methodMap_ 缺方法）",
+      "stage": ["coding", "validation", "both"],
+      "plugin_type": ["all"],
+      "count": 8,
+      "load_when": "实现/校验 TurboModule、Fabric、C++ Package 注册、Spec↔methodMap_ 一致性，或本库依赖了有鸿蒙原生实现的三方库时"
+    },
+    {
+      "category": "build",
+      "file": "build.json",
+      "title": "构建/CMake/链接/codegen/缓存/HAR-HAP 链",
+      "stage": ["coding", "validation", "both"],
+      "plugin_type": ["all"],
+      "count": 18,
+      "load_when": "build har/hap、CMake/链接、codegen、ohpm/缓存、构建链报错时"
+    },
+    {
+      "category": "arkts",
+      "file": "arkts.json",
+      "title": "ArkTS/ArkUI 原生编码（导入·私有属性·属性名·Fabric 结构·版本漂移·别猜 API）",
+      "stage": ["coding"],
+      "plugin_type": ["turbo", "fabric", "cpp"],
+      "count": 8,
+      "load_when": "写/改 ETS 或 C++ 原生实现时（纯 js-only 库可不读）"
+    },
+    {
+      "category": "js-runtime",
+      "file": "js-runtime.json",
+      "title": "JS 层运行时/白屏（平台判断·Intl·PropTypes·具名导入·extends·生命周期·根布局·列表性能）",
+      "stage": ["coding", "validation", "both"],
+      "plugin_type": ["all"],
+      "count": 12,
+      "load_when": "写/校验 JS 层（ohos/src、App.tsx）或排查白屏/卡顿时"
+    },
+    {
+      "category": "deps",
+      "file": "deps.json",
+      "title": "依赖/Metro/包名 alias/入口资源/babel",
+      "stage": ["coding", "validation"],
+      "plugin_type": ["all"],
+      "count": 8,
+      "load_when": "配依赖版本、包名 alias、Metro 解析、静态资源、babel 时"
+    },
+    {
+      "category": "contract",
+      "file": "contract.json",
+      "title": "跨端契约正确性（参数类型·返回结构·行为对等·事件方向·路径归一化·上下文时序）",
+      "stage": ["coding", "both"],
+      "plugin_type": ["all"],
+      "count": 7,
+      "load_when": "实现/校验 原生↔JS 的方法/事件/类型/返回结构/文件路径、TurboModule 构造时上下文缓存，或保证与原库行为对等时"
+    },
+    {
+      "category": "review",
+      "file": "review.json",
+      "title": "强审查项（权限误判·权限完整性·假实现残留 P0·资源释放·JSON 容错·安全编码）",
+      "stage": ["coding", "both"],
+      "plugin_type": ["all"],
+      "count": 6,
+      "load_when": "03 校验做质量门禁，或写涉及权限/加密/文件流/外部输入解析的代码时"
+    },
+    {
+      "category": "runtime",
+      "file": "runtime.json",
+      "title": "原生运行时与稳定性（ArkWeb 初始化·WebView 绑定·异步错误·空安全）",
+      "stage": ["coding", "validation"],
+      "plugin_type": ["all"],
+      "count": 4,
+      "load_when": "用到 WebView/Web 引擎、异步 Promise、可能为空的边界数据时"
+    },
+    {
+      "category": "example",
+      "file": "example.json",
+      "title": "Example 页质量与校验（真实输入·prop 名·Alert·稳定 URL·querySchemes）",
+      "stage": ["validation"],
+      "plugin_type": ["all"],
+      "count": 5,
+      "load_when": "03 校验生成/检查 example 页时（coding 阶段可不读）"
+    }
+  ]
+}

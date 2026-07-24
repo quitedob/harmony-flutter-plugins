@@ -1,0 +1,58 @@
+{
+  "$schema": "https://raw.githubusercontent.com/HarmonyOS-AI/json-schema/main/sdk-test/test-points.schema.json",
+  "sdkInfo": {
+    "name": "SDK名称",
+    "version": "版本号"
+  },
+  "modules": [
+    {
+      "moduleCode": "F-01",
+      "moduleName": "模块名称",
+      "priority": "P0",
+      "testPoints": [
+        {
+          "id": "F-01-01",
+          "testName": "测试点名称",
+          "level": "L0",
+          "description": "测试点描述（使用功能视角，不含 API 调用词汇）",
+          "checkpoint": "验证点（具体判定标准）"
+        },
+        {
+          "id": "F-01-02",
+          "testName": "测试点名称",
+          "level": "L1",
+          "description": "测试点描述",
+          "checkpoint": "验证点"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-02",
+      "moduleName": "模块名称",
+      "priority": "P1",
+      "testPoints": [
+        {
+          "id": "F-02-01",
+          "testName": "测试点名称",
+          "level": "L0",
+          "description": "测试点描述",
+          "checkpoint": "验证点"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "totalModules": 2,
+    "totalTestPoints": 3,
+    "levelDistribution": {
+      "L0": 2,
+      "L1": 1,
+      "L2": 0
+    },
+    "levelPercentage": {
+      "L0": "66.7%",
+      "L1": "33.3%",
+      "L2": "0%"
+    }
+  }
+}

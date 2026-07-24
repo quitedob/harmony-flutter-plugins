@@ -1,0 +1,858 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ohos-adaptation/01-analysis.schema.json",
+  "title": "Analysis Stage Output",
+  "description": "Flutter 插件鸿蒙适配分析阶段（阶段1）的结构化产物。包含插件类型、通信模式、依赖分析、复杂度评估等信息，供后续 planning/coding/summary 阶段消费。",
+  "version": "1.0.0",
+  "type": "object",
+  "required": [
+    "plugin_name",
+    "plugin_version",
+    "description",
+    "ohos_readiness",
+    "plugin_type",
+    "plugin_architecture",
+    "communication_patterns",
+    "channels",
+    "functionality",
+    "native_dependencies",
+    "flutter_dependencies",
+    "permissions",
+    "has_example",
+    "complexity_assessment",
+    "supported_platforms",
+    "code_metrics",
+    "ecosystem_compliance",
+    "api_inventory"
+  ],
+  "properties": {
+    "plugin_name": {
+      "type": "string",
+      "description": "插件名称，来自 pubspec.yaml 的 name 字段"
+    },
+    "plugin_version": {
+      "type": "string",
+      "description": "插件版本，来自 pubspec.yaml 的 version 字段"
+    },
+    "description": {
+      "type": "string",
+      "description": "插件功能一句话描述"
+    },
+    "ohos_readiness": {
+      "$ref": "#/$defs/OhosReadiness"
+    },
+    "plugin_type": {
+      "type": "string",
+      "description": "插件类型分类",
+      "enum": ["dart", "ffi", "plugin_method_channel", "plugin_event_channel", "plugin_platform_view", "plugin_texture", "plugin_mixed"]
+    },
+    "plugin_architecture": {
+      "type": "string",
+      "description": "插件架构模式",
+      "enum": ["standalone", "federated", "monorepo"]
+    },
+    "monorepo_packages": {
+      "type": "array",
+      "description": "monorepo 架构时各子包信息，非 monorepo 为空数组或省略",
+      "items": {
+        "$ref": "#/$defs/MonorepoPackage"
+      }
+    },
+    "communication_patterns": {
+      "type": "array",
+      "description": "插件使用的通信模式列表",
+      "items": {
+        "type": "string",
+        "enum": ["method_channel", "event_channel", "basic_message_channel", "platform_view", "texture", "ffi"]
+      }
+    },
+    "channels": {
+      "type": "array",
+      "description": "插件注册的所有 Channel 列表",
+      "items": {
+        "$ref": "#/$defs/Channel"
+      }
+    },
+    "platform_views": {
+      "type": "array",
+      "description": "PlatformView 注册信息",
+      "items": {
+        "$ref": "#/$defs/PlatformView"
+      }
+    },
+    "ffi_bindings": {
+      "type": "array",
+      "description": "FFI 绑定的 native 函数列表（仅 ffi 类型插件）",
+      "items": {
+        "$ref": "#/$defs/FfiBinding"
+      }
+    },
+    "functionality": {
+      "$ref": "#/$defs/Functionality"
+    },
+    "native_dependencies": {
+      "$ref": "#/$defs/NativeDependencies"
+    },
+    "flutter_dependencies": {
+      "type": "array",
+      "description": "Flutter/Dart 依赖列表及其鸿蒙适配状态",
+      "items": {
+        "$ref": "#/$defs/FlutterDependency"
+      }
+    },
+    "permissions": {
+      "$ref": "#/$defs/Permissions"
+    },
+    "dart_plugin_class": {
+      "type": ["string", "null"],
+      "description": "pubspec.yaml 中声明的 dartPluginClass 名称，未使用时为 null"
+    },
+    "supported_platforms": {
+      "type": "array",
+      "description": "pubspec.yaml 中 flutter.plugin.platforms 已声明的平台列表（如 [\"android\", \"ios\", \"web\"]）",
+      "items": {
+        "type": "string",
+        "enum": ["android", "ios", "web", "windows", "macos", "linux", "ohos"]
+      }
+    },
+    "platform_checks": {
+      "type": "array",
+      "description": "代码中的平台判断逻辑",
+      "items": {
+        "$ref": "#/$defs/PlatformCheck"
+      }
+    },
+    "has_example": {
+      "type": "boolean",
+      "description": "是否包含 example 应用"
+    },
+    "example_deps": {
+      "type": "array",
+      "description": "example 应用的额外依赖及鸿蒙状态",
+      "items": {
+        "$ref": "#/$defs/ExampleDep"
+      }
+    },
+    "complexity_assessment": {
+      "$ref": "#/$defs/ComplexityAssessment"
+    },
+    "code_metrics": {
+      "$ref": "#/$defs/CodeMetrics"
+    },
+    "ecosystem_compliance": {
+      "$ref": "#/$defs/EcosystemCompliance"
+    },
+    "example_path": {
+      "type": "string",
+      "description": "Example 应用的相对路径（如 example/）"
+    },
+    "example_notes": {
+      "type": "string",
+      "description": "Example 功能覆盖说明"
+    },
+    "conclusion": {
+      "type": "string",
+      "description": "分析结论（Markdown 格式，总结适配建议和关键发现）"
+    },
+    "api_inventory": {
+      "$ref": "#/$defs/ApiInventory",
+      "description": "API 完整性扫描清单（双轨结构）：adaptation_contracts = 鸿蒙端必须实现的契约；dart_public_api = Dart 公开 API 完整性；cross_validation = 三端/文档一致性异常；prd_coverage = PRD 覆盖率回写"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "OhosReadiness": {
+      "type": "object",
+      "description": "鸿蒙化就绪状态评估",
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "鸿蒙化总体状态",
+          "enum": ["not_adapted", "partially_adapted", "fully_adapted"]
+        },
+        "in_repo_ohos_dir": {
+          "type": "boolean",
+          "description": "仓库内是否有 ohos/ 目录"
+        },
+        "in_pubspec_platforms": {
+          "type": "boolean",
+          "description": "pubspec.yaml 中是否声明了 ohos 平台"
+        },
+        "in_reference_index": {
+          "type": "boolean",
+          "description": "是否在已适配索引中找到"
+        },
+        "reference_url": {
+          "type": ["string", "null"],
+          "description": "已适配版本的仓库 URL"
+        },
+        "in_local_repos": {
+          "type": "boolean",
+          "description": "repos/ 下是否有已适配的同名插件"
+        },
+        "local_repo_name": {
+          "type": ["string", "null"],
+          "description": "本地已适配仓库的目录名"
+        },
+        "notes": {
+          "type": ["string", "null"],
+          "description": "补充说明"
+        },
+        "display_status": {
+          "type": "string",
+          "description": "面向报告的状态短标签（如「已完全兼容 ✓」「需适配」「部分适配」等）"
+        }
+      },
+      "additionalProperties": false
+    },
+    "MonorepoPackage": {
+      "type": "object",
+      "description": "Monorepo 中的子包信息",
+      "required": ["name", "path", "type", "is_main"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "子包名称"
+        },
+        "path": {
+          "type": "string",
+          "description": "相对路径"
+        },
+        "type": {
+          "type": "string",
+          "description": "子包类型（同 plugin_type 取值）",
+          "enum": ["dart", "ffi", "plugin_method_channel", "plugin_event_channel", "plugin_platform_view", "plugin_texture", "plugin_mixed"]
+        },
+        "is_main": {
+          "type": "boolean",
+          "description": "是否为主包"
+        },
+        "description": {
+          "type": "string",
+          "description": "子包功能说明"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Channel": {
+      "type": "object",
+      "description": "插件注册的单个 Channel",
+      "required": ["type", "name"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Channel 类型",
+          "enum": ["MethodChannel", "EventChannel", "BasicMessageChannel"]
+        },
+        "name": {
+          "type": "string",
+          "description": "Channel 名称，必须精确匹配 Dart 层定义"
+        },
+        "methods": {
+          "type": "array",
+          "description": "Channel 上注册的方法列表",
+          "items": {
+            "$ref": "#/$defs/ChannelMethod"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ChannelMethod": {
+      "type": "object",
+      "description": "Channel 上的单个方法。method_name + discovery_sources 是三端交叉验证的最小事实源",
+      "required": ["name", "discovery_sources"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "方法名（标准化：去引号、trim、区分大小写原样保留）"
+        },
+        "args": {
+          "type": ["object", "array", "string", "null"],
+          "description": "参数结构描述（对象表示命名参数、数组表示位置参数、字符串表示简要描述、无参数时为 null）"
+        },
+        "return_type": {
+          "type": "string",
+          "description": "返回值类型"
+        },
+        "discovery_sources": {
+          "type": "array",
+          "description": "发现该方法的端点（dart/android/ios）。三端并集后每条方法必须至少一个来源；空数组在 schema 层视为非法",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": ["dart", "android", "ios"]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "PlatformView": {
+      "type": "object",
+      "description": "PlatformView 注册信息",
+      "required": ["view_type"],
+      "properties": {
+        "view_type": {
+          "type": "string",
+          "description": "viewType 标识符"
+        },
+        "dart_widget": {
+          "type": "string",
+          "description": "Dart 层使用的 Widget 名"
+        }
+      },
+      "additionalProperties": false
+    },
+    "FfiBinding": {
+      "type": "object",
+      "description": "FFI 绑定的 native 函数",
+      "required": ["function_name", "signature", "source_file"],
+      "properties": {
+        "function_name": {
+          "type": "string",
+          "description": "native 函数名"
+        },
+        "signature": {
+          "type": "string",
+          "description": "函数签名"
+        },
+        "source_file": {
+          "type": "string",
+          "description": "定义所在的 C/C++ 文件"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Functionality": {
+      "type": "object",
+      "description": "插件功能概述和核心功能列表",
+      "required": ["summary", "core_features"],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "插件解决什么问题的一句话概述"
+        },
+        "core_features": {
+          "type": "array",
+          "description": "核心功能列表",
+          "items": {
+            "$ref": "#/$defs/CoreFeature"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "CoreFeature": {
+      "type": "object",
+      "description": "单个核心功能描述",
+      "required": ["name", "description"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "功能名称"
+        },
+        "description": {
+          "type": "string",
+          "description": "功能描述"
+        },
+        "related_methods": {
+          "type": "array",
+          "description": "关联的 Channel 方法名",
+          "items": { "type": "string" }
+        },
+        "android_apis": {
+          "type": "array",
+          "description": "对应的 Android 系统 API",
+          "items": { "type": "string" }
+        },
+        "ios_apis": {
+          "type": "array",
+          "description": "对应的 iOS 系统 API/框架",
+          "items": { "type": "string" }
+        },
+        "implementation": {
+          "type": "string",
+          "description": "实现方式（如「纯 Dart」「dart:io」「原生插件」「Platform Channel」等）"
+        }
+      },
+      "additionalProperties": false
+    },
+    "NativeDependencies": {
+      "type": "object",
+      "description": "各平台的原生三方库依赖",
+      "properties": {
+        "android": {
+          "type": "array",
+          "description": "Android 依赖（group:artifact:version 格式）",
+          "items": { "type": "string" }
+        },
+        "ios": {
+          "type": "array",
+          "description": "iOS CocoaPods 依赖",
+          "items": { "type": "string" }
+        },
+        "cpp": {
+          "type": "array",
+          "description": "C/C++ 库名（仅 FFI 类型）",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "FlutterDependency": {
+      "type": "object",
+      "description": "Flutter/Dart 依赖及鸿蒙适配状态",
+      "required": ["name", "version_constraint", "is_platform_plugin", "ohos_status"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "包名"
+        },
+        "version_constraint": {
+          "type": "string",
+          "description": "版本约束"
+        },
+        "is_platform_plugin": {
+          "type": "boolean",
+          "description": "是否含平台原生代码"
+        },
+        "ohos_status": {
+          "type": "string",
+          "description": "鸿蒙适配状态",
+          "enum": ["adapted", "not_adapted", "unknown", "not_needed"]
+        },
+        "reference_url": {
+          "type": ["string", "null"],
+          "description": "已适配版本 URL"
+        },
+        "is_blocking": {
+          "type": "boolean",
+          "description": "是否为阻塞性依赖"
+        },
+        "notes": {
+          "type": ["string", "null"],
+          "description": "补充说明"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Permissions": {
+      "type": "object",
+      "description": "各平台所需权限",
+      "properties": {
+        "android": {
+          "type": "array",
+          "description": "Android 权限（android.permission.XXX 格式）",
+          "items": { "type": "string" }
+        },
+        "ios": {
+          "type": "array",
+          "description": "iOS 权限（NSXxxUsageDescription 格式）",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "PlatformCheck": {
+      "type": "object",
+      "description": "代码中的平台判断逻辑",
+      "required": ["file", "check_type"],
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "文件路径"
+        },
+        "line_range": {
+          "type": "string",
+          "description": "行号范围（如 '42-45'）"
+        },
+        "check_type": {
+          "type": "string",
+          "description": "判断类型（如 Platform.isAndroid、defaultTargetPlatform、conditional_import）"
+        },
+        "gate_type": {
+          "type": "string",
+          "enum": ["whitelist_block", "branch", "feature_gate", "factory_select"],
+          "description": "平台门禁语义类型：whitelist_block=白名单拦截（阻断性，不在名单内的平台被throw/return）、branch=平台分支选择、feature_gate=功能开关、factory_select=工厂/策略选择"
+        },
+        "blocked_features": {
+          "type": "array",
+          "description": "被拦截的功能列表（仅 whitelist_block 类型需要填写）",
+          "items": { "type": "string" }
+        },
+        "throw_type": {
+          "type": ["string", "null"],
+          "description": "抛出的异常类型（仅 whitelist_block 类型，如 UnsupportedError、PlatformException）"
+        },
+        "code_snippet": {
+          "type": "string",
+          "description": "相关代码片段"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ExampleDep": {
+      "type": "object",
+      "description": "Example 应用的额外依赖",
+      "required": ["name", "ohos_status"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "依赖名"
+        },
+        "ohos_status": {
+          "type": "string",
+          "description": "鸿蒙适配状态",
+          "enum": ["adapted", "not_adapted", "unknown", "not_needed"]
+        },
+        "notes": {
+          "type": ["string", "null"],
+          "description": "补充说明"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComplexityAssessment": {
+      "type": "object",
+      "description": "适配复杂度评估",
+      "required": ["level", "factors", "complexity_score", "estimated_effort", "adaptation_recommendation"],
+      "properties": {
+        "level": {
+          "type": "string",
+          "description": "复杂度等级",
+          "enum": ["low", "medium", "high", "very_high"]
+        },
+        "factors": {
+          "$ref": "#/$defs/ComplexityFactors"
+        },
+        "complexity_score": {
+          "type": "integer",
+          "description": "复杂度加权评分（整数），由多维度因子计算得出，映射到 level：0-2=low, 3-7=medium, 8-14=high, ≥15=very_high",
+          "minimum": 0
+        },
+        "estimated_effort": {
+          "type": "string",
+          "description": "预估工作量的简要描述"
+        },
+        "adaptation_recommendation": {
+          "type": "string",
+          "description": "适配建议",
+          "enum": ["proceed", "proceed_with_caution", "blocked", "not_needed"]
+        },
+        "blocking_reasons": {
+          "type": "array",
+          "description": "如果 blocked，列出具体原因",
+          "items": { "type": "string" }
+        },
+        "risk_items": {
+          "type": "array",
+          "description": "风险项列表，与 02-planning/05-summary 阶段格式一致",
+          "items": {
+            "$ref": "#/$defs/RiskItem"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComplexityFactors": {
+      "type": "object",
+      "description": "复杂度量化指标",
+      "properties": {
+        "channel_method_count": {
+          "type": "integer",
+          "description": "Channel 方法总数",
+          "minimum": 0
+        },
+        "native_dependency_count": {
+          "type": "integer",
+          "description": "原生依赖数量",
+          "minimum": 0
+        },
+        "blocking_deps_count": {
+          "type": "integer",
+          "description": "阻塞性依赖数量",
+          "minimum": 0
+        },
+        "communication_pattern_count": {
+          "type": "integer",
+          "description": "通信模式数量",
+          "minimum": 0
+        },
+        "has_platform_view": {
+          "type": "boolean",
+          "description": "是否使用 PlatformView"
+        },
+        "has_texture": {
+          "type": "boolean",
+          "description": "是否使用外接纹理"
+        },
+        "has_ffi": {
+          "type": "boolean",
+          "description": "是否使用 FFI"
+        },
+        "platform_check_count": {
+          "type": "integer",
+          "description": "平台判断代码处数",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "CodeMetrics": {
+      "type": "object",
+      "description": "代码量统计（合并文件数和行数）",
+      "properties": {
+        "file_counts": {
+          "type": "object",
+          "description": "各平台源文件数量",
+          "properties": {
+            "dart": { "type": "integer", "description": "lib/ 下 Dart 文件数", "minimum": 0 },
+            "android": { "type": "integer", "description": "android/ 下 Java/Kotlin 文件数", "minimum": 0 },
+            "ios": { "type": "integer", "description": "ios/ 下 Swift/ObjC 文件数", "minimum": 0 },
+            "cpp": { "type": "integer", "description": "src/ 下 C/C++ 文件数（仅 FFI 类型）", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "line_counts": {
+          "type": "object",
+          "description": "各平台代码行数（由 code-stats subagent 统计）",
+          "properties": {
+            "dart": { "type": "integer", "description": "lib/ 下 Dart 代码行数", "minimum": 0 },
+            "android": { "type": "integer", "description": "android/ 下 Java/Kotlin 代码行数", "minimum": 0 },
+            "ios": { "type": "integer", "description": "ios/ 下 Swift/ObjC 代码行数", "minimum": 0 },
+            "cpp": { "type": "integer", "description": "src/ 下 C/C++ 代码行数", "minimum": 0 },
+            "example": { "type": "integer", "description": "example/ 下 Dart 代码行数", "minimum": 0 }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "RiskItem": {
+      "type": "object",
+      "description": "风险项（与 02-planning/05-summary 阶段格式统一）",
+      "required": ["description", "severity"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "风险描述"
+        },
+        "severity": {
+          "type": "string",
+          "description": "严重程度。high: 可能导致功能无法实现; medium: 有限制或降级; low: 轻微影响",
+          "enum": ["high", "medium", "low"]
+        },
+        "mitigation": {
+          "type": ["string", "null"],
+          "description": "缓解方案"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EcosystemCompliance": {
+      "type": "object",
+      "description": "鸿蒙生态规则合规性分析",
+      "required": ["library_category", "has_ecosystem_rules", "huawei_capabilities", "arkweb_requirement"],
+      "properties": {
+        "library_category": {
+          "type": "string",
+          "description": "库所属类别",
+          "enum": ["payment", "account", "ad", "map", "push", "share", "payment_aggregation", "account_aggregation", "ad_aggregation", "map_aggregation", "push_aggregation", "share_aggregation", "media_playback", "webview", "ime", "app_download", "deep_link", "restricted_permission", "single_channel", "other"]
+        },
+        "library_category_desc": {
+          "type": "string",
+          "description": "库类别描述说明"
+        },
+        "has_ecosystem_rules": {
+          "type": "boolean",
+          "description": "是否有对应的鸿蒙生态规则需要遵守"
+        },
+        "has_ui": {
+          "type": "boolean",
+          "description": "库是否包含 UI 界面"
+        },
+        "is_aggregation": {
+          "type": "boolean",
+          "description": "是否为多渠道聚合库"
+        },
+        "application_requirements": {
+          "type": "array",
+          "description": "应用需求类别列表（如数字商品支付、后台音频等）",
+          "items": {
+            "type": "string",
+            "enum": ["digital_payment", "physical_payment", "background_audio", "formatted_audio_playback", "video_playback", "offline_push", "online_push", "ad_platform", "map_requirement", "share_requirement", "security_input", "sensitive_input", "ime_app", "input_method", "app_download", "deep_link", "restricted_permission_access"]
+          }
+        },
+        "huawei_capabilities": {
+          "type": "array",
+          "description": "涉及的华为能力列表",
+          "items": {
+            "$ref": "#/$defs/HuaweiCapability"
+          }
+        },
+        "arkweb_requirement": {
+          "$ref": "#/$defs/ArkWebRequirement"
+        },
+        "restricted_permissions": {
+          "type": "array",
+          "description": "命中的受限权限及替代方案。涉及通讯录、媒体文件、剪贴板、悬浮窗等受限能力时填写",
+          "items": {
+            "$ref": "#/$defs/RestrictedPermissionReplacement"
+          }
+        },
+        "needs_architecture_upgrade": {
+          "type": "boolean",
+          "description": "是否需要架构升级（单体库 → 聚合库）"
+        },
+        "target_aggregation_type": {
+          "type": ["string", "null"],
+          "description": "升级后的目标聚合库类型（如 account → account_aggregation）"
+        },
+        "ui_priority_requirement": {
+          "type": ["string", "null"],
+          "description": "UI 展示顺序要求（如「华为登录必须在微博登录上方」）"
+        },
+        "compliance_notes": {
+          "type": "string",
+          "description": "合规建议说明"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HuaweiCapability": {
+      "type": "object",
+      "description": "华为能力要求",
+      "required": ["capability_type", "requirement_level"],
+      "properties": {
+        "capability_type": {
+          "type": "string",
+          "description": "华为能力类型",
+          "enum": ["payment", "account", "ad", "map", "push", "share", "av_session", "ime", "app_gallery", "app_linking", "security_keyboard", "arkweb", "location", "picker", "contact_picker", "audio_picker", "photo_picker", "pasteboard", "pip"]
+        },
+        "capability_name": {
+          "type": "string",
+          "description": "华为能力名称（如：华为数字商品服务、华为账号登录、华为广告平台、华为地图、Push Kit、Share Kit、AVSession Kit、IME Kit、AppGallery Kit、安全键盘等）"
+        },
+        "requirement_level": {
+          "type": "string",
+          "description": "要求级别：mandatory=必须接入, optional=可选接入, suggested=建议考虑",
+          "enum": ["mandatory", "optional", "suggested"]
+        },
+        "requirement_reason": {
+          "type": "string",
+          "description": "要求级别的原因说明"
+        },
+        "integration_guidance": {
+          "type": "string",
+          "description": "集成指导说明"
+        },
+        "skill_reference": {
+          "type": "string",
+          "description": "对应的集成 Skill 名称（如 huawei-iap-integration）"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ArkWebRequirement": {
+      "type": "object",
+      "description": "ArkWeb 内核需求",
+      "required": ["required"],
+      "properties": {
+        "required": {
+          "type": "boolean",
+          "description": "是否需要接入 ArkWeb 内核"
+        },
+        "reason": {
+          "type": "string",
+          "description": "需求原因说明"
+        },
+        "web_usage_scenario": {
+          "type": "string",
+          "description": "Web 内核使用场景描述"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RestrictedPermissionReplacement": {
+      "type": "object",
+      "description": "受限权限替代方案",
+      "required": ["permission", "replacement"],
+      "properties": {
+        "permission": {
+          "type": "string",
+          "description": "HarmonyOS 受限权限，如 ohos.permission.READ_CONTACTS"
+        },
+        "android_permission": {
+          "type": "string",
+          "description": "对应 Android 权限或能力，如 android.permission.READ_CONTACTS / MediaStore"
+        },
+        "type": {
+          "type": "string",
+          "description": "权限类型或业务域，如 contacts、audio、image_video、pasteboard、float_window"
+        },
+        "replacement": {
+          "type": "string",
+          "description": "Picker、安全控件、授权弹窗、画中画或系统应用跳转等替代方案"
+        },
+        "requirement_reason": {
+          "type": "string",
+          "description": "为什么不能直接沿用权限申请，以及该替代方案的触发依据"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ApiInventory": {
+      "type": "object",
+      "description": "API 完整性扫描清单。adaptation_contracts = 鸿蒙适配契约（唯一硬门槛，PRD 需 100% 覆盖）；dart_public_api = Dart 公开 API 计数（仅作诊断，不设阈值）；cross_validation = 三端/文档异常（自由结构，由 Agent 组织）；prd_coverage = PRD 覆盖率回写（自由结构，第二轮生成 PRD 后填入；仅 contract_coverage_percent 为硬门槛）",
+      "required": ["adaptation_contracts", "dart_public_api"],
+      "properties": {
+        "adaptation_contracts": { "$ref": "#/$defs/AdaptationContracts" },
+        "dart_public_api": { "$ref": "#/$defs/DartPublicApi" },
+        "cross_validation": {
+          "type": "object",
+          "description": "三端及 README 一致性异常（自由结构）。推荐键：dart_only_methods[]、native_only_methods[]、name_mismatches[]、readme_feature_gaps[]。具体字段由 Agent 按 prompt 步骤 3.5.3 规则组织，schema 不约束明细"
+        },
+        "prd_coverage": {
+          "type": "object",
+          "description": "PRD 覆盖率回写（第二轮写入）。推荐键：contract_coverage_percent、dart_api_coverage_percent、api_to_module_coverage_percent、module_to_api_coverage_percent。第一轮 JSON 写入时整字段省略（勿写空对象）"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AdaptationContracts": {
+      "type": "object",
+      "description": "鸿蒙适配契约计数（硬约束）。total_contracts 供下游 planning/coding 作为工作量基准。Agent 写入前必须自校验：total_contracts = method_channel_method_count + basic_message_channel_method_count + event_channel_count + platform_view_count + ffi_main_function_count；且 ffi_total_scanned = ffi_main_function_count + ffi_helper_function_count",
+      "required": ["method_channel_method_count", "basic_message_channel_method_count", "event_channel_count", "platform_view_count", "ffi_main_function_count", "ffi_helper_function_count", "ffi_total_scanned", "total_contracts"],
+      "properties": {
+        "method_channel_method_count": { "type": "integer", "minimum": 0, "description": "MethodChannel 具名方法数（三端并集去重）" },
+        "basic_message_channel_method_count": { "type": "integer", "minimum": 0, "description": "BasicMessageChannel 具名调用数（若插件使用；否则 0）" },
+        "event_channel_count": { "type": "integer", "minimum": 0, "description": "EventChannel 实例数" },
+        "platform_view_count": { "type": "integer", "minimum": 0, "description": "PlatformView viewType 数" },
+        "ffi_main_function_count": { "type": "integer", "minimum": 0, "description": "FFI 主函数数（Dart 直接调用，计入 total_contracts）；非 FFI 插件填 0" },
+        "ffi_helper_function_count": { "type": "integer", "minimum": 0, "description": "FFI 辅助函数数（不计入 total_contracts）；非 FFI 插件填 0" },
+        "ffi_total_scanned": { "type": "integer", "minimum": 0, "description": "FFI 函数扫描总数 = main + helper；非 FFI 插件填 0" },
+        "total_contracts": { "type": "integer", "minimum": 0, "description": "鸿蒙端必须实现的契约总数 = method_channel_method_count + basic_message_channel_method_count + event_channel_count + platform_view_count + ffi_main_function_count" }
+      },
+      "additionalProperties": false
+    },
+    "DartPublicApi": {
+      "type": "object",
+      "description": "Dart 公开 API 计数（诊断信息，不设达标阈值）。6 类计数之和 = total_count；core_count = total_count - excluded_count，作为 PRD 12.2 覆盖率分母。排除规则详见 prompt 步骤 3.5.4。注意：@protected 方法不算排除，属于子类扩展契约",
+      "required": ["class_count", "method_count", "enum_count", "top_level_function_count", "typedef_count", "top_level_constant_count", "total_count", "core_count", "excluded_count"],
+      "properties": {
+        "class_count": { "type": "integer", "minimum": 0, "description": "公开类数（含 Widget/Controller/数据类）" },
+        "method_count": { "type": "integer", "minimum": 0, "description": "公开方法数 = 构造函数（含命名构造） + 实例方法 + 静态方法 + 显式声明的 get/set。**不计入**：字段、字段隐含的 getter/setter、枚举值、顶级函数（有独立计数）" },
+        "enum_count": { "type": "integer", "minimum": 0, "description": "公开枚举数" },
+        "top_level_function_count": { "type": "integer", "minimum": 0, "description": "顶级函数数" },
+        "typedef_count": { "type": "integer", "minimum": 0, "description": "typedef 数" },
+        "top_level_constant_count": { "type": "integer", "minimum": 0, "description": "顶层常量数" },
+        "total_count": { "type": "integer", "minimum": 0, "description": "六类之和" },
+        "core_count": { "type": "integer", "minimum": 0, "description": "核心 API 数 = total_count - excluded_count（PRD 12.2 覆盖率分母）" },
+        "excluded_count": { "type": "integer", "minimum": 0, "description": "排除数（@internal/@visibleForTesting/@experimental/代码生成/Schema 类/私有 subtree）" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

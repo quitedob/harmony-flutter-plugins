@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "media_scanner_ohos",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ]
+  }
+}

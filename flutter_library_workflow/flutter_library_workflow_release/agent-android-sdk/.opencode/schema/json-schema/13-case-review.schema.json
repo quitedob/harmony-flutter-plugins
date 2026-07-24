@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SDK Case Review Stage Output",
+  "description": "SDK 鸿蒙化适配用例评审阶段产物 Schema",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["reviewDate", "reviewedProject", "threeWayComparison", "scores", "passStatus", "recommendation"],
+  "properties": {
+    "reviewDate": {
+      "type": "string",
+      "format": "date",
+      "description": "评审日期"
+    },
+    "reviewedProject": {
+      "type": "string",
+      "description": "评审项目名称"
+    },
+    "threeWayComparison": {
+      "type": "object",
+      "required": ["moduleCount", "totalCases", "levelDistribution", "overall"],
+      "properties": {
+        "moduleCount": {
+          "type": "object",
+          "description": "模块数比对",
+          "properties": {
+            "testPoints": { "type": "integer" },
+            "testCasesJson": { "type": "integer" },
+            "testCasesMd": { "type": "integer" },
+            "match": { "type": "boolean" }
+          }
+        },
+        "totalCases": {
+          "type": "object",
+          "description": "用例总数比对",
+          "properties": {
+            "testPoints": { "type": "integer" },
+            "testCasesJson": { "type": "integer" },
+            "testCasesMd": { "type": "integer" },
+            "match": { "type": "boolean" }
+          }
+        },
+        "levelDistribution": {
+          "type": "object",
+          "description": "级别分布比对",
+          "properties": {
+            "testPoints": {
+              "type": "object",
+              "properties": { "L0": { "type": "integer" }, "L1": { "type": "integer" }, "L2": { "type": "integer" } }
+            },
+            "testCasesJson": {
+              "type": "object",
+              "properties": { "L0": { "type": "integer" }, "L1": { "type": "integer" }, "L2": { "type": "integer" } }
+            },
+            "testCasesMd": {
+              "type": "object",
+              "properties": { "L0": { "type": "integer" }, "L1": { "type": "integer" }, "L2": { "type": "integer" } }
+            },
+            "match": { "type": "boolean" }
+          }
+        },
+        "overall": { "type": "boolean" }
+      }
+    },
+    "scores": {
+      "type": "object",
+      "required": ["coverage", "executability", "judgability", "standardization", "overall"],
+      "properties": {
+        "coverage": { "type": "number", "minimum": 0, "maximum": 100 },
+        "executability": { "type": "number", "minimum": 0, "maximum": 100 },
+        "judgability": { "type": "number", "minimum": 0, "maximum": 100 },
+        "standardization": { "type": "number", "minimum": 0, "maximum": 100 },
+        "overall": { "type": "number", "minimum": 0, "maximum": 100 }
+      }
+    },
+    "passStatus": {
+      "type": "object",
+      "required": ["coverage", "executability", "judgability", "standardization", "overall"],
+      "properties": {
+        "coverage": { "type": "boolean" },
+        "executability": { "type": "boolean" },
+        "judgability": { "type": "boolean" },
+        "standardization": { "type": "boolean" },
+        "overall": { "type": "boolean" }
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dimension": { "type": "string", "enum": ["coverage", "executability", "judgability", "standardization"] },
+          "severity": { "type": "string", "enum": ["critical", "major", "minor"] },
+          "description": { "type": "string" },
+          "location": { "type": "string" },
+          "suggestion": { "type": "string" }
+        }
+      }
+    },
+    "recommendation": {
+      "type": "string",
+      "enum": ["proceed", "conditional_proceed", "reject"],
+      "description": "评审建议：proceed=通过，conditional_proceed=有条件通过，reject=不通过"
+    }
+  }
+}

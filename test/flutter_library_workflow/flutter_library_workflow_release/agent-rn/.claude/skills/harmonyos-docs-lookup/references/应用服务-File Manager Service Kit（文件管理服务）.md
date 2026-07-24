@@ -1,0 +1,3 @@
+* **[File Manager Service Kit简介](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/filemanagerservice-introduction)**
+* **[删除文件到回收站](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/filemanagerservice-deletetotrash)**
+* **[获取文件图标](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/filemanagerservice-getfileicon)**

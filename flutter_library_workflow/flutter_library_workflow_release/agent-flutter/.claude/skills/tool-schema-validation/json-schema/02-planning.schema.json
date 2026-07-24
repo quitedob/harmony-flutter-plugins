@@ -1,0 +1,478 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ohos-adaptation/02-planning.schema.json",
+  "title": "Planning Stage Output",
+  "description": "Flutter 插件鸿蒙适配方案制定阶段（阶段2）的产物。包含 API 映射、依赖替代方案、权限映射、实现策略等，指导后续 coding-library 阶段的编码工作。",
+  "version": "1.1.0",
+  "type": "object",
+  "required": [
+    "sdk_environment",
+    "plugin_type_skill",
+    "ohos_api_mapping",
+    "native_dependency_mapping",
+    "permission_mapping",
+    "implementation_strategy",
+    "risk_items"
+  ],
+  "properties": {
+    "sdk_environment": {
+      "$ref": "#/$defs/SdkEnvironment"
+    },
+    "plugin_type_skill": {
+      "type": "string",
+      "description": "后续 coding-library 阶段应加载的 skill 名称，决定工程搭建和编码的具体模式",
+      "enum": [
+        "type-method-channel",
+        "type-event-channel",
+        "type-ffi",
+        "type-federated",
+        "type-platform-view",
+        "type-texture",
+        "type-pure-dart",
+        "type-monorepo"
+      ]
+    },
+    "ohos_api_mapping": {
+      "type": "array",
+      "description": "每个功能/Channel 方法到鸿蒙 API 的映射",
+      "items": {
+        "$ref": "#/$defs/ApiMapping"
+      }
+    },
+    "native_dependency_mapping": {
+      "type": "array",
+      "description": "原生三方库到鸿蒙替代方案的映射",
+      "items": {
+        "$ref": "#/$defs/NativeDependencyMapping"
+      }
+    },
+    "permission_mapping": {
+      "type": "array",
+      "description": "Android/iOS 权限到鸿蒙权限的映射",
+      "items": {
+        "$ref": "#/$defs/PermissionMapping"
+      }
+    },
+    "reference_plugins": {
+      "type": "array",
+      "description": "可参考的已适配插件",
+      "items": {
+        "$ref": "#/$defs/ReferencePlugin"
+      }
+    },
+    "implementation_strategy": {
+      "$ref": "#/$defs/ImplementationStrategy"
+    },
+    "risk_items": {
+      "type": "array",
+      "description": "风险项列表。所有 confidence:low 的映射和 solution_type:not_available 的依赖都应在此标记",
+      "items": {
+        "$ref": "#/$defs/RiskItem"
+      }
+    },
+    "example_deps_solutions": {
+      "type": "array",
+      "description": "Example 应用中缺少 OHOS 支持的依赖的替代方案",
+      "items": {
+        "$ref": "#/$defs/ExampleDepSolution"
+      }
+    },
+    "ffi_strategy": {
+      "type": ["string", "null"],
+      "description": "FFI 构建策略，仅 plugin_type 含 ffi 时填写。非 FFI 插件填 not_applicable 或 null",
+      "enum": [
+        "compile_from_source",
+        "rust_cross_compile",
+        "prebuilt_bundle",
+        "fetch_at_build",
+        "not_applicable",
+        null
+      ]
+    },
+    "ffi_strategy_caveat": {
+      "type": ["string", "null"],
+      "description": "FFI 策略长尾偏离说明，≤200 字符，可为 null",
+      "maxLength": 200
+    },
+    "ffi_library_name": {
+      "type": ["string", "null"],
+      "description": "原生库标识名，用于 native-lib-index 索引匹配。仅 ffi_strategy 为 prebuilt_bundle/fetch_at_build 时填写"
+    },
+    "ffi_so_files": {
+      "type": ["array", "null"],
+      "description": "Dart 层 DynamicLibrary.open() 加载的 .so 文件名列表。仅 ffi_strategy 为 prebuilt_bundle/fetch_at_build 时填写",
+      "items": { "type": "string" }
+    },
+    "ffi_source_project": {
+      "type": ["string", "null"],
+      "description": "上游源码仓库地址（GitHub/GitLab URL）。仅 ffi_strategy 为 prebuilt_bundle/fetch_at_build 时填写"
+    },
+    "ffi_source_version": {
+      "type": ["string", "null"],
+      "description": "上游库版本号（从 tag/版本号/README 推断）。仅 ffi_strategy 为 prebuilt_bundle/fetch_at_build 时填写"
+    },
+    "implementation_notes": {
+      "type": ["string", "null"],
+      "description": "给 coding-library agent 的整体提示和注意事项"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "ApiMapping": {
+      "type": "object",
+      "description": "单个功能/Channel 方法到鸿蒙 API 的映射",
+        "required": ["feature", "ohos_module", "ohos_api", "ohos_import", "since_version", "syscap", "is_async", "confidence", "source"],
+      "properties": {
+        "feature": {
+          "type": "string",
+          "description": "功能的中文描述"
+        },
+        "channel_method": {
+          "type": ["string", "null"],
+          "description": "对应的 Channel 方法名，纯功能映射时为 null"
+        },
+        "android_api": {
+          "type": ["string", "null"],
+          "description": "对应的 Android API（来自 01-analysis.json），便于追溯"
+        },
+        "ios_api": {
+          "type": ["string", "null"],
+          "description": "对应的 iOS API（来自 01-analysis.json），便于追溯"
+        },
+        "ohos_module": {
+          "type": "string",
+          "description": "鸿蒙模块名（如 @ohos.nfc.tag）"
+        },
+        "ohos_api": {
+          "type": "string",
+          "description": "具体的 API 函数签名"
+        },
+        "ohos_import": {
+          "type": ["string", "null"],
+          "description": "ETS 中的 import 语句。对仅在 planning 阶段做能力级映射、尚未直接验签的 ohpm 原生包可为 null"
+        },
+        "file_path": {
+          "type": ["string", "null"],
+          "description": "SDK .d.ts 文件全路径（相对于 workspace 根），供 coding agent 查看详细定义"
+        },
+        "since_version": {
+          "type": ["integer", "null"],
+          "description": "API 版本号（数字，如 9、12）。对 ohpm 原生包且 planning 阶段未直接验签时可为 null",
+          "minimum": 1
+        },
+        "syscap": {
+          "type": ["string", "null"],
+          "description": "系统能力标识（如 SystemCapability.Xxx.Xxx）。对 ohpm 原生包且 planning 阶段未直接验签时可为 null"
+        },
+        "required_permission": {
+          "type": ["string", "null"],
+          "description": "所需权限（ohos.permission.XXX），无需权限时为 null"
+        },
+        "is_async": {
+          "type": "boolean",
+          "description": "是否为异步 API"
+        },
+        "confidence": {
+          "type": "string",
+          "description": "映射置信度。high: SDK 签名完整且 @since 明确; medium: 近似 API 或需组合; low: 仅通过文档推断",
+          "enum": ["high", "medium", "low"]
+        },
+        "source": {
+          "type": "string",
+          "description": "数据来源",
+          "enum": ["mapping_db", "sdk_search", "doc_search", "finished_lookup", "ohpm_package_precheck"]
+        },
+        "verification_status": {
+          "type": "string",
+          "description": "该映射的验签状态。对未直接验签的 ohpm 包映射写 pending_coding_verification",
+          "enum": ["verified", "pending_coding_verification", "not_required"]
+        },
+        "verification_source": {
+          "type": ["string", "null"],
+          "description": "验签来源摘要（如 README、Index.d.ts、包级类型文件路径）"
+        },
+        "notes": {
+          "type": ["string", "null"],
+          "description": "补充说明"
+        }
+      },
+      "additionalProperties": false
+    },
+    "NativeDependencyMapping": {
+      "type": "object",
+      "description": "原生三方库到鸿蒙替代方案的映射",
+      "required": ["original_platform", "original_lib", "original_usage", "ohos_solution_type", "api_verification_status", "confidence"],
+      "properties": {
+        "original_platform": {
+          "type": "string",
+          "description": "原平台",
+          "enum": ["android", "ios", "cpp"]
+        },
+        "original_lib": {
+          "type": "string",
+          "description": "原三方库名（如 com.github.barteksc:android-pdf-viewer）"
+        },
+        "original_usage": {
+          "type": "string",
+          "description": "在插件中的用途（如 PDF 文档渲染）"
+        },
+        "ohos_solution_type": {
+          "type": "string",
+          "description": "鸿蒙替代方案类型",
+          "enum": ["ohpm_package", "system_api", "custom_implementation", "not_available"]
+        },
+        "ohos_package": {
+          "type": ["string", "null"],
+          "description": "ohpm 包名（当 solution_type 为 ohpm_package 时填写）"
+        },
+        "ohpm_version": {
+          "type": ["string", "null"],
+          "description": "ohpm 包版本号（从 ohpm API 实时查询获取）"
+        },
+        "ohos_module": {
+          "type": ["string", "null"],
+          "description": "鸿蒙模块名（当 solution_type 为 system_api 时填写）"
+        },
+        "install_command": {
+          "type": ["string", "null"],
+          "description": "安装命令（如 ohpm install xxx）"
+        },
+        "api_verification_status": {
+          "type": "string",
+          "description": "原生包 API 验签状态。ohpm_package 通常先写 pending_coding_verification，等 coding 阶段在已安装包上验签；非 ohpm_package 写 not_required",
+          "enum": ["not_required", "pending_coding_verification", "verified"]
+        },
+        "confidence": {
+          "type": "string",
+          "description": "替代方案的置信度",
+          "enum": ["high", "medium", "low"]
+        },
+        "verification_notes": {
+          "type": ["string", "null"],
+          "description": "关于包 API 验签的说明或证据摘要"
+        },
+        "notes": {
+          "type": ["string", "null"],
+          "description": "说明（替代方案的能力覆盖度、已知限制等）"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PermissionMapping": {
+      "type": "object",
+      "description": "权限映射",
+      "required": ["source_platform", "source_permission", "ohos_permission", "permission_level", "needs_user_grant"],
+      "properties": {
+        "source_platform": {
+          "type": "string",
+          "description": "来源平台",
+          "enum": ["android", "ios"]
+        },
+        "source_permission": {
+          "type": "string",
+          "description": "原权限标识（如 android.permission.CAMERA）"
+        },
+        "ohos_permission": {
+          "type": "string",
+          "description": "鸿蒙对应权限（如 ohos.permission.CAMERA）"
+        },
+        "permission_level": {
+          "type": "string",
+          "description": "权限级别",
+          "enum": ["normal", "restricted"]
+        },
+        "needs_user_grant": {
+          "type": "boolean",
+          "description": "是否需要用户运行时授权"
+        },
+        "notes": {
+          "type": ["string", "null"],
+          "description": "补充说明"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReferencePlugin": {
+      "type": "object",
+      "description": "可参考的已适配插件",
+      "required": ["name", "url", "relevance"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "参考插件名"
+        },
+        "url": {
+          "type": "string",
+          "description": "仓库地址"
+        },
+        "relevance": {
+          "type": "string",
+          "description": "关联程度。direct: 同一插件鸿蒙版; similar: 功能相近; partial: 部分功能可参考",
+          "enum": ["direct", "similar", "partial"]
+        },
+        "key_patterns": {
+          "type": "array",
+          "description": "关键实现模式",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImplementationStrategy": {
+      "type": "object",
+      "description": "实现策略，指导后续 coding-library 阶段",
+      "required": ["approach"],
+      "properties": {
+        "approach": {
+          "type": "string",
+          "description": "整体实现策略概述（1-3 段文字，描述核心实现思路）"
+        },
+        "architecture_decisions": {
+          "type": "array",
+          "description": "关键技术选型决策",
+          "items": {
+            "type": "object",
+            "required": ["topic", "decision", "rationale"],
+            "properties": {
+              "topic": {
+                "type": "string",
+                "description": "决策主题"
+              },
+              "decision": {
+                "type": "string",
+                "description": "选定方案"
+              },
+              "rationale": {
+                "type": "string",
+                "description": "选择原因"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "planned_files": {
+          "type": "array",
+          "description": "ohos/ 目录下需创建的文件清单",
+          "items": {
+            "type": "object",
+            "required": ["path", "purpose"],
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "文件相对路径"
+              },
+              "purpose": {
+                "type": "string",
+                "description": "用途说明"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "approach_detail": {
+          "type": "string",
+          "description": "详细实现方案说明（Markdown 格式，可包含子标题、列表、代码块等，比 approach 更详尽）"
+        },
+        "supplemental_sections": {
+          "type": "array",
+          "description": "方案的补充说明段落（如关键特性、状态机说明、协议支持等）",
+          "items": {
+            "type": "object",
+            "required": ["title", "body"],
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "段落标题"
+              },
+              "body": {
+                "type": "string",
+                "description": "段落内容（Markdown 格式）"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "module_json5_config": {
+          "type": "object",
+          "description": "module.json5 配置需求",
+          "properties": {
+            "permissions": {
+              "type": "array",
+              "description": "需在 module.json5 声明的权限列表",
+              "items": { "type": "string" }
+            },
+            "syscap_requirements": {
+              "type": "array",
+              "description": "需要的系统能力列表",
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "RiskItem": {
+      "type": "object",
+      "description": "风险项",
+      "required": ["description", "severity"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "风险描述"
+        },
+        "severity": {
+          "type": "string",
+          "description": "严重程度。high: 可能导致功能无法实现; medium: 有限制或降级; low: 轻微影响",
+          "enum": ["high", "medium", "low"]
+        },
+        "mitigation": {
+          "type": ["string", "null"],
+          "description": "缓解方案"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ExampleDepSolution": {
+      "type": "object",
+      "description": "Example 依赖替代方案",
+      "required": ["dep", "solution", "solution_type"],
+      "properties": {
+        "dep": {
+          "type": "string",
+          "description": "依赖名"
+        },
+        "solution": {
+          "type": "string",
+          "description": "替代方案描述"
+        },
+        "solution_type": {
+          "type": "string",
+          "description": "替代方案类型",
+          "enum": ["adapted", "alternative", "remove", "mock"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "SdkEnvironment": {
+      "type": "object",
+      "description": "Flutter SDK 环境适配结果，由 flutter-sdk-switch Skill 在 Planning 阶段写入",
+      "required": ["needs_switch", "flutter_version"],
+      "properties": {
+        "needs_switch": {
+          "type": "boolean",
+          "description": "是否需要切换 SDK。当前环境已满足约束或未配置 sdk-paths.json 时为 false"
+        },
+        "switch_path": {
+          "type": "string",
+          "description": "切换目标 SDK 路径，仅 needs_switch 为 true 时存在"
+        },
+        "flutter_version": {
+          "type": "string",
+          "description": "最终生效的 Flutter SDK 主版本号（如 3.22、3.35），供依赖版本匹配使用"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

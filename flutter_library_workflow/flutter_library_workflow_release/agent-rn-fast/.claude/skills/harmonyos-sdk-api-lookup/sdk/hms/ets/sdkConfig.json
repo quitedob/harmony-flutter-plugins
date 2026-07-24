@@ -1,0 +1,10 @@
+{
+    "apiPath": ["./api", "./kits"],
+    "prefix": "@hms",
+	"osName": "HarmonyOS",
+	"apiCheckPlugin": [{
+		"tag": "since",
+		"path": "build-tools/ts-checker-hooks/since-checker.js",
+		"functionName": "checkSinceValue"
+	}]
+}

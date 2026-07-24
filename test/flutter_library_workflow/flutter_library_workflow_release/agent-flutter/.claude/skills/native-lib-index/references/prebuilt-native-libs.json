@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "description": "FFI 插件预编译 OHOS ARM64 .so 库索引",
+    "schema_version": "1.1.0",
+    "total_count": 2,
+    "last_updated": "2026-05-19"
+  },
+  "libraries": [
+    {
+      "name": "tensorflowlite_c",
+      "description": "TensorFlow Lite C API — 轻量级机器学习推理引擎",
+      "so_filename": "libtensorflowlite_c.so",
+      "arch": "arm64-v8a",
+      "version": "2.16.1",
+      "source_project": "https://github.com/tensorflow/tensorflow",
+      "size_mb": 6.0,
+      "license": "Apache-2.0",
+      "download": {
+        "type": "github_release",
+        "repo": "HarmonyOS-AI/ohos-prebuilt-libs",
+        "tag": "tensorflowlite_c-v2.16.1-ohos-arm64",
+        "url": "https://github.com/HarmonyOS-AI/ohos-prebuilt-libs/releases/download/tensorflowlite_c-v2.16.1-ohos-arm64/libtensorflowlite_c.so",
+        "sha256": "f04ed8ef3a72e97317ec68d032bbc9986f9140698ba4acc9126b347bdd4d8f5b"
+      },
+      "known_consumers": ["tflite_flutter"],
+      "build_recipe": "tensorflowlite_c.json",
+      "tested_on": "OHOS 5.0, ARM64 真机",
+      "verified_date": "2025-05-14"
+    },
+    {
+      "name": "mpv",
+      "description": "mpv 媒体播放引擎 — 支持音视频解码播放的 C 库",
+      "so_filename": "libmpv.so",
+      "arch": "arm64-v8a",
+      "version": "1.2.6",
+      "source_project": "https://github.com/mpv-player/mpv",
+      "size_mb": 93.0,
+      "license": "LGPL-2.1",
+      "download": {
+        "type": "github_release",
+        "repo": "HarmonyOS-AI/ohos-prebuilt-libs",
+        "tag": "mpv-v1.2.6-ohos-arm64",
+        "url": "https://github.com/HarmonyOS-AI/ohos-prebuilt-libs/releases/download/mpv-v1.2.6-ohos-arm64/libmpv.so",
+        "sha256": "45febf6194b02561572b98659e5c13b672bf86503dd4835688a284326ba18811"
+      },
+      "extra_so_files": [
+        {
+          "filename": "libc++_shared.so",
+          "download_url": "https://github.com/HarmonyOS-AI/ohos-prebuilt-libs/releases/download/mpv-v1.2.6-ohos-arm64/libc++_shared.so",
+          "sha256": "e88953c3d16cd0363f32085dc4bfbd117b270c249b216c2a43703e9b9dabb1fa",
+          "size_mb": 1.2
+        }
+      ],
+      "known_consumers": ["media_kit", "media_kit_video"],
+      "build_recipe": null,
+      "tested_on": "OHOS 6.1, ARM64 真机 (OpenHarmony-6.1.0.115 API 23)",
+      "verified_date": "2026-05-19"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+* **[管理应用账号](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/manage-application-account)**

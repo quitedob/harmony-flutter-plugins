@@ -1,0 +1,28 @@
+{
+	"app": {
+		"bundleName": "com.example.flutter_ohos_test",
+		"debug": true,
+		"versionCode": 1,
+		"versionName": "1.0.0",
+		"minAPIVersion": 50100018,
+		"targetAPIVersion": 60101024,
+		"apiReleaseType": "Release",
+		"targetMinorAPIVersion": 0,
+		"targetPatchAPIVersion": 0,
+		"compileSdkVersion": "6.1.1.125",
+		"compileSdkType": "HarmonyOS",
+		"appEnvironments": [],
+		"bundleType": "app",
+		"buildMode": "debug"
+	},
+	"module": {
+		"name": "media_scanner_ohos",
+		"type": "har",
+		"deviceTypes": [
+			"phone",
+			"tablet"
+		],
+		"packageName": "media_scanner_ohos",
+		"installationFree": false
+	}
+}

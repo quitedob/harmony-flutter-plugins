@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ohos-adaptation/05-evaluation.schema.json",
+  "title": "SDK Evaluation Marker Output",
+  "description": "05 阶段 JSON：仅保留阶段状态、前端评分展示和报告定位。详细评估、覆盖率、风险、流程建议写入 05-evaluation-report.md。",
+  "version": "3.0.0",
+  "type": "object",
+  "required": [
+    "sdk_name",
+    "status",
+    "quality_score",
+    "overall_level",
+    "report_path"
+  ],
+  "properties": {
+    "sdk_name": { "type": "string" },
+    "status": {
+      "type": "string",
+      "enum": ["success", "partial", "failed"]
+    },
+    "quality_score": {
+      "type": "string",
+      "enum": ["A", "B", "C", "D"]
+    },
+    "overall_level": {
+      "type": "string",
+      "enum": ["L1", "L2", "L3", "L4", "L5"]
+    },
+    "summary": { "type": "string" },
+    "report_path": { "type": "string" },
+    "readme_path": { "type": "string" },
+    "generated_at": { "type": "string" }
+  },
+  "additionalProperties": false
+}

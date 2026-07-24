@@ -1,0 +1,1 @@
+可以使用通知消息，详情请参见[发送通知消息](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/push-send-alert)。

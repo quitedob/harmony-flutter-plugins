@@ -1,0 +1,1 @@
+* **[流式传输](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/remote-communication-syncstreamreq)**

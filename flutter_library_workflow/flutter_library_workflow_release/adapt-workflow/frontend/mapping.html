@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>映射库 - 插件跨平台适配工作流</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="top-bar-inner">
+            <div id="moduleNav"></div>
+            <div class="brand">
+                <a href="/" class="back-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    返回插件列表
+                </a>
+                <h1>全局映射库</h1>
+                <p class="brand-sub">汇总所有仓库的 Android→Harmony 映射，并在这里进行人工审核</p>
+            </div>
+            <div class="header-actions">
+                <button id="mappingSettingsBtn" class="btn btn-outline" title="映射分析设置" aria-label="映射分析设置">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="table-section">
+            <div class="mapping-tabs">
+                <button class="mtab active" data-tab="sources">分析仓库</button>
+                <button class="mtab" data-tab="global">汇总映射表</button>
+            </div>
+
+            <!-- Tab: Sources -->
+            <div class="mapping-tab-panel active" id="tabSources">
+                <div class="filter-toolbar">
+                    <div class="filter-row-top">
+                        <div class="filter-search">
+                            <svg class="filter-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" id="sourceSearch" placeholder="搜索仓库名称或 URL...">
+                        </div>
+                        <select id="sourceEnabled" class="filter-select filter-select-compact" title="启用状态过滤">
+                            <option value="">全部</option>
+                            <option value="enabled">启用</option>
+                            <option value="disabled">停用</option>
+                        </select>
+                        <div class="filter-row-top-right">
+                            <div class="mapping-toolbar-actions" aria-label="分析仓库工具栏">
+                                <button id="importCsvBtn" class="btn btn-small btn-secondary" title="导入已鸿蒙化仓库列表（CSV）">导入 CSV</button>
+                                <button id="addSourceBtn" class="btn btn-small btn-primary" title="手动添加分析仓库">手动添加</button>
+                                <button id="runAllSourcesBtn" class="btn btn-small btn-secondary" title="启动所有启用仓库的映射分析">批量分析</button>
+                                <button id="cancelAllSourcesBtn" class="btn btn-small btn-danger" title="停止批量执行（排队与运行中将标记为失败）">停止批量</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="file" id="csvFileInput" accept=".csv,text/csv" style="display:none" />
+
+                <div class="table-wrapper">
+                    <table id="sourcesTable">
+                        <thead>
+                            <tr>
+                                <th>启用</th>
+                                <th>名称</th>
+                                <th>仓库</th>
+                                <th>分支</th>
+                                <th>状态</th>
+                                <th>最近分析</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sourcesTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab: Global mapping table -->
+            <div class="mapping-tab-panel" id="tabGlobal">
+                <div class="filter-toolbar">
+                    <div class="filter-row-top">
+                        <div class="filter-search">
+                            <svg class="filter-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" id="filterSearch" placeholder="搜索 Android 符号 / Harmony 替代项 / 关键字...">
+                        </div>
+                        <div class="filter-row-top-right">
+                            <span id="filterResultCount" class="filter-result-count"></span>
+                            <button id="exportMappingBtn" class="btn btn-small btn-secondary" title="导出映射表（后端接入后生效）">导出</button>
+                            <button id="demoEntryBtn" class="btn btn-small btn-secondary" title="查看字段映射/枚举映射的展示效果">示例</button>
+                        </div>
+                    </div>
+                    <div class="filter-row-selects">
+                        <select id="filterReview" class="filter-select">
+                            <option value="">全部审核状态</option>
+                            <option value="approved">已审核</option>
+                            <option value="unreviewed">未审核</option>
+                            <option value="needs_changes">需修改</option>
+                            <option value="rejected">已驳回</option>
+                        </select>
+                        <label class="checkbox-label" style="margin-left: 4px;">
+                            <input type="checkbox" id="filterConflictsOnly">
+                            <span>仅冲突</span>
+                        </label>
+                        <select id="filterChangeType" class="filter-select">
+                            <option value="">全部变更类型</option>
+                            <option value="replace">替换</option>
+                            <option value="wrap">封装</option>
+                            <option value="conditional">条件编译</option>
+                            <option value="remove">移除</option>
+                            <option value="manual">人工处理</option>
+                        </select>
+                        <select id="filterConfidence" class="filter-select">
+                            <option value="">全部置信度</option>
+                            <option value="high">高</option>
+                            <option value="medium">中</option>
+                            <option value="low">低</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table id="mappingTable">
+                        <thead>
+                            <tr>
+                                <th>Android 符号</th>
+                                <th>推荐 Harmony 替代</th>
+                                <th>变更类型</th>
+                                <th>来源仓库数</th>
+                                <th>审核状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mappingTableBody">
+                            <tr>
+                                <td colspan="6" class="empty-state">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+                                    <p>汇总映射表还没有数据</p>
+                                    <p class="empty-hint">请先在“分析仓库”里导入/添加仓库并运行映射分析；接入后端后，此处将展示可审核的聚合条目。你也可以点右上角“示例”查看字段/枚举映射的展示效果。</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <div id="error" class="error-toast"></div>
+    </main>
+
+    <!-- Mapping analysis settings (same gear pattern as plugin list page) -->
+    <div id="mappingSettingsModal" class="modal-overlay">
+        <div class="modal-content modal-settings">
+            <div class="modal-header">
+                <h2>映射分析设置</h2>
+                <button class="modal-close" id="mappingSettingsModalClose" aria-label="关闭">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-form">
+                    <div class="settings-section">
+                        <h3>执行引擎</h3>
+                        <div class="form-group">
+                            <label for="mappingSettingsBackendSelect">映射分析后端</label>
+                            <select id="mappingSettingsBackendSelect" class="form-select">
+                                <option value="cline">Cline CLI</option>
+                                <option value="opencode">OpenCode</option>
+                            </select>
+                            <p class="form-hint">与插件流水线「全局默认后端」独立；仅影响「映射分析」任务。</p>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <h3>批量分析</h3>
+                        <div class="form-group">
+                            <label for="mappingSettingsBatchModeSelect">批量模式</label>
+                            <select id="mappingSettingsBatchModeSelect" class="form-select">
+                                <option value="serial">串行（推荐）</option>
+                                <option value="parallel">并行</option>
+                            </select>
+                            <p class="form-hint">串行时队列并发为 1，一个完成后再跑下一个；并行时按「Agent 最大并发数」与后端上限执行。</p>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="mappingSettingsCancelBtn">取消</button>
+                        <button type="button" class="btn btn-primary" id="mappingSettingsSaveBtn">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mapping Detail Modal (View field/enum mapping) -->
+    <div id="mappingDetailModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="mappingDetailTitle">映射详情</h2>
+                <button class="modal-close" id="mappingDetailClose" aria-label="关闭">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="mapping-detail-meta" id="mappingDetailMeta"></div>
+
+                <div class="mapping-detail-tabs" id="mappingDetailTabs">
+                    <button class="mdtab active" data-view="summary">概览</button>
+                    <button class="mdtab" data-view="field">字段映射</button>
+                    <button class="mdtab" data-view="enum">枚举映射</button>
+                    <button class="mdtab" data-view="evidence">证据/来源</button>
+                </div>
+
+                <div class="mapping-detail-view active" id="mdViewSummary"></div>
+                <div class="mapping-detail-view" id="mdViewField"></div>
+                <div class="mapping-detail-view" id="mdViewEnum"></div>
+                <div class="mapping-detail-view" id="mdViewEvidence"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mapping Review Modal -->
+    <div id="mappingReviewModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="mappingReviewTitle">审核映射</h2>
+                <button class="modal-close" id="mappingReviewClose" aria-label="关闭">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="reviewStatus">审核状态</label>
+                    <select id="reviewStatus" class="form-input">
+                        <option value="unreviewed">未审核</option>
+                        <option value="approved">已审核</option>
+                        <option value="needs_changes">需修改</option>
+                        <option value="rejected">已驳回</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reviewReviewer">审核人（可选）</label>
+                    <input type="text" id="reviewReviewer" class="form-input" placeholder="例如：jiezh">
+                </div>
+                <div class="form-group">
+                    <label for="reviewNotes">备注</label>
+                    <textarea id="reviewNotes" class="form-input" rows="4" placeholder="记录原因、适用条件、注意事项…"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="reviewFinalOverride">最终可信覆盖（finalOverride，可选，JSON）</label>
+                    <textarea id="reviewFinalOverride" class="form-input" rows="8" placeholder='例如：{"harmonyReplacement":{"kind":"kit","name":"@ohos.xxx","details":"..."},"changeType":"wrap","fieldMappings":[...]}&#10;留空表示不覆盖'></textarea>
+                    <p class="form-hint">只用于人工纠正：可覆盖 replacement/changeType/fieldMappings/enumMappings/preconditions/requiredDeps/limitations/testGuidance 等字段。</p>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-secondary" id="reviewCancelBtn">取消</button>
+                    <button class="btn btn-primary" id="reviewSaveBtn">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mapping Log Modal -->
+    <div id="mappingLogModal" class="modal-overlay">
+        <div class="modal-content agent-modal-content">
+            <div class="modal-header">
+                <h2 id="mappingLogTitle">映射分析日志</h2>
+                <button class="modal-close" id="mappingLogClose" aria-label="关闭">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="agent-info-bar">
+                    <div class="agent-status" id="mappingLogStatus"></div>
+                    <div class="agent-controls">
+                        <label class="checkbox-label mapping-log-auto">
+                            <input type="checkbox" id="mappingLogAutoRefresh" checked>
+                            <span>自动刷新</span>
+                        </label>
+                        <button class="btn btn-small btn-secondary" id="mappingLogRefreshBtn">刷新</button>
+                    </div>
+                </div>
+                <div class="agent-output" id="mappingLogOutput"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Source Modal -->
+    <div id="addSourceModal" class="modal-overlay">
+        <div class="modal-content modal-add-plugin">
+            <div class="modal-header">
+                <h2>添加分析仓库</h2>
+                <button class="modal-close" id="addSourceModalClose" aria-label="关闭">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="sourceNameInput">名称（可选）</label>
+                    <input type="text" id="sourceNameInput" class="form-input" placeholder="例如：camera / xxx_plugin">
+                </div>
+                <div class="form-group">
+                    <label for="sourceUrlInput">仓库地址</label>
+                    <input type="text" id="sourceUrlInput" class="form-input" placeholder="https://github.com/xxx/yyy.git">
+                    <p class="form-hint">将此仓库加入“映射分析语料库”，后续可批量运行映射分析</p>
+                </div>
+                <div class="form-group">
+                    <label for="sourceBranchInput">分支（可选）</label>
+                    <input type="text" id="sourceBranchInput" class="form-input" placeholder="例如：main / master / ohos">
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-secondary" id="cancelAddSourceBtn">取消</button>
+                    <button class="btn btn-primary" id="confirmAddSourceBtn">添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/module-nav.js"></script>
+    <script type="module" src="mapping.js"></script>
+</body>
+</html>
+

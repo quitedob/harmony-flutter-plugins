@@ -1,0 +1,598 @@
+/* ── Filter Toolbar (integrated into table card) ── */
+
+.filter-toolbar {
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.filter-row-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.filter-search {
+    position: relative;
+    flex: 1;
+    max-width: 360px;
+}
+
+.filter-search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    pointer-events: none;
+}
+
+.filter-search input {
+    width: 100%;
+    padding: 7px 12px 7px 34px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    color: var(--color-text);
+    background: var(--color-bg);
+    transition: all 0.15s ease;
+}
+
+.filter-search input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background: var(--color-surface);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.filter-search input::placeholder {
+    color: #94a3b8;
+}
+
+.filter-row-top-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.filter-result-count {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+}
+
+.filter-reset-btn {
+    flex-shrink: 0;
+}
+
+.filter-row-selects {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filter-select {
+    padding: 6px 26px 6px 10px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    color: var(--color-text);
+    background: var(--color-surface);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%2364748b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* ── Batch Action Bar (inside table card) ── */
+
+.batch-action-bar {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: white;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.25s ease;
+}
+
+.batch-action-bar.visible {
+    padding: 10px 20px;
+    max-height: 52px;
+    opacity: 1;
+}
+
+.batch-info {
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.batch-info svg {
+    opacity: 0.7;
+    flex-shrink: 0;
+}
+
+.batch-info strong {
+    font-weight: 700;
+}
+
+.batch-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.batch-actions .btn-primary {
+    background: white;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.batch-actions .btn-primary:hover {
+    background: #f0f4ff;
+    box-shadow: none;
+}
+
+.batch-actions .btn-primary:disabled {
+    background: rgba(255, 255, 255, 0.4);
+    color: rgba(37, 99, 235, 0.5);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.batch-actions .btn-secondary {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.batch-actions .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.22);
+    color: white;
+}
+
+/* ── Checkbox Column ── */
+
+.th-checkbox,
+.td-checkbox {
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    text-align: center;
+    padding: 0 8px 0 16px !important;
+}
+
+.th-checkbox input,
+.td-checkbox input {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    accent-color: var(--color-primary);
+    vertical-align: middle;
+}
+
+tr.row-selected {
+    background: #eff6ff !important;
+}
+
+tr.row-selected:hover {
+    background: #dbeafe !important;
+}
+
+/* ── List Page: Enhanced Table ── */
+
+.plugin-repo-url {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    margin-top: 2px;
+    max-width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.repo-link-short {
+    font-size: 12px;
+    max-width: 200px !important;
+}
+
+.td-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: var(--color-text-secondary);
+    font-size: 12px;
+}
+
+/* ── Stage Progress (List Page) ── */
+
+.stage-progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.stage-dots {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.stage-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    transition: all 0.2s ease;
+}
+
+.stage-dot.idle {
+    background: #e2e8f0;
+}
+
+.stage-dot.running {
+    background: var(--color-primary);
+    animation: pulse 1.5s ease-in-out infinite;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.stage-dot.success {
+    background: var(--color-success);
+}
+
+.stage-dot.failed {
+    background: var(--color-danger);
+}
+
+.stage-dot.interrupted {
+    background: #f59e0b;
+}
+
+.stage-dot.unknown {
+    background: #94a3b8;
+}
+
+.stage-progress-text {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+}
+
+.stage-running-label {
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 11px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.mini-spinner {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: 1.5px solid rgba(37, 99, 235, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--color-primary);
+    animation: spin 0.7s linear infinite;
+    flex-shrink: 0;
+}
+
+.text-success-sm {
+    color: var(--color-success);
+    font-weight: 600;
+}
+
+.text-danger-sm {
+    color: var(--color-danger);
+    font-weight: 600;
+}
+
+
+tr.row-running {
+    background: color-mix(in srgb, var(--color-info-light) 40%, transparent);
+}
+
+tr.row-running:hover {
+    background: color-mix(in srgb, var(--color-info-light) 60%, transparent);
+}
+
+.quality-badge {
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-block;
+    min-width: 24px;
+    text-align: center;
+}
+
+.quality-badge.quality-a {
+    background: var(--color-success-bg);
+    color: #15803d;
+}
+
+.quality-badge.quality-b {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.quality-badge.quality-c {
+    background: var(--color-warning-bg);
+    color: #92400e;
+}
+
+.quality-badge.quality-d {
+    background: var(--color-danger-bg);
+    color: #b91c1c;
+}
+
+.td-updated {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+}
+
+.complexity-badge {
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.complexity-success {
+    background: var(--color-success-bg);
+    color: #15803d;
+}
+
+.complexity-pending {
+    background: var(--color-warning-bg);
+    color: #92400e;
+}
+
+.complexity-warning {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.complexity-failed {
+    background: var(--color-danger-bg);
+    color: #b91c1c;
+}
+
+.status-neutral {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+/* ── Queue Status Bar ── */
+
+.queue-status-bar {
+    background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.queue-status-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    font-size: 13px;
+    color: #1e40af;
+}
+
+.queue-stat {
+    font-size: 13px;
+}
+
+.queue-stat strong {
+    font-weight: 600;
+}
+
+.queue-stat-sep {
+    color: #93c5fd;
+    margin: 0 2px;
+}
+
+.queue-cancel-btn {
+    margin-left: auto;
+}
+
+/* ── Batch Clone Progress Bar ── */
+
+.batch-clone-bar {
+    background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+    border: 1px solid #86efac;
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.batch-clone-inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: #166534;
+}
+
+.batch-clone-current {
+    color: #4ade80;
+    font-size: 12px;
+}
+
+/* ── Clone Button Group ── */
+
+.clone-btn-group {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* ── Harmony Branch Button ── */
+
+.btn-harmony {
+    background: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #86efac;
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    white-space: nowrap;
+    transition: all 0.15s;
+}
+
+.btn-harmony:hover {
+    background: #dcfce7;
+    border-color: #4ade80;
+    color: #166534;
+}
+
+.btn-harmony svg {
+    flex-shrink: 0;
+}
+
+/* ── Not Cloned Row ── */
+
+.row-not-cloned td {
+    opacity: 0.75;
+}
+
+.row-not-cloned:hover td {
+    opacity: 1;
+}
+
+/* ── Queued Badge ── */
+
+.queue-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #eff6ff;
+    color: #1e40af;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.row-queued td:first-child {
+    border-left: 3px solid #3b82f6;
+}
+
+/* ── Not Cloned Stat Card ── */
+
+.stat-card.not-cloned .stat-icon {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.stat-card.not-cloned .stat-value {
+    color: #64748b;
+}
+
+/* ── Sync Button (Detail Page) ── */
+
+.last-sync-info {
+    font-size: 11px;
+    color: #059669;
+    padding: 4px 8px;
+    background: #ecfdf5;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+/* ── Source Badge (Git / Pub) ── */
+
+.plugin-name-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.source-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.source-badge.source-git {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.source-badge.source-pub {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+/* ── Pub Download Modal ── */
+
+.form-textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    color: var(--color-text);
+    background: var(--color-bg);
+    resize: vertical;
+    min-height: 120px;
+    transition: all 0.15s ease;
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-textarea::placeholder {
+    color: #94a3b8;
+}
+
+.modal-pub-download {
+    max-width: 480px;
+}
+

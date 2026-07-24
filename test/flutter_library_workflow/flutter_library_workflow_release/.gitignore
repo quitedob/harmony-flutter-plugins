@@ -1,0 +1,73 @@
+# 克隆的插件仓库（通过管理面板动态添加）
+repos/
+repos-flutter/
+repos-rn/
+repos-sdk/
+repos-fast/
+repos-flutter-fast/
+repos-rn-fast/
+repos-sdk-fast/
+repos_flutter_upgrade/
+repos_rn_upgrade/
+repos_sdk_upgrade/
+FabricComponentSample/
+agent-flutter/opencode.json
+agent-flutter/.opencode/
+agent-rn/opencode.json
+agent-rn/.opencode/
+
+# 用户本地设置
+.claude/settings.local.json
+
+# 用户本地 SDK 路径配置（复制自 .example.json）
+agent-flutter/.claude/skills/flutter-sdk-switch/sdk-paths.json
+
+# 鸿蒙签名（本机独有，不入仓库）
+adapt-workflow/data/signing.local.json
+adapt-workflow/data/signing.rn.local.json
+adapt-workflow/data/signing.rn.example.json
+**/*.p12
+**/*.p7b
+**/*.cer
+
+# Node modules
+node_modules/
+
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+
+# 本地 SDK / 文档检索 Skill
+agent-flutter/.claude/skills/harmonyos-sdk-api-lookup/
+agent-flutter/.claude/skills/rn-docs-lookup/
+agent-flutter/.claude/skills/harmonyos-docs-search
+agent-rn/.claude/skills/harmonyos-sdk-api-lookup/
+agent-rn/.claude/skills/rn-docs-lookup/
+agent-rn/.claude/skills/harmonyos-docs-search
+agent-android-sdk/.claude/skills/arkts-rules
+agent-android-sdk/.claude/skills/firecrawl
+agent-android-sdk/.claude/skills/harmonyos-docs-lookup
+agent-android-sdk/.claude/skills/harmonyos-docs-search
+agent-android-sdk/.claude/skills/harmonyos-sdk-api-lookup
+
+docs/
+# agent-rn-fast 需单独发布，rn-docs-lookup 必须自包含，豁免上面的通用 docs/ 与 FabricComponentSample/ 忽略
+!agent-rn-fast/.claude/skills/rn-docs-lookup/docs/
+!agent-rn-fast/.claude/skills/rn-docs-lookup/docs/Samples/FabricComponentSample/
+编译问题记录/
+plugin_code/
+faq_solution/
+agent-flutter/.ohos-adaptation
+trajectories/
+tools/
+.ohos-adaptation/
+scripts/batch_build_hap.sh
+package-lock.json
+
+.vscode
+
+agent-core

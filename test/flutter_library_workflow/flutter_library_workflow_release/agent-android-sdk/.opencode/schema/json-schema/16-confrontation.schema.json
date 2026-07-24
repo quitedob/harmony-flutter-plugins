@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ohos-adaptation/16-confrontation.schema.json",
+  "title": "SDK Test Case Confrontation Output",
+  "description": "sdk-case-confrontation 阶段产物：基于 Android 源码意图验证的测试用例验证结果",
+  "version": "2.0.0",
+  "type": "object",
+  "required": [
+    "confrontation_id",
+    "sdk_name",
+    "confronted_at",
+    "analysis_type",
+    "summary",
+    "mismatches",
+    "report_path"
+  ],
+  "properties": {
+    "confrontation_id": {
+      "type": "string",
+      "description": "意图验证 ID，格式：{sdk_name}_confrontation_{timestamp}"
+    },
+    "sdk_name": {
+      "type": "string",
+      "description": "SDK 名称"
+    },
+    "confronted_at": {
+      "type": "string",
+      "description": "意图验证时间戳"
+    },
+    "analysis_type": {
+      "type": "string",
+      "enum": ["android_semantic_analysis"],
+      "description": "验证类型：基于 Android 源码意图验证"
+    },
+    "summary": {
+      "type": "object",
+      "required": ["total_cases", "checked_cases", "kept_cases", "modified_cases", "deleted_cases"],
+      "properties": {
+        "total_cases": { "type": "integer", "description": "测试用例总数" },
+        "checked_cases": { "type": "integer", "description": "已验证用例数" },
+        "kept_cases": { "type": "integer", "description": "语义合理、保持不变的用例数" },
+        "modified_cases": { "type": "integer", "description": "语义偏差、已修改的用例数" },
+        "deleted_cases": { "type": "integer", "description": "语义无对应、已删除的用例数" }
+      }
+    },
+    "mismatches": {
+      "type": "array",
+      "description": "意图验证结果明细（含未通过验证的用例，keep 的用例不在此列）",
+      "items": {
+        "type": "object",
+        "required": ["case_id", "case_title", "action", "android_semantic_analysis", "prd_intent"],
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "pattern": "^F\\d{2}-\\d{3}$",
+            "description": "用例 ID"
+          },
+          "case_title": {
+            "type": "string",
+            "description": "测试标题"
+          },
+          "action": {
+            "type": "string",
+            "enum": ["keep", "modify_test_case", "delete_test_case"],
+            "description": "判定动作：keep=语义合理保持不动，modify_test_case=语义有偏差需修改，delete_test_case=语义无效需删除"
+          },
+          "dimension": {
+            "type": "string",
+            "enum": [
+              "semantic_mismatch",
+              "redundant_scenario",
+              "android_api_not_found",
+              "only_initialization",
+              "runtime_semantics",
+              "test_flow",
+              "expected_result",
+              "platform_terms",
+              "api_remark"
+            ],
+            "description": "对抗维度"
+          },
+          "issue": {
+            "type": "string",
+            "description": "问题描述"
+          },
+          "android_semantic_analysis": {
+            "type": "string",
+            "description": "Android 源码意图分析详情（包含源码位置、方法签名、参数说明、运行时行为、是否仅初始化、异常场景等）"
+          },
+          "android_source_location": {
+            "type": "string",
+            "description": "Android 源码引用位置（文件路径:行号）"
+          },
+          "prd_intent": {
+            "type": "string",
+            "description": "PRD 原始意图"
+          },
+          "fix_detail": {
+            "type": "string",
+            "description": "修正/删除的具体内容"
+          }
+        }
+      }
+    },
+    "report_path": {
+      "type": "string",
+      "description": "意图验证报告路径（06-confrontation-report.md）"
+    }
+  },
+  "additionalProperties": false
+}

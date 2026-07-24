@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SDK Test Cases Stage Output",
+  "description": "SDK 鸿蒙化适配测试用例阶段产物 Schema",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["suite", "modules"],
+  "properties": {
+    "suite": {
+      "type": "object",
+      "required": ["id", "name", "app_package", "app_card"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "测试套件 ID，格式：{sdk_name}_test_suite"
+        },
+        "name": {
+          "type": "string",
+          "description": "测试套件名称"
+        },
+        "app_package": {
+          "type": "string",
+          "description": "应用包名"
+        },
+        "app_card": {
+          "type": "string",
+          "description": "应用卡片路径"
+        }
+      }
+    },
+    "modules": {
+      "type": "array",
+      "description": "测试模块列表",
+      "items": {
+        "type": "object",
+        "required": ["moduleCode", "moduleName", "moduleDescription", "priority", "test_cases"],
+        "properties": {
+          "moduleCode": {
+            "type": "string",
+            "pattern": "^F-\\d{2}$",
+            "description": "模块编号，如 F-01"
+          },
+          "moduleName": {
+            "type": "string",
+            "description": "模块名称"
+          },
+          "moduleDescription": {
+            "type": "string",
+            "description": "模块描述"
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["P0", "P1", "P2"],
+            "description": "模块优先级"
+          },
+          "test_cases": {
+            "type": "array",
+            "description": "测试用例列表",
+            "items": {
+              "type": "object",
+              "required": ["id", "title", "level", "preconditions", "test_steps", "expected_result", "postconditions"],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^F\\d{2}-\\d{3}$",
+                  "description": "用例 ID，如 F01-001"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "测试标题（使用黑盒功能视角描述）"
+                },
+                "level": {
+                  "type": "string",
+                  "enum": ["L0", "L1", "L2"],
+                  "description": "测试级别"
+                },
+                "preconditions": {
+                  "type": "string",
+                  "description": "前置条件"
+                },
+                "test_steps": {
+                  "type": "array",
+                  "description": "测试步骤列表",
+                  "items": {
+                    "type": "object",
+                    "required": ["action", "checkpoint"],
+                    "properties": {
+                      "action": {
+                        "type": "string",
+                        "description": "操作步骤描述（用户 UI 操作）"
+                      },
+                      "checkpoint": {
+                        "type": "string",
+                        "description": "验证点（可观察的 UI 状态变化）"
+                      }
+                    }
+                  }
+                },
+                "expected_result": {
+                  "type": "string",
+                  "description": "预期结果"
+                },
+                "postconditions": {
+                  "type": "string",
+                  "description": "后置条件（留空）",
+                  "default": ""
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

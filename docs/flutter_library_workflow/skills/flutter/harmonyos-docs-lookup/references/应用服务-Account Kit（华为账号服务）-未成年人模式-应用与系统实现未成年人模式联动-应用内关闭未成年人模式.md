@@ -1,0 +1,2 @@
+* **[关闭应用的未成年人模式（推荐）](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/account-appself-turn-off-minorsprotection)**
+* **[关闭系统的未成年人模式](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/account-system-turn-off-minorsprotection)**

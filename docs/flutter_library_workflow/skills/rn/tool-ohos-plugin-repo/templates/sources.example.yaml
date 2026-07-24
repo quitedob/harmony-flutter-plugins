@@ -1,0 +1,4 @@
+# 本 skill 内相对 templates/ 的三套资源（运行时只读这些路径）
+ohos_skeleton: ohos_skeleton
+harmony: harmony
+example: example

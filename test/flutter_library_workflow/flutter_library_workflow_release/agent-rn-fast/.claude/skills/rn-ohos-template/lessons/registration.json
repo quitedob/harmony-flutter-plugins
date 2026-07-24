@@ -1,0 +1,80 @@
+{
+  "$schema": "./shard.schema.json",
+  "category": "registration",
+  "version": "1.1.0",
+  "updated_at": "2026-07-10",
+  "lessons": [
+    {
+      "id": "spec-name-mismatch",
+      "stage": "coding",
+      "plugin_type": ["turbo", "fabric", "cpp"],
+      "symptom": "运行时找不到模块/组件 → 白屏",
+      "wrong": "TurboModule 名 ≠ TurboModuleRegistry.get('X')，或 codegenNativeComponent('X') 名与 Spec 不一致",
+      "fix": "Spec 名、注册名、JS 侧引用名三处完全一致",
+      "why": "RNOH 按名字桥接，差一字即匹配失败"
+    },
+    {
+      "id": "rnpackage-empty",
+      "stage": "both",
+      "plugin_type": ["turbo", "fabric", "cpp"],
+      "symptom": "原生模块未注册 → 白屏",
+      "wrong": "example 的 RNOHPackagesFactory createRNOHPackages 返回空数组 []",
+      "fix": "返回非空数组注册 library 的 RNPackage；C++ 侧 PackageProvider.cpp 注册对应 Package",
+      "why": "空数组 = 没有任何原生 Package 注入。rnohos.py check 已对此硬门禁"
+    },
+    {
+      "id": "cpp-package-not-instantiated",
+      "stage": "both",
+      "plugin_type": ["turbo", "cpp"],
+      "symptom": "Couldn't find Turbo Module 'X' on the CPP side",
+      "wrong": "PackageProvider.cpp 有 #include \"XxxPackage.h\" 但 getPackages() 返回列表里没有 make_shared<XxxPackage>(ctx)",
+      "fix": "在 getPackages()/ManualLinkingPackage 列表里加 std::make_shared<XxxPackage>(ctx)",
+      "why": "#include 只给可见性，实际注册看返回列表；漏 make_shared 则 C++ 侧没这模块"
+    },
+    {
+      "id": "fabric-builder-not-registered",
+      "stage": "validation",
+      "plugin_type": ["fabric"],
+      "symptom": "组件区域黑屏/空白，ComponentContext 为 undefined",
+      "wrong": "example Index.ets 的 buildCustomRNComponent Builder 体为空、arkTsComponentNames 为 []",
+      "fix": "从库导入组件与 TYPE 常量，在 Builder 里按 componentName 渲染，并把组件名(须与 JS codegenNativeComponent('X') 一致)加进 arkTsComponentNames",
+      "why": "CAPI 架构下只有列在 arkTsComponentNames 的组件才路由到 ArkTS Builder，未列出的 componentContext 为 undefined"
+    },
+    {
+      "id": "fabric-descriptor-factory-missing",
+      "stage": "coding",
+      "plugin_type": ["fabric"],
+      "symptom": "Fabric 组件运行时完全不渲染，无错误日志（静默失败）",
+      "wrong": "Package 只实现 getUITurboModuleFactoryByNameMap，缺 createDescriptorWrapperFactoryByDescriptorType",
+      "fix": "Package 中补 createDescriptorWrapperFactoryByDescriptorType，为每个组件 NAME 注册 DescriptorWrapper 工厂",
+      "why": "Fabric 组件要单独注册 Descriptor 工厂；只注册 TurboModule 不会注册组件视图"
+    },
+    {
+      "id": "fabric-default-export-combined",
+      "stage": "coding",
+      "plugin_type": ["turbo", "fabric"],
+      "symptom": "运行时 Couldn't find Turbo Module 'X' on the ArkTS side / 组件不渲染 → 白屏",
+      "wrong": "库同含 Fabric + TurboModule 却拆成两个 Package 类，index.ets 只 export default 其中一个",
+      "fix": "合并进同一个 default 导出的 Package（同时实现 Descriptor 工厂与 getUITurboModuleFactoryByNameMap + createEagerUITurboModuleByNameMap），改后重 build har",
+      "why": "HAR autolink 只消费 index.ets 的 default Package，另一类能力会永不注册"
+    },
+    {
+      "id": "dep-native-lib-unregistered",
+      "stage": "validation",
+      "plugin_type": ["all"],
+      "symptom": "NativeModule is null / Couldn't find Turbo Module 'X' on the CPP side",
+      "wrong": "库的鸿蒙覆盖文件(*.harmony.js / ohos/src)require 了有鸿蒙原生实现的三方库(如 async-storage)，但该依赖没写进 package.json，分析阶段漏发现 → entry oh-package.json5 / RNOHPackagesFactory / PackageProvider.cpp 三处全缺注册",
+      "fix": "把该库的鸿蒙化包(按 rn-adapted-library)加进 example 依赖重跑 build hap 触发自动注册；autolink 静默失败时手动在三处补；ArkTS 与 C++ 都要注册(只补 ArkTS 会报 on the CPP side)",
+      "why": "依赖发现只扫 package.json 会漏『源码 require 但未声明』的原生依赖；鸿蒙 TurboModule 需 ArkTS+C++ 双注册。rnohos.py check 会扫描覆盖文件 require 并报告漏注册"
+    },
+    {
+      "id": "cpp-methodmap-missing-method",
+      "stage": "both",
+      "plugin_type": ["turbo", "cpp"],
+      "symptom": "JS 调 NativeModule.<方法> 无响应/白屏、调用被静默吞掉（如 stopProfiling 后系统选择器不弹、按钮点了没反应）",
+      "wrong": "ArkTS TurboModule 与 JS Spec 都有某方法（如 saveToDownloadsDir），但 generated cpp 的 methodMap_ 没有对应 ARK_ASYNC_METHOD_METADATA 注册项——改 Spec 后没重跑 codegen，或手写/手改 generated 漏了这条",
+      "fix": "Spec 声明的每个方法都要在 generated/<X>.cpp 的 methodMap_ 里有一条 ARK_ASYNC_METHOD_METADATA(<方法>,<参数个数>)（同步方法用 ARK_METHOD_METADATA）。正道：改完 Spec 重跑 `rnohos.py codegen` 让它整体重生成，别手改 generated。rnohos.py check/build hap 已硬门禁：Spec 方法缺注册即 ERROR",
+      "why": "C++ 侧 methodMap_ 缺注册 → ArkTSTurboModule::callAsync 找不到该方法、转发失败抛异常 → 被 JS 侧 try/catch 吞掉 → 功能静默失效。getConstants/addListener/removeListeners 由 codegen 特殊处理，不在此列"
+    }
+  ]
+}

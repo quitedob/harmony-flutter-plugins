@@ -1,0 +1,2 @@
+* **[意图标准协议上架指导](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/intents-kit-listing-standard-protocol)**
+* **[MCP协议上架指导](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/intents-kit-listing-mcp-protocol)**

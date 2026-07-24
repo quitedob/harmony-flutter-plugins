@@ -1,0 +1,80 @@
+{
+  "$schema": "./shard.schema.json",
+  "category": "deps",
+  "version": "1.0.0",
+  "updated_at": "2026-06-26",
+  "lessons": [
+    {
+      "id": "dep-version-map",
+      "stage": "coding",
+      "plugin_type": ["all"],
+      "symptom": "依赖装错版本 → 编译失败",
+      "wrong": "按原库 peerDependencies 范围装鸿蒙化依赖",
+      "fix": "用 rn-adapted-library 的 dep-version-map 钉死版本；部分库需 dual_install 同时装原始包",
+      "why": "鸿蒙化包版本与原库语义化范围不对应"
+    },
+    {
+      "id": "js-only-pkgname",
+      "stage": "coding",
+      "plugin_type": ["js-only"],
+      "symptom": "example 装到原版包 → 白屏",
+      "wrong": "ohos/package.json 依赖仍写原始 RN 库名（如 react-native-pager-view）",
+      "fix": "换成 OHOS 包名（@react-native-ohos/... 或 @oh-rn/...），版本以 rn-adapted-library 为准",
+      "why": "原版包无 harmony 字段，autolink 注册不到原生组件"
+    },
+    {
+      "id": "file-dep-path",
+      "stage": "coding",
+      "plugin_type": ["all"],
+      "symptom": "file: 依赖路径不存在 / 安装失败",
+      "wrong": "file: 依赖里 node_modules/<X> 段写成 @oh-rn/... 包名",
+      "fix": "<X> 段用实际安装目录名/依赖 key，而非 scope 包名",
+      "why": "node_modules 目录名与包名可能不同"
+    },
+    {
+      "id": "metro-node-builtin-dep",
+      "stage": "validation",
+      "plugin_type": ["turbo", "js-only"],
+      "symptom": "Metro 报 Unable to resolve module 'util'/'process'/'buffer'",
+      "wrong": "插件 JS 用了 Node 内置模块，但 example 没装其 RN 兼容包",
+      "fix": "在 example/package.json 加这些包（util/process/buffer 等有 browser/RN 兼容版）",
+      "why": "RN 环境不含 Node 内置模块，需对应 polyfill 包"
+    },
+    {
+      "id": "js-only-harmony-alias",
+      "stage": "coding",
+      "plugin_type": ["js-only"],
+      "symptom": "Metro 报 Unable to resolve module react-native-xxx",
+      "wrong": "ohos/package.json 没配 harmony.alias",
+      "fix": "加 harmony.alias = 原始包名，再重新 build hap",
+      "why": "js-only 靠 harmony.alias 把原包名 import 重定向到鸿蒙化包"
+    },
+    {
+      "id": "js-only-entry-and-assets",
+      "stage": "coding",
+      "plugin_type": ["js-only"],
+      "symptom": "Metro 报 main 模块无法解析 / Unable to resolve ./x.png",
+      "wrong": "ohos/src/ 缺入口 index.js，或源码 require 的静态资源(png/字体)没拷进 ohos/src/",
+      "fix": "在 ohos/src/ 补入口文件并导出组件；把引用的静态资源按原相对路径一并拷进 ohos/src/",
+      "why": "js-only 的入口与静态资源都要落在 ohos/src/ 才会被打包"
+    },
+    {
+      "id": "spec-import-path-versioned",
+      "stage": "coding",
+      "plugin_type": ["turbo"],
+      "symptom": "Metro 报 Unable to resolve ./specs/NativeX",
+      "wrong": "入口 import './specs/NativeX' 但 codegen 实际生成在 specs/v1/ 子目录",
+      "fix": "导入路径对齐 codegen 目录结构（如 './specs/v1/NativeX'）",
+      "why": "codegen 按 codegenConfig 的 specPaths 分版本目录，导入路径须精确匹配"
+    },
+    {
+      "id": "reanimated-babel-plugin-last",
+      "stage": "validation",
+      "plugin_type": ["js-only", "turbo", "fabric"],
+      "symptom": "TypeError: Cannot read property 'code' of undefined → 白屏（reanimated）",
+      "wrong": "库(直接/间接)依赖 react-native-reanimated 或源码含 'worklet'，但 example babel.config.js 没把 'react-native-reanimated/plugin' 放在 plugins 末尾",
+      "fix": "babel.config.js 的 plugins 数组加 'react-native-reanimated/plugin' 且置于最后；改后重 build hap（必要时清 entry/build 缓存）。rnohos.py 检测到 reanimated/worklet 会自动注入，仍白屏时手动确认",
+      "why": "worklet 由该 babel 插件在编译期提取生成 __initData.code；缺插件或不在末尾则 worklet 无元数据，UI 线程解包即崩"
+    }
+  ]
+}

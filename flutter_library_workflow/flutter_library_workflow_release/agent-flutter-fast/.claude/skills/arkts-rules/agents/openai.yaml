@@ -1,0 +1,4 @@
+interface:
+  display_name: "ArkTS Rules"
+  short_description: "ArkTS language rules for compilable .ets code"
+  default_prompt: "Use $arkts-rules to check this .ets file against ArkTS language constraints."

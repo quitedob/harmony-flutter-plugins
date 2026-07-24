@@ -1,0 +1,15 @@
+{
+  "__doc__": "复制此文件为 signing.local.json（已入 .gitignore）并填入本机真实值。签名由 hvigor 根据 sync 后的 build-profile 完成；本仓库工具链不再调用 hap-sign-tool。java/hdc 仅用于 ohos-build-install --mode=check|install 的环境探测，见 adapt-workflow/docs/ohos-signing.md。",
+  "bundleName": "com.huawei.flutter.demo",
+  "signingMaterial": {
+    "certpath": "/Users/<me>/.ohos/config/default_XXX.cer",
+    "profile":  "/Users/<me>/.ohos/config/default_XXX.p7b",
+    "storeFile":"/Users/<me>/.ohos/config/default_XXX.p12",
+    "keyAlias": "debugKey",
+    "keyPassword":   "0000001B...",
+    "storePassword": "0000001B...",
+    "signAlg": "SHA256withECDSA"
+  },
+  "javaBin": null,
+  "hdcBin": null
+}

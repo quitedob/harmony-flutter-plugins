@@ -1,0 +1,52 @@
+# 评审结果 JSON Schema
+
+**适用范围**：阶段 5 - 测试用例评审
+
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/huawei-test-design-agent/schema/main/case-review.schema.json",
+  "reviewDate": "YYYY-MM-DD",
+  "reviewedArtifact": "04-test-cases.md",
+  "reviewedProject": "{plugin_name} 鸿蒙化适配",
+  "threeWayComparison": {
+    "moduleCount": {
+      "testPoints": X,
+      "testCasesJson": X,
+      "testCasesMd": X,
+      "match": true
+    },
+    "totalCases": {
+      "testPoints": XX,
+      "testCasesJson": XX,
+      "testCasesMd": XX,
+      "match": true
+    },
+    "levelDistribution": {
+      "testPoints": {"L0": X, "L1": X, "L2": X},
+      "testCasesJson": {"L0": X, "L1": X, "L2": X},
+      "testCasesMd": {"L0": X, "L1": X, "L2": X},
+      "match": true
+    },
+    "moduleBreakdown": {
+      "F-01": {"testPoints": X, "json": X, "md": X, "match": true}
+    },
+    "overall": true
+  },
+  "scores": {
+    "coverage": 95,
+    "executability": 90,
+    "judgability": 85,
+    "standardization": 100,
+    "overall": 92
+  },
+  "passStatus": {
+    "coverage": true,
+    "executability": true,
+    "judgability": true,
+    "standardization": true,
+    "overall": true
+  },
+  "issues": [],
+  "recommendation": "proceed"
+}
+```

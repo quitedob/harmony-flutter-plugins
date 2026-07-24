@@ -1,0 +1,30 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "AndroidReferenceTests"
+
+include ":reference-tests"
+
+def sourceSdkModuleDirProp = providers.gradleProperty("sourceSdkModuleDir").orNull
+def sourceSdkAttachModeProp = providers.gradleProperty("sourceSdkAttachMode").orElse("gradle_project").get()
+
+if (sourceSdkAttachModeProp == "gradle_project" &&
+        sourceSdkModuleDirProp != null &&
+        sourceSdkModuleDirProp.trim() &&
+        !sourceSdkModuleDirProp.contains("REPLACE_WITH")) {
+    include ":source-sdk"
+    project(":source-sdk").projectDir = file(sourceSdkModuleDirProp)
+}

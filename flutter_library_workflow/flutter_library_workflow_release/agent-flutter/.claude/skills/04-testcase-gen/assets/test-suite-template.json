@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/HarmonyOS-AI/json-schema/main/droidrun/test_suite.schema.json",
+  "suite": {
+    "id": "{plugin_name}_test_suite",
+    "name": "{plugin_name} 测试套件",
+    "app_package": "{bundleName from example/ohos/AppScope/app.json5}",
+    "app_card": "file:./04-droidrun--app-card.md",
+    "agent_prompt": "file:./04-droidrun--agent-prompt.md"
+  },
+  "test_cases": [
+    {
+      "id": "C-001",
+      "title": "{简短测试目标}",
+      "level": "L0",
+      "test_steps": [
+        {
+          "action": "点击【{模块名}】进入模块列表页",
+          "checkpoint": "【{模块名}】页面的用例列表正常显示"
+        },
+        {
+          "action": "点击【{用例标题}】进入用例详情页",
+          "checkpoint": "用例详情页顶部显示测试信息，中部显示操作按钮，底部显示【结果】面板"
+        },
+        {
+          "action": "点击【{功能按钮名}】按钮 (API: {method_name})",
+          "checkpoint": "【结果】面板显示{PRD 定义的可观察状态}"
+        }
+      ],
+      "expected_result": "{从 PRD 公开 API 规格抄写的可观察行为}"
+    }
+  ]
+}

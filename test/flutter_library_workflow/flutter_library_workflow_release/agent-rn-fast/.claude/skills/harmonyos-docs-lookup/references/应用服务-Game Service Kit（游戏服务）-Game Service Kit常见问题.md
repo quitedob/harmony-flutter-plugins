@@ -1,0 +1,2 @@
+* **[基础游戏服务](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/gameservice-faq-unlogin)**
+* **[游戏场景感知](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/gameservice-faq-performance)**

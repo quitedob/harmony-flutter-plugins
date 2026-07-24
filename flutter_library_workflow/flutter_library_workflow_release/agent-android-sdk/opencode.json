@@ -1,0 +1,144 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "build",
+  "permission": {
+    "bash": "allow",
+    "edit": "allow",
+    "write": "allow",
+    "read": "allow",
+    "grep": "allow",
+    "glob": "allow",
+    "skill": "allow",
+    "websearch": "allow",
+    "todowrite": "allow",
+    "external_directory": {
+      "**/flutter-library-workflow/**": "allow",
+      "**/DevEco Studio/sdk/**": "allow",
+      "**/openharmony/**": "allow",
+      "**/skills/**": "allow"
+    }
+  },
+  "agent": {
+    "primary-sdk-01-analysis": {
+      "description": "先识别 source_layout，再分析 SDK 并按功能模块生成总 PRD 与 work_unit_prd；01-analysis.json 仅保留前端/阶段定位最小字段。必须产出 01-analysis.json、01-analysis-report.md、01-analysis-prd.md、work_unit_prd/index.md 和模块 PRD。",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/primary-sdk-01-analysis.md}"
+    },
+    "primary-sdk-02-planning": {
+      "description": "基于 01 的总 PRD 与 work_unit_prd 先确定 WU 编码队列，再编排 sub-sdk-work-unit-planner 为每个已确定 WU 生成 work_unit_plan Markdown；02-planning.json 仅为 marker/索引。",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/primary-sdk-02-planning.md}",
+      "permission": {
+        "task": {
+          "sub-sdk-work-unit-planner": "allow"
+        }
+      }
+    },
+    "primary-sdk-03-implementation": {
+      "description": "以 scaffold/hardemo 为骨架，按 work_unit_plan/index.md 依赖顺序多次调用 sub-sdk-code-writer；每次明确传入模块 PRD 与 work unit plan Markdown，完成 HAR、assembleHar 与修复。",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/primary-sdk-03-implementation.md}",
+      "permission": {
+        "task": {
+          "sub-sdk-code-writer": "allow",
+          "sub-adaptation-completeness-check": "allow",
+          "sub-sdk-code-review": "allow",
+          "sub-dfx-quality": "allow"
+        }
+      }
+    },
+    "primary-sdk-04-har-demo": {
+      "description": "hardemo：基于 01 PRD、work_unit_prd、work_unit_plan、03 HAR 与实际导出生成 Demo，并完成 assembleHap 闭环；04 JSON 仅为 marker。",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/primary-sdk-04-har-demo.md}",
+      "permission": {
+        "task": {
+          "sub-adaptation-completeness-check": "allow"
+        }
+      }
+    },
+    "primary-sdk-05-evaluation": {
+      "description": "汇总 01 总 PRD、01/02/03/04 报告、JSON 与 HAR+Demo 可运行性，按 Markdown 主线做覆盖评估。",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/primary-sdk-05-evaluation.md}"
+    },
+    "primary-sdk-test-design": {
+      "description": "测试设计主 Agent - 端到端 SDK 测试设计流程（编排 3 个 SubAgent：测试分析、用例生成、用例评审）",
+      "mode": "primary",
+      "hidden": false,
+      "prompt": "{file:./.claude/prompts/test/sdk-test-design-master.md}",
+      "permission": {
+        "task": {
+          "sdk-test-analysis": "allow",
+          "sdk-test-case-gen": "allow",
+          "sdk-case-review": "allow"
+        }
+      }
+    },
+    "primary-sdk-demo-gen": {
+      "description": "基于测试用例和已适配的 HAR 代码，生成可安装到 OHOS 真机的测试 Demo App",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/test/primary-sdk-demo-gen.md}"
+    },
+    "sdk-case-confrontation": {
+      "description": "安卓意图验证 - 对照 Android 原生 SDK 源码验证每条鸿蒙测试用例的设计意图是否合理（keep/modify/delete），并修订测试用例",
+      "mode": "primary",
+      "hidden": false,
+      "prompt": "{file:./.claude/prompts/test/06-sdk-case-confrontation.md}"
+    },
+    "sdk-test-analysis": {
+      "description": "SDK 测试分析 SubAgent - 解析 PRD 文档并基于 IBO 模型生成测试点和测试分析报告（含需求解析、报告自评审）",
+      "mode": "subagent",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/test/01-sdk-test-analysis.md}"
+    },
+    "sdk-test-case-gen": {
+      "description": "SDK 测试用例生成 SubAgent - 基于评审后的测试分析报告生成黑盒测试用例",
+      "mode": "subagent",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/test/02-sdk-test-case-gen.md}"
+    },
+    "sdk-case-review": {
+      "description": "SDK 用例评审 SubAgent - 评审测试用例的覆盖率和可执行性",
+      "mode": "subagent",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/test/03-sdk-case-review.md}"
+    },
+    "sub-sdk-work-unit-planner": {
+      "description": "为 02 主 Agent 已确定的单个 work unit 探究 HarmonyOS 实现方案并生成一个编码计划 Markdown；不负责拆分、合并或新增 work unit。",
+      "mode": "subagent",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/sub-sdk-work-unit-planner.md}"
+    },
+    "sub-sdk-code-writer": {
+      "description": "按主 Agent 指定的模块 PRD 与 work unit plan Markdown 实现单个 Android SDK 能力切片；新上下文内先读必要背景和本地 Skills",
+      "mode": "subagent",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/sub-sdk-code-writer.md}"
+    },
+    "sub-adaptation-completeness-check": {
+      "description": "适配完整性校验",
+      "mode": "subagent",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/sub-adaptation-completeness-check.md}"
+    },
+    "sub-sdk-code-review": {
+      "description": "HAR ArkTS 代码质量门禁审查（ETS + CodeArts Check）",
+      "mode": "subagent",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/sub-sdk-code-review.md}"
+    },
+    "sub-dfx-quality": {
+      "description": "DFX 质量门禁检测（稳定性、性能、功耗）",
+      "mode": "subagent",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/sub-dfx-quality.md}"
+    }
+  }
+}

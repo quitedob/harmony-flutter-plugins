@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "rn-ohos-fast lessons shard",
+  "description": "单个 category 分片：RN→鸿蒙适配失败经验卡（问题→解决方案）。命中 category 后按需加载，再按 plugin_type+stage 逐条过滤、对照 wrong→fix。",
+  "type": "object",
+  "required": ["category", "version", "updated_at", "lessons"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "category": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "updated_at": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "lessons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "stage", "plugin_type", "symptom", "wrong", "fix", "why"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "stage": { "enum": ["coding", "validation", "both"] },
+          "plugin_type": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "enum": ["js-only", "turbo", "fabric", "cpp", "all"] }
+          },
+          "symptom": { "type": "string", "minLength": 1 },
+          "wrong": { "type": "string", "minLength": 1 },
+          "fix": { "type": "string", "minLength": 1 },
+          "why": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

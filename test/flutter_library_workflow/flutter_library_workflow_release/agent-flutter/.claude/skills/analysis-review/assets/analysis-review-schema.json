@@ -1,0 +1,52 @@
+# 评审结果 JSON Schema
+
+**适用范围**：阶段 3 - 测试分析报告评审
+
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/huawei-test-design-agent/schema/main/analysis-review.schema.json",
+  "reviewDate": "YYYY-MM-DD",
+  "reviewedArtifact": "02-test-analysis-report.md",
+  "reviewedProject": "{plugin_name} 鸿蒙化适配",
+  "threeWayComparison": {
+    "moduleCount": {
+      "testPoints": X,
+      "requirement": X,
+      "markdown": X,
+      "match": true
+    },
+    "totalCases": {
+      "testPoints": XX,
+      "markdown": XX,
+      "match": true
+    },
+    "levelDistribution": {
+      "testPoints": {"L0": X, "L1": X, "L2": X, "L3": X},
+      "markdown": {"L0": X, "L1": X, "L2": X, "L3": X},
+      "match": true
+    },
+    "moduleBreakdown": {
+      "F-01": {"testPoints": X, "markdown": X, "match": true}
+    },
+    "overall": true
+  },
+  "scores": {
+    "completeness": 95,
+    "accuracy": 90,
+    "testPointReview": 100,
+    "quality": 85,
+    "compatibility": 100,
+    "overall": 92
+  },
+  "passStatus": {
+    "completeness": true,
+    "accuracy": true,
+    "testPointReview": true,
+    "quality": true,
+    "compatibility": true,
+    "overall": true
+  },
+  "issues": [],
+  "recommendation": "proceed"
+}
+```

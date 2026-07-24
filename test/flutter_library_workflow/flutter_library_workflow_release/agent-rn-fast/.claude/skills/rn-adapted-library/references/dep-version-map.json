@@ -1,0 +1,3835 @@
+{
+  "_meta": {
+    "generated_at": "2026-05-21",
+    "source": "usage-docs/zh-cn/*.md",
+    "supported_rn_versions": [
+      "0.72",
+      "0.77",
+      "0.82"
+    ]
+  },
+  "rnoh_versions": {
+    "0.72": {
+      "rnoh": "0.72.140",
+      "react_native": "0.72.5"
+    },
+    "0.77": {
+      "rnoh": "0.77.71",
+      "react_native": "0.77.1"
+    },
+    "0.82": {
+      "rnoh": "0.82.30",
+      "react_native": "0.82.1"
+    }
+  },
+  "packages": {
+    "@react-native-async-storage/async-storage": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/async-storage",
+        "ohos_version": "~2.3.0",
+        "baseline": "2.2.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/async-storage",
+        "ohos_version": "~2.2.1",
+        "baseline": "2.2.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/async-storage",
+        "ohos_version": "~1.21.1",
+        "baseline": "1.21.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-camera-roll/camera-roll": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-camera-roll",
+        "ohos_version": "~ 7.11.0",
+        "baseline": "7.10.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-camera-roll",
+        "ohos_version": "~ 7.10.2",
+        "baseline": "7.10.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-camera-roll",
+        "ohos_version": "~ 7.8.4",
+        "baseline": "7.8.3",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-clipboard/clipboard": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/clipboard",
+        "ohos_version": "~ 1.17.0",
+        "baseline": "1.16.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/clipboard",
+        "ohos_version": "~ 1.16.3",
+        "baseline": "1.16.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/clipboard",
+        "ohos_version": "~ 1.13.3",
+        "baseline": "1.13.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-community/blur": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/blur",
+        "ohos_version": "~4.6.0",
+        "baseline": "4.4.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/blur",
+        "ohos_version": "~4.5.0",
+        "baseline": "4.4.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/blur",
+        "ohos_version": "~4.4.2",
+        "baseline": "4.4.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-community/checkbox": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/checkbox",
+        "ohos_version": "0.5.17",
+        "baseline": "0.5.17",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/checkbox",
+        "ohos_version": "0.6.0",
+        "baseline": "0.6.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-community/datetimepicker": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/datetimepicker",
+        "ohos_version": "7.6.3",
+        "baseline": "7.6.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/datetimepicker",
+        "ohos_version": "8.4.3",
+        "baseline": "8.4.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.82": {
+        "ohos_package": "@react-native-ohos/datetimepicker",
+        "ohos_version": "8.6.1",
+        "baseline": "8.6.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-community/geolocation": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/geolocation",
+        "ohos_version": "~ 3.5.0",
+        "baseline": "3.4.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/geolocation",
+        "ohos_version": "~ 3.4.1",
+        "baseline": "3.4.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/geolocation",
+        "ohos_version": "~ 3.1.1",
+        "baseline": "3.1.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-community/netinfo": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/netinfo",
+        "ohos_version": "~11.5.0",
+        "baseline": "11.4.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/netinfo",
+        "ohos_version": "~11.4.2",
+        "baseline": "11.4.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/netinfo",
+        "ohos_version": "~11.1.1",
+        "baseline": "11.1.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-community/progress-bar-android": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/progress-bar-android",
+        "ohos_version": "~ 1.2.0",
+        "baseline": "1.0.5",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/progress-bar-android",
+        "ohos_version": "~ 1.1.0",
+        "baseline": "1.0.5",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/progress-bar-android",
+        "ohos_version": "~ 1.0.6",
+        "baseline": "1.0.4",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-community/progress-view": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/progress-view",
+        "ohos_version": "1.4.3",
+        "baseline": "1.4.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/progress-view",
+        "ohos_version": "1.5.0",
+        "baseline": "1.5.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-community/push-notification-ios": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/push-notification-ios",
+        "ohos_version": "~1.13.0",
+        "baseline": "1.11.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/push-notification-ios",
+        "ohos_version": "~1.12.0",
+        "baseline": "1.11.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/push-notification-ios",
+        "ohos_version": "~1.11.2",
+        "baseline": "1.11.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-community/slider": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/slider",
+        "ohos_version": "4.4.4",
+        "baseline": "4.4.4",
+        "autolink": null,
+        "dual_install": true,
+        "dual_install_version": "4.4.4"
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/slider",
+        "ohos_version": "5.0.1",
+        "baseline": "5.0.1",
+        "autolink": null,
+        "dual_install": true,
+        "dual_install_version": "5.0.1"
+      },
+      "0.82": {
+        "ohos_package": "@react-native-ohos/slider",
+        "ohos_version": "5.1.2",
+        "baseline": "5.1.2",
+        "autolink": null,
+        "dual_install": true,
+        "dual_install_version": "5.1.2"
+      }
+    },
+    "@react-native-community/toolbar-android": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/toolbar-android",
+        "ohos_version": "0.2.1",
+        "baseline": "0.2.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/toolbar-android",
+        "ohos_version": "0.2.1",
+        "baseline": "0.2.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/toolbar-android",
+        "ohos_version": "0.2.1",
+        "baseline": "0.2.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-cookies/cookies": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/cookies",
+        "ohos_version": "~6.4.0",
+        "baseline": "6.2.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/cookies",
+        "ohos_version": "~6.3.0",
+        "baseline": "6.2.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/cookies",
+        "ohos_version": "~6.2.2",
+        "baseline": "6.2.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-masked-view/masked-view": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/masked-view",
+        "ohos_version": "~0.4.3",
+        "baseline": "0.3.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/masked-view",
+        "ohos_version": "~0.3.3",
+        "baseline": "0.3.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/masked-view",
+        "ohos_version": "~0.2.11",
+        "baseline": "0.2.9",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-picker/picker": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/picker",
+        "ohos_version": "~ 2.12.0",
+        "baseline": "2.11.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/picker",
+        "ohos_version": "~2.11.2",
+        "baseline": "2.11.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/picker",
+        "ohos_version": "~ 2.6.4",
+        "baseline": "2.6.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-segmented-control/segmented-control": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/segmented-control",
+        "ohos_version": "~ 2.6.0",
+        "baseline": "2.5.7",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/segmented-control",
+        "ohos_version": "~ 2.5.2",
+        "baseline": "2.5.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-navigation/elements": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/elements",
+        "ohos_version": "~2.4.0",
+        "baseline": "2.6.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/elements",
+        "ohos_version": "~2.3.9",
+        "baseline": "2.3.8",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/elements",
+        "ohos_version": "1.3.20",
+        "baseline": "1.3.20",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@shopify/flash-list": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/flash-list",
+        "ohos_version": "~2.1.1",
+        "baseline": "2.1.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/flash-list",
+        "ohos_version": "~1.8.3",
+        "baseline": "1.8.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/flash-list",
+        "ohos_version": "~1.6.4",
+        "baseline": "1.6.3",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-wechat-lib": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-wechat-lib",
+        "ohos_version": "3.0.6",
+        "baseline": "3.0.6",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-wechat-lib",
+        "ohos_version": "3.1.0",
+        "baseline": "3.1.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "jpush-react-native": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/jpush-react-native",
+        "ohos_version": "3.1.2",
+        "baseline": "3.1.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/jpush-react-native",
+        "ohos_version": "3.2.0",
+        "baseline": "3.2.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-localization": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-localization",
+        "ohos_version": "~ 2.5.0",
+        "baseline": "2.3.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-localization",
+        "ohos_version": "~ 2.4.0",
+        "baseline": "2.3.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-localization",
+        "ohos_version": "~ 2.3.3",
+        "baseline": "2.3.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "rn-bugly": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/rn-bugly",
+        "ohos_version": "~1.5.0",
+        "baseline": "1.3.0-beta.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/rn-bugly",
+        "ohos_version": "~1.4.0",
+        "baseline": "1.3.0-beta.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/rn-bugly",
+        "ohos_version": "~1.3.1",
+        "baseline": "1.3.0-beta.3",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-custom-keyboard": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-custom-keyboard",
+        "ohos_version": "~1.1.0",
+        "baseline": "1.0.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-custom-keyboard",
+        "ohos_version": "~1.0.4",
+        "baseline": "1.0.4",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-thumbnail": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-thumbnail",
+        "ohos_version": "~ 1.3.0",
+        "baseline": "1.1.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-thumbnail",
+        "ohos_version": "~ 1.2.0",
+        "baseline": "1.1.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-thumbnail",
+        "ohos_version": "~ 1.1.4",
+        "baseline": "1.1.3",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-doc-viewer": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-doc-viewer",
+        "ohos_version": "2.7.9",
+        "baseline": "2.7.9",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-doc-viewer",
+        "ohos_version": "2.8.0",
+        "baseline": "2.8.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-alipay": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-alipay",
+        "ohos_version": "~ 5.1.0",
+        "baseline": "5.0.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-alipay",
+        "ohos_version": "~ 5.0.3",
+        "baseline": "5.0.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-image-rotate": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-image-rotate",
+        "ohos_version": "2.1.1",
+        "baseline": "2.1.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-image-rotate",
+        "ohos_version": "2.2.0",
+        "baseline": "2.2.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "lottie-react-native": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/lottie-react-native",
+        "ohos_version": "~ 7.3.0",
+        "baseline": "7.3.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/lottie-react-native",
+        "ohos_version": "~ 7.2.3",
+        "baseline": "7.2.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/lottie-react-native",
+        "ohos_version": "~ 6.4.2",
+        "baseline": "6.4.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-user-agent": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-user-agent",
+        "ohos_version": "2.3.2",
+        "baseline": "2.3.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-user-agent",
+        "ohos_version": "2.4.0",
+        "baseline": "2.4.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-idfa-aaid": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-idfa-aaid",
+        "ohos_version": "~1.4.0",
+        "baseline": "1.2.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-idfa-aaid",
+        "ohos_version": "~1.3.0",
+        "baseline": "1.2.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-idfa-aaid",
+        "ohos_version": "~1.2.1",
+        "baseline": "1.2.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-file-selector": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-file-selector",
+        "ohos_version": "1.0.3",
+        "baseline": "1.0.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-file-selector",
+        "ohos_version": "1.1.0",
+        "baseline": "1.1.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-exit-app": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-exit-app",
+        "ohos_version": "2.0.1",
+        "baseline": "2.0.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-exit-app",
+        "ohos_version": "2.1.0",
+        "baseline": "2.1.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-tab-navigator": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-tab-navigator",
+        "ohos_version": "0.3.4",
+        "baseline": "0.3.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-tab-navigator",
+        "ohos_version": "0.4.0",
+        "baseline": "0.4.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-qrcode": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-qrcode",
+        "ohos_version": "0.2.7",
+        "baseline": "0.2.7",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-qrcode",
+        "ohos_version": "0.3.0",
+        "baseline": "0.3.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-video-cache": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-video-cache",
+        "ohos_version": "~ 2.9.0",
+        "baseline": "2.7.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-video-cache",
+        "ohos_version": "~ 2.8.0",
+        "baseline": "2.7.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-video-cache",
+        "ohos_version": "~ 2.7.5",
+        "baseline": "2.7.4",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-autoheight-webview": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-autoheight-webview",
+        "ohos_version": "~1.8.0",
+        "baseline": "1.6.5",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-autoheight-webview",
+        "ohos_version": "~1.7.0",
+        "baseline": "1.6.5",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-autoheight-webview",
+        "ohos_version": "1.6.5",
+        "baseline": "1.6.5",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-drag-sort": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-drag-sort",
+        "ohos_version": "~2.5.0",
+        "baseline": "2.4.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-drag-sort",
+        "ohos_version": "2.4.4-0.1.0",
+        "baseline": "2.4.4",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-exception-handler": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-exception-handler",
+        "ohos_version": "~2.12.0",
+        "baseline": "2.10.10",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-exception-handler",
+        "ohos_version": "~2.11.0",
+        "baseline": "2.10.10",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-exception-handler",
+        "ohos_version": "~2.10.11",
+        "baseline": "2.10.10",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-fast-image": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-fast-image",
+        "ohos_version": "~8.8.0",
+        "baseline": "8.6.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-fast-image",
+        "ohos_version": "~8.7.0",
+        "baseline": "8.6.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-fast-image",
+        "ohos_version": "~8.6.4",
+        "baseline": "8.6.3",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-fs": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-fs",
+        "ohos_version": "~2.22.0",
+        "baseline": "2.20.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-fs",
+        "ohos_version": "~2.21.0",
+        "baseline": "2.20.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-fs",
+        "ohos_version": "~2.20.1",
+        "baseline": "2.20.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-gesture-handler": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-gesture-handler",
+        "ohos_version": "2.30.1",
+        "baseline": "2.30.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-gesture-handler",
+        "ohos_version": "2.23.2",
+        "baseline": "2.25.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-gesture-handler",
+        "ohos_version": "2.14.18",
+        "baseline": "2.14.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-image-editor": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/image-editor",
+        "ohos_version": "~4.4.0",
+        "baseline": "4.3.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/image-editor",
+        "ohos_version": "~4.3.1",
+        "baseline": "4.3.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/image-editor",
+        "ohos_version": "~3.2.1",
+        "baseline": "3.2.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-image-picker": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-image-picker",
+        "ohos_version": "~ 8.3.0",
+        "baseline": "8.2.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-image-picker",
+        "ohos_version": "~ 8.2.2",
+        "baseline": "8.2.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-image-picker",
+        "ohos_version": "~ 7.0.4",
+        "baseline": "7.0.3",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-image-zoom-viewer": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-image-zoom-viewer",
+        "ohos_version": "~ 3.0.2",
+        "baseline": "3.0.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-image-viewing": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-image-viewing",
+        "ohos_version": "~0.3.0",
+        "baseline": "0.2.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-image-viewing",
+        "ohos_version": "~0.2.3",
+        "baseline": "0.2.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-image-pan-zoom": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-image-pan-zoom",
+        "ohos_version": "~ 2.2.0",
+        "baseline": "2.1.12",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-image-pan-zoom",
+        "ohos_version": "~ 2.1.12",
+        "baseline": "2.1.12",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-intersection-observer": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-intersection-observer",
+        "ohos_version": "0.2.0",
+        "baseline": "0.2.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-intersection-observer",
+        "ohos_version": "0.3.0",
+        "baseline": "0.3.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-keyboard-aware-scroll-view": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-keyboard-aware-scroll-view",
+        "ohos_version": "~ 0.10.1",
+        "baseline": "0.9.5",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-keyboard-aware-scroll-view",
+        "ohos_version": "0.9.5",
+        "baseline": "0.9.5",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-linear-gradient": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-linear-gradient",
+        "ohos_version": "~ 3.2.0",
+        "baseline": "3.0.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-linear-gradient",
+        "ohos_version": "~ 3.1.0",
+        "baseline": "3.0.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-linear-gradient",
+        "ohos_version": "~ 3.0.1",
+        "baseline": "3.0.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-maps": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-maps",
+        "ohos_version": "1.10.4",
+        "baseline": "1.10.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-maps",
+        "ohos_version": "1.24.4",
+        "baseline": "1.24.4",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-markdown-display": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-markdown-display",
+        "ohos_version": "~ 7.1.0",
+        "baseline": "7.0.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-markdown-display",
+        "ohos_version": "~ 7.1.0",
+        "baseline": "7.0.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-markdown-display",
+        "ohos_version": "~ 7.0.2-0.0.1",
+        "baseline": "7.0.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-marquee": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-marquee",
+        "ohos_version": "~0.6.0",
+        "baseline": "0.5.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-marquee",
+        "ohos_version": "~0.5.1",
+        "baseline": "0.5.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-MJRefresh": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-mjrefresh",
+        "ohos_version": "0.7.1",
+        "baseline": "0.7.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-mjrefresh",
+        "ohos_version": "0.8.0",
+        "baseline": "0.8.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-pager-view": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-pager-view",
+        "ohos_version": "7.0.3",
+        "baseline": "7.0.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-pager-view",
+        "ohos_version": "6.7.2",
+        "baseline": "6.7.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-pager-view",
+        "ohos_version": "6.2.5",
+        "baseline": "6.2.5",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-pdf": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-pdf",
+        "ohos_version": "~6.9.0",
+        "baseline": "6.7.6",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-pdf",
+        "ohos_version": "~6.8.0",
+        "baseline": "6.7.6",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-pdf",
+        "ohos_version": "~6.7.5",
+        "baseline": "6.7.4",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-permissions": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-permissions",
+        "ohos_version": "~ 5.4.3",
+        "baseline": "5.4.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-permissions",
+        "ohos_version": "~ 5.3.1",
+        "baseline": "5.3.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-permissions",
+        "ohos_version": "~ 4.1.3",
+        "baseline": "4.1.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-popover-view": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-popover-view",
+        "ohos_version": "5.1.7",
+        "baseline": "5.1.7",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-popover-view",
+        "ohos_version": "6.1.1",
+        "baseline": "6.1.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-progress": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-progress",
+        "ohos_version": "~5.1.0",
+        "baseline": "5.0.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-progress",
+        "ohos_version": "~5.0.1-0.0.3",
+        "baseline": "5.0.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-pull": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-pull",
+        "ohos_version": "~2.1.0",
+        "baseline": "2.0.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-pull",
+        "ohos_version": "2.0.4-0.0.1",
+        "baseline": "2.0.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-reanimated": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-reanimated",
+        "ohos_version": "~4.0.0",
+        "baseline": "4.2.1",
+        "autolink": null,
+        "dual_install": true,
+        "dual_install_version": "4.2.1"
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-reanimated",
+        "ohos_version": "~3.18.1",
+        "baseline": "3.18.0",
+        "autolink": null,
+        "dual_install": true,
+        "dual_install_version": "3.18.0"
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-reanimated",
+        "ohos_version": "~3.6.5",
+        "baseline": "3.6.0",
+        "autolink": null,
+        "dual_install": true,
+        "dual_install_version": "3.6.0"
+      }
+    },
+    "react-native-safe-area-context": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-safe-area-context",
+        "ohos_version": "5.6.3",
+        "baseline": "5.6.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-safe-area-context",
+        "ohos_version": "5.1.1",
+        "baseline": "5.1.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-safe-area-context",
+        "ohos_version": "4.7.5",
+        "baseline": "4.7.4",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-screens": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-screens",
+        "ohos_version": "~ 4.9.0",
+        "baseline": "4.17.1",
+        "autolink": null,
+        "dual_install": true,
+        "dual_install_version": "4.17.1"
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-screens",
+        "ohos_version": "~ 4.8.1",
+        "baseline": "4.8.0",
+        "autolink": null,
+        "dual_install": true,
+        "dual_install_version": "4.8.0"
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-screens",
+        "ohos_version": "~ 3.34.1",
+        "baseline": "3.34.1",
+        "autolink": null,
+        "dual_install": true,
+        "dual_install_version": "3.34.0"
+      }
+    },
+    "react-native-scrollable-tab-view": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-scrollable-tab-view",
+        "ohos_version": "~ 1.1.0",
+        "baseline": null,
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-scrollable-tab-view",
+        "ohos_version": "1.0.0-0.2.1",
+        "baseline": null,
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-SmartRefreshLayout": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-smartrefreshlayout",
+        "ohos_version": "0.6.8",
+        "baseline": "0.6.8",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-smartrefreshlayout",
+        "ohos_version": "0.7.0",
+        "baseline": "0.7.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-snap-carousel": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-snap-carousel",
+        "ohos_version": "3.9.1",
+        "baseline": "3.9.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-snap-carousel",
+        "ohos_version": "3.10.0",
+        "baseline": "3.10.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-sound": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-sound",
+        "ohos_version": "~0.11.3",
+        "baseline": null,
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-stickyheader": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-stickyheader",
+        "ohos_version": "1.1.3",
+        "baseline": "1.1.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-stickyheader",
+        "ohos_version": "1.1.4",
+        "baseline": "1.1.4",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-svg": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-svg",
+        "ohos_version": "~ 15.13.0",
+        "baseline": "15.15.0",
+        "autolink": null,
+        "dual_install": true,
+        "dual_install_version": "15.15.0"
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-svg",
+        "ohos_version": "~15.12.1",
+        "baseline": "15.12.0",
+        "autolink": null,
+        "dual_install": true,
+        "dual_install_version": "15.12.0"
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-svg",
+        "ohos_version": "~ 15.0.2",
+        "baseline": "15.0.0",
+        "autolink": null,
+        "dual_install": true,
+        "dual_install_version": "15.0.0"
+      }
+    },
+    "react-native-swiper": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-swiper",
+        "ohos_version": "1.6.1",
+        "baseline": "1.6.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-tab-view": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-tab-view",
+        "ohos_version": "~4.0.12",
+        "baseline": "4.0.10",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-tab-view",
+        "ohos_version": "~4.0.12",
+        "baseline": "4.0.10",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-tab-view",
+        "ohos_version": "~3.5.2",
+        "baseline": "3.5.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-text-size": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-text-size",
+        "ohos_version": "~4.2.0",
+        "baseline": "4.0.0-rc.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-text-size",
+        "ohos_version": "~4.1.0",
+        "baseline": "4.0.0-rc.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-text-size",
+        "ohos_version": "~4.0.1",
+        "baseline": "4.0.0-rc.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-transitiongroup": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-transitiongroup",
+        "ohos_version": "~ 1.3.0",
+        "baseline": "1.2.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-transitiongroup",
+        "ohos_version": "~ 1.2.0-0.0.1",
+        "baseline": "1.2.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-translucent-modal": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-translucent-modal",
+        "ohos_version": "~ 1.2.0",
+        "baseline": "1.1.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-translucent-modal",
+        "ohos_version": "~ 1.2.0",
+        "baseline": "1.1.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-translucent-modal",
+        "ohos_version": "1.1.0-0.0.3",
+        "baseline": "1.1.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-video": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-video",
+        "ohos_version": "6.13.2",
+        "baseline": "6.13.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-video",
+        "ohos_version": "6.14.0",
+        "baseline": "6.14.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-view-shot": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-view-shot",
+        "ohos_version": "3.8.1",
+        "baseline": "3.8.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-view-shot",
+        "ohos_version": "3.9.0",
+        "baseline": "3.9.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-webview": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-webview",
+        "ohos_version": "~13.16.1",
+        "baseline": "13.16.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-webview",
+        "ohos_version": "~13.15.1",
+        "baseline": "13.15.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-webview",
+        "ohos_version": "~13.10.5",
+        "baseline": "13.10.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-worklets-core": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-worklets-core",
+        "ohos_version": "1.3.4",
+        "baseline": "1.3.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-worklets-core",
+        "ohos_version": "1.5.1",
+        "baseline": "1.5.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-date-picker": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-date-picker",
+        "ohos_version": "~ 5.2.0",
+        "baseline": "5.0.13",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-date-picker",
+        "ohos_version": "~ 5.1.0",
+        "baseline": "5.0.13",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-date-picker",
+        "ohos_version": "~ 5.0.6",
+        "baseline": "5.0.4",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-sensors": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-sensors",
+        "ohos_version": "~7.4.0",
+        "baseline": "7.2.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-sensors",
+        "ohos_version": "~7.3.7",
+        "baseline": "7.2.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-sensors",
+        "ohos_version": "~7.2.3",
+        "baseline": "7.2.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-sortable-list": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-sortable-list",
+        "ohos_version": "~ 0.1.0",
+        "baseline": "0.0.25",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-sortable-list",
+        "ohos_version": "~ 0.0.26",
+        "baseline": "0.0.25",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-image-sequence-2": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-image-sequence-2",
+        "ohos_version": "~0.11.0",
+        "baseline": "0.9.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-image-sequence-2",
+        "ohos_version": "~0.10.0",
+        "baseline": "0.9.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-image-sequence-2",
+        "ohos_version": "~0.9.2",
+        "baseline": "0.9.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-navigation/native-stack": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/native-stack",
+        "ohos_version": "~7.4.0",
+        "baseline": "7.3.22",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/native-stack",
+        "ohos_version": "~7.3.11",
+        "baseline": "7.3.10",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/native-stack",
+        "ohos_version": "~6.9.26",
+        "baseline": "6.9.27",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-clippath": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-clippathview",
+        "ohos_version": "~ 1.3.0",
+        "baseline": "1.1.8",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-clippathview",
+        "ohos_version": "~1.2.0",
+        "baseline": "1.1.8",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-clippathview",
+        "ohos_version": "~ 1.1.9",
+        "baseline": "1.1.8",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-image-crop-picker": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-image-crop-picker",
+        "ohos_version": "0.40.5",
+        "baseline": "0.40.5",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-image-crop-picker",
+        "ohos_version": "0.50.2",
+        "baseline": "0.50.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-image-crop-picker",
+        "ohos_version": "0.51.2",
+        "baseline": "0.51.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-image-capinsets-next": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-image-capinsets-next",
+        "ohos_version": "0.6.2",
+        "baseline": "0.6.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-image-capinsets-next",
+        "ohos_version": "0.7.0",
+        "baseline": "0.7.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-map-linking": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-map-linking",
+        "ohos_version": "~1.1.0",
+        "baseline": "1.0.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-map-linking",
+        "ohos_version": "~1.0.4",
+        "baseline": "1.0.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-vision-camera": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-vision-camera",
+        "ohos_version": "4.0.3",
+        "baseline": "4.0.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-vision-camera",
+        "ohos_version": "4.7.1",
+        "baseline": "4.7.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-zip-archive": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-zip-archive",
+        "ohos_version": "6.1.2",
+        "baseline": "6.1.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-zip-archive",
+        "ohos_version": "7.1.0",
+        "baseline": "7.1.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-audio": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-audio",
+        "ohos_version": "4.2.4",
+        "baseline": "4.2.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-audio",
+        "ohos_version": "4.3.0",
+        "baseline": "4.3.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-simple-toast": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-simple-toast",
+        "ohos_version": "~3.4.0",
+        "baseline": "3.3.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-simple-toast",
+        "ohos_version": "~3.3.1",
+        "baseline": "3.3.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-localize": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-localize",
+        "ohos_version": "3.1.0",
+        "baseline": "3.1.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-localize",
+        "ohos_version": "3.4.2",
+        "baseline": "3.4.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-localize",
+        "ohos_version": "3.6.2",
+        "baseline": "3.6.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@bam.tech/react-native-image-resizer": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-image-resizer",
+        "ohos_version": "~ 3.2.0",
+        "baseline": "3.0.11",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-image-resizer",
+        "ohos_version": "~ 3.1.0",
+        "baseline": "3.0.11",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-image-resizer",
+        "ohos_version": "~ 3.0.10",
+        "baseline": "3.0.9",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-calendar-events": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-calendar-events",
+        "ohos_version": "~2.3.0",
+        "baseline": "2.2.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-calendar-events",
+        "ohos_version": "~2.2.1",
+        "baseline": "2.2.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-fileupload": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-fileupload",
+        "ohos_version": "1.1.1",
+        "baseline": "1.1.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-fileupload",
+        "ohos_version": "1.2.0",
+        "baseline": "1.2.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-root-modal": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-root-modal",
+        "ohos_version": "5.0.0",
+        "baseline": "5.0.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-root-modal",
+        "ohos_version": "5.0.0",
+        "baseline": "5.0.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-switch-pro": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-switch-pro",
+        "ohos_version": "~1.1.0",
+        "baseline": "1.0.5",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-switch-pro",
+        "ohos_version": "~1.0.5",
+        "baseline": "1.0.5",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-nested-scroll-view": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-nested-scroll-view",
+        "ohos_version": "~9.1.0",
+        "baseline": "9.0.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-nested-scroll-view",
+        "ohos_version": "~9.0.0-0.0.2",
+        "baseline": "9.0.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-code-push": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-code-push",
+        "ohos_version": "8.2.3",
+        "baseline": "8.2.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-code-push",
+        "ohos_version": "9.0.2",
+        "baseline": "9.0.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-safe-module": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-safe-module",
+        "ohos_version": "1.2.0",
+        "baseline": "1.2.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-safe-module",
+        "ohos_version": "1.3.0",
+        "baseline": "1.3.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-sqlite-storage": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-sqlite-storage",
+        "ohos_version": "~6.2.0",
+        "baseline": "6.0.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-sqlite-storage",
+        "ohos_version": "~6.1.1",
+        "baseline": "6.0.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-sqlite-storage",
+        "ohos_version": "~6.0.2",
+        "baseline": "6.0.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-text-gradient": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-text-gradient",
+        "ohos_version": "0.1.8",
+        "baseline": "0.1.8",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-text-gradient",
+        "ohos_version": "0.2.0",
+        "baseline": "0.2.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-bindingx": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-bindingx",
+        "ohos_version": "~1.2.0",
+        "baseline": "1.0.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-bindingx",
+        "ohos_version": "~1.1.0",
+        "baseline": "1.0.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-bindingx",
+        "ohos_version": "~1.0.4",
+        "baseline": "1.0.3",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-cardview": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-cardview",
+        "ohos_version": "2.0.4",
+        "baseline": "2.0.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-cardview",
+        "ohos_version": "2.1.0",
+        "baseline": "2.1.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-largelist": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-largelist",
+        "ohos_version": "3.2.0",
+        "baseline": "3.1.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-largelist",
+        "ohos_version": "3.1.1",
+        "baseline": "3.1.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-spring-scrollview": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-spring-scrollview",
+        "ohos_version": "3.1.0",
+        "baseline": "3.0.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-spring-scrollview",
+        "ohos_version": "3.0.3",
+        "baseline": "2.0.22",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-color-matrix-image-filters": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-color-matrix-image-filters",
+        "ohos_version": "~ 7.1.0",
+        "baseline": "7.0.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-color-matrix-image-filters",
+        "ohos_version": "~ 7.0.3",
+        "baseline": "7.0.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-color-matrix-image-filters",
+        "ohos_version": "~ 6.0.6",
+        "baseline": "6.0.5",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-toast": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-toast",
+        "ohos_version": "~1.2.0",
+        "baseline": "1.0.7",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-toast",
+        "ohos_version": "~1.1.0",
+        "baseline": "1.0.7",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-toast",
+        "ohos_version": "~1.0.8",
+        "baseline": "1.0.7",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-syan-image-picker": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-syan-image-picker",
+        "ohos_version": "0.5.4",
+        "baseline": "0.5.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-syan-image-picker",
+        "ohos_version": "0.6.0",
+        "baseline": "0.6.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-amap-geolocation": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-amap-geolocation",
+        "ohos_version": "~1.4.0",
+        "baseline": "1.2.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-amap-geolocation",
+        "ohos_version": "~1.3.0",
+        "baseline": "1.2.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-amap-geolocation",
+        "ohos_version": "~1.2.4",
+        "baseline": "1.2.3",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-splash-screen": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-splash-screen",
+        "ohos_version": "~3.5.0",
+        "baseline": "3.3.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-splash-screen",
+        "ohos_version": "~3.4.0",
+        "baseline": "3.3.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-splash-screen",
+        "ohos_version": "~3.3.2",
+        "baseline": "3.3.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-baidu-map": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-baidu-map",
+        "ohos_version": "1.0.38",
+        "baseline": "1.0.38",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-baidu-map",
+        "ohos_version": "1.1.0",
+        "baseline": "1.1.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-ble-plx": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-ble-plx",
+        "ohos_version": "3.2.1",
+        "baseline": "3.2.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-ble-plx",
+        "ohos_version": "3.5.1",
+        "baseline": "3.5.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-device-info": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-device-info",
+        "ohos_version": "~ 14.1.2",
+        "baseline": "14.1.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-device-info",
+        "ohos_version": "~ 14.0.5",
+        "baseline": "14.0.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-device-info",
+        "ohos_version": "~ 11.1.1",
+        "baseline": "11.1.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-amap3d": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-amap3d",
+        "ohos_version": "3.2.6",
+        "baseline": "3.2.6",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-amap3d",
+        "ohos_version": "3.3.0",
+        "baseline": "3.3.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-background-timer": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-background-timer",
+        "ohos_version": "~ 2.6.0",
+        "baseline": "2.4.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-background-timer",
+        "ohos_version": "~ 2.5.0",
+        "baseline": "2.4.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-background-timer",
+        "ohos_version": "~ 2.4.2",
+        "baseline": "2.4.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-http-bridge": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-http-bridge",
+        "ohos_version": "~0.8.0",
+        "baseline": "0.6.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-http-bridge",
+        "ohos_version": "~0.7.0",
+        "baseline": "0.6.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-http-bridge",
+        "ohos_version": "~0.6.2",
+        "baseline": "0.6.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-qr-decode-image-camera": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-qr-decode-image-camera",
+        "ohos_version": "1.1.5",
+        "baseline": "1.1.5",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-qr-decode-image-camera",
+        "ohos_version": "1.2.0",
+        "baseline": "1.2.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-touch-id": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-touch-id",
+        "ohos_version": "~ 4.6.0",
+        "baseline": "4.4.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-touch-id",
+        "ohos_version": "~ 4.5.0",
+        "baseline": "4.4.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-touch-id",
+        "ohos_version": "~ 4.4.2",
+        "baseline": "4.4.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-modal": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-modal",
+        "ohos_version": "~ 14.0.1",
+        "baseline": "14.0.0-rc.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-modal",
+        "ohos_version": "~ 14.0.1",
+        "baseline": "14.0.0-rc.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-modal",
+        "ohos_version": "~ 13.0.1",
+        "baseline": "13.0.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-restart": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-restart",
+        "ohos_version": "0.0.28",
+        "baseline": "0.0.28",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-restart",
+        "ohos_version": "0.1.0",
+        "baseline": "0.1.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-system-setting": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-system-setting",
+        "ohos_version": "~1.9.0",
+        "baseline": "3.1.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-system-setting",
+        "ohos_version": "~1.8.0",
+        "baseline": "3.1.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-system-setting",
+        "ohos_version": "~1.7.7",
+        "baseline": "3.0.5",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-keep-awake": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-keep-awake",
+        "ohos_version": "~ 4.2.0",
+        "baseline": "4.0.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-keep-awake",
+        "ohos_version": "~4.1.0",
+        "baseline": "4.0.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-keep-awake",
+        "ohos_version": "~ 4.0.1",
+        "baseline": "4.0.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-default-preference": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-default-preference",
+        "ohos_version": "~ 1.6.0",
+        "baseline": "1.4.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-default-preference",
+        "ohos_version": "~ 1.5.0",
+        "baseline": "1.4.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-default-preference",
+        "ohos_version": "~ 1.4.5",
+        "baseline": "1.4.4",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-ble-manager": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-ble-manager",
+        "ohos_version": "11.5.2",
+        "baseline": "11.5.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-ble-manager",
+        "ohos_version": "12.1.5",
+        "baseline": "12.1.5",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-sensitive-info": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-sensitive-info",
+        "ohos_version": "~6.2.0",
+        "baseline": "6.0.0-alpha.9",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-sensitive-info",
+        "ohos_version": "~6.1.0",
+        "baseline": "6.0.0-alpha.9",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-sensitive-info",
+        "ohos_version": "~6.0.1",
+        "baseline": "6.0.0-alpha.9",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-multi-slider": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-multi-slider",
+        "ohos_version": "~2.3.0",
+        "baseline": "2.2.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-multi-slider",
+        "ohos_version": "~2.2.3",
+        "baseline": "2.2.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-orientation": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-orientation",
+        "ohos_version": "~3.3.0",
+        "baseline": "3.1.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-orientation",
+        "ohos_version": "~3.2.0",
+        "baseline": "3.1.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-orientation",
+        "ohos_version": "~3.1.4",
+        "baseline": "3.1.3",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "rn-tourguide": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/rn-tourguide",
+        "ohos_version": "~3.4.0",
+        "baseline": "3.3.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/rn-tourguide",
+        "ohos_version": "~3.3.0-0.0.2",
+        "baseline": "3.3.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-performance": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-performance",
+        "ohos_version": "~ 5.3.0",
+        "baseline": "5.1.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-performance",
+        "ohos_version": "~ 5.2.0",
+        "baseline": "5.1.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-performance",
+        "ohos_version": "~ 5.1.3",
+        "baseline": "5.1.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-shake": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-shake",
+        "ohos_version": "5.6.3",
+        "baseline": "5.6.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-shake",
+        "ohos_version": "6.0.2",
+        "baseline": "6.0.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-material-dropdown": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-material-dropdown",
+        "ohos_version": "0.11.1",
+        "baseline": "0.11.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-material-dropdown",
+        "ohos_version": "0.12.0",
+        "baseline": "0.12.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-document-picker": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-document-picker",
+        "ohos_version": "9.2.2",
+        "baseline": "9.2.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-document-picker",
+        "ohos_version": "9.3.2",
+        "baseline": "9.3.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-fingerprint-scanner": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-fingerprint-scanner",
+        "ohos_version": "~ 6.2.0",
+        "baseline": "6.0.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-fingerprint-scanner",
+        "ohos_version": "~ 6.1.0",
+        "baseline": "6.0.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-fingerprint-scanner",
+        "ohos_version": "~ 6.0.1",
+        "baseline": "6.0.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-get-random-values": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-get-random-values",
+        "ohos_version": "1.13.0",
+        "baseline": "1.11.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-get-random-values",
+        "ohos_version": "1.12.0",
+        "baseline": "1.11.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-get-random-values",
+        "ohos_version": "1.11.1",
+        "baseline": "1.11.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "native-base": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/native-base",
+        "ohos_version": "~3.4.29",
+        "baseline": "3.4.28",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-orientation-locker": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-orientation-locker",
+        "ohos_version": "~1.9.0",
+        "baseline": "1.7.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-orientation-locker",
+        "ohos_version": "~1.8.0",
+        "baseline": "1.7.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-orientation-locker",
+        "ohos_version": "~1.7.1",
+        "baseline": "1.7.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-ssl-pinning": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-ssl-pinning",
+        "ohos_version": "1.5.8",
+        "baseline": "1.5.8",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-ssl-pinning",
+        "ohos_version": "1.6.0",
+        "baseline": "1.6.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-bootsplash": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-bootsplash",
+        "ohos_version": "6.1.2",
+        "baseline": "6.1.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-bootsplash",
+        "ohos_version": "6.3.5",
+        "baseline": "6.3.5",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "nativewind": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/nativewind",
+        "ohos_version": "2.0.11",
+        "baseline": "2.0.11",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/nativewind",
+        "ohos_version": "4.1.24",
+        "baseline": "4.1.24",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-country-picker-modal": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-country-picker-modal",
+        "ohos_version": "~2.1.0",
+        "baseline": "2.0.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-country-picker-modal",
+        "ohos_version": "2.0.0",
+        "baseline": "2.0.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-haptic-feedback": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-haptic-feedback",
+        "ohos_version": "~ 2.4.0",
+        "baseline": "2.3.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-haptic-feedback",
+        "ohos_version": "~ 2.3.4",
+        "baseline": "2.3.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-haptic-feedback",
+        "ohos_version": "~ 2.2.2",
+        "baseline": "2.2.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-dropdownalert": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/rreact-native-dropdownalert",
+        "ohos_version": "~ 5.3.0",
+        "baseline": "5.2.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-dropdownalert",
+        "ohos_version": "~5.2.0",
+        "baseline": "5.1.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-dropdownalert",
+        "ohos_version": "5.1.0",
+        "baseline": "5.1.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-material-ui": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-material-ui",
+        "ohos_version": "1.30.1",
+        "baseline": "1.30.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-material-ui",
+        "ohos_version": "1.31.0",
+        "baseline": "1.31.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-credit-card-input": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-credit-card-input",
+        "ohos_version": "~1.0.1",
+        "baseline": "1.0.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-credit-card-input",
+        "ohos_version": "~0.4.1-0.0.2",
+        "baseline": "0.4.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-unistyles": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-unistyles",
+        "ohos_version": "2.7.2",
+        "baseline": "2.7.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-unistyles",
+        "ohos_version": "2.43.1",
+        "baseline": "2.43.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-signature-capture": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-signature-capture",
+        "ohos_version": "0.4.13",
+        "baseline": "0.4.13",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-signature-capture",
+        "ohos_version": "0.5.0",
+        "baseline": "0.5.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-material-buttons": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-material-buttons",
+        "ohos_version": "~ 0.7.0",
+        "baseline": "0.6.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-material-buttons",
+        "ohos_version": "~ 0.6.0-0.0.2",
+        "baseline": "0.6.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-create-thumbnail": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-create-thumbnail",
+        "ohos_version": "2.0.1",
+        "baseline": "2.0.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-create-thumbnail",
+        "ohos_version": "2.1.0",
+        "baseline": "2.1.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-picker": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-picker",
+        "ohos_version": "~ 4.5.0",
+        "baseline": "4.3.7",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-picker",
+        "ohos_version": "~ 4.4.0",
+        "baseline": "4.3.7",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-picker",
+        "ohos_version": "~ 4.3.10",
+        "baseline": "4.0.3",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-shared-element": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-shared-element",
+        "ohos_version": "~ 0.10.0",
+        "baseline": "0.9.0-rc0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-shared-element",
+        "ohos_version": "~ 0.9.1",
+        "baseline": "0.9.0-rc0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-shared-element",
+        "ohos_version": "~ 0.8.10",
+        "baseline": "0.8.9",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@gorhom/bottom-sheet": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-library/bottom-sheet",
+        "ohos_version": "4.6.4",
+        "baseline": "4.6.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/bottom-sheet",
+        "ohos_version": "5.1.7",
+        "baseline": "5.1.7",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-mmkv-storage": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-mmkv-storage",
+        "ohos_version": "0.10.5",
+        "baseline": "0.10.5",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-mmkv-storage",
+        "ohos_version": "0.11.3",
+        "baseline": "0.11.3",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-ui-lib": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-ui-lib",
+        "ohos_version": "~ 7.43.1",
+        "baseline": "7.43.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-ui-lib",
+        "ohos_version": "~ 7.29.2",
+        "baseline": "7.29.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-skia": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-skia",
+        "ohos_version": "~2.0.0",
+        "baseline": "2.4.14",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-skia",
+        "ohos_version": "~1.4.0",
+        "baseline": "1.3.7",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-skia",
+        "ohos_version": "~1.3.9",
+        "baseline": "1.3.7",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-print": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-print",
+        "ohos_version": "~0.13.0",
+        "baseline": "0.11.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-print",
+        "ohos_version": "~0.12.0",
+        "baseline": "0.11.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-print",
+        "ohos_version": "~0.11.1",
+        "baseline": "0.11.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-inappbrowser-reborn": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-inappbrowser-reborn",
+        "ohos_version": "~ 3.9.0",
+        "baseline": "3.7.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-inappbrowser-reborn",
+        "ohos_version": "~ 3.8.0",
+        "baseline": "3.7.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-inappbrowser-reborn",
+        "ohos_version": "~ 3.7.1",
+        "baseline": "3.7.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-picker-select": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-picker-select",
+        "ohos_version": "~ 9.4.0",
+        "baseline": "9.3.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-picker-select",
+        "ohos_version": "~ 9.3.1",
+        "baseline": "9.3.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-track-player": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-track-player",
+        "ohos_version": "4.1.3",
+        "baseline": "4.1.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-track-player",
+        "ohos_version": "4.2.0",
+        "baseline": "4.2.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@invertase/react-native-apple-authentication": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-apple-authentication",
+        "ohos_version": "~ 2.5.0",
+        "baseline": "2.4.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-apple-authentication",
+        "ohos_version": "~ 2.4.2",
+        "baseline": "2.4.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-apple-authentication",
+        "ohos_version": "~ 2.3.1",
+        "baseline": "2.3.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-camera-kit": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-camera-kit",
+        "ohos_version": "~ 15.1.1",
+        "baseline": "15.1.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-camera-kit",
+        "ohos_version": "~ 14.0.2",
+        "baseline": "14.0.0-beta15",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-nfc-manager": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-nfc-manager",
+        "ohos_version": "3.15.1",
+        "baseline": "3.15.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-nfc-manager",
+        "ohos_version": "3.16.2",
+        "baseline": "3.16.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-blurhash": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-blurhash",
+        "ohos_version": "2.0.4",
+        "baseline": "2.0.4",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-blurhash",
+        "ohos_version": "2.1.0",
+        "baseline": "2.1.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-blurhash",
+        "ohos_version": "2.2.0",
+        "baseline": "2.2.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-text-input-mask": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-text-input-mask",
+        "ohos_version": "~3.1.5-0.0.7",
+        "baseline": null,
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-text-input-mask",
+        "ohos_version": "3.2.0",
+        "baseline": "3.2.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "realm-js": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/realm",
+        "ohos_version": "~ 12.14.2",
+        "baseline": "12.14.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/realm",
+        "ohos_version": "~ 12.13.2",
+        "baseline": "12.13.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-charts-wrapper": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-charts-wrapper",
+        "ohos_version": "~ 0.8.0",
+        "baseline": "0.6.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-charts-wrapper",
+        "ohos_version": "~ 0.7.0",
+        "baseline": "0.6.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-charts-wrapper",
+        "ohos_version": "~ 0.6.1",
+        "baseline": "0.6.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-keyboard-controller": {
+      "0.82": {
+        "ohos_package": "@react-native-oh-tpl/react-native-keyboard-controller",
+        "ohos_version": "~1.17.0",
+        "baseline": null,
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-oh-tpl/react-native-keyboard-controller",
+        "ohos_version": "~1.16.6",
+        "baseline": null,
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-keyboard-controller",
+        "ohos_version": "~1.12.8",
+        "baseline": null,
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-config": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-config",
+        "ohos_version": "~ 1.6.0",
+        "baseline": "1.5.5",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-config",
+        "ohos_version": "~ 1.5.3-0.0.3",
+        "baseline": "1.5.3",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-context-menu-view": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-context-menu-view",
+        "ohos_version": "~1.20.0",
+        "baseline": "1.21.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-context-menu-view",
+        "ohos_version": "~1.19.1",
+        "baseline": "1.19.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-context-menu-view",
+        "ohos_version": "~1.16.1",
+        "baseline": "1.16.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-view-pdf": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-view-pdf",
+        "ohos_version": "~ 0.16.0",
+        "baseline": "0.14.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-view-pdf",
+        "ohos_version": "~ 0.15.0",
+        "baseline": "0.14.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-view-pdf",
+        "ohos_version": "~ 0.14.1",
+        "baseline": "0.14.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-hole-view": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-hole-view",
+        "ohos_version": "~3.2.0",
+        "baseline": "3.0.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-hole-view",
+        "ohos_version": "~3.1.0",
+        "baseline": "3.0.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-hole-view",
+        "ohos_version": "~3.0.1",
+        "baseline": "3.0.0-alpha4",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-material-textfield": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-material-textfield",
+        "ohos_version": "~ 0.17.0",
+        "baseline": "0.16.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-material-textfield",
+        "ohos_version": "~ 0.16.1",
+        "baseline": "0.16.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-randombytes": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-randombytes",
+        "ohos_version": "~3.8.0",
+        "baseline": "3.6.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-randombytes",
+        "ohos_version": "~3.7.0",
+        "baseline": "3.6.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-randombytes",
+        "ohos_version": "~3.6.2",
+        "baseline": "3.6.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-view-overflow": {
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-view-overflow",
+        "ohos_version": "0.1.0",
+        "baseline": "0.0.5",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-view-overflow",
+        "ohos_version": "0.0.5",
+        "baseline": "0.0.5",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-email-link": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-email-link",
+        "ohos_version": "~ 1.17.0",
+        "baseline": "1.16.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-email-link",
+        "ohos_version": "~ 1.16.2",
+        "baseline": "1.16.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-email-link",
+        "ohos_version": "~ 1.15.1",
+        "baseline": "1.15.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-textinput-maxlength-fixed": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-textinput-maxlength-fixed",
+        "ohos_version": "~0.3.0",
+        "baseline": "0.1.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-textinput-maxlength-fixed",
+        "ohos_version": "~0.2.0",
+        "baseline": "0.1.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-textinput-maxlength-fixed",
+        "ohos_version": "~0.1.4",
+        "baseline": "0.1.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-community/audio-toolkit": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/audio-toolkit",
+        "ohos_version": "~ 2.2.0",
+        "baseline": "2.0.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/audio-toolkit",
+        "ohos_version": "~ 2.1.0",
+        "baseline": "2.0.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/audio-toolkit",
+        "ohos_version": "~ 2.0.4",
+        "baseline": "2.0.3",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-svg-charts": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-svg-charts",
+        "ohos_version": "~ 5.4.0",
+        "baseline": "5.3.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-file-viewer": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-file-viewer",
+        "ohos_version": "~2.3.0",
+        "baseline": "2.1.5",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-file-viewer",
+        "ohos_version": "~2.2.0",
+        "baseline": "2.1.5",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-file-viewer",
+        "ohos_version": "~2.1.7",
+        "baseline": "2.1.5",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-image-colors": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-image-colors",
+        "ohos_version": "2.4.1",
+        "baseline": "2.4.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-image-colors",
+        "ohos_version": "2.5.1",
+        "baseline": "2.5.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-content-loader": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-content-loader",
+        "ohos_version": "~7.2.0",
+        "baseline": "7.1.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-content-loader",
+        "ohos_version": "~7.1.0",
+        "baseline": "7.0.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-content-loader",
+        "ohos_version": "~7.0.2-0.0.2",
+        "baseline": "7.0.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-reanimated-bottom-sheet": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/reanimated-bottom-sheet",
+        "ohos_version": "1.0.0",
+        "baseline": "1.0.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/reanimated-bottom-sheet",
+        "ohos_version": "1.1.0",
+        "baseline": "1.1.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-audio-recorder-player": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-audio-recorder-player",
+        "ohos_version": "3.6.11",
+        "baseline": "3.6.11",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-audio-recorder-player",
+        "ohos_version": "3.7.0",
+        "baseline": "3.7.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-gifted-charts": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-gifted-charts",
+        "ohos_version": "1.4.16",
+        "baseline": "1.4.16",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-gifted-charts",
+        "ohos_version": "1.5.0",
+        "baseline": "1.5.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-tts": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-tts",
+        "ohos_version": "~4.3.0",
+        "baseline": "4.1.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-tts",
+        "ohos_version": "~4.2.0",
+        "baseline": "4.1.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-tts",
+        "ohos_version": "~4.1.3",
+        "baseline": "4.1.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "victory-native-xl": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/victory-native-xl",
+        "ohos_version": "41.1.0",
+        "baseline": "41.1.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/victory-native-xl",
+        "ohos_version": "41.17.5",
+        "baseline": "41.17.5",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-incall-manager": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-incall-manager",
+        "ohos_version": "~4.4.0",
+        "baseline": "4.2.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-incall-manager",
+        "ohos_version": "~4.3.0",
+        "baseline": "4.2.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-incall-manager",
+        "ohos_version": "~4.2.1",
+        "baseline": "4.2.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-securerandom": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-securerandom",
+        "ohos_version": "~ 1.2.0",
+        "baseline": "1.0.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-securerandom",
+        "ohos_version": "~ 1.1.0",
+        "baseline": "1.0.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-securerandom",
+        "ohos_version": "~ 1.0.2",
+        "baseline": "1.0.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@react-native-ohos-community/auto-fill": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/auto-fill",
+        "ohos_version": "~1.2.0",
+        "baseline": null,
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/auto-fill",
+        "ohos_version": "~1.1.0",
+        "baseline": null,
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/auto-fill",
+        "ohos_version": "~1.0.2",
+        "baseline": null,
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-network-info": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-network-info",
+        "ohos_version": "~ 5.4.0",
+        "baseline": "5.2.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-network-info",
+        "ohos_version": "~ 5.3.0",
+        "baseline": "5.2.1",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-network-info",
+        "ohos_version": "~ 5.2.2",
+        "baseline": "5.2.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-mlkit-ocr": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-mlkit-ocr",
+        "ohos_version": "~ 0.5.0",
+        "baseline": "0.3.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-mlkit-ocr",
+        "ohos_version": "~ 0.4.0",
+        "baseline": "0.3.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-mlkit-ocr",
+        "ohos_version": "~ 0.3.1",
+        "baseline": "0.3.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-drax": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-drax",
+        "ohos_version": "0.10.3",
+        "baseline": "0.10.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-drax",
+        "ohos_version": "0.11.1",
+        "baseline": "0.11.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "@op-engineering/op-sqlite": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/op-sqlite",
+        "ohos_version": "8.0.3",
+        "baseline": "8.0.3",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/op-sqlite",
+        "ohos_version": "14.0.1",
+        "baseline": "14.0.1",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-keys": {
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-keys",
+        "ohos_version": "0.7.12",
+        "baseline": "0.7.12",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-keys",
+        "ohos_version": "0.8.0",
+        "baseline": "0.8.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-barcode-builder": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-barcode-builder",
+        "ohos_version": "2.0.0",
+        "baseline": "2.0.0",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-barcode-builder",
+        "ohos_version": "2.1.0",
+        "baseline": "2.1.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "react-native-neomorph-shadows": {
+      "0.72": {
+        "ohos_package": "@react-native-oh-tpl/react-native-neomorph-shadows",
+        "ohos_version": "1.1.2",
+        "baseline": "1.1.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-neomorph-shadows",
+        "ohos_version": "1.2.0",
+        "baseline": "1.2.0",
+        "autolink": null,
+        "dual_install": false
+      }
+    },
+    "ffmpeg-kit-react-native": {
+      "0.82": {
+        "ohos_package": "@react-native-ohos/react-native-ffmpeg-kit",
+        "ohos_version": "~6.2.0",
+        "baseline": "6.0.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.77": {
+        "ohos_package": "@react-native-ohos/react-native-ffmpeg-kit",
+        "ohos_version": "~6.1.0",
+        "baseline": "6.0.2",
+        "autolink": null,
+        "dual_install": false
+      },
+      "0.72": {
+        "ohos_package": "@react-native-ohos/react-native-ffmpeg-kit",
+        "ohos_version": "~6.0.4",
+        "baseline": "6.0.2",
+        "autolink": null,
+        "dual_install": false
+      }
+    }
+  }
+}

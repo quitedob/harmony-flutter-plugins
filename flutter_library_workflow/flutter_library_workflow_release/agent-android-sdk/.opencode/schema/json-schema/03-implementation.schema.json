@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ohos-adaptation/03-implementation.schema.json",
+  "title": "ArkTS HAR Implementation Marker Output",
+  "description": "03 阶段 JSON：保留 04/05 必须读取的 HAR 路径、build_status 和文件索引。详细 work unit 执行结果、实现追踪写入 03-implementation-report.md。",
+  "version": "3.0.0",
+  "type": "object",
+  "required": [
+    "sdk_name",
+    "artifact_type",
+    "primary_language",
+    "har_module_relative_path",
+    "output_root",
+    "files_created",
+    "files_modified",
+    "build_status",
+    "report_path"
+  ],
+  "properties": {
+    "sdk_name": { "type": "string" },
+    "artifact_type": { "type": "string", "enum": ["har"] },
+    "primary_language": { "type": "string", "enum": ["arkts"] },
+    "har_module_relative_path": { "type": "string" },
+    "assemble_har_command": { "type": "string" },
+    "output_root": { "type": "string" },
+    "files_created": { "type": "array", "items": { "type": "string" } },
+    "files_modified": { "type": "array", "items": { "type": "string" } },
+    "public_exports": { "type": "array", "items": { "type": "string" } },
+    "host_proxy_summary": { "type": "array", "items": { "type": "string" } },
+    "cut_or_deferred_summary": { "type": "array", "items": { "type": "string" } },
+    "build_status": { "type": "string", "enum": ["pass", "warning", "fail"] },
+    "compilation_summary": { "type": "string" },
+    "report_path": { "type": "string" },
+    "generated_at": { "type": "string" }
+  },
+  "additionalProperties": false
+}

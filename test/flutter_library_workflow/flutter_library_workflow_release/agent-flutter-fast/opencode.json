@@ -1,0 +1,88 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "primary-01-analysis",
+  "lsp": false,
+  "permission": {
+    "bash": "allow",
+    "edit": {
+      "*": "allow",
+      "../*": "deny",
+      "?:/*": "deny",
+      "//*": "deny"
+    },
+    "write": "allow",
+    "read": "allow",
+    "grep": "allow",
+    "glob": "allow",
+    "skill": "allow",
+    "websearch": "allow",
+    "todowrite": "allow",
+    "external_directory": {
+      "**/flutter-library-workflow/**": "allow",
+      "**/DevEco Studio/sdk/**": "allow",
+      "**/openharmony/**": "allow",
+      "**/skills/**": "allow"
+    }
+  },
+  "agent": {
+    "primary-00-orchestrator": {
+      "description": "Flutter 插件 → 鸿蒙适配统一入口（编排现状分析/代码编写/编码校验 3 阶段）",
+      "mode": "primary",
+      "prompt": "{file:./.claude/prompts/primary-00-orchestrator.md}"
+    },
+    "primary-01-analysis": {
+      "description": "现状分析",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/primary-01-analysis.md}"
+    },
+    "primary-02-coding-library": {
+      "description": "代码编写",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/primary-02-coding-library.md}"
+    },
+    "primary-03-validation": {
+      "description": "编码校验",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/primary-03-validation.md}"
+    },
+    "primary-04-quality-review": {
+      "description": "质量审查",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/primary-04-quality-review.md}"
+    },
+    "primary-05-quality-fix": {
+      "description": "质量修复",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/primary-05-quality-fix.md}"
+    },
+    "primary-04-test-design": {
+      "description": "Flutter 插件测试用例设计",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/test/test-design-master.md}"
+    },
+    "primary-05-demo-gen2": {
+      "description": "基于测试用例和已适配代码生成可安装的测试 Demo App",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/test/primary-05-demo-gen2.md}"
+    },
+    "upgrade-01-analysis": {
+      "description": "三方库升级分析",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/upgrade/upgrade-01-analysis.md}"
+    },
+    "upgrade-02-coding": {
+      "description": "三方库升级代码编写",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/upgrade/upgrade-02-coding.md}"
+    }
+  }
+}

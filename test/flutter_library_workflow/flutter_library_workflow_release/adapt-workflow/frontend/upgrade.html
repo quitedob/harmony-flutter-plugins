@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三方库升级 - 插件跨平台适配工作流</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="top-bar-inner">
+            <div id="moduleNav"></div>
+            <div class="profile-switcher" id="typeSwitcher">
+                <button class="profile-btn active" data-type="flutter">Flutter</button>
+                <button class="profile-btn" data-type="rn">React Native</button>
+                <button class="profile-btn" data-type="sdk">原生 SDK</button>
+            </div>
+            <div class="header-actions">
+                <div class="header-actions-group" aria-label="升级库列表页动作">
+                    <button id="addUpgradeBtn" class="btn btn-outline" title="为当前类型添加升级库">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        添加升级库
+                    </button>
+                    <button id="cloneAllBtn" class="btn btn-outline" title="一键克隆当前类型下全部未克隆的 harmonized + upstream">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        一键克隆全部
+                    </button>
+                    <button id="runAllBtn" class="btn btn-outline" title="批量升级当前类型下所有启用的库">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        批量升级
+                    </button>
+                    <button id="refreshBtn" class="btn btn-outline" title="刷新列表">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                        刷新
+                    </button>
+                    <button id="settingsBtn" class="btn btn-outline" title="设置">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 全局升级队列状态栏 -->
+        <div id="queueStatusBar" class="queue-status-bar" style="display:none;">
+            <div class="queue-status-inner">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <span>升级队列：</span>
+                <span class="queue-stat"><strong id="queueRunningCount">0</strong> 运行中</span>
+                <span class="queue-stat-sep">|</span>
+                <span class="queue-stat"><strong id="queueWaitingCount">0</strong> 排队中</span>
+                <span class="queue-stat-sep">|</span>
+                <span class="queue-stat"><strong id="queueDoneCount">0</strong> 已完成</span>
+                <button id="queueCancelAllBtn" class="btn btn-small btn-danger queue-cancel-btn">清空队列</button>
+            </div>
+        </div>
+
+        <section class="stats-section">
+            <div class="stat-card total">
+                <div class="stat-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+                </div>
+                <div class="stat-body">
+                    <div class="stat-value" id="totalCount">0</div>
+                    <div class="stat-label">总计</div>
+                </div>
+            </div>
+            <div class="stat-card not-cloned">
+                <div class="stat-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </div>
+                <div class="stat-body">
+                    <div class="stat-value" id="notClonedCount">0</div>
+                    <div class="stat-label">未克隆</div>
+                </div>
+            </div>
+            <div class="stat-card running">
+                <div class="stat-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+                <div class="stat-body">
+                    <div class="stat-value" id="runningCount">0</div>
+                    <div class="stat-label">运行中</div>
+                </div>
+            </div>
+            <div class="stat-card success">
+                <div class="stat-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <div class="stat-body">
+                    <div class="stat-value" id="successCount">0</div>
+                    <div class="stat-label">升级完成</div>
+                </div>
+            </div>
+            <div class="stat-card failed">
+                <div class="stat-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                </div>
+                <div class="stat-body">
+                    <div class="stat-value" id="failedCount">0</div>
+                    <div class="stat-label">升级失败</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="table-section">
+            <div class="filter-toolbar">
+                <div class="filter-row-top">
+                    <div class="filter-search">
+                        <svg class="filter-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="filterSearch" placeholder="搜索名称或仓库地址...">
+                    </div>
+                    <div class="filter-row-top-right">
+                        <span id="filterResultCount" class="filter-result-count"></span>
+                        <button id="filterResetBtn" class="btn btn-small btn-secondary filter-reset-btn" style="display:none">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            重置
+                        </button>
+                    </div>
+                </div>
+                <div class="filter-row-selects">
+                    <select id="filterStatus" class="filter-select">
+                        <option value="">全部状态</option>
+                        <option value="running">运行中</option>
+                        <option value="queued">排队中</option>
+                        <option value="success">升级完成</option>
+                        <option value="failed">升级失败</option>
+                        <option value="pending">待升级</option>
+                        <option value="not_cloned">未克隆</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="batchActionBar" class="batch-action-bar">
+                <div class="batch-info">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                    <span>已选择 <strong id="batchSelectedCount">0</strong> 个</span>
+                </div>
+                <div class="batch-actions">
+                    <button class="btn btn-small btn-outline" id="batchCloneSelectedBtn" title="克隆选中的未克隆库">批量克隆</button>
+                    <button class="btn btn-small btn-primary" id="batchUpgradeSelectedBtn" title="对选中的已克隆库排队升级">批量升级</button>
+                    <button class="btn btn-small btn-danger" id="batchDeleteSelectedBtn" title="删除选中的库及其本地克隆目录">批量删除</button>
+                    <button class="btn btn-small btn-secondary" id="batchClearBtn" title="清空选择">取消选择</button>
+                </div>
+            </div>
+
+            <!-- Tab: Flutter -->
+            <div class="mapping-tab-panel active" id="tabFlutter">
+                <div class="table-wrapper">
+                    <table id="flutterTable">
+                        <thead>
+                            <tr>
+                                <th class="th-checkbox"><input type="checkbox" class="select-all-checkbox" data-type="flutter" aria-label="全选"></th>
+                                <th>名称</th>
+                                <th>目标OS版本</th>
+                                <th>目标框架版本</th>
+                                <th>克隆</th>
+                                <th>升级进度</th>
+                                <th>状态</th>
+                                <th>最近运行</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="flutterTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab: React Native -->
+            <div class="mapping-tab-panel" id="tabRn">
+                <div class="table-wrapper">
+                    <table id="rnTable">
+                        <thead>
+                            <tr>
+                                <th class="th-checkbox"><input type="checkbox" class="select-all-checkbox" data-type="rn" aria-label="全选"></th>
+                                <th>名称</th>
+                                <th>目标OS版本</th>
+                                <th>目标RN框架版本</th>
+                                <th>克隆</th>
+                                <th>升级进度</th>
+                                <th>状态</th>
+                                <th>最近运行</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rnTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab: 原生 SDK -->
+            <div class="mapping-tab-panel" id="tabSdk">
+                <div class="table-wrapper">
+                    <table id="sdkTable">
+                        <thead>
+                            <tr>
+                                <th class="th-checkbox"><input type="checkbox" class="select-all-checkbox" data-type="sdk" aria-label="全选"></th>
+                                <th>名称</th>
+                                <th>目标OS版本</th>
+                                <th>克隆</th>
+                                <th>升级进度</th>
+                                <th>状态</th>
+                                <th>最近运行</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sdkTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <div id="error" class="error-toast"></div>
+    </main>
+
+    <!-- Add Upgrade Library Modal (shared; configured per type on open) -->
+    <div id="addUpgradeLibraryModal" class="modal-overlay">
+        <div class="modal-content modal-add-plugin">
+            <div class="modal-header">
+                <h2 id="addUpgradeTitle">添加升级库</h2>
+                <button class="modal-close" id="addUpgradeModalClose" aria-label="关闭">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="upgradeNameInput">名称（可选）</label>
+                    <input type="text" id="upgradeNameInput" class="form-input" placeholder="留空时按仓库地址自动派生">
+                </div>
+                <div class="form-group">
+                    <label for="upgradeRepoUrlInput">仓库</label>
+                    <input type="text" id="upgradeRepoUrlInput" class="form-input" placeholder="https://github.com/xxx/yyy.git">
+                    <p class="form-hint">待升级的上游三方库仓库地址</p>
+                </div>
+                <div class="form-group">
+                    <label for="upgradeRepoBranchInput">仓库分支（可选）</label>
+                    <input type="text" id="upgradeRepoBranchInput" class="form-input" placeholder="留空则克隆默认分支">
+                    <p class="form-hint">指定后克隆该分支（上游待升级版本所在分支）</p>
+                </div>
+                <div class="form-group">
+                    <label for="upgradeHarmonizedUrlInput">已鸿蒙化插件仓库</label>
+                    <input type="text" id="upgradeHarmonizedUrlInput" class="form-input" placeholder="https://github.com/xxx/yyy_ohos.git">
+                    <p class="form-hint">已通过鸿蒙化适配的仓库地址（升级基线）</p>
+                </div>
+                <div class="form-group">
+                    <label for="upgradeHarmonizedBranchInput">已鸿蒙化仓库分支（可选）</label>
+                    <input type="text" id="upgradeHarmonizedBranchInput" class="form-input" placeholder="留空则克隆默认分支">
+                    <p class="form-hint">指定后克隆该分支（升级基线所在分支）</p>
+                </div>
+                <div class="form-group">
+                    <label for="upgradeTargetOsInput">目标OS版本（可选）</label>
+                    <input type="text" id="upgradeTargetOsInput" class="form-input" placeholder="例如：HarmonyOS 5.0 / API 12 / 5.0.0(12)">
+                </div>
+                <div class="form-group" id="upgradeFrameworkGroup">
+                    <label for="upgradeTargetFrameworkInput" id="upgradeFrameworkLabel">目标框架版本</label>
+                    <input type="text" id="upgradeTargetFrameworkInput" class="form-input" placeholder="例如：3.22.0">
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-secondary" id="cancelAddUpgradeBtn">取消</button>
+                    <button class="btn btn-primary" id="confirmAddUpgradeBtn">添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Upgrade Library Modal -->
+    <div id="editUpgradeLibraryModal" class="modal-overlay">
+        <div class="modal-content modal-add-plugin">
+            <div class="modal-header">
+                <h2 id="editUpgradeTitle">编辑升级库</h2>
+                <button class="modal-close" id="editUpgradeModalClose" aria-label="关闭">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="editUpgradeNameInput">名称（可选）</label>
+                    <input type="text" id="editUpgradeNameInput" class="form-input" placeholder="留空时按仓库地址自动派生">
+                </div>
+                <div class="form-group">
+                    <label for="editUpgradeRepoUrlInput">仓库</label>
+                    <input type="text" id="editUpgradeRepoUrlInput" class="form-input" placeholder="https://github.com/xxx/yyy.git">
+                </div>
+                <div class="form-group">
+                    <label for="editUpgradeRepoBranchInput">仓库分支（可选）</label>
+                    <input type="text" id="editUpgradeRepoBranchInput" class="form-input" placeholder="留空则克隆默认分支">
+                </div>
+                <div class="form-group">
+                    <label for="editUpgradeHarmonizedUrlInput">已鸿蒙化插件仓库</label>
+                    <input type="text" id="editUpgradeHarmonizedUrlInput" class="form-input" placeholder="https://github.com/xxx/yyy_ohos.git">
+                </div>
+                <div class="form-group">
+                    <label for="editUpgradeHarmonizedBranchInput">已鸿蒙化仓库分支（可选）</label>
+                    <input type="text" id="editUpgradeHarmonizedBranchInput" class="form-input" placeholder="留空则克隆默认分支">
+                </div>
+                <div class="form-group">
+                    <label for="editUpgradeTargetOsInput">目标OS版本（可选）</label>
+                    <input type="text" id="editUpgradeTargetOsInput" class="form-input" placeholder="例如：HarmonyOS 5.0 / API 12">
+                </div>
+                <div class="form-group" id="editUpgradeFrameworkGroup">
+                    <label for="editUpgradeTargetFrameworkInput" id="editUpgradeFrameworkLabel">目标框架版本</label>
+                    <input type="text" id="editUpgradeTargetFrameworkInput" class="form-input" placeholder="例如：3.22.0">
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-secondary" id="cancelEditUpgradeBtn">取消</button>
+                    <button class="btn btn-primary" id="confirmEditUpgradeBtn">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/module-nav.js?v=4"></script>
+    <script type="module" src="upgrade.js?v=7"></script>
+</body>
+</html>

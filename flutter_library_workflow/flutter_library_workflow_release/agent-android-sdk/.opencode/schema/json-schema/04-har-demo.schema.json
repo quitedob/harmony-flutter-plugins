@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ohos-adaptation/04-har-demo.schema.json",
+  "title": "HAR Demo Marker Output",
+  "description": "04 阶段 marker JSON。详细 Demo 设计、权限闭环和编译修复过程写入 04-har-demo-report.md。",
+  "version": "3.0.0",
+  "type": "object",
+  "required": [
+    "sdk_name",
+    "status",
+    "demo_build_status",
+    "har_module_relative_path",
+    "scaffold_root",
+    "app_module_relative_path",
+    "assemble_hap_command",
+    "report_path",
+    "run_instructions_zh"
+  ],
+  "properties": {
+    "sdk_name": { "type": "string" },
+    "status": { "type": "string", "enum": ["complete", "partial", "failed"] },
+    "demo_build_status": { "type": "string", "enum": ["pass", "warning", "fail"] },
+    "har_module_relative_path": { "type": "string" },
+    "scaffold_root": { "type": "string" },
+    "app_module_relative_path": { "type": "string" },
+    "assemble_har_command": { "type": "string" },
+    "assemble_hap_command": { "type": "string" },
+    "report_path": { "type": "string" },
+    "coverage_report_path": { "type": "string" },
+    "run_instructions_zh": { "type": "string" },
+    "device_run_hint_zh": { "type": "string" },
+    "generated_at": { "type": "string" }
+  },
+  "additionalProperties": false
+}

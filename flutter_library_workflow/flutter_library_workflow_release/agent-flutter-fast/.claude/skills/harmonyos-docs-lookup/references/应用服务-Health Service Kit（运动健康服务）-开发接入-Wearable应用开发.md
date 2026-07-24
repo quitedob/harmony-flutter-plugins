@@ -1,0 +1,2 @@
+* **[管理用户授权](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/health-wearable-add-permissions)**
+* **[管理运动健康数据](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/health-wearable-data-manage)**

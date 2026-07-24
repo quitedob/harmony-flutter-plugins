@@ -1,0 +1,55 @@
+plugins {
+    id "com.android.library"
+}
+
+def intProperty = { name, fallback ->
+    def value = rootProject.findProperty(name)
+    return value == null ? fallback : value.toString().toInteger()
+}
+
+def sourceSdkModuleDirProp = rootProject.findProperty("sourceSdkModuleDir")
+def sourceSdkAttachMode = (rootProject.findProperty("sourceSdkAttachMode") ?: "gradle_project").toString()
+def sourceSdkModuleDir = sourceSdkModuleDirProp == null ? null : rootProject.file(sourceSdkModuleDirProp.toString())
+
+android {
+    namespace (rootProject.findProperty("referenceNamespace") ?: "ohos.adaptation.android.reference.tests").toString()
+    compileSdk intProperty("referenceCompileSdk", 35)
+
+    defaultConfig {
+        minSdk intProperty("referenceMinSdk", 23)
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    if (sourceSdkAttachMode == "source_set" &&
+            sourceSdkModuleDir != null &&
+            sourceSdkModuleDir.exists() &&
+            !sourceSdkModuleDir.path.contains("REPLACE_WITH")) {
+        sourceSets {
+            main {
+                java.srcDirs += file("${sourceSdkModuleDir}/src/main/java")
+                res.srcDirs += file("${sourceSdkModuleDir}/src/main/res")
+                assets.srcDirs += file("${sourceSdkModuleDir}/src/main/assets")
+            }
+        }
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            returnDefaultValues = true
+        }
+    }
+}
+
+dependencies {
+    def sourceProject = findProject(":source-sdk")
+    if (sourceSdkAttachMode == "gradle_project" && sourceProject != null) {
+        testImplementation sourceProject
+    }
+
+    testImplementation "junit:junit:4.13.2"
+    testImplementation "org.robolectric:robolectric:4.13"
+    testImplementation "org.mockito:mockito-core:5.12.0"
+    testImplementation "androidx.test:core:1.6.1"
+    testImplementation "com.google.truth:truth:1.4.4"
+}

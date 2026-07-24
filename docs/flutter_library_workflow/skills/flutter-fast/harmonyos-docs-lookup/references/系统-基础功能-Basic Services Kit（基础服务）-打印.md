@@ -1,0 +1,2 @@
+* **[文件打印（C/C++）](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/native-print-file)**
+* **[打印扩展能力](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/printextensionabilityguide)**

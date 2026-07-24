@@ -1,0 +1,2 @@
+* **[云存储](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/cloudfoundation-faq-cloudstorage)**
+* **[预加载](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/cloudfoundation-faq-prefetch)**

@@ -1,0 +1,6 @@
+# prepack 时从 sibling agent-*-fast + ../agent-core 快照生成，非提交物（单一事实源在那两处）
+/shared/
+node_modules/
+*.log
+*.tgz
+.DS_Store

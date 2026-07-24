@@ -1,0 +1,130 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "primary-01-analysis",
+  "lsp": false,
+  "permission": {
+    "bash": "allow",
+    "edit": {
+      "*": "allow",
+      "../*": "deny",
+      "?:/*": "deny",
+      "//*": "deny",
+      "**/rn/**": "allow"
+    },
+    "write": "allow",
+    "read": "allow",
+    "grep": "allow",
+    "glob": "allow",
+    "skill": "allow",
+    "websearch": "allow",
+    "todowrite": "allow",
+    "external_directory": {
+      "**/flutter-library-workflow/**": "allow",
+      "**/DevEco Studio/sdk/**": "allow",
+      "**/openharmony/**": "allow",
+      "**/skills/**": "allow",
+      "**/rn/**": "allow",
+      "D:/tmp/**": "allow",
+      "D:/temp/**": "allow"
+    }
+  },
+  "agent": {
+    "primary-00-orchestrator": {
+      "description": "RN → 鸿蒙适配统一入口（编排现状分析/代码编写/编码校验 3 阶段）",
+      "mode": "primary",
+      "prompt": "{file:./.claude/prompts/primary-00-orchestrator.md}"
+    },
+    "primary-01-analysis": {
+      "description": "现状分析",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/primary-01-analysis.md}"
+    },
+    "primary-02-coding-library": {
+      "description": "代码编写",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/primary-02-coding-library.md}",
+      "bash_timeout_ms": 1800000
+    },
+    "primary-03-validation": {
+      "description": "编码校验",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/primary-03-validation.md}",
+      "bash_timeout_ms": 1800000
+    },
+    "primary-02-test-design": {
+      "description": "测试设计主 Agent - 端到端测试设计流程（编排 3 个 SubAgent）",
+      "mode": "primary",
+      "hidden": false,
+      "prompt": "{file:./.claude/prompts/test/test-design-master.md}",
+      "permission": {
+        "task": {
+          "test-analysis": "allow",
+          "test-case-gen": "allow",
+          "case-review": "allow"
+        }
+      }
+    },
+    "primary-05-demo-gen": {
+      "description": "基于测试用例和已适配代码生成可安装的测试 Demo App",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/test/primary-05-demo-gen.md}",
+      "gate_script": ".scripts/gate-demo-gen.js",
+      "bash_timeout_ms": 1800000
+    },
+    "test-report": {
+      "description": "测试报告 - 汇总端到端测试全流程结果并生成测试总结报告",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/test/test-report.md}"
+    },
+    "test-analysis": {
+      "description": "测试分析 SubAgent - 解析 PRD 文档并基于 IBO 模型生成测试点和测试分析报告",
+      "mode": "subagent",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/test/01-test-analysis.md}"
+    },
+    "test-case-gen": {
+      "description": "测试用例生成 SubAgent - 基于评审后的报告生成黑盒测试用例",
+      "mode": "subagent",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/test/02-test-case-gen.md}"
+    },
+    "case-review": {
+      "description": "用例评审 SubAgent - 评审测试用例的覆盖率和可执行性",
+      "mode": "subagent",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/test/03-case-review.md}"
+    },
+    "primary-04-quality-review": {
+      "description": "质量审查",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/primary-04-quality-review.md}",
+      "bash_timeout_ms": 1800000
+    },
+    "primary-05-quality-fix": {
+      "description": "质量修复",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/primary-05-quality-fix.md}",
+      "bash_timeout_ms": 1800000
+    },
+    "upgrade-01-analysis": {
+      "description": "三方库升级分析",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/upgrade/upgrade-01-analysis.md}"
+    },
+    "upgrade-02-coding": {
+      "description": "三方库升级代码编写",
+      "mode": "primary",
+      "hidden": true,
+      "prompt": "{file:./.claude/prompts/upgrade/upgrade-02-coding.md}",
+      "bash_timeout_ms": 1800000
+    }
+  }
+}

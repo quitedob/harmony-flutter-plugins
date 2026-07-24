@@ -1,0 +1,229 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ohos-adaptation/03-coding-library.schema.json",
+  "title": "Coding Library Stage Output",
+  "description": "Flutter 插件鸿蒙适配编码阶段（阶段3）的产物。记录工程搭建、已实现方法、编译状态、修复记录等信息。",
+  "version": "1.0.0",
+  "type": "object",
+  "required": [
+    "plugin_type_skill",
+    "build_status",
+    "build_attempts",
+    "engineering_setup",
+    "implemented_methods",
+    "not_implemented",
+    "files_created",
+    "files_modified",
+    "build_log_summary"
+  ],
+  "properties": {
+    "plugin_type_skill": {
+      "type": "string",
+      "description": "实际使用的类型 Skill 名称，用于追溯和调试",
+      "enum": [
+        "type-method-channel",
+        "type-event-channel",
+        "type-ffi",
+        "type-federated",
+        "type-platform-view",
+        "type-texture",
+        "type-pure-dart",
+        "type-monorepo"
+      ]
+    },
+    "build_status": {
+      "type": "string",
+      "description": "编译结果。pass: flutter build hap --debug 返回 exit code 0; fail: 编译最终未通过。纯 Dart 包以 flutter pub get 成功为 pass",
+      "enum": ["pass", "fail"]
+    },
+    "build_attempts": {
+      "type": "integer",
+      "description": "编译尝试次数（首次编译 = 1，每次修复后重新编译 +1）",
+      "minimum": 1
+    },
+    "engineering_setup": {
+      "$ref": "#/$defs/EngineeringSetup"
+    },
+    "implemented_methods": {
+      "type": "array",
+      "description": "已实现的 Channel 方法列表",
+      "items": {
+        "$ref": "#/$defs/ImplementedMethod"
+      }
+    },
+    "not_implemented": {
+      "type": "array",
+      "description": "未实现的方法及原因",
+      "items": {
+        "$ref": "#/$defs/NotImplementedMethod"
+      }
+    },
+    "dart_changes": {
+      "type": "array",
+      "description": "Dart 层的修改记录（联合插件需创建 Dart 文件、纯 Dart 包需修改平台判断），非联合插件通常为空数组",
+      "items": {
+        "$ref": "#/$defs/FileChange"
+      }
+    },
+    "files_created": {
+      "type": "array",
+      "description": "新建文件路径列表",
+      "items": { "type": "string" }
+    },
+    "files_modified": {
+      "type": "array",
+      "description": "修改文件路径列表",
+      "items": { "type": "string" }
+    },
+    "compilation_fixes": {
+      "type": "array",
+      "description": "编译修复记录",
+      "items": {
+        "$ref": "#/$defs/CompilationFix"
+      }
+    },
+    "build_log_summary": {
+      "type": "string",
+      "description": "编译过程关键输出摘要。成功时简述，失败时包含最终错误信息"
+    },
+    "overview": {
+      "type": "string",
+      "description": "编码阶段概述（一段话总结适配方案和关键决策）"
+    },
+    "architecture_decisions": {
+      "type": "array",
+      "description": "关键架构决策记录",
+      "items": {
+        "type": "object",
+        "required": ["topic", "decision", "rationale"],
+        "properties": {
+          "topic": {
+            "type": "string",
+            "description": "决策主题"
+          },
+          "decision": {
+            "type": "string",
+            "description": "选定方案"
+          },
+          "rationale": {
+            "type": "string",
+            "description": "选择原因"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "EngineeringSetup": {
+      "type": "object",
+      "description": "工程搭建详细记录",
+      "required": ["ohos_directory"],
+      "properties": {
+        "create_command": {
+          "type": ["string", "null"],
+          "description": "执行的 flutter create 命令（无需创建时为 null）"
+        },
+        "ohos_directory": {
+          "type": "string",
+          "description": "ohos 工程目录的相对路径"
+        },
+        "directory_tree": {
+          "type": "string",
+          "description": "ohos 工程目录树文本（用于报告展示）"
+        },
+        "config_changes": {
+          "type": "array",
+          "description": "配置文件变更列表",
+          "items": {
+            "$ref": "#/$defs/FileChange"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImplementedMethod": {
+      "type": "object",
+      "description": "已实现的 Channel 方法",
+      "required": ["channel", "method", "status"],
+      "properties": {
+        "channel": {
+          "type": "string",
+          "description": "Channel 名称"
+        },
+        "method": {
+          "type": "string",
+          "description": "方法名"
+        },
+        "status": {
+          "type": "string",
+          "description": "实现状态",
+          "const": "implemented"
+        },
+        "ohos_api": {
+          "type": ["string", "null"],
+          "description": "该方法使用的鸿蒙 API（便于追溯）"
+        }
+      },
+      "additionalProperties": false
+    },
+    "NotImplementedMethod": {
+      "type": "object",
+      "description": "未实现的方法及原因",
+      "required": ["channel", "method", "reason"],
+      "properties": {
+        "channel": {
+          "type": "string",
+          "description": "Channel 名称"
+        },
+        "method": {
+          "type": "string",
+          "description": "方法名"
+        },
+        "reason": {
+          "type": "string",
+          "description": "未实现的原因说明"
+        }
+      },
+      "additionalProperties": false
+    },
+    "FileChange": {
+      "type": "object",
+      "description": "文件变更记录",
+      "required": ["file", "change"],
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "文件路径"
+        },
+        "change": {
+          "type": "string",
+          "description": "变更描述"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CompilationFix": {
+      "type": "object",
+      "description": "编译修复记录",
+      "required": ["attempt", "error", "fix"],
+      "properties": {
+        "attempt": {
+          "type": "integer",
+          "description": "第几次编译尝试时出现此错误",
+          "minimum": 1
+        },
+        "error": {
+          "type": "string",
+          "description": "编译错误描述（错误信息摘要）"
+        },
+        "fix": {
+          "type": "string",
+          "description": "修复方法描述"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

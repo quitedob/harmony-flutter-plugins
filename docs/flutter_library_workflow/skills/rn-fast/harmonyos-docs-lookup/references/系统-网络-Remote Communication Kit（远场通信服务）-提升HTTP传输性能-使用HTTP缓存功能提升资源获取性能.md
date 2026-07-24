@@ -1,0 +1,3 @@
+* **[HTTP缓存基本功能](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/remote-communication-cache-basic)**
+* **[Session间缓存共享](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/remote-communication-cache-shared)**
+* **[自定义缓存拦截器](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/remote-communication-cache-intercept)**

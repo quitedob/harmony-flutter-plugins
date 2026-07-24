@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>插件跨平台适配工作流</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="top-bar-inner">
+            <div id="moduleNav"></div>
+            <div class="profile-switcher" id="profileSwitcher"></div>
+            <div class="flow-switcher">
+                <select id="flowSwitcher" class="flow-select" title="选择流程版本">
+                    <option value="fast">高效流程版</option>
+                    <option value="full">完整流程版</option>
+                </select>
+            </div>
+            <div class="header-actions">
+                <div class="header-actions-group header-actions-page" aria-label="插件列表页动作">
+                    <button id="addPluginBtn" class="btn btn-outline" title="手动添加插件仓库">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        添加仓库
+                    </button>
+                    <button id="batchGitBtn" class="btn btn-outline" title="批量添加 Git 仓库地址并自动克隆">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+                        批量Git
+                    </button>
+                    <button id="pubDownloadBtn" class="btn btn-outline" title="从 Pub.dev 批量下载插件">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Pub下载
+                    </button>
+                    <button id="uploadZipBtn" class="btn btn-outline" title="上传 ZIP 包导入 SDK（仅 Android SDK Profile）" style="display: none;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y1="15"/></svg>
+                        上传ZIP
+                    </button>
+                    <button id="cloneAllBtn" class="btn btn-outline" title="克隆全部未克隆的插件">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        一键克隆全部
+                    </button>
+                    <button id="exportBtn" class="btn btn-outline" title="导出 CSV">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        导出
+                    </button>
+                    <button id="refreshAllBtn" class="btn btn-outline" title="刷新所有报告">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                        刷新
+                    </button>
+                    <button id="settingsBtn" class="btn btn-outline" title="设置">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 全局队列状态栏 -->
+        <div id="queueStatusBar" class="queue-status-bar" style="display:none;">
+            <div class="queue-status-inner">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <span>全局执行队列：</span>
+                <span class="queue-stat"><strong id="queueRunningCount">0</strong> 运行中</span>
+                <span class="queue-stat-sep">|</span>
+                <span class="queue-stat"><strong id="queueWaitingCount">0</strong> 排队中</span>
+                <span class="queue-stat-sep">|</span>
+                <span class="queue-stat"><strong id="queueDoneCount">0</strong> 已完成</span>
+                <button id="queueCancelAllBtn" class="btn btn-small btn-danger queue-cancel-btn">清空队列</button>
+            </div>
+        </div>
+
+        <!-- 批量克隆进度栏 -->
+        <div id="batchCloneBar" class="batch-clone-bar" style="display:none;">
+            <div class="batch-clone-inner">
+                <span class="spinner"></span>
+                <span>批量克隆中：<strong id="batchCloneProgress">0/0</strong></span>
+                <span id="batchCloneCurrent" class="batch-clone-current"></span>
+            </div>
+        </div>
+
+        <div id="flowModeHint" class="flow-mode-hint" style="display:none;">
+            当前模式推荐使用 Claude Code 后端，搭配 Claude Opus 4.8、GLM-5.2 等高级模型使用。
+        </div>
+
+        <section class="stats-section">
+            <div class="stat-card total">
+                <div class="stat-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+                </div>
+                <div class="stat-body">
+                    <div class="stat-value" id="totalCount">0</div>
+                    <div class="stat-label">总计</div>
+                </div>
+            </div>
+            <div class="stat-card not-cloned">
+                <div class="stat-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </div>
+                <div class="stat-body">
+                    <div class="stat-value" id="notClonedCount">0</div>
+                    <div class="stat-label">未克隆</div>
+                </div>
+            </div>
+            <div class="stat-card running">
+                <div class="stat-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+                <div class="stat-body">
+                    <div class="stat-value" id="runningCount">0</div>
+                    <div class="stat-label">运行中</div>
+                </div>
+            </div>
+            <div class="stat-card success">
+                <div class="stat-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <div class="stat-body">
+                    <div class="stat-value" id="successCount">0</div>
+                    <div class="stat-label">适配完成</div>
+                </div>
+            </div>
+            <div class="stat-card failed">
+                <div class="stat-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                </div>
+                <div class="stat-body">
+                    <div class="stat-value" id="failedCount">0</div>
+                    <div class="stat-label">适配失败</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="table-section">
+            <div class="filter-toolbar">
+                <div class="filter-row-top">
+                    <div class="filter-search">
+                        <svg class="filter-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input type="text" id="filterSearch" placeholder="搜索插件名称或仓库地址...">
+                    </div>
+                    <div class="filter-row-top-right">
+                        <span id="filterResultCount" class="filter-result-count"></span>
+                        <button id="filterResetBtn" class="btn btn-small btn-secondary filter-reset-btn" style="display:none">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            重置
+                        </button>
+                    </div>
+                </div>
+                <div class="filter-row-selects">
+                    <select id="filterStatus" class="filter-select">
+                        <option value="">全部状态</option>
+                        <option value="running">运行中</option>
+                        <option value="queued">排队中</option>
+                        <option value="success">适配完成</option>
+                        <option value="failed">适配失败</option>
+                        <option value="pending">待适配</option>
+                        <option value="not_cloned">未克隆</option>
+                    </select>
+                    <select id="filterType" class="filter-select">
+                        <option value="">全部类型</option>
+                        <option value="plugin_method_channel">MethodChannel</option>
+                        <option value="plugin_event_channel">EventChannel</option>
+                        <option value="plugin_platform_view">PlatformView</option>
+                        <option value="plugin_texture">Texture</option>
+                        <option value="plugin_mixed">混合模式</option>
+                        <option value="ffi">FFI</option>
+                        <option value="dart">Dart 包</option>
+                    </select>
+                    <select id="filterArch" class="filter-select">
+                        <option value="">全部架构</option>
+                        <option value="standalone">独立插件</option>
+                        <option value="federated">联合插件</option>
+                        <option value="monorepo">多包仓库</option>
+                    </select>
+                    
+                    <select id="filterRecommendation" class="filter-select">
+                        <option value="">全部建议</option>
+                        <option value="proceed">建议适配</option>
+                        <option value="proceed_with_caution">谨慎适配</option>
+                        <option value="blocked">无法适配</option>
+                        <option value="not_needed">无需适配</option>
+                    </select>
+                    <select id="filterQuality" class="filter-select">
+                        <option value="">全部评分</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </select>
+                    <select id="filterSource" class="filter-select">
+                        <option value="">全部来源</option>
+                        <option value="catalog">清单内</option>
+                        <option value="external">清单外</option>
+                    </select>
+                </div>
+            </div>
+            <div id="batchActionBar" class="batch-action-bar">
+                <div class="batch-info">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                    <span>已选择 <strong id="batchSelectedCount">0</strong> 个插件</span>
+                </div>
+                <div class="batch-actions">
+                    <button id="batchCloneBtn" class="btn btn-small btn-outline">批量克隆</button>
+                    <button id="batchZipBtn" class="btn btn-small btn-outline" title="将选中的插件目录打包为 Zip 文件">打包</button>
+                    <button id="batchStartBtn" class="btn btn-small btn-primary">批量启动适配</button>
+                    <button id="batchDeleteBtn" class="btn btn-small btn-danger">删除</button>
+                    <button id="batchClearBtn" class="btn btn-small btn-secondary">取消选择</button>
+                </div>
+            </div>
+            <div class="table-wrapper">
+                <table id="pluginsTable">
+                    <thead>
+                        <tr>
+                            <th class="th-checkbox"><input type="checkbox" id="selectAllCheckbox"></th>
+                            <th>插件名称</th>
+                            <th>架构模式</th>
+                            <th>插件类型</th>
+                            <th>适配建议</th>
+                            <th>适配进度</th>
+                            <th>质量评分</th>
+                            <th>更新时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pluginsTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div id="loading" class="loading">
+            <span class="spinner-lg"></span>
+            <span>加载中...</span>
+        </div>
+        <div id="error" class="error-toast"></div>
+    </main>
+
+    <div id="addPluginModal" class="modal-overlay">
+        <div class="modal-content modal-add-plugin">
+            <div class="modal-header">
+                <h2>添加插件仓库</h2>
+                <button class="modal-close" id="addPluginModalClose" aria-label="关闭">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="repoUrlInput">仓库地址</label>
+                    <input type="text" id="repoUrlInput" class="form-input" placeholder="https://github.com/user/plugin.git 或 .../tree/branch/packages/sub">
+                    <p class="form-hint" id="addPluginHint">输入插件的 Git 仓库地址，支持 Monorepo 子包地址（自动识别 /tree/ 路径），添加后可在列表中进行克隆</p>
+                </div>
+                <div class="form-group">
+                    <label for="packagePathInput">子包路径（可选）</label>
+                    <input type="text" id="packagePathInput" class="form-input" placeholder="例如 monorepo：packages/react-native">
+                    <p class="form-hint">留空表示仓库根目录即插件根目录；填写相对路径，不含前后斜杠</p>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-secondary" id="cancelAddPluginBtn">取消</button>
+                    <button class="btn btn-primary" id="confirmAddPluginBtn">添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="pubDownloadModal" class="modal-overlay">
+        <div class="modal-content modal-pub-download">
+            <div class="modal-header">
+                <h2>从 Pub.dev 批量下载</h2>
+                <button class="modal-close" id="pubDownloadModalClose" aria-label="关闭">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="pubPackageInput">包名列表（支持指定版本）</label>
+                    <textarea id="pubPackageInput" class="form-textarea" rows="12" placeholder="每行一个插件，可选指定版本号。例如：&#10;&#10;path_provider&#10;dio:5.4.0&#10;shared_preferences:2.3.0&#10;&#10;联合插件用逗号分隔（第一个包作为主目录）：&#10;dio:5.4.0, dio_http&#10;shared_preferences, shared_preferences_android:2.0.0"></textarea>
+                </div>
+                <div class="pub-download-help">
+                    <div class="help-section">
+                        <h4>格式说明</h4>
+                        <ul>
+                            <li><code>包名</code> — 使用最新版本，如 <code>dio</code></li>
+                            <li><code>包名:版本号</code> — 指定版本，如 <code>dio:5.4.0</code></li>
+                            <li><code>包1, 包2, 包3</code> — 联合插件，第一个包名作为主目录</li>
+                        </ul>
+                    </div>
+                    <div class="help-section">
+                        <h4>版本号格式</h4>
+                        <p>支持标准 semver 格式：<code>1.0.0</code>、<code>1.0.0-dev</code>、<code>1.0.0-beta.1</code></p>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-secondary" id="cancelPubDownloadBtn">取消</button>
+                    <button class="btn btn-primary" id="confirmPubDownloadBtn">开始下载</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="uploadZipModal" class="modal-overlay">
+        <div class="modal-content modal-upload-zip">
+            <div class="modal-header">
+                <h2>上传 ZIP 包导入 SDK</h2>
+                <button class="modal-close" id="uploadZipModalClose" aria-label="关闭">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="zipPluginNameInput">插件名称</label>
+                    <input type="text" id="zipPluginNameInput" class="form-input" placeholder="例如：retrofit">
+                    <p class="form-hint">名称必须以字母开头，只能包含字母、数字、下划线和连字符（1-64字符）</p>
+                </div>
+                <div class="form-group">
+                    <label for="zipFileInput">选择 ZIP 文件</label>
+                    <input type="file" id="zipFileInput" class="form-input" accept=".zip">
+                    <p class="form-hint">ZIP 包内应包含 Android SDK 源码（Maven 或 Gradle 项目）</p>
+                </div>
+                <div class="upload-zip-help">
+                    <div class="help-section">
+                        <h4>支持的项目结构</h4>
+                        <ul>
+                            <li><code>pom.xml</code> — Maven 项目（根目录或子目录）</li>
+                            <li><code>build.gradle</code> — Gradle 项目（根目录或子目录）</li>
+                            <li><code>settings.gradle</code> — Gradle 多模块项目</li>
+                        </ul>
+                    </div>
+                    <div class="help-section">
+                        <h4>注意事项</h4>
+                        <ul>
+                            <li>最大文件大小：100MB</li>
+                            <li>系统会自动识别 ZIP 内的项目结构（最多递归3层）</li>
+                            <li>仅支持 <strong>Android SDK Profile</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-secondary" id="cancelUploadZipBtn">取消</button>
+                    <button class="btn btn-primary" id="confirmUploadZipBtn">上传并导入</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="batchGitModal" class="modal-overlay">
+        <div class="modal-content modal-pub-download">
+            <div class="modal-header">
+                <h2>批量添加 Git 仓库</h2>
+                <button class="modal-close" id="batchGitModalClose" aria-label="关闭">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="batchGitInput">Git 仓库地址列表</label>
+                    <textarea id="batchGitInput" class="form-textarea" rows="12" placeholder="每行一个 Git 仓库地址，添加后自动开始克隆。例如：&#10;&#10;https://github.com/user/plugin_a.git&#10;https://github.com/user/repo/tree/main/packages/foo&#10;https://gitee.com/org/plugin_c.git"></textarea>
+                </div>
+                <div class="pub-download-help">
+                    <div class="help-section">
+                        <h4>格式说明</h4>
+                        <ul>
+                            <li><code>https://...</code> — 标准 Git HTTPS 地址</li>
+                            <li><code>https://.../tree/branch/path</code> — Monorepo 子包地址，自动拆分为仓库地址 + 子包路径</li>
+                            <li>每行一个地址，空行和 <code>#</code> 开头的行会被忽略</li>
+                            <li>添加后自动触发批量克隆，无需手动操作</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-secondary" id="cancelBatchGitBtn">取消</button>
+                    <button class="btn btn-primary" id="confirmBatchGitBtn">添加并克隆</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/module-nav.js"></script>
+    <script type="module" src="app.js"></script>
+</body>
+</html>

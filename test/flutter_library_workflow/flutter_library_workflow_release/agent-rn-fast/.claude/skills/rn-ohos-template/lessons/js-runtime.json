@@ -1,0 +1,116 @@
+{
+  "$schema": "./shard.schema.json",
+  "category": "js-runtime",
+  "version": "1.0.0",
+  "updated_at": "2026-06-26",
+  "lessons": [
+    {
+      "id": "platform-detect",
+      "stage": "both",
+      "plugin_type": ["all"],
+      "symptom": "鸿蒙分支不走 / 行为异常",
+      "wrong": "用排除法判平台：Platform.OS !== 'android' && Platform.OS !== 'ios'",
+      "fix": "只用 Platform.OS === 'harmony'（Platform.select 用 harmony 键）",
+      "why": "排除法在鸿蒙上不可靠，必须显式判 harmony"
+    },
+    {
+      "id": "intl-own-code",
+      "stage": "coding",
+      "plugin_type": ["all"],
+      "symptom": "你自己写的代码用 Intl/toLocale* → Hermes 无 Intl，运行崩",
+      "wrong": "ohos/src 里直接 Intl.DateTimeFormat(...).format() 或 date.toLocaleString()",
+      "fix": "typeof Intl !== 'undefined' 守卫 + 降级；日期用 Date getter 手拼或 toISOString()",
+      "why": "鸿蒙 Hermes/ArkJS 无 ICU/Intl。注意：第三方依赖内部的 Intl 不在此处理，见 intl-deps-polyfill"
+    },
+    {
+      "id": "intl-deps-polyfill",
+      "stage": "validation",
+      "plugin_type": ["js-only", "turbo", "fabric"],
+      "symptom": "HAP 编译过、bundle 生成、符号命中，但真机 ReferenceError: Property 'Intl' doesn't exist → 白屏",
+      "wrong": "npm 依赖（dayjs/plugin/timezone、moment-timezone、date-fns-tz）内部直接 new Intl.DateTimeFormat(...)（timeZone=undefined 也触发）；polyfill 只补 Date.prototype.toLocaleString、留全局 Intl 仍 undefined",
+      "fix": "建独立 ohos/src/intl-polyfill.js（非 .ts）补 globalThis.Intl：DateTimeFormat 兼容 new 与无 new 调用 + format/formatToParts/resolvedOptions（无 ICU 退化为引擎本地时间，不崩即达标）；在库/Example 入口第一行纯副作用 import './intl-polyfill'，早于 dayjs.extend(timezone)、早于库主体",
+      "why": "依赖读的是全局 Intl 对象本身、改不动其源码 → 必须注入全局 polyfill。rnohos.py build hap 在 bundle 后有 intl 硬门禁强制此项"
+    },
+    {
+      "id": "root-flex-collapse",
+      "stage": "validation",
+      "plugin_type": ["all"],
+      "symptom": "页面挤成一团 / 近乎空白",
+      "wrong": "根 SafeAreaView/View 的 style 只给 backgroundColor，没 flex:1，内部 flex:1 子树拿不到高度",
+      "fix": "根容器 style 必须含 flex:1（如 { flex:1, backgroundColor }）",
+      "why": "无 flex 时高度由子内容决定，内部 flex:1 塌陷为 0 高度并相互重叠"
+    },
+    {
+      "id": "js-deprecated-proptypes",
+      "stage": "coding",
+      "plugin_type": ["js-only", "turbo", "fabric"],
+      "symptom": "运行时 TypeError: Cannot read property 'style'/'string' of undefined → 白屏",
+      "wrong": "import { ViewPropTypes } from 'react-native' 或 import { PropTypes } from 'react'（含间接封装层）；RN0.72+/React16+ 已移除，返回 undefined",
+      "fix": "ViewPropTypes.style → PropTypes.oneOfType([PropTypes.object, PropTypes.array])，PropTypes 从 'prop-types' 导入；间接封装层与消费层都要改",
+      "why": "在模块定义期(static propTypes 求值)就崩，整个 JS bundle 初始化失败。间接引用需追 import 链才看得到"
+    },
+    {
+      "id": "js-named-import-undefined",
+      "stage": "validation",
+      "plugin_type": ["all"],
+      "symptom": "具名导入得到 undefined，访问其属性即 TypeError → 白屏",
+      "wrong": "import { Colors } from 'react-native'（实际在 react-native/Libraries/NewAppScreen），或导入已移除的 ColorPropType/EdgeInsetsPropType 等",
+      "fix": "颜色写字面量(lighter=#F3F3F3 / darker=#222)或从 NewAppScreen 导入；已移除符号用等价替换。写前确认符号确实从该入口导出",
+      "why": "react-native 主入口不导出这些；具名 import 为 undefined，属性访问在模块/渲染期抛 TypeError，整树渲染失败"
+    },
+    {
+      "id": "js-extends-platform-component",
+      "stage": "coding",
+      "plugin_type": ["js-only", "fabric"],
+      "symptom": "运行时 TypeError: Super expression must either be null or a function (hermes) → 白屏",
+      "wrong": "class X extends ScrollView/FlatList/TextInput/View/Image（鸿蒙这些常以 forwardRef 导出）",
+      "fix": "编码前看 *.harmony.js 末尾导出形态；若是 forwardRef，改用组合 + ref 转发（转发 scrollTo/scrollToEnd/setNativeProps/getScrollableNode 等 API）",
+      "why": "extends forwardRef 返回值在 Hermes 触发 TypeError，是鸿蒙平台系统性差异"
+    },
+    {
+      "id": "js-children-not-rendered",
+      "stage": "coding",
+      "plugin_type": ["js-only"],
+      "symptom": "页面空白但无 JS 错误（静默白屏），日志只有 bundle executed successfully",
+      "wrong": "容器型组件(Popup/Modal/Overlay)的 render() 不渲染 this.props.children",
+      "fix": "在 render() 所有分支都渲染 {this.props.children}（children 通常是背景内容，覆盖层叠加其上）",
+      "why": "children 被丢弃但不报错，与 TypeError 白屏不同，靠查组件 render 逻辑发现"
+    },
+    {
+      "id": "js-lifecycle-init-in-constructor",
+      "stage": "coding",
+      "plugin_type": ["js-only"],
+      "symptom": "首帧 Cannot read property 'X' of null → 白屏（native 日志只见 #RNOH_JS TypeError）",
+      "wrong": "createReactClass→ES6 class 迁移时把 render 依赖的初始化(如 PanResponder.create)从 componentWillMount 挪到 componentDidMount",
+      "fix": "render 依赖的实例初始化放 constructor（或 render 内惰性创建）；componentDidMount 只留定时器/跳转/setState 等纯副作用；getInitialState→constructor state、getDefaultProps→static defaultProps",
+      "why": "componentDidMount 晚于首次 render，render 读到未初始化字段(null)即崩"
+    },
+    {
+      "id": "js-preserve-branch-logic",
+      "stage": "coding",
+      "plugin_type": ["js-only", "turbo"],
+      "symptom": "去掉平台判断后选项参数失效/行为异常",
+      "wrong": "删 Platform.OS==='android' 外壳时把分支内行为逻辑一起删，所有情况走同一路径；或原生方法内置 fallback 绕过 JS 选项控制",
+      "fix": "只去平台判断外壳，保留分支内行为（如 preferInApp 真假分别走 native / openURL）；原生方法职责单一(成功 resolve/失败 reject)，fallback 由 JS 按 options 控制",
+      "why": "平台外壳≠业务逻辑，分支行为与选项语义必须保留"
+    },
+    {
+      "id": "js-default-export-shape",
+      "stage": "coding",
+      "plugin_type": ["turbo", "js-only"],
+      "symptom": "真机 X.default.method is not a function",
+      "wrong": "ohos/src/index.js 直接拷原 barrel，default 是单个主函数，但 Example 用 default 对象调多方法",
+      "fix": "ohos/src/index.js 聚合 ./src 成对象再 export default（同时保留命名导出）；改后重 build hap 重打 bundle",
+      "why": "双入口插件 default 常为单函数；Example 用 default 对象时两边形态须一致"
+    },
+    {
+      "id": "list-perf",
+      "stage": "coding",
+      "plugin_type": ["js-only", "turbo", "fabric"],
+      "symptom": "长列表滚动卡顿/掉帧",
+      "wrong": "FlatList/SectionList 未配性能项；renderItem 返回的 item 组件未用 React.memo 包裹",
+      "fix": "配 removeClippedSubviews、getItemLayout(定高时)、合理 windowSize/initialNumToRender；item 组件用 React.memo 包裹 + useCallback 稳定回调引用",
+      "why": "鸿蒙端默认配置下大数据量列表易卡；无 memo 时父组件状态变化触发全列表 item 重渲"
+    }
+  ]
+}

@@ -1,0 +1,1043 @@
+{
+  "$schema": "./lessons.schema.json",
+  "version": "1.2.0",
+  "updated_at": "2026-06-11",
+  "lessons": [
+    {
+      "id": "coding-import-001",
+      "stage": "coding-library",
+      "category": "import",
+      "module_types": [
+        "fabric-component"
+      ],
+      "error_type": "ArkTS import syntax",
+      "wrong_pattern": "import { drawing } from '@ohos.graphics.drawing';",
+      "fix_pattern": "import drawing from '@ohos.graphics.drawing';",
+      "reason": "@ohos.graphics.drawing 模块为默认导出，需使用默认导入语法而非解构导入。",
+      "example_source": "react_native_fast_squircle"
+    },
+    {
+      "id": "coding-access-001",
+      "stage": "coding-library",
+      "category": "access",
+      "module_types": [
+        "fabric-component"
+      ],
+      "error_type": "ArkTS private property access",
+      "wrong_pattern": "this.descriptorWrapper.descriptor.rawProps\nthis.descriptorWrapper.propsSelector",
+      "fix_pattern": "使用公开 getter API：\n- this.descriptorWrapper.props\n- this.descriptorWrapper.backgroundColor\n- this.descriptorWrapper.borderWidth\n- this.descriptorWrapper.borderColor\n- this.descriptorWrapper.borderRadius\n- this.descriptorWrapper.isClipping\n- this.descriptorWrapper.width\n- this.descriptorWrapper.height",
+      "reason": "ViewDescriptorWrapperBase 的 descriptor、rawProps、propsSelector 为私有/保护属性，不可直接访问。应使用公开的 getter 方法获取属性值。",
+      "example_source": "react_native_fast_squircle"
+    },
+    {
+      "id": "testing-cmake-001",
+      "stage": "testing",
+      "category": "cmake",
+      "module_types": [
+        "fabric-component"
+      ],
+      "error_type": "CMake No SOURCES",
+      "wrong_pattern": "纯 ETS Fabric Component 项目，cpp 目录下无任何 .cpp 源文件",
+      "fix_pattern": "在 harmony/library/src/main/cpp/ 目录下创建 dummy.cpp 空文件，内容为：\n// Dummy source file for header-only library (pure ETS Fabric Component)\n\n注意：generate-example.py 脚本已自动处理此场景。",
+      "reason": "CMake 的 add_library 命令要求至少一个源文件。纯 ETS Fabric Component 的 C++ 层通常只有头文件（generated/），无实际源文件会导致构建失败。",
+      "example_source": "react_native_fast_squircle"
+    },
+    {
+      "id": "testing-config-001",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "turbo-module",
+        "fabric-component",
+        "cpp-turbo-module",
+        "fabric-cpp-component"
+      ],
+      "error_type": "module.json5 schema validation",
+      "wrong_pattern": "module.json5 包含 systemCapabilities 字段：\n\"systemCapabilities\": [\n  \"SystemCapability.Graphics.Drawing\",\n  \"SystemCapability.ArkUI.ArkUI.Full\"\n]",
+      "fix_pattern": "删除 systemCapabilities 字段，只保留必需字段：\n{\n  \"module\": {\n    \"name\": \"library\",\n    \"type\": \"har\",\n    \"deviceTypes\": [\"default\", \"tablet\", \"2in1\"],\n    \"requestPermissions\": []\n  }\n}",
+      "reason": "当前 HarmonyOS API 版本的 module.json5 schema 不允许 systemCapabilities 字段，该字段会导致 hvigorw 编译时 schema 验证失败。",
+      "example_source": "react_native_fast_squircle"
+    },
+    {
+      "id": "testing-naming-001",
+      "stage": "testing",
+      "category": "naming",
+      "module_types": [
+        "fabric-component"
+      ],
+      "error_type": "ArkUI property name conflict",
+      "wrong_pattern": "@Component struct 中使用 @State 属性名为：\n- borderRadius\n- backgroundColor\n- borderWidth\n- borderColor\n\n这些名称与 ArkUI 组件内置属性方法同名，导致编译错误。",
+      "fix_pattern": "重命名属性避免冲突，使用前缀或不同名称：\n- borderRadius → squircleBorderRadius\n- backgroundColor → squircleBackgroundColor\n- borderWidth → squircleBorderWidth\n- borderColor → squircleBorderColor\n\n或使用私有变量（不声明为 @State），在组件内部使用。",
+      "reason": "ArkUI 的 @Component struct 继承自 CustomComponent，内置了 borderRadius、backgroundColor、borderWidth、borderColor 等属性方法。组件属性名与这些方法同名会导致类型冲突：Property 'borderRadius' in type 'FastSquircleView' is not assignable to the same property in base type 'CustomComponent'。",
+      "example_source": "react_native_fast_squircle"
+    },
+    {
+      "id": "testing-cmake-002",
+      "stage": "testing",
+      "category": "cmake",
+      "module_types": [
+        "turbo-module"
+      ],
+      "error_type": "Windows path length limit 260 chars",
+      "wrong_pattern": "codegen 为纯 TurboModule 生成了 Fabric Component 的 C++ 文件（位于 generated/_react_native_oh_tpl_react_native_get_device_locale/react/renderer/components/...），导致路径超过 Windows 260 字符限制：\nninja: error: Stat(.../EventEmitters.cpp): Filename longer than 260 characters",
+      "fix_pattern": "删除不必要的 Fabric Component generated 目录：\nharmony/library/src/main/cpp/generated/_react_native_oh_tpl_react_native_get_device_locale/\n\n同时修改 PackageProvider.cpp，移除对该目录中头文件的引用：\n- 删除 #include \"BaseReactNativeOhTplReactNativeGetDeviceLocalePackage.h\"\n- 删除 std::make_shared<BaseReactNativeOhTplReactNativeGetDeviceLocalePackage>(ctx)",
+      "reason": "纯 TurboModule（仅含异步方法调用）不需要 Fabric Component 的 C++ 代码。codegen 可能错误地为 TurboModule 生成了 Fabric Component 文件，这些文件不仅无用，还会因路径过长导致 Windows 构建失败。",
+      "example_source": "react_native_get_device_locale"
+    },
+    {
+      "id": "testing-config-002",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "turbo-module",
+        "fabric-component",
+        "cpp-turbo-module",
+        "fabric-cpp-component"
+      ],
+      "error_type": "oh-package.json5 invalid types field",
+      "wrong_pattern": "oh-package.json5 中 types 字段设置为非 .d.ts/.d.ets 文件：\n\"types\": 'har'",
+      "fix_pattern": "删除 types 字段，或设置为正确的 TypeScript 类型定义文件路径：\n\"types\": \"./src/main/ets/generated/index.d.ets\"\n\n或不设置 types 字段（让 hvigorw 自动处理）。",
+      "reason": "oh-package.json5 的 types 字段必须指向 .d.ts 或 .d.ets 类型定义文件。设置为 'har' 会导致 hvigorw 编译警告：Invalid types file har defined in library oh-package.json5。",
+      "example_source": "react_native_get_device_locale"
+    },
+    {
+      "id": "testing-turbomodule-001",
+      "stage": "testing",
+      "category": "import",
+      "module_types": [
+        "turbo-module"
+      ],
+      "error_type": "RNOHPackage import path",
+      "wrong_pattern": "import { RNOHPackage, TurboModulesFactory } from '@rnoh/react-native-openharmony';\n\nclass TurboModulesFactory extends TurboModulesFactory {\n  createTurboModule(name: string) { return new Module(this.ctx); }\n}",
+      "fix_pattern": "import { RNOHPackage, UITurboModule, UITurboModuleContext } from '@rnoh/react-native-openharmony';\nimport { EtsUITurboModule } from '@rnoh/react-native-openharmony';\n\nexport class Module extends EtsUITurboModule {\n  public static readonly NAME = 'ModuleName';\n}\n\nexport class Package extends RNOHPackage {\n  override getUITurboModuleFactoryByNameMap(): Map<string, (ctx: UITurboModuleContext) => UITurboModule | null> {\n    return new Map().set(Module.NAME, (ctx) => new Module(ctx));\n  }\n}",
+      "reason": "新版本 RNOH（0.72.x）中 TurboModule 实现方式已更新：1) 使用 RNOHPackage 替代旧的 RNPackage + TurboModulesFactory 组合；2) TurboModule 应继承 EtsUITurboModule 而非 TurboModule；3) 导入路径不带 /ets 子路径（通过 index.ets 自动导出）。",
+      "example_source": "react_native_device_country"
+    },
+    {
+      "id": "testing-turbomodule-002",
+      "stage": "testing",
+      "category": "cmake",
+      "module_types": [
+        "turbo-module"
+      ],
+      "error_type": "CMake No SOURCES for TurboModule",
+      "wrong_pattern": "纯 ETS TurboModule 项目，cpp 目录下只有 CMakeLists.txt 和 generated/ 目录，但没有实际 .cpp 源文件。CMake file(GLOB) 无法匹配任何文件导致 add_library 报 No SOURCES。",
+      "fix_pattern": "在 harmony/library/src/main/cpp/ 目录下创建 dummy.cpp 空文件：\n// Dummy source file for header-only library (pure ETS TurboModule)",
+      "reason": "CMake 的 add_library 命令要求至少一个源文件。纯 ETS TurboModule 的 C++ 层通常只有 codegen 生成的胶水代码（generated/），若无其他源文件，file(GLOB) 可能返回空列表导致构建失败。创建 dummy.cpp 可确保 add_library 有源文件。",
+      "example_source": "react_native_device_country"
+    },
+    {
+      "id": "testing-import-002",
+      "stage": "testing",
+      "category": "import",
+      "module_types": [
+        "turbo-module"
+      ],
+      "error_type": "Metro bundler module resolution",
+      "wrong_pattern": "插件 JS 代码使用 Node.js 内置模块（如 util），但 example 未安装该依赖，导致 Metro bundler 报错：Unable to resolve module util from .../dist/module/index.js: util could not be found within the project",
+      "fix_pattern": "在 ohos/example/package.json 的 dependencies 中添加缺失的 Node.js 模块依赖：\n\"dependencies\": {\n  \"util\": \"^0.12.5\"\n}\n\n这些模块通常有 browser/React Native 兼容版本（如 util、process、buffer 等）。",
+      "reason": "React Native 环境不包含 Node.js 内置模块。当插件 JS 代码导入这些模块时（如 import util from 'util'），Metro bundler 无法找到对应的 polyfill 包。需要在 example 中手动安装这些依赖，否则 JS bundle 生成失败。",
+      "example_source": "react_native_file_logger"
+    },
+    {
+      "id": "testing-config-003",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "fabric-component"
+      ],
+      "error_type": "Metro entry file not found (ohos/src missing)",
+      "wrong_pattern": "ohos/package.json 指定入口 dist/module/index.js，但 ohos/src/ 目录下无源文件（只有 specs/v1/），导致 bob build 无法生成 dist/ 目录，Metro bundler 报错：\nthe package itself specifies a `main` module field that could not be resolved (`dist/module/index.js`. Indeed, none of these files exist)",
+      "fix_pattern": "在 ohos/src/ 下创建完整的 JS 入口文件结构：\n1. index.js - 主入口，导出 WheelCurvedPicker\n2. WheelCurvedPicker.js - 组件实现（包含 Item 子组件）\n3. specs/index.ts - specs 导出入口\n\n然后执行 npm run prepare 构建 dist/ 目录。",
+      "reason": "react-native-builder-bob 配置 source: \"src\"，会编译 ohos/src/ 下的文件到 dist/。如果 src/ 缺少入口文件（index.js/index.ts），bob 会生成空的 dist 目录或只有部分文件，导致 package.json 的 main/module 字段无法解析。",
+      "example_source": "react_native_wheel_picker"
+    },
+    {
+      "id": "testing-cmake-003",
+      "stage": "testing",
+      "category": "cmake",
+      "module_types": [
+        "fabric-component"
+      ],
+      "error_type": "HAR file outdated after adding placeholder source",
+      "wrong_pattern": "创建 library.cpp 占位源文件后直接执行 `rn.py build hap`，但编译仍然失败报 'No SOURCES given to target'。原因是旧的 HAR 文件（不含 library.cpp）仍被安装到 example。",
+      "fix_pattern": "创建占位源文件后，必须先执行 `rn.py build har` 重新编译 HAR，确保 library.cpp 被打包进 HAR 文件，然后再执行 `rn.py build hap`。",
+      "reason": "build hap 流程使用的是已存在的 HAR 文件。如果在创建占位源文件后直接执行 build hap，旧的 HAR 文件不会包含新创建的源文件，导致 CMake 仍然找不到源文件。",
+      "example_source": "react_native_blur_view"
+    },
+    {
+      "id": "testing-import-003",
+      "stage": "testing",
+      "category": "import",
+      "module_types": [
+        "turbo-module"
+      ],
+      "error_type": "TurboModule spec import path mismatch",
+      "wrong_pattern": "在 ohos/src/index.js 中使用 './specs/NativeRNVersionInfo' 导入 TurboModule Spec，但 NativeRNVersionInfo.ts 实际位于 specs/v1/ 子目录，导致 Metro bundler 报错：\nUnable to resolve module ./specs/NativeRNVersionInfo from .../dist/module/index.js",
+      "fix_pattern": "修正导入路径为 './specs/v1/NativeRNVersionInfo'，确保与 codegen 生成的目录结构匹配。然后执行 npm run prepare 重新构建 dist 目录。",
+      "reason": "codegen 生成的 TurboModule Spec 文件按版本分目录（如 specs/v1/），入口文件的导入路径必须精确匹配子目录结构。package.json 的 codegenConfig 配置 specPaths: ['./src/specs/v1'] 会影响 codegen 生成的目录层级。",
+      "example_source": "react_native_version_info"
+    },
+    {
+      "id": "testing-js-only-001",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "js-only"
+      ],
+      "error_type": "harmony.alias missing in package.json",
+      "wrong_pattern": "ohos/package.json 中未配置 harmony.alias 字段，Metro bundler 报错：\nUnable to resolve module react-native-xxx from .../App.tsx: react-native-xxx could not be found within the project",
+      "fix_pattern": "在 ohos/package.json 中添加 harmony.alias 字段，值为原始包名：\n\"harmony\": {\n  \"alias\": \"react-native-xxx\"\n}\n\n然后重新执行 npm pack 和 build hap。",
+      "reason": "js-only 模块必须在 package.json 中配置 harmony.alias，否则 Metro bundler 无法将原始包名的 import 重定向到鸿蒙化包名。这是 RN for OpenHarmony 的包名映射机制。",
+      "example_source": "react_native_ultimate_listview"
+    },
+    {
+      "id": "testing-js-only-002",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "js-only"
+      ],
+      "error_type": "Entry file missing in ohos/src/",
+      "wrong_pattern": "ohos/package.json 指定入口 ./src/index.js，但 ohos/src/ 目录下无 index.js 文件（根目录入口未被拷贝），Metro bundler 报错：\nthe package itself specifies a `main` module field that could not be resolved (`./src/index.js`. Indeed, none of these files exist)",
+      "fix_pattern": "在 ohos/src/ 下创建入口文件 index.js，导出组件：\nimport UltimateListView from './ultimateListView'\nimport UltimateRefreshView from './refreshableScrollView'\nexport { UltimateListView, UltimateRefreshView }\n\n或确保脚本已正确拷贝根目录入口文件。",
+      "reason": "js-only 模块如果入口文件在根目录而非 src/ 目录下，需要手动拷贝或在 ohos/src/ 创建对应的入口文件。脚本 apply_ohos_js.py 已支持根目录入口拷贝，但若未覆盖需手动处理。",
+      "example_source": "react_native_ultimate_listview"
+    },
+    {
+      "id": "testing-js-only-003",
+      "stage": "testing",
+      "category": "import",
+      "module_types": [
+        "js-only"
+      ],
+      "error_type": "Static assets missing (images/fonts)",
+      "wrong_pattern": "源码中引用静态资源 require('./downArrow.png')，但 ohos/src/ 目录下无该资源文件，Metro bundler 报错：\nUnable to resolve module ./downArrow.png from .../ultimateListView.js",
+      "fix_pattern": "手动拷贝静态资源文件到 ohos/src/ 目录，保持原有相对路径：\ncp src/downArrow.png ohos/src/\n\n或确保脚本 apply_ohos_js.py 已自动拷贝静态资源（支持 .png/.jpg/.gif/.svg 等格式）。",
+      "reason": "js-only 模块的静态资源（图片、字体等）需要一并拷贝到 ohos/src/ 目录。早期版本脚本只拷贝 .ts/.tsx/.js/.jsx 文件，需手动补充静态资源。",
+      "example_source": "react_native_ultimate_listview"
+    },
+    {
+      "id": "testing-export-001",
+      "stage": "testing",
+      "category": "export",
+      "module_types": [
+        "turbo-module"
+      ],
+      "error_type": "JS default export mismatch (dual-entry barrel)",
+      "wrong_pattern": "根 index.js：export default changeNavigationBarColor（函数）+ export { hideNavigationBar, showNavigationBar }。\nohos/src/index.js 被原样拷贝后，bundle 中 default 为函数。\nExample：import NavigationBarColor from 'react-native-navigation-bar-color'; NavigationBarColor.showNavigationBar();\n真机报错：I.default.showNavigationBar is not a function (it is undefined)",
+      "fix_pattern": "将 ohos/src/index.js 改为从 ./src 聚合成对象再 export default：\nimport { changeNavigationBarColor, hideNavigationBar, showNavigationBar } from './src';\nconst defaultExport = { changeNavigationBarColor, hideNavigationBar, showNavigationBar };\nexport default defaultExport;\nexport { changeNavigationBarColor, hideNavigationBar, showNavigationBar };\n\n然后：cd ohos && npm pack --ignore-scripts → example npm install --force file:../xxx.tgz → npm run dev 重打 bundle.harmony.js。\n（或重新 rn.py build hap --full）",
+      "reason": "双入口插件根 barrel 的 default 常为单个主函数；鸿蒙 Example 若用 default 对象调用多方法，必须与 ohos/src/index.js 的对象 default 一致。仅改源码不重打 tgz/bundle 时真机仍加载旧 JS。",
+      "example_source": "react_native_navigation_bar_color"
+    },
+    {
+      "id": "coding-export-001",
+      "stage": "coding-library",
+      "category": "export",
+      "module_types": [
+        "turbo-module"
+      ],
+      "error_type": "Dual-entry ohos barrel default export",
+      "wrong_pattern": "package.json main 指向根 index.js，且 src/index.js 另有实现；create 后 ohos/src/index.js 与根 index 相同（export default 为单函数）。",
+      "fix_pattern": "create/migrate 后检查 ohos/src/index.js：若 Example 或 index.d.ts 要求 default 为命名空间对象，改为聚合 ./src 的 barrel（见 library-fill-implementation.md §0.1.1）。create 脚本对双入口会自动生成对象 default。",
+      "reason": "migrate 只改 ohos/src/src/ 与 codegen-lib，不会修复根 barrel 的 default 形态。",
+      "example_source": "react_native_navigation_bar_color"
+    },
+    {
+      "id": "coding-js-extends-001",
+      "stage": "coding-library",
+      "category": "extends",
+      "module_types": [
+        "js-only"
+      ],
+      "error_type": "Hermes TypeError: Super expression must either be null or a function",
+      "wrong_pattern": "class RefreshableScrollView extends ScrollView { }\n\n在 Harmony 上运行时报错：\nTypeError: Super expression must either be null or a function, js engine: hermes",
+      "fix_pattern": "改为组合而非继承，转发 scroll API：\n\nimport { ScrollView } from 'react-native';\n\nclass RefreshableScrollView extends React.Component {\n  _scrollViewRef = null;\n  \n  render() {\n    return <ScrollView ref={ref => this._scrollViewRef = ref} {...this.props} />;\n  }\n  \n  // 转发 VirtualizedList 需要的 API\n  scrollTo = (options) => this._scrollViewRef?.scrollTo?.(options);\n  scrollToEnd = (options) => this._scrollViewRef?.scrollToEnd?.(options);\n  flashScrollIndicators = () => this._scrollViewRef?.flashScrollIndicators?.();\n  getScrollResponder = () => this._scrollViewRef?.getScrollResponder?.();\n  getScrollableNode = () => this._scrollViewRef?.getScrollableNode?.();\n  getScrollRef = () => this._scrollViewRef;\n  setNativeProps = (props) => this._scrollViewRef?.setNativeProps?.(props);\n  measureLayout = (...) => this._scrollViewRef?.measureLayout?.(...);\n}",
+      "reason": "Harmony 的 ScrollView.harmony.js 使用 React.forwardRef 导出，不是 class 构造函数。extends forwardRef 返回值在 Hermes 上会触发 TypeError。这是 Harmony 平台的系统性差异，不是个别问题。",
+      "example_source": "react_native_ultimate_listview"
+    },
+    {
+      "id": "coding-js-extends-002",
+      "stage": "coding-library",
+      "category": "extends",
+      "module_types": [
+        "js-only",
+        "fabric-component"
+      ],
+      "error_type": "extends platform component pattern",
+      "wrong_pattern": "检测到代码中使用 extends 继承平台组件：\n- extends ScrollView\n- extends FlatList\n- extends TextInput\n- extends View\n- extends Image\n\n这些写法在 Harmony 上可能因导出形态差异（forwardRef/函数组件）而报错。",
+      "fix_pattern": "编码前检查 Harmony 导出形态（读 *.harmony.js 文件末尾）：\n\n1. 若导出为 forwardRef → 使用组合 + ref 转发\n2. 若导出为函数 → 直接组合调用\n3. 若导出为对象解构 → import { Component }\n\n验证方法：\ngrep 'module.exports' node_modules/@rnoh/react-native-openharmony/Libraries/Components/ScrollView/ScrollView.harmony.js\n\n若看到 React.forwardRef(...) → 改为组合",
+      "reason": "Harmony 强制 forwardRef 化是架构差异。写代码前就应验证目标组件导出形态，避免继承不兼容的父类。",
+      "example_source": "general_pattern"
+    },
+    {
+      "id": "coding-config-001",
+      "stage": "coding-library",
+      "category": "config",
+      "module_types": [
+        "turbo-module",
+        "fabric-component",
+        "cpp-turbo-module",
+        "fabric-cpp-component",
+        "js-only"
+      ],
+      "error_type": "ENAMETOOLONG pnpm cache path exceeds 255 bytes",
+      "wrong_pattern": "hvigor-config.json5 中 @rnoh/hvigor-plugin 使用 file:../../node_modules/@react-native-oh/react-native-harmony-cli/harmony/rnoh-hvigor-plugin-0.3.0.tgz 长路径，pnpm 编码绝对路径到索引文件名时超过 255 字节",
+      "fix_pattern": "1. 将 node_modules 中的 tgz 拷贝到 ohos/example/harmony/hvigor/ 目录下\n2. 修改 hvigor-config.json5 中路径为 file:./rnoh-hvigor-plugin-0.3.0.tgz",
+      "reason": "DevEco Studio bundled hvigor/pnpm 将 file: 路径的绝对路径编码到 CAS 索引文件名中，当项目路径较深时（如 repos-rn/react_native_xxx），编码后文件名超过 macOS 255 字节限制，导致 ENAMETOOLONG",
+      "example_source": "react_native_store_review"
+    },
+    {
+      "id": "testing-config-004",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "turbo-module",
+        "fabric-component",
+        "cpp-turbo-module",
+        "fabric-cpp-component",
+        "js-only"
+      ],
+      "error_type": "ENAMETOOLONG pnpm cache path exceeds 255 bytes",
+      "wrong_pattern": "hvigor-config.json5 中 @rnoh/hvigor-plugin 使用 file:../../node_modules/@react-native-oh/react-native-harmony-cli/harmony/rnoh-hvigor-plugin-0.3.0.tgz 长路径，pnpm 编码绝对路径到索引文件名时超过 255 字节",
+      "fix_pattern": "1. 将 node_modules 中的 tgz 拷贝到 ohos/example/harmony/hvigor/ 目录下\n2. 修改 hvigor-config.json5 中路径为 file:./rnoh-hvigor-plugin-0.3.0.tgz",
+      "reason": "DevEco Studio bundled hvigor/pnpm 将 file: 路径的绝对路径编码到 CAS 索引文件名中，当项目路径较深时（如 repos-rn/react_native_xxx），编码后文件名超过 macOS 255 字节限制，导致 ENAMETOOLONG",
+      "example_source": "react_native_store_review"
+    },
+    {
+      "id": "coding-api-001",
+      "stage": "coding-library",
+      "category": "api",
+      "module_types": [
+        "turbo-module",
+        "cpp-turbo-module",
+        "fabric-component",
+        "fabric-cpp-component"
+      ],
+      "error_type": "RNInstance.subscribeToDeviceEvent does not exist",
+      "wrong_pattern": "在 TurboModule 或 Fabric Component 中试图调用 RNInstance 的 subscribeToDeviceEvent 方法进行 ArkTS 层事件监听：\nthis.ctx.rnInstance.subscribeToDeviceEvent('eventName', (data) => { ... })\n\n或在非 UI 层 ArkTS 代码中监听 JS 层发出的事件。",
+      "fix_pattern": "RNOH 中 RNInstance 只提供 emitDeviceEvent（ArkTS → JS），不存在 subscribeToDeviceEvent。\n\nArkTS 层进程内通信（如 TurboModule ↔ UI 组件、Helper ↔ Helper）应使用 @kit.BasicServicesKit 的 emitter：\n\nimport { emitter } from '@kit.BasicServicesKit';\n\n// 监听\nemitter.on('MyEvent', (eventData: emitter.EventData) => {\n  const data = eventData.data;\n});\n\n// 发送\nemitter.emit('MyEvent', { data: payload });\n\nJS 层监听 ArkTS 事件使用 DeviceEventEmitter：\nimport { DeviceEventEmitter } from 'react-native';\nDeviceEventEmitter.addListener('eventName', (data) => { ... });",
+      "reason": "RNInstance 的接口定义中仅有 emitDeviceEvent 方法（用于 ArkTS 向 JS 层发送事件），没有 subscribeToDeviceEvent。ArkTS 进程内通信必须使用系统提供的 emitter 模块。混淆这两种通信方向是常见架构设计错误。",
+      "example_source": "react_native_html_to_pdf"
+    },
+    {
+      "id": "testing-runtime-001",
+      "stage": "testing",
+      "category": "runtime",
+      "module_types": [
+        "turbo-module",
+        "fabric-component",
+        "cpp-turbo-module",
+        "fabric-cpp-component",
+        "js-only"
+      ],
+      "error_type": "ArkWeb engine not initialized (white screen)",
+      "wrong_pattern": "应用启动后白屏，日志出现 dlns_create failed errno=17 / libweb_engine.so 加载失败。EntryAbility 未调用 initializeWebEngine()。",
+      "fix_pattern": "在 EntryAbility 的 onCreate() 中同步调用 ArkWeb 引擎预初始化：\n\nimport { webview } from '@kit.ArkWeb';\nimport { RNAbility } from '@rnoh/react-native-openharmony';\n\nexport default class EntryAbility extends RNAbility {\n  onCreate(want, launchParam) {\n    super.onCreate(want, launchParam);\n    webview.WebviewController.initializeWebEngine();\n  }\n}",
+      "reason": "HarmonyOS 6.x 上 ArkWeb 引擎不会自动初始化。若应用使用 WebView 或依赖 Web 引擎的组件（如 PDF 生成），必须在 EntryAbility.onCreate() 同步调用 initializeWebEngine()，否则引擎加载失败导致白屏。",
+      "example_source": "react_native_html_to_pdf"
+    },
+    {
+      "id": "testing-api-001",
+      "stage": "testing",
+      "category": "api",
+      "module_types": [
+        "turbo-module",
+        "fabric-component",
+        "cpp-turbo-module",
+        "fabric-cpp-component"
+      ],
+      "error_type": "WebviewController method fails without Web component binding",
+      "wrong_pattern": "在 ArkTS 代码中创建 WebviewController 实例并直接调用 createPdf() / loadUrl() 等方法，但 controller 未绑定到 UI 树中的 Web 组件，导致方法调用无效或异常。",
+      "fix_pattern": "WebviewController 必须与 UI 树中的 Web 组件绑定才能正常工作。在 Index.ets 中声明隐藏的 Web 组件并将 controller 注入到需要使用的类中：\n\n@Entry\n@Component\nstruct Index {\n  private webController: webview.WebviewController = new webview.WebviewController()\n  private helper: MyHelper | null = null\n\n  build() {\n    Column() {\n      Web({ src: 'about:blank', controller: this.webController })\n        .width(1).height(1)\n        .visibility(Visibility.Hidden)\n\n      if (this.rnohCoreContext && this.shouldShow) {\n        RNApp({\n          onSetUp: (rnInstance) => {\n            this.helper = new MyHelper(rnInstance, this.webController)\n          }\n        })\n      }\n    }\n  }\n}",
+      "reason": "ArkWeb 的 WebviewController 是 Web 组件的代理控制器，其能力（如 createPdf、runJavaScript、loadData）依赖与 UI 树中 Web 组件的绑定。未绑定的 controller 实例只能创建但不能执行实际操作。",
+      "example_source": "react_native_html_to_pdf"
+    },
+    {
+      "id": "testing-cpp-001",
+      "stage": "testing",
+      "category": "cpp",
+      "module_types": [
+        "fabric-component"
+      ],
+      "error_type": "RNOH RawValue castValue calls private constructor",
+      "wrong_pattern": "在 Props.h 中使用 (std::unordered_map<std::string, RawValue>)value 或类似的 C 风格转换来提取嵌套结构，导致编译错误：\nerror: no matching function for call to 'castValue'\nerror: calling a private constructor of class 'facebook::react::RawValue'",
+      "fix_pattern": "重写 Props.h，直接使用 folly::dynamic 操作数据：\n1. 将 RawValue 转换为 folly::dynamic：auto dyn = (folly::dynamic)value;\n2. 使用 dyn.count(\"key\") 检查键是否存在\n3. 使用 dyn[\"key\"].asBool()/.asString()/.asInt() 进行类型转换\n4. 对于嵌套结构和数组，直接遍历 folly::dynamic",
+      "reason": "RNOH 的 RawValue 类有一个 castValue(const folly::dynamic&, RawValue*) 重载，它调用 RawValue(folly::dynamic) 私有构造函数。当尝试将 RawValue 转换为包含 RawValue 的容器（如 std::unordered_map<std::string, RawValue> 或 std::vector<RawValue>）时，castValue 会尝试构造新的 RawValue 对象，但构造函数是私有的。解决方案是绕过 RawValue 类型系统，直接使用底层的 folly::dynamic。",
+      "example_source": "menu"
+    },
+    {
+      "id": "coding-js-api-001",
+      "stage": "coding-library",
+      "category": "api",
+      "module_types": [
+        "js-only"
+      ],
+      "error_type": "鸿蒙 JS 运行时 Intl API 缺失",
+      "wrong_pattern": "插件 JS 源码直接使用 Intl API 而无守卫判断：\nreturn Intl.DateTimeFormat('en-us', { ... }).format(this);\n\n鸿蒙 Hermes/QJS 引擎不提供 Intl 全局对象，运行时报错：\nRender Error: Property 'Intl' doesn't exist",
+      "fix_pattern": "在使用 Intl 前加 typeof 守卫，缺失时走降级路径：\n\nif (typeof Intl !== 'undefined' && b && ...) {\n  return Intl.DateTimeFormat('en-us', { ... }).format(this);\n}\nreturn this._toLocaleString(a, b);  // 降级到原生方法\n\n注意：仅修复 ohos/src/ 中的代码。npm 依赖内部的 Intl 使用不在本阶段处理，由 testing 阶段在 example 入口注入全局 polyfill。",
+      "reason": "鸿蒙 JS 运行时不支持 Intl 等 Web 标准 API。插件源码中的直接使用需要守卫保护，而依赖库（如 dayjs timezone）中的使用需要通过全局 polyfill 解决。两层修复各有分工。",
+      "example_source": "react_native_ui_datepicker"
+    },
+    {
+      "id": "testing-js-api-001",
+      "stage": "testing",
+      "category": "api",
+      "module_types": [
+        "js-only",
+        "turbo-module",
+        "fabric-component"
+      ],
+      "error_type": "npm 依赖使用 Intl 导致运行时 Render Error",
+      "wrong_pattern": "HAP 编译通过但运行时报错：\nRender Error: Property 'Intl' doesn't exist\n\n常见于 dayjs timezone 插件（dayjs/plugin/timezone）、日期格式化库等依赖。\nnpm install 正常，Metro bundle 正常，但鸿蒙运行时缺少 Intl 全局对象。",
+      "fix_pattern": "在 example 入口注入全局 polyfill：\n\n1. 创建 ohos/example/intl-polyfill.js（独立 .js 文件，非 .ts）：\nif (typeof Intl === 'undefined') {\n  var DTF = function(locale, options) {\n    if (!(this instanceof DTF)) return new DTF(locale, options);\n    this._locale = locale || 'en-US';\n    this._options = options || {};\n  };\n  DTF.prototype.format = function(date) { /* 基于 Date 方法手动格式化 */ };\n  DTF.prototype.formatToParts = function(date) { /* 返回 [{type, value}] */ };\n  DTF.prototype.resolvedOptions = function() { return { timeZone: 'UTC' }; };\n  global.Intl = { DateTimeFormat: DTF };\n}\n\n2. 修改 ohos/example/index.js，在最前面（其他 import 之前）添加：\nimport './intl-polyfill';\n\n关键要点：\n- polyfill 必须是独立文件（import 提升机制会打乱同文件内的执行顺序）\n- 构造函数必须兼容无 new 调用（dayjs 会 Intl.DateTimeFormat() 直接调用）\n- format/formatToParts/resolvedOptions 三个方法都必须实现",
+      "reason": "鸿蒙 Hermes/QJS 引擎不提供 Intl API。dayjs timezone 等库在内部使用 Intl.DateTimeFormat 进行时区计算，加载即触发错误。全局 polyfill 必须在所有模块加载前注入，而 ES module 的 import 提升机制要求 polyfill 在独立文件中。",
+      "example_source": "react_native_ui_datepicker"
+    },
+    {
+      "id": "testing-linker-001",
+      "stage": "testing",
+      "category": "cmake",
+      "module_types": [
+        "turbo-module",
+        "fabric-component",
+        "cpp-turbo-module",
+        "fabric-cpp-component",
+        "js-only"
+      ],
+      "error_type": "ld.lld undefined symbol from missing system library",
+      "wrong_pattern": "ld.lld: error: undefined symbol: OH_GetSdkApiVersion\n>>> referenced by ApiVersionCheck.h:33\n>>> rnoh_flash_list/CMakeFiles/rnoh_flash_list.dir/AutoLayoutViewComponentInstance.cpp.o\n\n04 阶段错误诊断为 'SDK 版本不够（需 API 15+）'，但本地 SDK 实际为 API 20+。",
+      "fix_pattern": "这是 CMakeLists.txt 缺少系统库链接，而非 SDK 版本问题。\n\n修复：在 ohos/example/harmony/entry/src/main/cpp/CMakeLists.txt 的 target_link_libraries(rnoh PUBLIC ...) 中添加缺失的 .so：\n\n常见缺失库：\n- libdeviceinfo_ndk.z.so — 提供 OH_GetSdkApiVersion（@since 10）\n\n排查方法：\nfind <SDK_SYSROOT>/usr/lib/aarch64-linux-ohos/ -name '*.so' -exec sh -c 'nm -D \"$1\" 2>/dev/null | grep -q \"T <SYMBOL>\" && echo \"$1\"' _ {} \\;\n\n注意：脚手架模板已修复（templates/example*/harmony/entry/src/main/cpp/CMakeLists.txt 已包含 libdeviceinfo_ndk.z.so），但旧模板生成的项目需手动补充。",
+      "reason": "RNOH 的 ApiVersionCheck.h 使用 OH_GetSdkApiVersion() 进行运行时 API 版本检查。该函数定义在 libdeviceinfo_ndk.z.so 中（@since API 10），但脚手架模板的 CMakeLists.txt 未链接该库。头文件编译通过（include 路径正确），但链接阶段找不到符号。这不是 SDK 版本问题——只要 SDK >= API 10 就有此库，问题在于未链接。",
+      "example_source": "react_native_collapsible_tab_view"
+    },
+    {
+      "id": "testing-cmake-004",
+      "stage": "testing",
+      "category": "cmake",
+      "module_types": [
+        "turbo-module",
+        "fabric-component",
+        "cpp-turbo-module",
+        "fabric-cpp-component",
+        "js-only"
+      ],
+      "error_type": "ld.lld undefined symbol folly::f14 (FOLLY_MOBILE mismatch)",
+      "wrong_pattern": "ld.lld: error: undefined symbol: folly::f14::detail::kEmptyTagVector\n或 folly::f14::detail::F14LinkCheck::check()\n\n原因：folly_compile_options（含 -DFOLLY_MOBILE=1）只在 rnoh_app 上设置，未传播到 rnoh 目标。插件 CMake target 链接 rnoh 而非 rnoh_app，导致插件代码的 folly F14 编译模式与 librnoh_semi.so 不一致。",
+      "fix_pattern": "在 CMakeLists.txt 的 add_library(rnoh ...) 之后、target_link_directories 之前，添加：\ntarget_compile_options(rnoh PUBLIC ${folly_compile_options})\n\n这确保所有链接 rnoh 的插件都继承 FOLLY_MOBILE=1，使用 F14 fallback 模式，与 librnoh_semi.so 保持一致。\n\n注意：脚手架模板已修复（templates/example*/harmony/entry/src/main/cpp/CMakeLists.txt），但旧模板生成的项目需手动补充。",
+      "reason": "librnoh_semi.so 使用 FOLLY_MOBILE=1 编译（F14 fallback 到 std::unordered_map），但插件代码缺少该标志时走 vector intrinsics 路径，引用了 kEmptyTagVector 等 librnoh_semi.so 未导出的符号。这是编译选项传播问题，不是 SDK 版本问题。",
+      "example_source": "react_native_collapsible_tab_view"
+    },
+    {
+      "id": "testing-props-001",
+      "stage": "testing",
+      "category": "api",
+      "module_types": [
+        "fabric-component",
+        "js-only"
+      ],
+      "error_type": "Component prop name mismatch (render function vs component)",
+      "wrong_pattern": "App.tsx 中使用 HeaderComponent={<Header />} 或 HeaderComponent={Header}，但库实际接受 renderHeader={() => <Header />}（render function 模式）。\n\n症状：组件渲染但关键子元素（如 header）不显示，无报错、无崩溃。",
+      "fix_pattern": "编写 App.tsx 前，必须读取组件的 TypeScript 类型定义（types.ts / index.d.ts / 组件源文件的 Props interface），确认 prop 精确名称和类型。\n\n常见混淆模式：\n- renderXxx（render function）vs XxxComponent（component type）\n- onXxx（callback）vs xxxHandler（handler）\n- children as render function vs children as ReactNode\n\n验证命令：\ngrep -n 'renderHeader\\|HeaderComponent\\|header' node_modules/<包名>/lib/typescript/src/types.d.ts\n\n或直接读取组件源文件中的 Props type/interface 定义。",
+      "reason": "render function prop 和 component prop 是两种不同的 React 模式。传错类型不会触发 TypeScript/Metro 编译错误（JS 层 prop 为 undefined），但运行时组件不渲染对应部分，表现为 UI 缺失而无报错。collapsible-tab-view 的 Container 在 renderHeader 为 undefined 时将 headerHeight 设为 0 并跳过 header 渲染。",
+      "example_source": "react_native_collapsible_tab_view"
+    },
+    {
+      "id": "coding-js-viewproptypes-001",
+      "stage": "coding-library",
+      "category": "api",
+      "module_types": [
+        "js-only",
+        "turbo-module",
+        "fabric-component"
+      ],
+      "error_type": "TypeError: Cannot read property 'style' of undefined (ViewPropTypes)",
+      "wrong_pattern": "模式 A（直接引用）：\nimport { ViewPropTypes } from 'react-native';\nstatic propTypes = { style: ViewPropTypes.style };\n\n模式 B（行内兜底不完整）：\nstyle: (ViewPropTypes || View.propTypes).style\n\n模式 C（间接引用，通过封装层）：\n// lib.js\nimport { View, ViewPropTypes as RNViewPropTypes } from 'react-native';\nconst ViewPropTypes = RNViewPropTypes || View.propTypes;\nexport default ViewPropTypes;\n// index.js\nimport ViewPropTypes from './lib';\nstyle: ViewPropTypes.style\n\n三种模式在 RN 0.72+ / HarmonyOS 下均导致 undefined.style → TypeError → 白屏。",
+      "fix_pattern": "方式 1（推荐，功能等价）：替换为 PropTypes.oneOfType：\nimport PropTypes from 'prop-types';\nstatic propTypes = { style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]) };\n\n方式 2（简化）：替换为 PropTypes.object：\nstatic propTypes = { style: PropTypes.object };\n\n方式 3（最小改动）：添加空对象兜底：\nstyle: ((ViewPropTypes || View.propTypes) || {}).style\n\n间接引用模式（模式 C）必须同时修复封装层和消费层：\n- lib.js: const ViewPropTypes = RNViewPropTypes || View.propTypes || {};\n- index.js: ViewPropTypes.style → PropTypes.oneOfType([PropTypes.object, PropTypes.array])\n\n修复后必须执行完整构建链：cd ohos && npm pack → cd example && rm -rf node_modules && npm install → npm run dev",
+      "reason": "RN 0.72+ 的 react-native 主入口（module 2）不再 re-export ViewPropTypes。虽然内部 deprecated-prop-types（module 298）仍存在，但 import { ViewPropTypes } from 'react-native' 返回 undefined。此错误在模块定义阶段（import 时 static propTypes 求值）触发，导致整个 JS bundle 初始化失败。间接引用模式需特别注意：直接 grep index.js 可能看不到 ViewPropTypes 关键字，需追溯 import 链。",
+      "example_source": "react_native_keyboard_spacer, react_native_photo_browser, react_native_swipeout, react_native_navbar"
+    },
+    {
+      "id": "coding-js-proptypes-from-react-001",
+      "stage": "coding-library",
+      "category": "import",
+      "module_types": [
+        "js-only"
+      ],
+      "error_type": "TypeError: Cannot read property 'string' of undefined (PropTypes from react)",
+      "wrong_pattern": "import React, { Component, PropTypes } from 'react';\nstatic propTypes = { title: PropTypes.string };\n\nReact 16+ 移除了从 react 包直接导出 PropTypes。访问 undefined.string 触发 TypeError → 白屏。",
+      "fix_pattern": "将 PropTypes 的导入源从 react 改为 prop-types 包：\nimport React, { Component } from 'react';\nimport PropTypes from 'prop-types';\n\nprop-types 作为 react 的间接依赖已在 node_modules 中，无需额外安装。\n\n修复后执行完整构建链：cd ohos && npm pack → cd example && npm install → npm run dev",
+      "reason": "React 15.5 将 PropTypes 标记为 deprecated，React 16 正式移除。import { PropTypes } from 'react' 在 React 18.2.0 下返回 undefined。常见于 2017 年前发布的老旧 RN 插件。",
+      "example_source": "react_native_popup"
+    },
+    {
+      "id": "coding-js-children-render-001",
+      "stage": "coding-library",
+      "category": "api",
+      "module_types": [
+        "js-only"
+      ],
+      "error_type": "容器组件 render() 不渲染 children 导致静默白屏",
+      "wrong_pattern": "容器型组件（Popup/Modal/Overlay）的 render() 方法不渲染 this.props.children：\nrender() {\n  if (isVisible) return <View>{this._renderContent()}</View>;\n  return <View style={styles.hidden}/>;\n}\n\nApp.tsx 将所有 UI 作为 children 传入 → children 被丢弃 → 页面空白但无 JS 错误。",
+      "fix_pattern": "在 render() 所有分支中添加 this.props.children 渲染：\nrender() {\n  if (isVisible) {\n    return <View style={styles.container}>\n      {this.props.children}\n      {this._renderOverlay()}\n      {this._renderContent()}\n    </View>;\n  }\n  return <View style={{flex: 1}}>{this.props.children}</View>;\n}\n\n注意：需理解组件设计意图，children 通常是背景内容，popup/overlay 覆盖在上方。",
+      "reason": "这是一种静默失败：不会产生 JS 错误，但页面完全空白。与 TypeError 类白屏不同，hilog 中无错误日志，只有 JS bundle executed successfully 但页面无内容。调试时需检查组件的 render 逻辑和 props 传递。",
+      "example_source": "react_native_popup"
+    },
+    {
+      "id": "testing-tgz-rebuild-chain-001",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "js-only",
+        "turbo-module",
+        "fabric-component",
+        "cpp-turbo-module",
+        "fabric-cpp-component"
+      ],
+      "error_type": "修改 ohos/src 后白屏未修复（tgz 构建链断裂）",
+      "wrong_pattern": "修改 ohos/src/ 中的 JS 文件后，直接执行 npm run dev 或 build hap，不重新 npm pack → 安装 → 重建 bundle。\n\n症状：明确修复了废弃 API 或其他 JS 错误，但真机仍然白屏/报相同错误。",
+      "fix_pattern": "修改 ohos/src/ 后必须执行完整构建链：\ncd ohos && npm pack\ncd example && rm -rf node_modules package-lock.json\nnpm install --legacy-peer-deps\nnpm run dev\ncd ../..\n\n验证：grep 'ViewPropTypes' ohos/example/harmony/entry/src/main/resources/rawfile/bundle.harmony.js\n应无匹配结果。\n\n使用 rn.py build hap 时无需手动执行上述步骤（内部已处理）。",
+      "reason": "example 通过 file:../xxx.tgz 引用库代码。ohos/src/ 修改不会自动同步到 example/node_modules/，因为 npm install 时是从 tgz 解压的。必须重新 npm pack 生成新 tgz → 安装 → Metro bundler 才能读到修复后的代码 → 生成正确的 bundle。这是 4/6 FAQ 案例的共同二次失败原因。",
+      "example_source": "react_native_keyboard_spacer, react_native_swipeout, react_native_popup, react_native_photo_browser"
+    },
+    {
+      "id": "testing-cpp-package-not-instantiated-001",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "turbo-module",
+        "cpp-turbo-module"
+      ],
+      "error_type": "Couldn't find Turbo Module 'XXX' on the CPP side (Package included but not instantiated)",
+      "wrong_pattern": "#include \"XxxPackage.h\" 已在 PackageProvider.cpp 中，但 getPackages() 返回列表中无 std::make_shared<XxxPackage>(ctx)：\n\nconst std::vector<std::shared_ptr<Package>> ManualLinkingPackage = {\n//  std::make_shared<YourPackage>(ctx)   // 被注释或为空\n};",
+      "fix_pattern": "在 getPackages() 的返回列表中添加 Package 实例化：\npackages.push_back(std::make_shared<XxxPackage>(ctx));\n\n或在 ManualLinkingPackage 初始化列表中添加：\nconst std::vector<std::shared_ptr<Package>> ManualLinkingPackage = {\n    std::make_shared<XxxPackage>(ctx),\n};",
+      "reason": "#include 只是声明可见性，不会自动注册 Package。getPackages() 返回的列表才是 RNOH 运行时实际使用的 Package 集合。遗漏 make_shared 导致 TurboModuleFactoryDelegate 不生效，JS 侧 TurboModuleRegistry.get() 返回 null。",
+      "example_source": "react_native_qrcode_scanner"
+    },
+    {
+      "id": "testing-fabric-builder-not-registered-001",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "fabric-component"
+      ],
+      "error_type": "ComponentContext is undefined / Fabric 组件区域黑屏",
+      "wrong_pattern": "Index.ets 的 buildCustomRNComponent Builder 函数体为空，arkTsComponentNames 为空数组 []。\n\n依赖库提供 Fabric 组件（如 ReactCameraView），但 Example 未注册。\n症状：应用启动正常但组件区域为黑屏/空白。",
+      "fix_pattern": "1. 从依赖库入口导入组件和 TYPE 常量：\nimport { ReactXxxView, REACT_XXX_TYPE } from '@react-native-ohos/react-native-xxx';\n\n2. 在 Builder 中注册：\n@Builder\nexport function buildCustomRNComponent(ctx: ComponentBuilderContext) {\n  if (ctx.componentName === REACT_XXX_TYPE) {\n    ReactXxxView({ ctx: ctx.rnComponentContext, tag: ctx.tag })\n  }\n}\n\n3. 在 arkTsComponentNames 中添加组件名：\narkTsComponentNames: [\"NativeXxx\"]\n\n组件名须与 JS codegenNativeComponent('NativeXxx') 的字符串一致。",
+      "reason": "enableCAPIArchitecture: true 架构下，只有 arkTsComponentNames 中列出的组件名才会通过 CustomRNComponentFrameNodeFactory 路由到 ArkTS Builder。未列出的组件 componentContext 为 undefined，ArkTS 视图不创建，表现为黑屏或空白区域。TurboModule 的注册由 PackageProvider.cpp 处理，Fabric 组件的 ArkTS 视图注册则在 Index.ets，两处独立。",
+      "example_source": "react_native_qrcode_scanner"
+    },
+    {
+      "id": "testing-config-004",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "turbo-module",
+        "fabric-component",
+        "cpp-turbo-module",
+        "fabric-cpp-component",
+        "js-only"
+      ],
+      "error_type": "Linking.canOpenURL always returns false",
+      "wrong_pattern": "测试页使用 Linking.canOpenURL 或 Rate.openURL 打开 URL，输出 `openURL supported: false`，URL 未打开。\n\n根因：module.json5 缺少 querySchemes 声明，鸿蒙 bundleManager.canOpenLink() 要求调用方预声明可查询的 URL scheme。",
+      "fix_pattern": "在 ohos/example/harmony/entry/src/main/module.json5 的 module 对象中添加 querySchemes：\n\"querySchemes\": [\"https\", \"http\"]\n\n常见需声明的 scheme：\n- https / http — 网页链接\n- market / appgallery — 应用市场\n- weixin / alipay — 第三方应用",
+      "reason": "HarmonyOS 的 bundleManager.canOpenLink() API 要求调用方在 module.json5 中预声明可查询的 URL scheme，否则始终返回 false。这与 iOS LSApplicationQueriesSchemes 和 Android API 30+ 的 queries 机制类似，是平台安全设计。",
+      "example_source": "react_native_rate"
+    },
+    {
+      "id": "coding-js-001",
+      "stage": "coding-library",
+      "category": "logic",
+      "module_types": [
+        "turbo-module",
+        "js-only"
+      ],
+      "error_type": "入口文件删除平台判断后未保留 Android 分支逻辑",
+      "wrong_pattern": "原库入口有 Platform.OS === 'android' 分支逻辑（如 preferInApp: false 时直接调用 openURL），ohos 适配版删除平台判断后，所有情况都调用 NativeRNRate.rate()，导致选项参数失效。\n\n症状：preferInApp: false 时仍触发原生 fallback，而非直接 openURL。",
+      "fix_pattern": "在 ohos/src/index.js 中对齐原库 Android 分支逻辑（去掉平台判断，保留条件分支）：\n\n原库：\nif (Platform.OS === 'android') {\n  if (options.preferInApp) { RNRate.rate() } else { Rate.openURL() }\n}\n\nohos 适配版：\nif (options.preferInApp) {\n  NativeRNRate.rate()\n} else {\n  Rate.openURL(options.fallbackPlatformURL)\n}",
+      "reason": "删除 Platform.OS 判断只是去掉条件外壳，不应删除分支内的行为逻辑。原库 Android 分支的 preferInApp/openAppStoreIfInAppFails 等选项控制逻辑必须在 ohos 适配版中保留。",
+      "example_source": "react_native_rate"
+    },
+    {
+      "id": "coding-native-001",
+      "stage": "coding-library",
+      "category": "api",
+      "module_types": [
+        "turbo-module",
+        "cpp-turbo-module"
+      ],
+      "error_type": "TurboModule 方法内置 fallback 逻辑",
+      "wrong_pattern": "原生 TurboModule 方法在首选方案失败后自动执行备用方案（如 showCommentDialog 失败后直接调用 startAppGalleryReview），绕过 JS 层 openAppStoreIfInAppFails 选项控制。\n\n症状：JS 层 options.openAppStoreIfInAppFails = false 时仍触发 fallback。",
+      "fix_pattern": "原生方法职责单一：成功 resolve，失败 reject。fallback 行为由 JS 层控制：\n\n原生（修改后）：\nrate(options: Object): Promise<boolean> {\n  return this.tryShowCommentDialog();  // 成功/失败直接返回\n}\n\nJS 层：\nNativeRNRate.rate(options)\n  .catch((error) => {\n    if (options.openAppStoreIfInAppFails) {\n      Rate.openURL(options.fallbackPlatformURL);\n    }\n  });",
+      "reason": "TurboModule 是系统 API 调用的封装层，不应包含业务决策逻辑（如是否 fallback、fallback 到哪）。JS 层通过 options 参数控制 fallback 行为，原生层擅自执行会破坏选项语义。",
+      "example_source": "react_native_rate"
+    },
+    {
+      "id": "testing-api-002",
+      "stage": "testing",
+      "category": "api",
+      "module_types": [
+        "turbo-module",
+        "js-only"
+      ],
+      "error_type": "使用 Linking API 但未调研平台配置限制",
+      "wrong_pattern": "README 或测试页使用 Linking.canOpenURL / Linking.openURL，但未调研鸿蒙 bundleManager.canOpenLink() 的预声明要求，API 支持列标记为「完全支持」。",
+      "fix_pattern": "调研 Linking 类 API 时必须检查：\n1. 鸿蒙对应 API 是否需要配置声明（querySchemes）\n2. 在 API 支持列中标注配置要求：\n⚠️ 需配置（module.json5 声明 querySchemes）\n3. 在 USAGE_NOTES 中补充说明",
+      "reason": "Linking.canOpenURL 在鸿蒙上不是简单的 API 调用，需要 module.json5 配合。README 填充时必须调研此类平台限制，不能仅因代码存在就标记「完全支持」。",
+      "example_source": "react_native_rate"
+    },
+    {
+      "id": "coding-api-002",
+      "stage": "coding-library",
+      "category": "api",
+      "module_types": [
+        "fabric-component",
+        "turbo-module"
+      ],
+      "error_type": "Property 'create' does not exist on type 'typeof ColorFilter'",
+      "wrong_pattern": "ColorFilter.create(new ColorFilterMatrix([...]))\nColorFilterMatrix([1,0,0,0,0, ...])",
+      "fix_pattern": "ColorFilter.create() 和 ColorFilterMatrix 在 HarmonyOS SDK 中不存在。\n\n图片着色替代方案：\nImage(src)\n  .renderMode(hasTintColor ? ImageRenderMode.Template : ImageRenderMode.Original)\n  .fillColor(hasTintColor ? tintColor : undefined)\n\n注意：此方案仅对矢量图/模板图有效，光栅图 tintColor 效果有限。",
+      "reason": "HarmonyOS ArkUI 的 Image 组件不提供 ColorFilter 类和 ColorFilterMatrix 类型。Agent 猜测了不存在的 API。图片着色应使用 renderMode(Template) + fillColor() 组合。",
+      "example_source": "react_native_fast_image"
+    },
+    {
+      "id": "coding-api-003",
+      "stage": "coding-library",
+      "category": "api",
+      "module_types": [
+        "fabric-component",
+        "turbo-module"
+      ],
+      "error_type": "animateTo is deprecated / not a function",
+      "wrong_pattern": "animateTo({ duration: 300 }, () => {\n  this.opacityVal = 1;\n})",
+      "fix_pattern": "使用组件级 .animation() 属性替代 animateTo()：\n\n@State private opacityVal: number = 0;\n\n// build() 中\nImage(src)\n  .opacity(this.opacityVal)\n  .animation({ duration: 300, curve: Curve.EaseInOut })\n\n// aboutToAppear 或回调中触发动画\nthis.opacityVal = 1;  // @State 变化自动触发 .animation()",
+      "reason": "animateTo() 在 HarmonyOS 中已废弃。应使用 ArkUI 组件的 .animation() 属性声明动画配置，通过 @State 变量变化自动触发动画过渡。",
+      "example_source": "react_native_fast_image"
+    },
+    {
+      "id": "coding-fabric-wrong-pattern-001",
+      "stage": "coding-library",
+      "category": "api",
+      "module_types": [
+        "fabric-component"
+      ],
+      "error_type": "Fabric 组件使用错误的基类模式导致空白",
+      "wrong_pattern": "@Component\nexport struct XxxView {\n  @Prop ctx: Record<string, ESObject>\n  // 没有 tag 属性\n  // 没有 subscribeToDescriptorChanges\n  // 没有 EventEmitter\n}",
+      "fix_pattern": "必须使用 RNOH 标准 Fabric 组件模式：\n\n@Component\nexport struct XxxView {\n  public ctx!: RNOHContext;       // 必须是 RNOHContext\n  public tag: number = 0;        // 必须有 tag\n  @State private propA: string = '';\n  private eventEmitter: RNC.XxxView.EventEmitter | undefined = undefined;\n  private cleanUpCallbacks: (() => void)[] = [];\n\n  aboutToAppear() {\n    this.eventEmitter = new RNC.XxxView.EventEmitter(this.ctx.rnInstance, this.tag);\n    this.cleanUpCallbacks.push(\n      this.ctx.descriptorRegistry.subscribeToDescriptorChanges(this.tag, (descriptor) => {\n        const rawProps = descriptor.rawProps as RNC.XxxView.DirectRawProps;\n        this.propA = rawProps.propA ?? '';\n      })\n    );\n  }\n\n  aboutToDisappear() {\n    this.cleanUpCallbacks.forEach(cb => cb());\n  }\n\n  build() {\n    RNViewBase({ ctx: this.ctx, tag: this.tag }) {\n      // ArkUI 组件\n    }\n  }\n}",
+      "reason": "RNOH Fabric 组件有严格的结构要求：必须通过 RNOHContext + tag 标识组件实例，通过 subscribeToDescriptorChanges 接收 props 变化，通过 EventEmitter 发射事件，通过 RNViewBase 包裹 UI。使用 @Prop + Record<string, ESObject> 是完全错误的模式。",
+      "example_source": "react_native_fast_image"
+    },
+    {
+      "id": "coding-import-002",
+      "stage": "coding-library",
+      "category": "import",
+      "module_types": [
+        "fabric-component"
+      ],
+      "error_type": "Fabric 从 @rnoh/.../ts 导入 RNViewBase 导致 assembleHar 失败",
+      "wrong_pattern": "import { RNComponentContext, RNViewBase, RNViewBaseAttributeModifier, ViewDescriptorWrapperBase, DescriptorWrapper } from '@rnoh/react-native-openharmony/ts';\n\n@Component\nexport struct PinchableView {\n  public ctx!: RNComponentContext;\n  // ...\n  build() {\n    Stack() {\n      LazyForEach(this.ctx.createComponentDataSource({ tag: this.tag }),\n        (dw: DescriptorWrapper) => {\n          this.ctx.wrappedRNComponentBuilder.builder(this.ctx, dw.tag)\n        }, ...)\n    }\n  }\n}\n\n编译报错示例：\n- Module '\"@rnoh/react-native-openharmony/ts\"' has no exported member 'RNViewBase'\n- Use explicit types instead of \"any\", \"unknown\" (arkts-no-any-unknown)\n- wrappedRNComponentBuilder.builder(...) does not meet UI component syntax",
+      "fix_pattern": "UI 运行时符号从主包导入（勿用 /ts）；codegen 生成的 Spec 仍可从 /ts 导入：\n\nimport { RNOHContext, RNComponentContext, DescriptorWrapper } from '@rnoh/react-native-openharmony';\nimport { ViewBaseDescriptor, ViewDescriptorWrapperBase, RNViewBaseAttributeModifier } from '@rnoh/react-native-openharmony';\nimport { PinchableView as Spec } from '../generated/components/PinchableView';\n\n@Component\nexport struct PinchableView {\n  public ctx!: RNOHContext;\n  public tag: number = 0;\n  // subscribeToDescriptorChanges + EventEmitter ...\n  build() {\n    Stack() {\n      if (this.ctx instanceof RNComponentContext) {\n        LazyForEach(this.ctx.createComponentDataSource({ tag: this.tag }),\n          (descriptorWrapper: DescriptorWrapper) => {\n            (this.ctx as RNComponentContext).wrappedRNComponentBuilder.builder(\n              (this.ctx as RNComponentContext),\n              descriptorWrapper.tag\n            )\n          },\n          (descriptorWrapper: DescriptorWrapper) => descriptorWrapper.tag.toString() + '@' + descriptorWrapper.renderKey\n        )\n      }\n    }\n    .attributeModifier(this.rnViewAttributeModifier)\n    // 自定义手势/scale 等加在 Stack 上\n  }\n}\n\n说明：\n- /ts 子路径主要导出 Descriptor、EventEmitter 等 codegen 类型，不含 RNViewBase、RNViewBaseAttributeModifier\n- 需要渲染 RN 子节点时，子节点 LazyForEach 模式对齐 RNView.ets（instanceof RNComponentContext + 显式 cast）\n- 仅展示占位 UI、无子节点时，可用 generate_library_common 模板的 RNViewBase({ ctx, tag }) { ... }",
+      "reason": "@rnoh/react-native-openharmony/ts 与主包导出集不同。从 /ts 导入 RNViewBase 等会在 HAR 编译期报「无导出成员」，并连带引发 any/unknown 与 UI 语法错误。容器类 Fabric 组件（需渲染 children）应复用 RNView.ets 的 LazyForEach + wrappedRNComponentBuilder 写法；叶子组件用 RNViewBase 包裹即可。",
+      "example_source": "react_native_pinchable"
+    },
+    {
+      "id": "coding-fabric-descriptor-missing-001",
+      "stage": "coding-library",
+      "category": "config",
+      "module_types": [
+        "fabric-component"
+      ],
+      "error_type": "Fabric 组件不可用（Package 缺少 Descriptor 注册）",
+      "wrong_pattern": "Package 类只实现了 getUITurboModuleFactoryByNameMap()，缺少 createDescriptorWrapperFactoryByDescriptorType() 方法。\n\nFabric 组件运行时完全不可用，不渲染，无任何错误日志。",
+      "fix_pattern": "在 Package 中添加 createDescriptorWrapperFactoryByDescriptorType 方法：\n\ncreateDescriptorWrapperFactoryByDescriptorType(\n  ctx: DescriptorWrapperFactoryByDescriptorTypeCtx\n): DescriptorWrapperFactoryByDescriptorType {\n  const result: DescriptorWrapperFactoryByDescriptorType = {};\n  result[RNC.XxxView.NAME] = (ctx) =>\n    new RNC.XxxView.DescriptorWrapper(ctx.descriptor);\n  return result;\n}",
+      "reason": "Fabric 组件需要在 Package 中同时注册 Descriptor 工厂和 TurboModule 工厂（如有）。仅注册 TurboModule 不会自动注册 Fabric 组件的 Descriptor，导致运行时无法创建组件视图。这是一个静默失败，不产生错误日志。",
+      "example_source": "react_native_fast_image"
+    },
+    {
+      "id": "coding-fabric-event-hardcode-001",
+      "stage": "coding-library",
+      "category": "api",
+      "module_types": [
+        "fabric-component"
+      ],
+      "error_type": "事件回调返回错误数据（硬编码 payload）",
+      "wrong_pattern": "// Image.onComplete 中硬编码数据\n.onComplete(() => {\n  this.eventEmitter?.emit('onLoad', { width: 0, height: 0 });\n})",
+      "fix_pattern": "使用 ArkUI 回调函数提供的真实 event 参数：\n\n.onComplete((event?: { width: number; height: number; componentWidth: number; componentHeight: number }) => {\n  if (event) {\n    this.eventEmitter?.emit('onLoad', {\n      width: event.width,\n      height: event.height,\n    });\n  }\n})",
+      "reason": "ArkUI 组件的回调函数（如 Image.onComplete、Image.onError）提供完整的 event 对象，包含真实的运行时数据。硬编码 payload（如 width: 0, height: 0）会导致 JS 侧收到错误数据，功能异常。",
+      "example_source": "react_native_fast_image"
+    },
+    {
+      "id": "testing-ohpm-cache-stale-001",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "fabric-component",
+        "turbo-module",
+        "cpp-turbo-module",
+        "fabric-cpp-component"
+      ],
+      "error_type": "修改源码后 ohpm 缓存不刷新，运行旧代码",
+      "wrong_pattern": "修改 HAR 源码后重新 build HAR 并执行 ohpm install，但运行时仍使用旧代码。\n\n原因：ohpm 在 oh_modules/.ohpm/ 下缓存了旧的 .ets 文件，版本号未变时 ohpm install 不会更新缓存。",
+      "fix_pattern": "ohpm install 后，手动同步修改后的源码到两个缓存位置：\n\n1. 查找缓存路径：\nfind oh_modules/.ohpm -type d -name '*包名*'\n\n2. 复制到 ohpm 缓存路径（带哈希）：\ncp 源文件.ets 'oh_modules/.ohpm/@包名@<hash>/oh_modules/@包名/src/main/ets/...'\n\n3. 复制到 entry 的 oh_modules：\ncp 源文件.ets 'entry/oh_modules/@包名/src/main/ets/...'\n\n或更可靠的方案：在 ohpm install 前先清理缓存目录：\nrm -rf oh_modules/.ohpm/@包名*\nrm -rf entry/oh_modules/@包名\nohpm install",
+      "reason": "ohpm 使用版本号作为缓存键。当本地 HAR 版本号未变时（开发阶段常见），ohpm install 认为缓存有效不会更新。导致即使重新编译了 HAR，example 工程中使用的仍是旧代码。",
+      "example_source": "react_native_fast_image, react_native_smart_splash_screen"
+    },
+    {
+      "id": "coding-turbomodule-003",
+      "stage": "coding_library",
+      "category": "logic",
+      "module_types": [
+        "turbo-module"
+      ],
+      "error_type": "TCP Socket write 方法未查找服务端连接的客户端",
+      "wrong_pattern": "TurboModule 中 write 方法只从 clientSockets Map 查找 socket：\nconst instance = this.clientSockets.get(cId);\nif (!instance) { callback('Socket not found'); return; }\n\n服务端 accept 接受的客户端连接存放在 serverSockets[serverId].clientSockets 中，导致服务端连接无法写入数据。",
+      "fix_pattern": "write 方法应同时查找 clientSockets 和 serverSockets 中的客户端连接：\n\n1. 先从 clientSockets 查找\n2. 找不到则遍历 serverSockets，检查每个 serverInst.clientSockets\n3. 将写入逻辑提取为独立方法避免代码重复\n\nprivate writeToSocket(tcpSocket: socket.TCPSocket, cId: number, base64String: string, callback: (error: string) => void): void {\n  const decodedData = this.base64Helper.decodeSync(base64String);\n  const arrayBuffer = decodedData.buffer.slice(decodedData.byteOffset, decodedData.byteOffset + decodedData.byteLength);\n  tcpSocket.send({ data: arrayBuffer }).then(() => { ... });\n}\n\nwrite(cId: number, base64String: string, callback?: (error: string) => void): void {\n  const instance = this.clientSockets.get(cId);\n  if (instance) { this.writeToSocket(instance.socket, cId, base64String, callback); return; }\n  \n  for (const [serverId, serverInst] of this.serverSockets) {\n    const clientSocket = serverInst.clientSockets.get(cId);\n    if (clientSocket) { this.writeToSocket(clientSocket, cId, base64String, callback); return; }\n  }\n  \n  if (callback) callback('Socket not found');\n}",
+      "reason": "TCP Socket 库通常支持两种角色：客户端连接（connect）和服务端接受连接（accept）。客户端连接的 socket 存放在 clientSockets Map，而服务端接受的客户端连接存放在 serverSockets[serverId].clientSockets 中。write 方法需要能够找到两种角色的 socket 才能正常工作。",
+      "example_source": "react_native_tcp"
+    },
+    {
+      "id": "testing-config-005",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "turbo-module",
+        "cpp-turbo-module",
+        "fabric-component",
+        "fabric-cpp-component",
+        "js-only"
+      ],
+      "error_type": "ohpm Fetch Local Package Failed: .har does not exist（依赖路径不一致）",
+      "wrong_pattern": "entry/oh-package.json5 用 ohos 包名作 file: 路径段（如 node_modules/@oh-rn/voice/...），与实际安装目录名（如 @react-native-voice/voice）不一致，指向不存在的目录。",
+      "fix_pattern": "file: 路径里 node_modules/<X> 段必须用『安装目录名』(example/package.json 的依赖 key)，依赖 key 才用 ohos 名(@oh-rn/...)；harmony/oh-package.json5 与 entry/oh-package.json5 两处保持一致。现已由 `rn.py doctor` 自动拦截。",
+      "reason": "npm/ohpm 按依赖 key 决定物理安装目录；同一包有『安装目录名』与『ohos 包名』两套身份，混用导致 .har 路径指向不存在目录。",
+      "example_source": "voice"
+    },
+    {
+      "id": "testing-example-001",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "fabric-component",
+        "fabric-cpp-component",
+        "turbo-module",
+        "js-only"
+      ],
+      "error_type": "Example 只见数字/状态变化，核心功能区域空白（未喂真实输入）",
+      "wrong_pattern": "source/uri 等关键输入写死为空串或占位值当『覆盖所有 props 的测试页』，组件无真实数据可渲染。",
+      "fix_pattern": "对需外部输入才体现功能的组件（PDF/图片/视频/文件/地图），必须内置真实样本：rawfile 打包样本 → EntryAbility.onCreate 用 resourceManager.getRawFileContentSync+fileIo 拷到 context.filesDir → 用真实绝对路径作 source；禁空/占位 source。",
+      "reason": "空输入下原生不加载、配置不生效，按钮只改 React state，真机只看到数字变化，无法验证核心功能。",
+      "example_source": "react_native_pdf_renderer"
+    },
+    {
+      "id": "coding-api-004",
+      "stage": "coding-library",
+      "category": "api",
+      "module_types": [
+        "fabric-component",
+        "turbo-module",
+        "cpp-turbo-module"
+      ],
+      "error_type": "原生加载本地文件失败：传入 file:// URI 但鸿蒙 API 只接受裸沙箱路径",
+      "wrong_pattern": "把 JS 传来的 source 直接透传给原生 API，如 controller.loadDocument(this.params.source)，而 source 形如 file:///data/.../x.pdf。",
+      "fix_pattern": "路径/URI 类参数在原生侧先归一化再用：剥 file:// 前缀 + decodeURIComponent（样板 normalizeSourcePath）。鸿蒙文件类 API（PDF Kit loadDocument、图片/音视频/fileIo 等）多数只接受 context.filesDir + '/x' 形式。",
+      "reason": "RN 插件 JS 文档普遍约定 file:// URI（Android/iOS 接受），鸿蒙原生 API 不识别 file:// scheme。",
+      "example_source": "react_native_pdf_renderer"
+    },
+    {
+      "id": "testing-config-006",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "turbo-module",
+        "cpp-turbo-module",
+        "fabric-component",
+        "fabric-cpp-component",
+        "js-only"
+      ],
+      "error_type": "HAP 装上后只显示空白模板页（Hello HarmonyOS），插件未注册",
+      "wrong_pattern": "autolinking 三件套为空：RNOHPackagesFactory.ets 返回 []、autolinking.cmake 的 AUTOLINKED_LIBRARIES 为空、entry/oh-package.json5 未声明插件 HAR 依赖。",
+      "fix_pattern": "`rn.py build hap --full` 重跑 prepare 自动生成 autolinking；确保插件 tgz 已 npm install、entry HAR 依赖路径正确。现由 `rn.py doctor` 自动检查 RNOHPackagesFactory 是否注册了 Package。",
+      "reason": "autolinking 未生成/为空 → 插件 Package 未注册到原生层 → 组件与 TurboModule 全部不可用，只剩模板页。",
+      "example_source": "react-native-avoid-softinput"
+    },
+    {
+      "id": "testing-config-007",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "turbo-module",
+        "cpp-turbo-module",
+        "fabric-component",
+        "fabric-cpp-component",
+        "js-only"
+      ],
+      "error_type": "DevEco sync 报 Cannot find module './tools/gracefulifyFs'",
+      "wrong_pattern": "node_modules/.bin/react-native 是复制的普通文件而非符号链接，其内部 require('./tools/..') 相对路径解析到错误目录。",
+      "fix_pattern": "rm -rf node_modules && npm install 让 npm 正确创建符号链接。现由 `rn.py doctor` 检查 .bin/react-native 是否为 symlink。",
+      "reason": ".bin 下应为指向真实包的 symlink；被复制成普通文件后相对 require 的基准目录错位。",
+      "example_source": "react-native-avoid-softinput"
+    },
+    {
+      "id": "coding-type-001",
+      "stage": "coding-library",
+      "category": "type",
+      "module_types": [
+        "turbo-module",
+        "cpp-turbo-module"
+      ],
+      "error_type": "HAR 编译报错 Property 'ctx' does not exist on type 'XxxTurboModule'（RNOH 0.72）",
+      "wrong_pattern": "ETS TurboModule 继承 EtsUITurboModule，构造函数 (ctx: RNOHContext, name: string)。",
+      "fix_pattern": "RNOH 0.72 改用 UITurboModule：import { UITurboModule, UITurboModuleContext } from '@rnoh/react-native-openharmony/ts'；constructor(ctx: UITurboModuleContext){ super(ctx) }；用 this.ctx.rnInstance.emitDeviceEvent / this.ctx.uiAbilityContext 访问能力。",
+      "reason": "EtsUITurboModule 是较新版本基类，RNOH 0.72 中 this.ctx 不可用或类型不匹配。",
+      "example_source": "react-native-avoid-softinput"
+    },
+    {
+      "id": "coding-type-002",
+      "stage": "coding-library",
+      "category": "type",
+      "module_types": [
+        "fabric-component",
+        "fabric-cpp-component"
+      ],
+      "error_type": "HAR 编译报错 has no exported member 'ViewProps'/'Float'/'Int32'（generated 用了新版 codegen 类型）",
+      "wrong_pattern": "generated component spec 使用 ViewProps/Float/Int32/WithDefault/DirectEventHandler，从 @rnoh/react-native-openharmony/ts 导入。",
+      "fix_pattern": "RNOH 0.72 用 namespace + ViewBaseProps + ViewRawProps + PropsSelector(this.rawProps.x ?? default) + ViewDescriptorWrapperBase + EventEmitter 模式；参考 react-native-blur 的 generated 代码。",
+      "reason": "这些是新版 codegen 类型，RNOH 0.72 不存在；须用 0.72 的 namespace/PropsSelector 模式。",
+      "example_source": "react-native-avoid-softinput"
+    },
+    {
+      "id": "coding-cpp-001",
+      "stage": "coding-library",
+      "category": "cpp",
+      "module_types": [
+        "cpp-turbo-module",
+        "fabric-cpp-component"
+      ],
+      "error_type": "C++ 编译报错 unknown class name 'BaseXxxSoftinputPackage'; did you mean ...SoftInput...",
+      "wrong_pattern": "手写头文件引用的类名大小写与 codegen 生成的不一致（Softinput vs SoftInput）。",
+      "fix_pattern": "类名以 codegen 产物为准（PascalCase 逐词首字母大写，如 SoftInput）；编译前核对所有 #include / 继承语句类名大小写一致。",
+      "reason": "codegen 按 PascalCase 拆词生成类名，手写易混用小写。",
+      "example_source": "react-native-avoid-softinput"
+    },
+    {
+      "id": "coding-import-003",
+      "stage": "coding-library",
+      "category": "import",
+      "module_types": [
+        "fabric-component",
+        "fabric-cpp-component"
+      ],
+      "error_type": "运行时 TypeError: codegenNativeComponent is not a function（RN 0.72）",
+      "wrong_pattern": "import { codegenNativeComponent } from 'react-native'（RN 0.81+ 才有的公开 API）。",
+      "fix_pattern": "RN 0.72 用内部路径：import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent'；CodegenTypes 从 'react-native/Libraries/Types/CodegenTypes' 导入。参考 react-native-blur。",
+      "reason": "codegenNativeComponent 在 RN 0.81+ 才作为公开 API 导出，0.72.5 中不存在。",
+      "example_source": "react-native-avoid-softinput"
+    },
+    {
+      "id": "coding-config-002",
+      "stage": "coding-library",
+      "category": "config",
+      "module_types": [
+        "fabric-component",
+        "fabric-cpp-component"
+      ],
+      "error_type": "Fabric C++ codegen 产物缺失（ComponentDescriptors.h/ShadowNodes 等）→ 组件 not found in UIManager",
+      "wrong_pattern": "在 Node < 20 环境跑 react-native codegen-lib-harmony，Fabric 的 C++ 产物无法生成。",
+      "fix_pattern": "Fabric 组件需 Node>=20 跑完整 codegen（生成 ComponentDescriptors/ShadowNodes/Props + JSIBinder）。Node<20 时 Fabric 不可用，planning 阶段应降级为 TurboModule 方案并标注。",
+      "reason": "codegen-lib-harmony 要求 Node 20+；Fabric 原生组件依赖其 C++ 产物完成注册。",
+      "example_source": "react-native-avoid-softinput"
+    },
+    {
+      "id": "testing-config-008",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "turbo-module",
+        "cpp-turbo-module",
+        "fabric-component",
+        "fabric-cpp-component",
+        "js-only"
+      ],
+      "error_type": "build hap 跑 npm run lint 报 Cannot find package '@callstack/eslint-config'（monorepo flat config 冲突）",
+      "wrong_pattern": "example/package.json 保留 lint 脚本，ESLint 向上命中 monorepo 根 eslint.config.mjs 但找不到对应依赖，构建中断。",
+      "fix_pattern": "从 example/package.json 移除 lint 脚本（不影响功能）；example 生成时默认不带 lint 脚本。",
+      "reason": "ESLint 向上查找到 monorepo 根 flat config，依赖缺失导致 lint 阶段失败、阻断 HAP 构建。",
+      "example_source": "react-native-avoid-softinput"
+    },
+    {
+      "id": "testing-api-003",
+      "stage": "testing",
+      "category": "api",
+      "module_types": [
+        "js-only",
+        "turbo-module",
+        "fabric-component"
+      ],
+      "error_type": "运行时 TypeError: Alert.prompt is not a function（鸿蒙/Android）",
+      "wrong_pattern": "Example 用 Alert.prompt 弹输入框（iOS 专属 API）。",
+      "fix_pattern": "鸿蒙/Android 不支持 Alert.prompt，仅支持 Alert.alert。Example 直接用硬编码示例数据；确需用户输入用 Modal + TextInput（并按 Platform.OS 分支）。",
+      "reason": "Alert.prompt 是 iOS-only API，其他平台为 undefined。",
+      "example_source": "react-native-pell-rich-editor"
+    },
+    {
+      "id": "testing-api-004",
+      "stage": "testing",
+      "category": "api",
+      "module_types": [
+        "js-only",
+        "fabric-component",
+        "turbo-module"
+      ],
+      "error_type": "Example 资源加载失败/灰色占位（示例 URL 鸿蒙 WebView 不可达）",
+      "wrong_pattern": "Example 用 via.placeholder.com 等占位图服务或不存在的 example.com 资源。",
+      "fix_pattern": "Example 用公开稳定可达 URL：图片 https://picsum.photos/{w}/{h}，视频 MDN rabbit320.mp4；优先复制原始仓库 example 已验证 URL。禁 placeholder.com。",
+      "reason": "占位图服务在鸿蒙设备 WebView 网络/SSL 受限无法访问，显示灰色占位。",
+      "example_source": "react-native-pell-rich-editor"
+    },
+    {
+      "id": "testing-example-002",
+      "stage": "testing",
+      "category": "import",
+      "module_types": [
+        "turbo-module",
+        "cpp-turbo-module",
+        "fabric-component",
+        "fabric-cpp-component",
+        "js-only",
+        "native-module",
+        "native-ui-component"
+      ],
+      "error_type": "App.tsx 从 'react-native' 具名导入非导出符号 → 运行时 undefined → 访问属性即 TypeError → 白屏",
+      "wrong_pattern": "import { Colors } from 'react-native'（Colors 实际在 react-native/Libraries/NewAppScreen），或 import { ViewPropTypes/ColorPropType/EdgeInsetsPropType/PointPropType } from 'react-native'（RN 0.72+ 已移除）。这些 import 为 undefined，例如 backgroundColor: Colors.lighter → Cannot read property 'lighter' of undefined。",
+      "fix_pattern": "颜色直接写字面量（lighter=#F3F3F3 / darker=#222），或从 react-native/Libraries/NewAppScreen 导入；已移除的 PropTypes 用 prop-types 等价替换。check_example_static.py 的 check_example_quality 已对此做硬门禁。",
+      "reason": "react-native 主入口并不导出 NewAppScreen 调色板与已废弃 PropTypes；具名 import 得到 undefined，后续访问其属性在模块/渲染期抛 TypeError，整棵树渲染失败 → 白屏。",
+      "example_source": "react_native_viewpager"
+    },
+    {
+      "id": "testing-example-003",
+      "stage": "testing",
+      "category": "runtime",
+      "module_types": [
+        "turbo-module",
+        "cpp-turbo-module",
+        "fabric-component",
+        "fabric-cpp-component",
+        "js-only",
+        "native-module",
+        "native-ui-component"
+      ],
+      "error_type": "根布局容器缺 flex:1 → 内部 flex 子树塌陷重叠，页面挤成一团/近乎空白",
+      "wrong_pattern": "最外层 <SafeAreaView style={backgroundStyle}>，而 backgroundStyle = { backgroundColor } 只给背景色没有 flex:1；内部 container/组件用 flex:1 却拿不到可分配高度。",
+      "fix_pattern": "根 SafeAreaView/View 的 style 必须含 flex:1（如 backgroundStyle = { flex:1, backgroundColor }）。",
+      "reason": "SafeAreaView 无 flex 时高度由子内容决定，内部 flex:1 子树拿不到可分配空间，塌陷为 0 高度并相互重叠。",
+      "example_source": "react_native_viewpager"
+    },
+    {
+      "id": "coding-lifecycle-001",
+      "stage": "coding-library",
+      "category": "runtime",
+      "module_types": [
+        "js-only"
+      ],
+      "error_type": "createReactClass→ES6 class 迁移把 componentWillMount 的 render 前置初始化错放到 componentDidMount → 首帧实例字段为 null → Cannot read property 'X' of null → 白屏",
+      "wrong_pattern": "迁移时把 this._panResponder = PanResponder.create(...)（render 里 {...this._panResponder.panHandlers} 读取）从 componentWillMount 挪到 componentDidMount。componentDidMount 在首次 render 之后执行，render 时 _panResponder 仍是类字段默认 null。",
+      "fix_pattern": "render 依赖的实例初始化放 constructor（或 render 内惰性创建）；只有 autoPlay 定时器、initialPage 跳转、setState 等纯副作用留 componentDidMount。getInitialState→constructor state；getDefaultProps→static defaultProps；去 TimerMixin 用原生 timer 并在 componentWillUnmount 清理；内联 react-native-web 的 StaticRenderer。",
+      "reason": "componentDidMount 晚于首次 render；render 读取尚未初始化的实例字段（null）即抛 TypeError，整棵树渲染失败 → 白屏，native 日志只见 #RNOH_JS TypeError。",
+      "example_source": "react_native_viewpager"
+    },
+    {
+      "id": "testing-config-009",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "js-only",
+        "turbo-module",
+        "cpp-turbo-module",
+        "fabric-component",
+        "fabric-cpp-component"
+      ],
+      "error_type": "依赖的原生三方库整库漏注册：NativeModule is null / Couldn't find Turbo Module 'XXX' on the CPP side",
+      "wrong_pattern": "库的鸿蒙适配代码（典型是平台覆盖文件 xxx.harmony.js，或 ohos/src）import 了一个有鸿蒙原生实现的三方库（如 @react-native-async-storage/async-storage），但该依赖只在源码 require、未写进 package.json 的 dependencies/peerDependencies。\nanalysis 只扫 package.json 漏掉它 → planning 不写入 resolved_ohos_deps → testing 的 register_dep_plugins 不注册 → example 三处全缺（entry/oh-package.json5 无 HAR、RNOHPackagesFactory/RNPackagesFactory 无 Package、PackageProvider.cpp 无 make_shared）。\n症状：错误1 '@RNC/AsyncStorage: NativeModule: AsyncStorage is null'；补了 ArkTS 侧后错误2 'Couldn't find Turbo Module RNCAsyncStorage on the CPP side'（C++ 侧也要注册）。",
+      "fix_pattern": "1. 把该依赖的鸿蒙化包加入 ohos/example/package.json 依赖（按 dep-version-map.json，如 @react-native-ohos/async-storage），重跑 `rn.py build hap --prepare-only` 触发 register_dep_plugins 自动注册 HAR/CMake/Factory。\n2. 若 autolink 静默失败或为手动注册型 TurboModule，按 example-registration.md 在三处补齐：\n   - entry/oh-package.json5 加 HAR 依赖；\n   - RNOHPackagesFactory.ets 返回 new XxxPackage(ctx)，RNPackagesFactory.ets 展开 createRNOHPackages；\n   - cpp：RNOHPackagesFactory.h + autolinking.cmake（用 ${OH_MODULE_DIR} 而非 ${OH_MODULES_DIR}）+ PackageProvider.cpp 调 createRNOHPackages。\n3. 优先据 check_example_static.py 第8项 check_runtime_dep_registration 的报错补注册——它会扫 *.harmony.* / ohos/src 的 import，命中原生库 DB 却未在 entry/oh-package.json5 注册即报『整库漏注册』。",
+      "reason": "鸿蒙 TurboModule 需 ArkTS + C++ 双重注册，仅注册 ArkTS 会报 'on the CPP side'。register_dep_plugins 只注册『已在 example 依赖里且带 harmony 字段』的包，发现不了『源码 require 但 package.json 未声明』的原生依赖；旧 C++ 注册检查只查『include 却没 make_shared』的不一致，查不出整库从未注册。根因在 analysis 的依赖发现只看 package.json 声明、漏扫平台覆盖文件的 runtime require。",
+      "example_source": "react_native_ultimate_listview"
+    },
+    {
+      "id": "testing-config-009",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "turbo-module",
+        "cpp-turbo-module",
+        "fabric-component",
+        "fabric-cpp-component",
+        "js-only"
+      ],
+      "error_type": "误删 RNPackagesFactory spread → TurboModule 未注册 → Cannot read property 'X' of undefined",
+      "wrong_pattern": "prepare-only 后见 RNOHPackagesFactory.ets 仍为模板 stub（return []），误以为 HAR autolink 已足够，删除 `import { createRNOHPackages as createRNOHPackagesAutolinking } from './RNOHPackagesFactory'` 与 `...createRNOHPackagesAutolinking(ctx)`，或改 return [] 并注释「编译时由 hvigor autolink 自动注册」。",
+      "fix_pattern": "勿改 RNPackagesFactory.ets：必须保留 `...createRNOHPackagesAutolinking(ctx)`。autolink 三件套（RNOHPackagesFactory.ets/.h、autolinking.cmake）模板已带占位 stub，build hap 时 hvigor 覆盖为真实内容；prepare-only 后 stub 为空是正常的。",
+      "reason": "Index.ets 的 createRNPackages 只读 RNPackagesFactory.ets；spread 被删则 ArkTS TurboModule Package 永不注册，JS 侧 TurboModuleRegistry/NativeModules 为 undefined。HAR 与 C++ autolink 不能替代 ETS 侧 spread。",
+      "example_source": "react_native_exit_app"
+    },
+    {
+      "id": "testing-config-010",
+      "stage": "testing",
+      "category": "config",
+      "module_types": [
+        "js-only",
+        "turbo-module",
+        "fabric-component"
+      ],
+      "error_type": "reanimated worklet 未转换 → TypeError: Cannot read property 'code' of undefined → 白屏",
+      "wrong_pattern": "库（直接或间接）依赖 react-native-reanimated 或源码含 'worklet' 指令，但 example/babel.config.js 的 plugins 未包含 'react-native-reanimated/plugin'。worklet 函数缺少 __initData，运行时 valueUnpacker 取 __initData.code 抛 `Cannot read property 'code' of undefined`，连带 `Cannot read property 'Tabs' of undefined` 等模块初始化失败 → 白屏。",
+      "fix_pattern": "确保 example/babel.config.js 的 plugins 数组含 'react-native-reanimated/plugin' 且位于【最后一个】。当前流水线 apply_example_auto（generate_example_full.ensure_example_babel_reanimated）会在检测到 reanimated 依赖或 'worklet' 时自动注入；若仍白屏，手动确认并重新生成 bundle：`rn.py build hap`（必要时清 entry/build 缓存避免打入旧 bundle）。判定条件：直接依赖 reanimated / 被适配库源码含 'worklet' / 间接依赖 reanimated。",
+      "reason": "reanimated 的 worklet 由 babel 插件在编译期提取函数体生成 __initData.code，运行时在 UI 线程 eval 执行。无插件则 worklet 无元数据，UI 线程解包即崩溃。插件必须置于 plugins 末尾，否则其它插件的转换会破坏 worklet 识别。",
+      "example_source": "react_native_collapsible_tab_view"
+    },
+    {
+      "id": "coding-export-002",
+      "stage": "coding-library",
+      "category": "export",
+      "module_types": [
+        "fabric-component",
+        "turbo-module"
+      ],
+      "error_type": "index.ets 默认导出 Package 注册能力不全 → Couldn't find Turbo Module 'X' on the ArkTS side → 白屏",
+      "wrong_pattern": "库同时含 Fabric 组件和 TurboModule 时，生成了两个独立 Package 类（如 GeneratedPackage 只注册 Descriptor、XxxTurboModulesFactory 只注册 TurboModule），但 index.ets 仅 `export { GeneratedPackage as default }`（或仅导出另一个）。example 拿到的 default Package 只有一种能力，另一种运行时找不到。",
+      "fix_pattern": "把两类注册【合并进同一个 default 导出的 Package 类】：该类同时实现 createDescriptorWrapperFactoryByDescriptorType（Fabric）与 getUITurboModuleFactoryByNameMap + createEagerUITurboModuleByNameMap（TurboModule）；index.ets 导出这个完整 Package。改后 `rn.py build har` 重新编译。check_lib_static.py 的 check_har_export_completeness 会在二者俱备但 default 导出缺一时报错。",
+      "reason": "RNOH HAR autolink 只消费 index.ets 的 default 导出 Package。两类注册若分散在不同类、index 只导出一个，则另一类永不注册：TurboModule 缺失报 'Couldn't find Turbo Module on the ArkTS side'，Fabric 缺失则组件不渲染。",
+      "example_source": "react_native_fast_image"
+    },
+    {
+      "id": "testing-cmake-005",
+      "stage": "testing",
+      "category": "cmake",
+      "module_types": [
+        "turbo-module",
+        "fabric-component",
+        "cpp-turbo-module",
+        "fabric-cpp-component",
+        "js-only"
+      ],
+      "error_type": "Reanimated HermesRuntime: 'hermes/hermes.h' file not found",
+      "wrong_pattern": "entry/src/main/cpp/CMakeLists.txt 未包含 hermes 头文件路径，reanimated 的 CMakeLists.txt 编译 ReanimatedHermesRuntime.cpp 时找不到 hermes.h",
+      "fix_pattern": "在 entry/CMakeLists.txt 的 include_directories 中添加 hermes 头文件路径：\n${RNOH_CPP_DIR}/third-party/hermes/API\n${RNOH_CPP_DIR}/third-party/hermes/public\n${RNOH_CPP_DIR}/third-party/hermes/include\n\n其中 RNOH_CPP_DIR = ${OH_MODULE_DIR}/@rnoh/react-native-openharmony/src/main/include\n\n注意 hermes.h 的 #include <hermes/hermes.h> 需要 API/ 作为根才能正确解析，而 hermes.h 内部的 #include <hermes/Public/HermesExport.h> 需要 public/ 作为根。",
+      "reason": "reanimated 的 CMakeLists.txt（在 oh_modules 中，不可修改）target_link_libraries(rnoh_reanimated PUBLIC rnoh)，但 rnoh 的 include_directories() 未包含 hermes 路径。需在 entry 的 CMakeLists.txt 中显式添加 hermes 头文件路径，该路径在 RNOH SDK 的 third-party/hermes/ 目录下。",
+      "example_source": "react_native_head_tab_view"
+    },
+    {
+      "id": "demo-gen-cpp-001",
+      "stage": "demo-gen",
+      "category": "oh-modules",
+      "module_types": [
+        "turbo-module",
+        "fabric-component"
+      ],
+      "error_type": "CMake autolink 多文件缺失",
+      "wrong_pattern": "build 同时报多个 CMake 错误（如 cpp 目录不存在 + folly-config.h.cmake 不存在 + include 不存在），用 Copy-Item 逐个文件/目录拷贝修复，每个错误触发一次重 build。",
+      "fix_pattern": "三联错通常是同一根因：example_auto/harmony/oh_modules 不完整。在 harmony 目录跑 `ohpm install --all` 一次解决，不要逐个 Copy-Item。修错前必须先 grep 全部错误行，确认是同根因再统一修。",
+      "reason": "agent 单点修复让每个错误各浪费一次 build 循环（30s-2min）。ohpm install 一次完成。详见 primary-05-demo-gen.md 的\"编译失败修错\"强制约束。",
+      "example_source": "react_native_toast"
+    }
+  ]
+}

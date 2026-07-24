@@ -1,0 +1,1 @@
+* **[接入跨设备互通控件后，设备选择列表没有周围设备](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/servicecollaboration-faq-1)**
