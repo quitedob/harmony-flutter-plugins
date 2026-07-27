@@ -40,6 +40,7 @@
 | `02-test-cases.md` | flutter-fast / `02-test-case-gen` | ✅ 本次生成 — 18 条 Markdown 用例 |
 | `04-test-cases.json` | flutter-fast / `02-test-case-gen` | ✅ 本次生成 — 18 条 JSON 用例 |
 | `03-case-review-report.md` | flutter-fast / `03-case-review` | ✅ 本次生成 — 4 维度评审 93.4 分通过 |
+| `05-test-cases.xlsx` | flutter-fast / `05-xlsx-export` | ✅ 2026-07-27 生成 — 18 条测试用例（12 列标准格式） |
 
 ### 1.4 flutter-fast 规范覆盖
 
@@ -88,11 +89,12 @@
 
 ### 2.4 文档待同步
 
-| 项目 | 说明 |
-|------|------|
-| README.md | 目标仓库 README 仍标注 "Only work in Android"，需更新 |
-| CHANGELOG.md | 目标仓库 CHANGELOG 未记录 v2.2.1 鸿蒙适配变更 |
-| `example/ohos/` | 目标仓库 example 仅有 android/ios，缺少 ohos 示例脚手架 |
+| 项目 | 说明 | 状态 |
+|------|------|:--:|
+| README.md | 目标仓库 README 仍标注 "Only work in Android"，需更新 | ❌ |
+| CHANGELOG.md | 目标仓库 CHANGELOG 未记录 v2.2.1 鸿蒙适配变更 | ❌ |
+| `example/ohos/` | 目标仓库 example 仅有 android/ios，缺少 ohos 示例脚手架 | ❌ |
+| 测试用例 XLSX | `repos-flutter-fast/media_scanner/.ohos-adaptation/05-test-cases.xlsx` | ✅ 2026-07-27 |
 
 ---
 
@@ -136,6 +138,15 @@ flutter build hap --debug
 # build\ohos\hap\entry-default-signed.hap (签名)
 # build\ohos\hap\entry-default-unsigned.hap (未签名)
 ```
+
+---
+
+## 五、修订记录
+
+| 日期 | 变更 |
+|------|------|
+| 2026-07-24 | 初始版本：media_scanner 鸿蒙适配完成 + 18/18 真机测试通过 |
+| 2026-07-27 | 补全 `05-test-cases.xlsx`（18 条标准格式测试用例）到 repos-flutter-fast |
 
 ---
 
