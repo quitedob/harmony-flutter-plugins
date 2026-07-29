@@ -5,6 +5,7 @@ import 'package:media_scanner/media_scanner.dart';
 
 import 'zoom_drawer_test_page.dart';
 import 'media_scanner_full_test_page.dart';
+import 'flutter_zoom_drawer_full_test_page.dart';
 
 void main() {
   runApp(const TestHubApp());
@@ -63,6 +64,14 @@ class TestHubPage extends StatelessWidget {
               title: 'ZoomDrawer',
               subtitle: '纯 Dart 抽屉组件测试',
               page: const ZoomDrawerTestPage(),
+            ),
+            const SizedBox(height: 12),
+            _testCard(
+              context,
+              icon: Icons.checklist_rtl,
+              title: 'ZoomDrawer 完整测试',
+              subtitle: '24 项测试用例一键覆盖',
+              page: const ZoomDrawerFullTestPage(),
             ),
           ],
         ),

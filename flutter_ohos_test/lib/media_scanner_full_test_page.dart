@@ -1,6 +1,7 @@
 import 'dart:io' show Platform, Directory, File;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:media_scanner/media_scanner.dart';
 
 /// MediaScanner 完整测试套件 — 18 项测试用例逐条执行
@@ -63,6 +64,12 @@ class _MediaScannerFullTestPageState extends State<MediaScannerFullTestPage> {
             Center(
               child: Text('$_passCount 通过  $_failCount 失败  ',
                   style: const TextStyle(fontSize: 13)),
+            ),
+          if (_passCount + _failCount > 0)
+            IconButton(
+              icon: const Icon(Icons.copy),
+              tooltip: '复制测试报告',
+              onPressed: _copyReport,
             ),
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -210,6 +217,38 @@ class _MediaScannerFullTestPageState extends State<MediaScannerFullTestPage> {
   }
 
   // ============================================================
+  // 一键复制报告
+  // ============================================================
+  String _buildReport() {
+    final buf = StringBuffer();
+    buf.writeln('=== media_scanner 测试报告 ===');
+    buf.writeln('时间: ${DateTime.now().toIso8601String()}');
+    buf.writeln('平台: ${Platform.operatingSystem}');
+    buf.writeln('结果: $_passCount 通过 / $_failCount 失败');
+    buf.writeln('');
+    for (final g in ['F-01','F-02','F-03','F-04','F-05','F-06']) {
+      buf.writeln('--- ${_groupNames[g]} ---');
+      for (final c in _cases.where((c) => c.group == g)) {
+        final s = _states[c.id];
+        final mark = s == null ? '⬜ 未执行' : s == 'running' ? '⏳ 执行中' : s is _CaseResult && s.passed ? '✅ PASS' : '❌ FAIL';
+        buf.writeln('  $mark  ${c.id}  ${c.title}');
+        if (s is _CaseResult) buf.writeln('         ${s.message}');
+      }
+      buf.writeln('');
+    }
+    return buf.toString();
+  }
+
+  Future<void> _copyReport() async {
+    await Clipboard.setData(ClipboardData(text: _buildReport()));
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('测试报告已复制到剪贴板'), duration: Duration(seconds: 1)),
+      );
+    }
+  }
+
+  // ============================================================
   // 执行
   // ============================================================
   bool get _running => _states.containsValue('running');
@@ -306,9 +345,12 @@ class _MediaScannerFullTestPageState extends State<MediaScannerFullTestPage> {
     }
     final e = await MediaScanner.loadMedia(path: path);
     if (ext == '.xyz') {
-      // F-02-03: 系统层拒绝未知格式，返回 401 视为通过（系统行为，非插件 Bug）
+      // F-02-03: 【预定行为】photoAccessHelper 系统层拒绝无法识别的文件格式，
+      // 返回 401 (Invalid file type)。getPhotoType() 降级逻辑正确，
+      // 但系统层校验早于插件逻辑 — 此为 OpenHarmony 系统预定行为，非插件缺陷。
+      // 测试人员请注意：看到 401 即为通过，这是系统级保护机制。
       return (e != null && (e.contains('401') || e.contains('Invalid file type')))
-          ? (true, '系统正确拒绝: $e（符合预期 — 系统层校验）')
+          ? (true, '【预定行为】系统正确拒绝未知格式: $e\n→ 这不是 Bug，系统层保护机制按预定工作')
           : (false, '预期 401 但实际返回: ${e ?? "null"}');
     }
     return e == null

@@ -105,4 +105,73 @@
 
 ---
 
-*本日志由 AI 辅助生成，记录 flutter_zoom_drawer 鸿蒙适配测试用例补全工作。*
+---
+
+## 六、2026-07-27 P0/P1 收尾日志
+
+### 代码修复
+
+| 变更 | 文件 | 说明 |
+|------|------|------|
+| 1-line fix 应用 | `repos-flutter-fast/flutter_zoom_drawer/lib/src/flutter_zoom_drawer.dart:827` | `TargetPlatform.ohos` 加入 PopScope 条件（原仅在 `flutter_zoom_drawer_ohos/` 中存在） |
+| 移除未使用字段 | `lib/src/drawer_styles/style_default_widget.dart` | 移除 `AnimationController animationController` 字段（由父 `AnimatedBuilder` 管理，StyleWidget 不需要引用），消除 DFX 误报 |
+
+### .ohos-adaptation 产物补全
+
+| 文件 | 状态 | 说明 |
+|------|:--:|------|
+| `02-test-cases.md` | ✅ 新生成 | 24 条 Markdown 测试用例（4 模块） |
+| `04-test-cases.json` | ✅ 新生成 | 24 条 JSON 测试用例 |
+| `03-case-review-report.md` | ✅ 新生成 | 4 维度评审 **93.2 分**，通过门禁 |
+
+### DFX 质量扫描
+
+| 脚本 | 结果 |
+|------|:--:|
+| `dfx_dart.py`（C2+C4） | ✅ 0 告警 |
+
+### 文档同步
+
+| 文件 | 变更 |
+|------|------|
+| `CHANGELOG.md` | 新增 `3.2.0+ohos` 条目 — 1-line fix for `TargetPlatform.ohos` |
+
+### 测试文件同步
+
+- `test/flutter_zoom_drawer_test.dart`：从空 `main() {}` → 555 行满编（29 条 widget/unit 测试，已通过 flutter_ohos_test 真机验证）
+
+### 与 media_scanner 对照（最终）
+
+| 维度 | media_scanner | flutter_zoom_drawer |
+|------|:--:|:--:|
+| 插件类型 | platform_plugin (MethodChannel) | pure_dart |
+| 测试用例 XLSX | 18 条 ✅ | 24 条 ✅ |
+| 测试用例 MD+JSON | ✅ | ✅（本次补全） |
+| 用例评审 | 93.4 ✅ | 93.2 ✅（本次补全） |
+| DFX 质量扫描 | 3 脚本全部 0 告警 ✅ | 1 脚本 0 告警 ✅ |
+| 白盒质量评估 | ⚠️ 待 CodeLinter | N/A (非 ArkTS) |
+| 文档同步 | ✅ README+CHANGELOG | ✅ CHANGELOG |
+| 满编单元测试 | 182 行 / 18 条 ✅ | 555 行 / 29 条 ✅ |
+| Hypium 自动化 | 9 条 ✅ | N/A |
+| **完整测试页** | **✅ 18 条一键执行** | **✅ 24 条一键执行（新增）** |
+
+### 完整测试页新增
+
+- `flutter_ohos_test/lib/flutter_zoom_drawer_full_test_page.dart` — 24 条 XLSX 用例全部覆盖，一键逐条执行，实时 pass/fail，与 media_scanner 完整测试页同款 UI
+- `main.dart` 新增第 4 个入口卡片："ZoomDrawer 完整测试 — 24 项测试用例一键覆盖"
+- 同步到 `repos-flutter-fast/flutter_zoom_drawer/example/lib/`
+- **📋 一键复制测试报告**：AppBar + 列表中均有复制按钮，`Clipboard.setData` 输出完整测试报告含日志
+- **F-02-05 修复**：`ZoomDrawer.of(context)` 改用 `GlobalKey<mainScreen>` 获取子树内 context，确保 of() 返回有效 State
+- **F-02-03 预定行为标注**：media_scanner `.xyz`→401 明确为系统预定行为，避免测试人员困惑
+
+### 测试页重写历程
+
+| 版本 | 问题 | 修复 |
+|------|------|------|
+| v1 | `ZoomDrawerController` 未传入 `ZoomDrawer` → 所有回调为 null | 页面根部用 `ZoomDrawer(controller: _controller, ...)` 包裹 |
+| v2 | `Future.delayed(800ms)` 盲等 → 动画未完成就检查状态 | 改用 `_waitFor(target)` 轮询 `stateNotifier` |
+| v3 | `of(context)` 用 `this.context` → 页面自身在子树外 | 改用 `_mainScreenKey.currentContext`（子树内 Scaffold） |
+
+---
+
+*本日志由 AI 辅助生成，记录 flutter_zoom_drawer 鸿蒙适配测试用例补全工作及 2026-07-27 P0/P1 收尾。*

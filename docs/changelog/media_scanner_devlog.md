@@ -32,6 +32,47 @@
 
 ---
 
+## 2026-07-27 P0/P1 收尾日志
+
+### DFX 质量扫描（3 脚本全部通过）
+
+| 脚本 | 目标 | 结果 |
+|------|------|:--:|
+| `dfx_dart.py` | `lib/media_scanner.dart` | ✅ 0 告警 |
+| `dfx_ets.py` | `ohos/.../MediaScannerPlugin.ets` | ✅ 0 告警 |
+| `dfx_channel_consistency.py` | Dart ↔ ETS 交叉 | ✅ Channel 名称一致 |
+
+**DFX 修复**：
+- `Platform.isOhos` (line 45) → `defaultTargetPlatform == TargetPlatform.ohos` — 消除服务器引擎产物构建风险
+- `print()` (line 41 doc comment) → `debugPrint()`
+- ETS 侧 `CHANNEL_NAME` 常量内联为 `'media_scanner'` 字面量 — 确保脚本可验证
+
+### 文档同步
+
+| 文件 | 变更 |
+|------|------|
+| `README.md` | 标题 "Android Only" → "Android + OpenHarmony"，新增 OHOS 使用说明 |
+| `CHANGELOG.md` | v2.2.1 条目新增 OHOS 平台支持 |
+
+### Hypium 自动化测试
+
+- 产物：`.ohos-adaptation/hypium-test-cases.md` — 9 条黑盒测试用例
+- 覆盖：F-01 图片扫描 / F-02 视频扫描 / F-03 参数校验 / F-04 权限流程
+
+### 白盒质量评估
+
+- 挂起：`hmos-library-quality-assessment` 硬性要求 DevEco Studio CodeLinter（当前环境不可用）
+- 预评估结论：187 行单类、职责清晰、错误处理合规、资源释放正确 → 预计 ✅ 推荐
+- 记录：`.ohos-adaptation/hmos-quality-assessment-note.md`
+
+### 测试文件同步
+
+- `test/media_scanner_test.dart`：从 1 行空壳 → 182 行满编（18 条 Mock MethodChannel 测试，已通过 flutter_ohos_test 真机验证）
+- **📋 一键复制测试报告**：`media_scanner_full_test_page.dart` 新增 `_buildReport()` + `_copyReport()`，`Clipboard.setData` 输出完整测试报告
+- **F-02-03 预定行为标注**：`.xyz`→401 明确为【预定行为】系统层保护机制，非插件缺陷
+
+---
+
 ## F-02-03 详细记录 — 未知扩展名系统拒绝 (401)
 
 ### 操作
