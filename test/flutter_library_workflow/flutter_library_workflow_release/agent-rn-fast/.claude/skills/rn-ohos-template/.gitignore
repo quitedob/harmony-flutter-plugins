@@ -1,9 +1,0 @@
-__pycache__/
-*.py[cod]
-node_modules/
-oh_modules/
-*.har
-*.tgz
-build/
-templates/**/oh-package-lock.json5
-templates/**/package-lock.json

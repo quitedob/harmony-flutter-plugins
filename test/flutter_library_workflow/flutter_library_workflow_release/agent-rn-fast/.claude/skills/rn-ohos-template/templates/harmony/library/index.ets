@@ -1,1 +1,0 @@
-export { {{CAMEL_NAME}}Package as default } from './src/main/ets/{{CAMEL_NAME}}TurboModulesFactory';

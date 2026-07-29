@@ -1,6 +1,0 @@
-{
-  "real_path": "D:\\rn\\231",
-  "link_path": "D:\\code\\f\\agent-rn\\.claude\\skills\\tool-ohos-plugin-repo\\tool\\ohos",
-  "platform": "win32",
-  "note": "项目 ohos 目录是 junction，真实目录在 D:\\rn\\231（直接包含 example/src/harmony）"
-}
