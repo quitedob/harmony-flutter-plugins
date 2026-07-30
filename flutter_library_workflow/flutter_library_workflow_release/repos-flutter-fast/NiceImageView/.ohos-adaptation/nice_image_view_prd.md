@@ -63,6 +63,42 @@
 
 **结论**：本组件不涉及鸿蒙生态特殊规则。
 
+### 1.6 组件架构图
+
+```mermaid
+graph TB
+    subgraph "Flutter App"
+        APP[开发者代码]
+    end
+
+    subgraph "nice_image_view Plugin"
+        WIDGET[NiceImageView<br/>StatefulWidget]
+        RESOLVER[ImageProvider.resolve<br/>异步图片加载]
+        PAINTER[NiceImageViewPainter<br/>CustomPainter]
+    end
+
+    subgraph "Flutter Framework"
+        CANVAS[Canvas API]
+        PAINT[Paint]
+        PATH[Path / RRect]
+        IMAGE[ui.Image]
+    end
+
+    subgraph "Flutter Engine"
+        SKIA[Skia / Impeller<br/>GPU Rasterizer]
+    end
+
+    APP -->|"NiceImageView(image: ..., isCircle: true, borderWidth: 3)"| WIDGET
+    WIDGET -->|"ImageStreamListener"| RESOLVER
+    RESOLVER -->|"setState(ui.Image)"| WIDGET
+    WIDGET -->|"build() → CustomPaint"| PAINTER
+    PAINTER -->|"clipPath()"| PATH
+    PAINTER -->|"drawImageRect()"| IMAGE
+    PAINTER -->|"drawCircle() / drawRRect()"| PAINT
+    PAINTER -->|"paint(canvas, size)"| CANVAS
+    CANVAS -->|"GPU Command"| SKIA
+```
+
 ---
 
 ## 2. 功能需求总览
@@ -92,6 +128,48 @@ F-01 构造与初始化
  ├─► F-04 边框绘制（依赖 F-02/F-03 确定的几何形状）
  ├─► F-05 边框覆盖控制（依赖 F-04 边框宽度计算缩放比例）
  └─► F-06 遮罩绘制（依赖 clipPath = F-02 或 F-03 构建的裁剪路径）
+```
+
+### 2.3 功能模块交互流程图
+
+```mermaid
+flowchart TD
+    START([创建 NiceImageView]) --> PARSE{解析 16 个参数}
+    PARSE --> RESOLVE[ImageProvider.resolve<br/>异步加载图片]
+    RESOLVE --> CALLBACK{图片加载成功?}
+    CALLBACK -->|yes| SETSTATE[setState<br/>触发 build]
+    CALLBACK -->|no| EMPTY[渲染空白<br/>不崩溃]
+    SETSTATE --> BUILD[build → CustomPaint]
+    BUILD --> PAINT[paint 方法]
+
+    PAINT --> CLIP{isCircle?}
+    CLIP -->|true| CIRCLE[Path.addOval<br/>圆形裁剪路径]
+    CLIP -->|false| RRECT[Path.addRRect<br/>圆角矩形裁剪路径]
+
+    CIRCLE --> SAVE[canvas.save + clipPath]
+    RRECT --> SAVE
+
+    SAVE --> COVER{isCoverSrc?}
+    COVER -->|false| SCALE[canvas.scale<br/>缩小画布避让边框]
+    COVER -->|true| NOSCALE[不缩放]
+
+    SCALE --> DRAW[drawImageRect<br/>绘制原图]
+    NOSCALE --> DRAW
+
+    DRAW --> MASK{maskColor != transparent?}
+    MASK -->|yes| MASKDRAW[drawPath<br/>裁剪区域内绘制遮罩]
+    MASK -->|no| SKIPMASK[跳过遮罩]
+    MASKDRAW --> RESTORE[canvas.restore]
+    SKIPMASK --> RESTORE
+
+    RESTORE --> BORDER{borderWidth > 0?}
+    BORDER -->|yes| DRAWBORDER[drawCircle / drawRRect<br/>绘制边框]
+    BORDER -->|no| SKIPBORDER[跳过边框]
+    DRAWBORDER --> INNER{isCircle && innerBorderWidth > 0?}
+    SKIPBORDER --> DONE([渲染完成])
+    INNER -->|yes| DRAWINNER[drawCircle<br/>绘制内边框]
+    INNER -->|no| DONE
+    DRAWINNER --> DONE
 ```
 
 ---
@@ -218,6 +296,41 @@ const NiceImageView({
       → 任一变化 → return true → paint() 重新执行
 ```
 
+### 7.3 渲染管线序列图
+
+```mermaid
+sequenceDiagram
+    participant Dev as 开发者代码
+    participant Widget as NiceImageView<br/>StatefulWidget
+    participant Provider as ImageProvider
+    participant Painter as NiceImageViewPainter<br/>CustomPainter
+    participant Canvas as Flutter Canvas
+
+    Dev->>Widget: NiceImageView(image: AssetImage(...), isCircle: true, borderWidth: 4)
+    Widget->>Widget: initState() → _resolveImage()
+    Widget->>Provider: resolve(ImageConfiguration)
+    Provider-->>Widget: ImageStreamListener → ImageInfo
+    Widget->>Widget: setState(_resolvedImage)
+    Widget->>Painter: CustomPaint(painter: NiceImageViewPainter)
+    Painter->>Painter: shouldRepaint(oldPainter) → true
+
+    Note over Painter,Canvas: paint() 渲染管线（8步）
+    Painter->>Canvas: 1. Path.addOval() 圆形 clipPath
+    Painter->>Canvas: 2. canvas.save()
+    Painter->>Canvas: 3. canvas.clipPath(clipPath)
+    Painter->>Canvas: 4. [isCoverSrc=false] canvas.scale(sx,sy)
+    Painter->>Canvas: 5. canvas.drawImageRect(image, src, dst)
+    Painter->>Canvas: 6. [maskColor≠透明] canvas.drawPath(clipPath)
+    Painter->>Canvas: 7. canvas.restore()
+    Painter->>Canvas: 8. canvas.drawCircle / drawRRect (边框)
+
+    Note over Dev,Canvas: 用户交互触发参数变更
+    Dev->>Widget: setState(isCircle: false, cornerRadius: 16)
+    Widget->>Painter: CustomPaint(painter: newProps)
+    Painter->>Painter: shouldRepaint(oldPainter) → true
+    Painter->>Canvas: paint() → 矩形圆角 + 矩形边框
+```
+
 ---
 
 ## 8. 错误处理规格
@@ -307,6 +420,33 @@ const NiceImageView({
 ---
 
 ## 11. 适配要点提示和平台差异对照
+
+### 11.0 Android→Flutter 迁移对照总图
+
+```mermaid
+graph LR
+    subgraph "Android 原始库（源）"
+        A1[NiceImageView.java<br/>335 行 Java]
+        A2[AppCompatImageView<br/>继承基类]
+        A3[PorterDuff Xfermode<br/>DST_IN / DST_OUT]
+        A4[Path.Op.DIFFERENCE<br/>路径差集运算]
+        A5[Utils.dp2px<br/>密度转换]
+    end
+
+    subgraph "Flutter pure_dart（目标）"
+        F1[NiceImageViewPainter<br/>192 行 Dart]
+        F2[CustomPainter<br/>组合模式]
+        F3[canvas.clipPath<br/>原生路径裁剪]
+        F4[无需 DIFFERENCE<br/>clipPath 等效]
+        F5[逻辑像素<br/>无需转换]
+    end
+
+    A1 -->|"像素级移植<br/>(-43% 代码)"| F1
+    A2 -->|"继承→组合<br/>(StatefulWidget)"| F2
+    A3 -->|"改进：clipPath<br/>替代 xfermode"| F3
+    A4 -->|"完全规避<br/>("| F4
+    A5 -->|"简化：天然 LP<br/>("| F5
+```
 
 ### 11.1 交叉验证问题
 

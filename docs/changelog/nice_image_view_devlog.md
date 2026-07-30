@@ -371,6 +371,7 @@ module.json, pack.info, pkgSdkInfo.json
 | 2026-07-30 | **P2 文档交付收尾**：Demo 全中文化（12 个可见中文文本）、复制日志功能（`Key('btn_copy_log')` + `Clipboard.setData`）、示例占位图片生成（69 bytes 最小 PNG）、`example/pubspec.yaml` 创建、`05-demo-gen.json` 更新（`copy_log_supported: true` + `visible_texts` 中文列表 + `demo_source_files` 扩展至 4 个） |
 | 2026-07-30 | **Git 提交与推送**：`c423de4` → `origin/main`。61 files changed, 7,125 insertions。移除 `NiceImageView/.git`（避免嵌套 git 仓库），`git add -f` 绕过 `repos-flutter-fast/` 的 `.gitignore` 排除规则。commit message 包含完整路线决策、5 个关键问题解决记录、HAP 构建方法和 SHA-256。 |
 | 2026-07-30 | **PRD 按 Flutter 插件标准重写**：原 PRD（852 行）面向 Android 原生 View→ArkUI 迁移分析，含 Android API→ArkUI Canvas 映射（13 章）。重写为 Flutter pure_dart 插件标准 PRD（416 行），按 12 章模板严格组织：删除 Android 内部实现细节（PorterDuff xfermode→clipPath 移植细节移至 devlog）、Android→ArkUI 映射第 13 章整体移出、改为「Android→Flutter 等价映射」简洁对照表放入第 11 章。公开 API 规格从 15 个 Java 方法细化为 16 个 Dart 构造函数参数的完整参数表（含所属模块、默认值、Android 默认值对照）。`nice_image_view_prd.md` 与 `01-analysis-prd.md` byte-identical (416 lines)。 |
+| 2026-07-30 | **Mermaid 图表与验证通过**：添加 4 个 Mermaid 图表（1.6 架构图 graph TB、2.3 渲染流程图 flowchart TD、7.3 渲染管线序列图 sequenceDiagram、11.0 迁移对照图 graph LR）。`validate_mermaid_markdown.py` 运行：4/4 图 mmdc 渲染 SVG 成功（Puppeteer→Chrome，`PUPPETEER_EXECUTABLE_PATH=C:\Program Files\Google\Chrome\Application\chrome.exe` 解决初始浏览器启动失败）。`01-prd-mermaid-validation.json`：`status: PASS`，`syntax_errors: []`，`byte_identical: true`。4 个 SVG 合计 219 KB（01=26KB 架构图, 02=138KB 流程图, 03=34KB 序列图, 04=21KB 迁移对照图）。 |
 
 ---
 

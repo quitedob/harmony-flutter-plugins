@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "source": "01-analysis-prd.md",
+  "source_sha256": "da9dff9aef079559251fe307ee9f94a7994bfd7c94f719a680ee86eac73382fc",
+  "alias": {
+    "path": "nice_image_view_prd.md",
+    "sha256": "da9dff9aef079559251fe307ee9f94a7994bfd7c94f719a680ee86eac73382fc",
+    "byte_identical": true
+  },
+  "validator": {
+    "package": "@mermaid-js/mermaid-cli",
+    "executable": "C:\\Users\\shuaibi\\.claude\\skills\\migrate-flutter-plugins\\scripts\\node_modules\\.bin\\mmdc.cmd",
+    "version": "11.16.0"
+  },
+  "diagram_count": 4,
+  "required_types": {
+    "flowchart": true,
+    "sequenceDiagram": true
+  },
+  "diagrams": [
+    {
+      "index": 1,
+      "type": "graph",
+      "source_sha256": "ec8501add82d232da80de0cd2a9bf5f0214fcaa5f60fcb9dd66a0f868ccffe2d",
+      "rendered_svg": "mermaid/01-analysis-prd-01.svg",
+      "rendered_sha256": "14670d09f054e01640fb52c5990b984aed9403d93649fd7f79b77938135a81fa",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "status": "PASS"
+    },
+    {
+      "index": 2,
+      "type": "flowchart",
+      "source_sha256": "a1df50f43945028f10c3215ffd93b99b771a4f1df5f01cc6849c7adccaf29c3d",
+      "rendered_svg": "mermaid/01-analysis-prd-02.svg",
+      "rendered_sha256": "d6b09afd2298b7a5a695d0e99d2e5fbc73e888d0069296995a02de6b3958b32d",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "status": "PASS"
+    },
+    {
+      "index": 3,
+      "type": "sequenceDiagram",
+      "source_sha256": "579e0f64926ffb73eeecb74671348449404de70af3f6bb505733cbc36471631f",
+      "rendered_svg": "mermaid/01-analysis-prd-03.svg",
+      "rendered_sha256": "3192857d5b0abc9d11163de2b3d3bde43de4ab86357940294ad0dbaef8255292",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "status": "PASS"
+    },
+    {
+      "index": 4,
+      "type": "graph",
+      "source_sha256": "a8b92fde4219f08c22d7f2cf322488c3fd5f96d76fb2b6c979dc9b1e3b6e1eb4",
+      "rendered_svg": "mermaid/01-analysis-prd-04.svg",
+      "rendered_sha256": "97f2934a21c6bb2f4fe1b739e1458893d3ca39f64fdadfbc638ff09d231a18e4",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "status": "PASS"
+    }
+  ],
+  "syntax_errors": [],
+  "status": "PASS"
+}
