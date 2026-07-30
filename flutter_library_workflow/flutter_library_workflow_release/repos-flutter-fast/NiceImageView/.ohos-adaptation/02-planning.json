@@ -1,0 +1,111 @@
+{
+  "sdk_environment": {
+    "flutter_ohos_sdk_version": null,
+    "dart_sdk_constraint": ">=3.0.0 <4.0.0",
+    "flutter_constraint": ">=3.10.0",
+    "ohos_api_level": 12,
+    "target_devices": ["phone", "tablet", "2in1"]
+  },
+  "plugin_type_skill": "type-pure-dart",
+  "ohos_api_mapping": [
+    {
+      "android_api": "NiceImageView extends AppCompatImageView",
+      "ohos_equivalent": "NiceImageView extends StatefulWidget -> CustomPaint(CustomPainter)",
+      "mapping_type": "direct_equivalent",
+      "confidence": "high",
+      "notes": "Flutter CustomPainter with canvas.clipPath() is a cleaner approach than Android PorterDuff xfermode"
+    },
+    {
+      "android_api": "Canvas.drawBitmap / super.onDraw",
+      "ohos_equivalent": "canvas.drawImageRect() with ui.Image from ImageProvider.resolve()",
+      "mapping_type": "direct_equivalent",
+      "confidence": "high"
+    },
+    {
+      "android_api": "PorterDuff.Mode.DST_IN (API <= 27)",
+      "ohos_equivalent": "canvas.clipPath() — native Flutter clipping, no blend mode needed",
+      "mapping_type": "improved",
+      "confidence": "high"
+    },
+    {
+      "android_api": "PorterDuff.Mode.DST_OUT + Path.Op.DIFFERENCE (API > 27)",
+      "ohos_equivalent": "canvas.clipPath() — avoids both DST_OUT and DIFFERENCE entirely",
+      "mapping_type": "avoided",
+      "confidence": "high"
+    },
+    {
+      "android_api": "Path.addCircle()",
+      "ohos_equivalent": "Path.addOval(Rect.fromCircle(...))",
+      "mapping_type": "direct_equivalent",
+      "confidence": "high"
+    },
+    {
+      "android_api": "Path.addRoundRect(RectF, radii[])",
+      "ohos_equivalent": "Path.addRRect(RRect.fromLTRBAndCorners(...))",
+      "mapping_type": "direct_equivalent",
+      "confidence": "high"
+    },
+    {
+      "android_api": "Canvas.saveLayer()",
+      "ohos_equivalent": "canvas.save() + canvas.clipPath() + canvas.restore()",
+      "mapping_type": "equivalent_pattern",
+      "confidence": "high"
+    },
+    {
+      "android_api": "canvas.scale(sx, sy, px, py)",
+      "ohos_equivalent": "canvas.translate() + canvas.scale() + canvas.translate()",
+      "mapping_type": "equivalent_pattern",
+      "confidence": "high"
+    },
+    {
+      "android_api": "Utils.dp2px()",
+      "ohos_equivalent": "Not needed — Flutter uses logical pixels natively",
+      "mapping_type": "not_needed",
+      "confidence": "high"
+    },
+    {
+      "android_api": "invalidate()",
+      "ohos_equivalent": "shouldRepaint() returns true on parameter change",
+      "mapping_type": "equivalent_pattern",
+      "confidence": "high"
+    },
+    {
+      "android_api": "TypedArray/XML attributes",
+      "ohos_equivalent": "Constructor parameters with matching defaults",
+      "mapping_type": "equivalent_pattern",
+      "confidence": "high"
+    },
+    {
+      "android_api": "Paint.setAntiAlias(true)",
+      "ohos_equivalent": "Paint()..isAntiAlias = true",
+      "mapping_type": "direct_equivalent",
+      "confidence": "high"
+    }
+  ],
+  "native_dependency_mapping": [],
+  "permission_mapping": [],
+  "reference_plugins": [
+    {
+      "name": "flutter_zoom_drawer",
+      "type": "pure_dart",
+      "relevance": "Pure Dart Flutter UI widget with OHOS compatibility — same adaptation path"
+    }
+  ],
+  "implementation_strategy": {
+    "approach": "pure_dart_port",
+    "description": "Port Android NiceImageView.java Canvas drawing logic to Flutter CustomPainter. Use canvas.clipPath() instead of PorterDuff xfermode for image clipping. Use canvas.clipRRect/clipOval native Flutter APIs for rounded corners and circles.",
+    "files_to_create": [
+      "lib/nice_image_view.dart",
+      "lib/src/nice_image_view.dart",
+      "lib/src/nice_image_view_painter.dart"
+    ],
+    "files_to_modify": [],
+    "no_native_code": true,
+    "estimated_effort": "low"
+  },
+  "risk_items": [],
+  "example_deps_solutions": [],
+  "ffi_strategy": "not_applicable",
+  "ffi_strategy_caveat": null,
+  "ffi_library_name": null
+}

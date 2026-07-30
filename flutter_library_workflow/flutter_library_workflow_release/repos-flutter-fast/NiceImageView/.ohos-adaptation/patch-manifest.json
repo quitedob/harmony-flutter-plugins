@@ -1,0 +1,66 @@
+{
+  "changes": [
+    {
+      "target_file": "pubspec.yaml",
+      "intent": "Create Flutter pure_dart package configuration for nice_image_view (v1.0.5)",
+      "donor_evidence": "Android NiceImageView build.gradle and README.md properties table",
+      "target_adaptation": "New Flutter package with flutter SDK dependency only, no native platform registrations",
+      "validation": ["flutter pub get", "flutter analyze"],
+      "rollback": "Remove pubspec.yaml"
+    },
+    {
+      "target_file": "lib/nice_image_view.dart",
+      "intent": "Library entry point exporting NiceImageView widget",
+      "donor_evidence": "Original Android package entry: com.shehuan.niv.NiceImageView",
+      "target_adaptation": "Dart library file with single export",
+      "validation": ["flutter analyze"],
+      "rollback": "Remove file"
+    },
+    {
+      "target_file": "lib/src/nice_image_view.dart",
+      "intent": "StatefulWidget wrapping CustomPaint; resolves ImageProvider to ui.Image; 16 constructor params matching Android XML attributes + setter API",
+      "donor_evidence": "NiceImageView.java constructors (lines 54-95), attrs.xml 12 declare-styleable entries",
+      "target_adaptation": "Dart StatefulWidget with ImageProvider.resolve() pattern, CustomPaint child, all 12 Android attributes + width/height/fit as constructor params with matching defaults",
+      "validation": ["flutter analyze", "test/nice_image_view_test.dart group: construction + public API"],
+      "rollback": "Remove file"
+    },
+    {
+      "target_file": "lib/src/nice_image_view_painter.dart",
+      "intent": "CustomPainter porting NiceImageView.onDraw() Canvas logic: clipPath (equivalent to PorterDuff DST_IN/DST_OUT), image scaling, mask overlay, border/inner-border drawing",
+      "donor_evidence": "NiceImageView.java onDraw() (lines 128-168), drawBorders() (lines 171-183), calculateRadii() (lines 232-252)",
+      "target_adaptation": "canvas.clipPath() replaces PorterDuff xfermode (cleaner); Path.addOval/addRRect replace Android Path.addCircle/addRoundRect; save/scale/translate/restore pattern for isCoverSrc scaling; drawCircle/drawRRect for borders",
+      "validation": ["flutter analyze", "test/nice_image_view_test.dart group: rendering modes + repaint logic"],
+      "rollback": "Remove file"
+    },
+    {
+      "target_file": "test/nice_image_view_test.dart",
+      "intent": "21 widget and unit tests covering all 6 functional modules, repaint logic, edge cases, API defaults",
+      "donor_evidence": "Original Android test: ExampleInstrumentedTest.java, ExampleUnitTest.java",
+      "target_adaptation": "Flutter widget tests using pumpWidget + find.byType; unit tests for shouldRepaint with toImageSync images",
+      "validation": ["flutter test"],
+      "rollback": "Remove file"
+    },
+    {
+      "target_file": "example/lib/main.dart",
+      "intent": "Interactive demo app with circle/cornerRadius/border/isCoverSrc controls",
+      "donor_evidence": "Original Android app/src/main layout/activity_main.xml + MainActivity.java",
+      "target_adaptation": "Material 3 Flutter app with Slider/Switch controls to toggle NiceImageView properties",
+      "validation": ["flutter analyze"],
+      "rollback": "Remove file"
+    }
+  ],
+  "rejected_donor_changes": [
+    {
+      "change": "Android PorterDuff.Mode.DST_OUT + Path.Op.DIFFERENCE for API > 27",
+      "reason": "Flutter canvas.clipPath() achieves equivalent clipping without either API. This is an improvement, not a gap."
+    },
+    {
+      "change": "Android Utils.dp2px() unit conversion",
+      "reason": "Flutter operates in logical pixels natively; no density conversion needed. Removed entirely."
+    },
+    {
+      "change": "Android TypedArray.obtainStyledAttributes() XML parsing",
+      "reason": "Flutter uses Dart constructor parameters with defaults, not XML attributes. Replaced with const constructor params."
+    }
+  ]
+}

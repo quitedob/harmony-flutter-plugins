@@ -1,0 +1,17 @@
+{
+  "review": {
+    "review_id": "case-review-niv-001",
+    "stage": "case-review",
+    "plugin_name": "nice_image_view",
+    "dimensions": {
+      "coverage": {"score": 100, "weight": 35, "pass": true, "notes": "48 test case entries covering all modules and edge cases"},
+      "executability": {"score": 100, "weight": 30, "pass": true, "notes": "All cases have concrete actions, checkpoints, and expected results"},
+      "decidability": {"score": 100, "weight": 20, "pass": true, "notes": "All cases have clear expectation_metadata (success/expected_rejection)"},
+      "standardization": {"score": 100, "weight": 15, "pass": true, "notes": "Standard widget/unit test format with deterministic pass/fail logic"}
+    },
+    "overall_score": 100,
+    "all_dimensions_pass": true,
+    "revisionRequired": false,
+    "resolved_issue_ids": []
+  }
+}

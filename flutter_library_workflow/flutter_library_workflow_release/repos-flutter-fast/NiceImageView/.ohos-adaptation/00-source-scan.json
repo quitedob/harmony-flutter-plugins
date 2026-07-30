@@ -1,0 +1,73 @@
+{
+  "docs_scan": {
+    "agent_id": "docs-agent",
+    "assigned_roots": [".", "README.md"],
+    "status": "complete",
+    "file_count": 3,
+    "files": [
+      "README.md",
+      "niceimageview/src/main/res/values/attrs.xml",
+      "LICENSE"
+    ],
+    "findings": [
+      "Android AppCompatImageView extension library",
+      "Supports circle, rounded corners (uniform and individual), border, inner border, mask",
+      "12 XML custom attributes declared in attrs.xml",
+      "15 public Java methods (3 constructors + 12 setters)",
+      "Uses PorterDuff Xfermode (DST_IN/DST_OUT) for image clipping",
+      "Apache 2.0 license"
+    ],
+    "unknowns": [],
+    "conflicts": [],
+    "read_only": true
+  },
+  "project_scans": [
+    {
+      "agent_id": "dart-agent",
+      "assigned_roots": ["lib", "test"],
+      "status": "complete",
+      "file_count": 5,
+      "files": [
+        "lib/nice_image_view.dart",
+        "lib/src/nice_image_view.dart",
+        "lib/src/nice_image_view_painter.dart",
+        "test/nice_image_view_test.dart",
+        "pubspec.yaml"
+      ],
+      "findings": [
+        "Pure Dart Flutter package with no native dependencies",
+        "NiceImageView StatefulWidget with 16 constructor parameters matching Android API",
+        "NiceImageViewPainter CustomPainter implementing draw logic",
+        "Uses canvas.clipPath() instead of PorterDuff xfermode (cleaner Flutter approach)",
+        "21 test cases covering construction, rendering modes, repaint logic, edge cases",
+        "flutter analyze passes with 0 issues"
+      ],
+      "unknowns": [],
+      "conflicts": [],
+      "read_only": true
+    },
+    {
+      "agent_id": "platform-agent",
+      "assigned_roots": ["example", "android", "ohos"],
+      "status": "complete",
+      "file_count": 2,
+      "files": [
+        "example/lib/main.dart",
+        "niceimageview/src/main/java/com/shehuan/niv/NiceImageView.java"
+      ],
+      "findings": [
+        "Original Android source: NiceImageView.java (335 lines), Utils.java (11 lines)",
+        "Flutter example/demo created with interactive controls",
+        "No OHOS native directory needed (pure_dart path)",
+        "No Android Flutter platform directory needed (pure_dart path)"
+      ],
+      "unknowns": [],
+      "conflicts": [],
+      "read_only": true
+    }
+  ],
+  "batching": {
+    "mode": "parallel",
+    "degraded": false
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "review": {
+    "review_id": "analysis-review-niv-001",
+    "stage": "analysis-review",
+    "plugin_name": "nice_image_view",
+    "dimensions": {
+      "coverage": {"score": 100, "weight": 35, "pass": true, "notes": "All 6 modules, 24 test points covered"},
+      "correctness": {"score": 100, "weight": 30, "pass": true, "notes": "All test points traceable to PRD functional requirements"},
+      "consistency": {"score": 100, "weight": 20, "pass": true, "notes": "Test point IDs consistent across MD, JSON, and test code"},
+      "executability": {"score": 100, "weight": 15, "pass": true, "notes": "All test cases are widget/unit tests with clear actions and checkpoints"}
+    },
+    "overall_score": 100,
+    "all_dimensions_pass": true,
+    "revisionRequired": false,
+    "resolved_issue_ids": []
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "artifact_profile": "flutter",
+  "package": {
+    "name": "nice_image_view",
+    "version": "1.0.5",
+    "repository": "https://github.com/shehuan/NiceImageView",
+    "license": "Apache-2.0",
+    "revision": "b16945686600f7471b14db10368ef17ade5bf4ed"
+  },
+  "target": {
+    "flutter_ohos_revision": null,
+    "api": 12,
+    "device_types": ["phone", "tablet", "2in1"]
+  },
+  "donor": {
+    "path_or_url": "https://github.com/shehuan/NiceImageView",
+    "revision": "b16945686600f7471b14db10368ef17ade5bf4ed",
+    "description": "Original Android library (com.android.library) providing an AppCompatImageView extension with circle/rounded-corner clipping, border, and mask effects."
+  },
+  "source_strategy": "new_port",
+  "classification": "pure_dart",
+  "implementation_path": "pure_dart",
+  "classification_reason": "Original Android Canvas drawing logic (PorterDuff xfermode clipping, Path operations) ported to Flutter CustomPainter using canvas.clipPath(). No MethodChannel, native platform code, or permissions required. All rendering uses standard Flutter framework Canvas API.",
+  "authority_conflicts": [],
+  "created_at": "2026-07-30T00:00:00+08:00",
+  "notes": "Original NiceImageView is an Android native View library. This migration creates a NEW Flutter pure-Dart package from scratch, porting the Canvas rendering logic directly rather than wrapping the Android code. The Flutter package uses CustomPainter + clipPath which is a cleaner approach than the original PorterDuff xfermode technique."
+}

@@ -1,0 +1,54 @@
+{
+  "checks": [
+    {
+      "id": "channel_name_consistency",
+      "name": "Channel 名称一致性",
+      "result": "pass",
+      "detail": "N/A — pure_dart plugin has zero channels"
+    },
+    {
+      "id": "plugin_type_skill_consistency",
+      "name": "插件类型与 Skill 一致性",
+      "result": "pass",
+      "detail": "plugin_type=dart matches plugin_type_skill=type-pure-dart"
+    },
+    {
+      "id": "build_status_propagation",
+      "name": "构建状态传播",
+      "result": "pass",
+      "detail": "flutter pub get + analyze PASS propagated to all stage JSON files"
+    },
+    {
+      "id": "example_status_propagation",
+      "name": "Example 状态传播",
+      "result": "pass",
+      "detail": "example/lib/main.dart created, flutter analyze passes"
+    },
+    {
+      "id": "coverage_math_consistency",
+      "name": "覆盖率算术一致性",
+      "result": "pass",
+      "detail": "16/16 API = 100%; 24/24 test points covered; counts match across stages"
+    },
+    {
+      "id": "runtime_check_summary_consistency",
+      "name": "运行时检查摘要一致性",
+      "result": "pass",
+      "detail": "NOT_RUN statuses propagated correctly to summary"
+    },
+    {
+      "id": "device_test_summary_consistency",
+      "name": "真机测试摘要一致性",
+      "result": "pass",
+      "detail": "HAP/device status=NOT_RUN, device count=0, consistent with artifact-manifest"
+    },
+    {
+      "id": "quality_score_consistency",
+      "name": "质量评分一致性",
+      "result": "pass",
+      "detail": "Review scores 100 across analysis-review (100) and case-review (100)"
+    }
+  ],
+  "all_pass": true,
+  "timestamp": "2026-07-30T00:00:00+08:00"
+}

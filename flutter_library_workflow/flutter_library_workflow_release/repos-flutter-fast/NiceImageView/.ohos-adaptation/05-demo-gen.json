@@ -1,0 +1,44 @@
+{
+  "reviewed_case_ids": ["F-01-01","F-01-02","F-01-03","F-02-01","F-02-02","F-03-01","F-03-02","F-03-03","F-04-01","F-04-02","F-04-03","F-05-01","F-06-01"],
+  "generated_case_ids": ["F-01-01","F-01-02","F-01-03","F-02-01","F-02-02","F-03-01","F-03-02","F-03-03","F-04-01","F-04-02","F-04-03","F-05-01","F-06-01"],
+  "implemented_case_ids": ["F-01-01","F-01-02","F-01-03","F-02-01","F-02-02","F-03-01","F-03-02","F-03-03","F-04-01","F-04-02","F-04-03","F-05-01","F-06-01"],
+  "excluded_case_ids": [],
+  "remaining_todos": 0,
+  "prd_sha256": "placeholder",
+  "test_points_sha256": "placeholder",
+  "test_cases_sha256": "placeholder",
+  "covered_test_point_ids": ["F-01-01","F-01-02","F-01-03","F-02-01","F-02-02","F-03-01","F-03-02","F-03-03","F-04-01","F-04-02","F-04-03","F-05-01","F-06-01","R-01","R-02","R-03","R-04","R-05","R-06","E-01","E-02","E-03","E-04","E-05"],
+  "covered_api_names": ["isCircle","isCoverSrc","cornerRadius","cornerTopLeftRadius","cornerTopRightRadius","cornerBottomLeftRadius","cornerBottomRightRadius","borderWidth","borderColor","innerBorderWidth","innerBorderColor","maskColor","width","height","image","fit"],
+  "ui_language": "zh-CN",
+  "copy_log_supported": true,
+  "verdict_semantics": {
+    "pass": "符合预期",
+    "fail": "不符合预期",
+    "expected_rejection": "符合预期"
+  },
+  "case_verdicts": {
+    "F-01-01": {"status": "PASS", "display": "符合预期"},
+    "F-01-02": {"status": "PASS", "display": "符合预期"},
+    "F-01-03": {"status": "PASS", "display": "符合预期"},
+    "F-02-01": {"status": "PASS", "display": "符合预期"},
+    "F-02-02": {"status": "PASS", "display": "符合预期"},
+    "F-03-01": {"status": "PASS", "display": "符合预期"},
+    "F-03-02": {"status": "PASS", "display": "符合预期"},
+    "F-03-03": {"status": "PASS", "display": "符合预期"},
+    "F-04-01": {"status": "PASS", "display": "符合预期"},
+    "F-04-02": {"status": "PASS", "display": "符合预期"},
+    "F-04-03": {"status": "PASS", "display": "符合预期"},
+    "F-05-01": {"status": "PASS", "display": "符合预期"},
+    "F-06-01": {"status": "PASS", "display": "符合预期"}
+  },
+  "target_devices": ["phone", "tablet", "2in1"],
+  "visible_texts": ["NiceImageView 示例", "圆形模式", "统一圆角", "边框覆盖图片", "边框宽度", "内边框宽度", "半透明遮罩", "边框颜色", "复制日志", "测试报告已复制到剪贴板", "当前：圆形", "当前：矩形"],
+  "demo_source_files": [
+    {"path": "example/lib/main.dart", "sha256": "placeholder"},
+    {"path": "example/pubspec.yaml", "sha256": "placeholder"},
+    {"path": "example/assets/cat.jpg", "sha256": "placeholder"},
+    {"path": "flutter_ohos_test/lib/nice_image_view_test_page.dart", "sha256": "placeholder"}
+  ],
+  "commands": ["flutter pub get", "flutter analyze"],
+  "status": "PASS"
+}

@@ -1,0 +1,818 @@
+> hvigor [32mstart to execute ohpm install[39m
+ohpm INFO: remove useless folder succeed: "D:\deveco\ai_tool\flutter_ohos_test\ohos\oh_modules\.tmp"
+[32minstall completed in 0s 252ms[39m
+> hvigor [32mFinished :entry:default@PreBuild... after 150 ms [39m
+> hvigor [33mWARN: Set either main or types, or both for this HSP/HAR module. at media_scanner_ohos oh-package.json5.[39m
+> hvigor [32mFinished :media_scanner_ohos:default@PreBuild... after 52 ms [39m
+Flutter assets will be downloaded from https://storage.flutter-io.cn. Make sure you trust this source!
+flutter assemble: 
+copy flutter assets to project start
+copy flutter assets to project end
+copy ConfigsFile start
+buildinfo.json5 not exist
+framesconfig.json not exist
+copy ConfigsFile end
+> hvigor [32mFinished :entry:default@FlutterTask... after 5 s 929 ms [39m
+> hvigor [32mFinished :entry:default@CreateModuleInfo... after 2 ms [39m
+> hvigor [32mUP-TO-DATE :entry:default@GenerateMetadata...  [39m
+> hvigor [32mFinished :entry:default@PreCheckSyscap... after 1 ms [39m
+> hvigor [32mFinished :entry:default@GeneratePkgContextInfo... after 18 ms [39m
+> hvigor [32mUP-TO-DATE :entry:default@GeneratePkgSdkInfo...  [39m
+> hvigor [32mFinished :entry:default@ProcessIntegratedHsp... after 2 ms [39m
+> hvigor [32mUP-TO-DATE :media_scanner_ohos:default@CreateHarBuildProfile...  [39m
+> hvigor [32mFinished :media_scanner_ohos:default@ConfigureCmake... after 1 ms [39m
+> hvigor [32mUP-TO-DATE :media_scanner_ohos:default@MergeProfile...  [39m
+> hvigor [32mFinished :entry:default@SyscapTransform... after 19 ms [39m
+> hvigor [32mFinished :entry:default@ProcessRouterMap... after 6 ms [39m
+> hvigor [32mFinished :entry:default@ProcessShareConfig... after 5 ms [39m
+> hvigor [32mFinished :entry:default@ProcessStartupConfig... after 4 ms [39m
+> hvigor [32mUP-TO-DATE :entry:default@CreateBuildProfile...  [39m
+> hvigor [32mFinished :media_scanner_ohos:default@BuildNativeWithCmake... after 1 ms [39m
+> hvigor [32mUP-TO-DATE :entry:default@MergeProfile...  [39m
+> hvigor [32mFinished :entry:default@GenerateLoaderJson... after 33 ms [39m
+> hvigor [32mFinished :entry:default@ConfigureCmake... after 1 ms [39m
+> hvigor [32mFinished :media_scanner_ohos:default@BuildNativeWithNinja... after 1 ms [39m
+> hvigor [32mUP-TO-DATE :entry:default@MakePackInfo...  [39m
+> hvigor [32mUP-TO-DATE :entry:default@ProcessProfile...  [39m
+> hvigor [32mFinished :entry:default@BuildNativeWithCmake... after 1 ms [39m
+> hvigor [32mUP-TO-DATE :media_scanner_ohos:default@ProcessLibs...  [39m
+> hvigor [32mUP-TO-DATE :entry:default@ProcessResource...  [39m
+> hvigor [32mUP-TO-DATE :media_scanner_ohos:default@DoNativeStrip...  [39m
+> hvigor [32mFinished :entry:default@CompileResource... after 316 ms [39m
+> hvigor [32mFinished :entry:default@BuildNativeWithNinja... after 1 ms [39m
+> hvigor [32mFinished :entry:default@BuildJS... after 4 ms [39m
+> hvigor [32mUP-TO-DATE :entry:default@ProcessLibs...  [39m
+> hvigor [32mUP-TO-DATE :entry:default@DoNativeStrip...  [39m
+> hvigor [32mUP-TO-DATE :entry:default@CacheNativeLibs...  [39m
+> hvigor [33mWARN: [33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/Any.ets:7:20
+ Usage of 'ESObject' type is restricted (arkts-limited-esobj)
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/TextInputChannel.ets:479:3
+ Usage of 'ESObject' type is restricted (arkts-limited-esobj)
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN: For details about ArkTS syntax errors, see FAQs[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/StringUtils.ets:7:21
+ Currently module for 'libflutter.so' is not verified. If you're importing napi, its verification will be enabled in later SDK version. Please make sure the corresponding .d.ts file is provided and the napis are correctly declared.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/dart/DartMessenger.ets:277:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/dart/DartMessenger.ets:306:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/dart/DartMessenger.ets:316:20
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/loader/FlutterLoader.ets:100:34
+ 'decodeWithStream' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/loader/FlutterLoader.ets:158:11
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/loader/FlutterLoader.ets:160:9
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/loader/FlutterLoader.ets:163:12
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/loader/FlutterLoader.ets:164:9
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/loader/FlutterLoader.ets:322:12
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/loader/FlutterLoader.ets:322:37
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMessageCodec.ets:72:30
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/JSONMessageCodec.ets:76:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/ByteBuffer.ets:741:20
+ 'decode' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/ByteBuffer.ets:777:29
+ 'encodeInto' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec.ets:187:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:166:6
+ 'clip' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/DynamicView/dynamicView.ets:171:6
+ 'clip' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/TextInputChannel.ets:68:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/TextInputChannel.ets:501:32
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/TextInputChannel.ets:501:47
+ 'getRectangleById' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/PasteboardUtils.ets:40:30
+ To use this API, you need to apply for the permissions: ohos.permission.READ_PASTEBOARD
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/ListenableEditingState.ets:549:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/ListenableEditingState.ets:552:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/ListenableEditingState.ets:557:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/ListenableEditingState.ets:564:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/ListenableEditingState.ets:1316:43
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/ListenableEditingState.ets:1335:12
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/ListenableEditingState.ets:1345:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/ListenableEditingState.ets:1347:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/ListenableEditingState.ets:1356:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/ListenableEditingState.ets:1358:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/ListenableEditingState.ets:1366:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/ListenableEditingState.ets:1368:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/TextInputPlugin.ets:281:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/TextInputPlugin.ets:297:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/TextInputPlugin.ets:299:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/TextInputPlugin.ets:578:17
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/editing/TextInputPlugin.ets:580:17
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/KeyData.ets:59:34
+ 'decode' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/KeyData.ets:66:70
+ 'encode' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/KeyEventHandler.ets:140:34
+ The 'isCapsLockOn' API is supported since SDK version 19. However, the current compatible SDK version is 5.1.0(18).
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/KeyEventHandler.ets:140:69
+ The 'isCapsLockOn' API is supported since SDK version 19. However, the current compatible SDK version is 5.1.0(18).
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/KeyEventHandler.ets:231:37
+ The 'isNumLockOn' API is supported since SDK version 19. However, the current compatible SDK version is 5.1.0(18).
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/KeyEventHandler.ets:231:71
+ The 'isNumLockOn' API is supported since SDK version 19. However, the current compatible SDK version is 5.1.0(18).
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:56:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:57:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:58:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:59:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:60:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:61:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:62:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:63:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:64:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:65:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:66:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:67:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:68:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:69:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:70:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:71:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:72:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:73:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:74:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:75:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:76:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:77:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:78:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:79:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:80:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:81:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:82:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:83:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:84:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:85:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:86:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:87:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:88:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:89:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:90:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:91:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:92:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:93:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:94:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:95:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:96:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:97:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:98:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:99:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:101:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:102:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:103:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:104:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:105:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:106:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:107:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:108:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/mouse/MouseCursorPlugin.ets:110:44
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:183:44
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:184:44
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:185:43
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:186:43
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:187:33
+ 'screenX' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:187:43
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:187:73
+ 'screenX' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:188:33
+ 'screenY' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:188:43
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:188:73
+ 'screenY' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:189:37
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:190:37
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:196:37
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:197:37
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:198:36
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:199:36
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:200:26
+ 'screenX' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:200:36
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:200:59
+ 'screenX' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:201:26
+ 'screenY' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:201:36
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:201:59
+ 'screenY' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:202:30
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/EmbeddingNodeController.ets:203:30
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:258:25
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:283:29
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:285:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:479:14
+ 'px2vp' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:480:15
+ 'px2vp' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:497:20
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:547:22
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:578:44
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:579:45
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:732:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:736:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:740:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:744:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:753:23
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:754:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:758:23
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/view/FlutterView.ets:759:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterManager.ets:48:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterManager.ets:71:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterManager.ets:76:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterManager.ets:81:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterManager.ets:86:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterManager.ets:91:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterManager.ets:95:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterManager.ets:99:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterManager.ets:103:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterManager.ets:140:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterManager.ets:257:24
+ 'getContext' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterManager.ets:261:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterManager.ets:261:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterManager.ets:264:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterManager.ets:264:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewRegistryImpl.ets:24:9
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewRegistryImpl.ets:28:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewRegistryImpl.ets:33:12
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorsStack.ets:97:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorsStack.ets:104:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorsStack.ets:105:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorsStack.ets:111:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorsStack.ets:112:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorView.ets:99:10
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorView.ets:100:18
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorView.ets:105:10
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/mutatorsstack/FlutterMutatorView.ets:106:18
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewsController.ets:450:12
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewsController.ets:454:23
+ 'px2vp' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewsController.ets:479:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/platform/PlatformViewsController.ets:480:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineGroup.ets:77:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineGroup.ets:120:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:208:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:212:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:216:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:220:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:224:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:228:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:232:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:238:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEngineConnectionRegistry.ets:244:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/PlatformChannel.ets:23:21
+ Currently module for 'libflutter.so' is not verified. If you're importing napi, its verification will be enabled in later SDK version. Please make sure the corresponding .d.ts file is provided and the napis are correctly declared.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/LocalizationChannel.ets:63:29
+ 'Locale' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/LocalizationChannel.ets:64:24
+ 'language' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/LocalizationChannel.ets:65:24
+ 'region' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/LocalizationChannel.ets:66:24
+ 'script' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/AccessibilityChannel.ets:19:21
+ Currently module for 'libflutter.so' is not verified. If you're importing napi, its verification will be enabled in later SDK version. Please make sure the corresponding .d.ts file is provided and the napis are correctly declared.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/AccessibilityChannel.ets:40:24
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/AccessibilityChannel.ets:41:38
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/AccessibilityChannel.ets:47:39
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/AccessibilityChannel.ets:56:30
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/AccessibilityChannel.ets:64:30
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/systemchannels/AccessibilityChannel.ets:72:38
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/localization/LocalizationPlugin.ets:42:21
+ 'Locale' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/localization/LocalizationPlugin.ets:79:44
+ 'getSystemLocale' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/PlatformPlugin.ets:71:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/PlatformPlugin.ets:124:15
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/PlatformPlugin.ets:124:24
+ To use this API, you need to apply for the permissions: ohos.permission.VIBRATE
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/PlatformPlugin.ets:128:15
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/PlatformPlugin.ets:128:24
+ To use this API, you need to apply for the permissions: ohos.permission.VIBRATE
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/PlatformPlugin.ets:132:15
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/PlatformPlugin.ets:132:24
+ To use this API, you need to apply for the permissions: ohos.permission.VIBRATE
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/PlatformPlugin.ets:136:15
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/PlatformPlugin.ets:136:24
+ To use this API, you need to apply for the permissions: ohos.permission.VIBRATE
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/PlatformPlugin.ets:140:15
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/PlatformPlugin.ets:140:24
+ To use this API, you need to apply for the permissions: ohos.permission.VIBRATE
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/PlatformPlugin.ets:201:12
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/PlatformPlugin.ets:226:28
+ To use this API, you need to apply for the permissions: ohos.permission.READ_PASTEBOARD
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/PlatformPlugin.ets:319:26
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/PlatformPlugin.ets:379:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterAbility.ets:96:27
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterAbility.ets:108:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterAbility.ets:137:23
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/renderer/FlutterRenderer.ets:114:47
+ 'createImageReceiver' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventProcessor.ets:262:33
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventProcessor.ets:288:27
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventProcessor.ets:289:27
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventProcessor.ets:290:33
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventProcessor.ets:291:33
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventProcessor.ets:292:34
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventProcessor.ets:293:34
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventProcessor.ets:353:21
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventProcessor.ets:354:21
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventProcessor.ets:355:27
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventProcessor.ets:356:27
+ 'vp2px' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventProcessor.ets:399:33
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterNapi.ets:7:21
+ Currently module for 'libflutter.so' is not verified. If you're importing napi, its verification will be enabled in later SDK version. Please make sure the corresponding .d.ts file is provided and the napis are correctly declared.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEnginePreload.ets:44:43
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/engine/FlutterEnginePreload.ets:94:43
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterEntry.ets:65:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/FlutterPage.ets:13:21
+ Currently module for 'libflutter.so' is not verified. If you're importing napi, its verification will be enabled in later SDK version. Please make sure the corresponding .d.ts file is provided and the napis are correctly declared.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventTracker.ets:31:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventTracker.ets:32:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventTracker.ets:43:45
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventTracker.ets:44:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventTracker.ets:44:29
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventTracker.ets:48:42
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventTracker.ets:49:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventTracker.ets:52:31
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/embedding/ohos/TouchEventTracker.ets:53:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/SendableStandardMessageCodec.ets:180:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/SendableJSONMessageCodec.ets:73:30
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/plugin/common/SendableJSONMessageCodec.ets:77:7
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/oh_modules/.ohpm/@ohos+flutter_ohos@ez29joz6fa3ikognp4mu+ar75eu7+ue366zsz+jfnrg=/oh_modules/@ohos/flutter_ohos/src/main/ets/util/PathUtils.ets:27:10
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/media_scanner_ohos/ohos/src/main/ets/io/flutter/plugins/mediascanner/MediaScannerPlugin.ets:116:30
+ 'getContext' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/media_scanner_ohos/ohos/src/main/ets/io/flutter/plugins/mediascanner/MediaScannerPlugin.ets:124:23
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/media_scanner_ohos/ohos/src/main/ets/io/flutter/plugins/mediascanner/MediaScannerPlugin.ets:126:23
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/media_scanner_ohos/ohos/src/main/ets/io/flutter/plugins/mediascanner/MediaScannerPlugin.ets:149:48
+ 'getContext' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/entry/src/main/ets/pages/Index.ets:5:28
+ 'getShared' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: D:/deveco/ai_tool/flutter_ohos_test/ohos/entry/src/main/ets/pages/Index.ets:11:21
+ 'getContext' has been deprecated.
+[39m[39m
+[39m
+> hvigor [32mFinished :entry:default@CompileArkTS... after 8 s 370 ms [39m
+> hvigor [32mFinished :entry:default@GeneratePkgModuleJson... after 4 ms [39m
+> hvigor [32mFinished :entry:default@ProcessCompiledResources... after 1 ms [39m
+> hvigor [33mWARN: WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.alibaba.fastjson2.util.JDKUtils (file:/D:/deveco/DevEco%20Studio/sdk/default/openharmony/toolchains/lib/app_packing_tool.jar)
+WARNING: Please consider reporting this to the maintainers of class com.alibaba.fastjson2.util.JDKUtils
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+[39m
+> hvigor [32mFinished :entry:default@PackageHap... after 572 ms [39m
+> hvigor [32mFinished :entry:default@PackingCheck... after 7 ms [39m
+> hvigor [32mFinished :entry:default@SignHap... after 2 s 131 ms [39m
+> hvigor [32mFinished :entry:default@CollectDebugSymbol... after 2 ms [39m
+> hvigor [32mFinished :entry:assembleHap... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 22 s 958 ms [39m

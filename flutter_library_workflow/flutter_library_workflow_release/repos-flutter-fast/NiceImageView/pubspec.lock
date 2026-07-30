@@ -41,21 +41,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.19.1"
-  cupertino_icons:
-    dependency: "direct overridden"
-    description:
-      name: cupertino_icons
-      sha256: ba631d1c7f7bef6b729a622b7b752645a2d076dba9976925b8f25725a30e1ee6
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.0.8"
-  discrollview:
-    dependency: "direct main"
-    description:
-      path: "../flutter_library_workflow/flutter_library_workflow_release/repos-flutter-fast/discrollview"
-      relative: true
-    source: path
-    version: "0.0.2"
   fake_async:
     dependency: transitive
     description:
@@ -73,22 +58,15 @@ packages:
     dependency: "direct dev"
     description:
       name: flutter_lints
-      sha256: "5398f14efa795ffb7a33e9b6a08798b26a180edac4ad7db3f231e40f82ce11e1"
+      sha256: "9e8c3858111da373efc5aa341de011d9bd23e2c5c5e0c62bccf32438e192d7b1"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "5.0.0"
+    version: "3.0.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_zoom_drawer:
-    dependency: "direct main"
-    description:
-      path: "../flutter_zoom_drawer_ohos"
-      relative: true
-    source: path
-    version: "3.2.0"
   leak_tracker:
     dependency: transitive
     description:
@@ -117,10 +95,10 @@ packages:
     dependency: transitive
     description:
       name: lints
-      sha256: c35bb79562d980e9a453fc715854e1ed39e24e7d0297a880ef54e17f9874a9d7
+      sha256: cbf8d4b858bb0134ef3ef87841abdf8d63bfc255c266b7bf6b39daa1085c4290
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "5.1.1"
+    version: "3.0.0"
   matcher:
     dependency: transitive
     description:
@@ -137,20 +115,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.11.1"
-  media_scanner:
-    dependency: "direct main"
-    description:
-      path: "../media_scanner"
-      relative: true
-    source: path
-    version: "1.0.0"
-  media_scanner_ohos:
-    dependency: "direct overridden"
-    description:
-      path: "../media_scanner_ohos"
-      relative: true
-    source: path
-    version: "1.0.0"
   meta:
     dependency: transitive
     description:
@@ -159,13 +123,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.16.0"
-  nice_image_view:
-    dependency: "direct main"
-    description:
-      path: "../flutter_library_workflow/flutter_library_workflow_release/repos-flutter-fast/NiceImageView"
-      relative: true
-    source: path
-    version: "1.0.5"
   path:
     dependency: transitive
     description:
@@ -244,5 +201,5 @@ packages:
     source: hosted
     version: "15.0.0"
 sdks:
-  dart: ">=3.8.1 <4.0.0"
-  flutter: ">=3.22.0"
+  dart: ">=3.7.0-0 <4.0.0"
+  flutter: ">=3.18.0-18.0.pre.54"

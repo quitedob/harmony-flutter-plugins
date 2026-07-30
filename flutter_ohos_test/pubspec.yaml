@@ -34,6 +34,10 @@ dependencies:
     path: ../media_scanner
   flutter_zoom_drawer:
     path: ../flutter_zoom_drawer_ohos
+  discrollview:
+    path: ../flutter_library_workflow/flutter_library_workflow_release/repos-flutter-fast/discrollview
+  nice_image_view:
+    path: ../flutter_library_workflow/flutter_library_workflow_release/repos-flutter-fast/NiceImageView
 
 dependency_overrides:
   media_scanner_ohos:

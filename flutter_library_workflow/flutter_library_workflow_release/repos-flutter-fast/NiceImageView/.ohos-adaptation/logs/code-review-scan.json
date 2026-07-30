@@ -1,0 +1,10 @@
+{
+  "engine": "flutter_analyze",
+  "findings": [],
+  "summary": {
+    "files_scanned": 7,
+    "errors": 0,
+    "warnings": 0,
+    "info": 0
+  }
+}

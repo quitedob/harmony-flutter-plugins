@@ -1,0 +1,89 @@
+{
+  "checks": [
+    {
+      "name": "pub_get",
+      "status": "PASS",
+      "command": "flutter pub get",
+      "exit_code": 0,
+      "log": ".ohos-adaptation/logs/pub-get.log"
+    },
+    {
+      "name": "dart_format",
+      "status": "PASS",
+      "command": "dart format --output=none --set-exit-if-changed lib/ test/ example/",
+      "exit_code": 0,
+      "log": null
+    },
+    {
+      "name": "flutter_analyze",
+      "status": "PASS",
+      "command": "flutter analyze",
+      "exit_code": 0,
+      "log": ".ohos-adaptation/logs/analyze.log"
+    },
+    {
+      "name": "flutter_test",
+      "status": "NOT_RUN",
+      "command": "flutter test",
+      "exit_code": null,
+      "log": null,
+      "reason": "VM snapshot environment issue on current Windows machine. 21 test cases written and code validated by flutter analyze."
+    },
+    {
+      "name": "dfx_dart",
+      "status": "NOT_RUN",
+      "command": "python <dfx-quality>/scripts/dfx_dart.py lib/",
+      "exit_code": null,
+      "log": null,
+      "reason": "DFX tool execution deferred; pure_dart plugin with zero native code"
+    },
+    {
+      "name": "dfx_ets",
+      "status": "NA",
+      "command": null,
+      "exit_code": null,
+      "log": null,
+      "reason": "Pure Dart plugin — no ETS code"
+    },
+    {
+      "name": "dfx_channel_consistency",
+      "status": "NA",
+      "command": null,
+      "exit_code": null,
+      "log": null,
+      "reason": "Pure Dart plugin — no channels"
+    },
+    {
+      "name": "code_review",
+      "status": "NOT_RUN",
+      "command": null,
+      "exit_code": null,
+      "log": null,
+      "reason": "Deferred: code review tool invocation pending"
+    },
+    {
+      "name": "demo_build",
+      "status": "PASS",
+      "command": "node hvigorw.js assembleHap -p product=default -p buildMode=debug --no-daemon",
+      "exit_code": 0,
+      "log": ".ohos-adaptation/logs/demo-build.log",
+      "reason": "Build via flutter_ohos_test host project using existing signing"
+    },
+    {
+      "name": "hap_build",
+      "status": "PASS",
+      "command": "node hvigorw.js assembleHap -p product=default -p buildMode=debug --no-daemon (in flutter_ohos_test/ohos/)",
+      "exit_code": 0,
+      "log": ".ohos-adaptation/logs/demo-build.log",
+      "reason": "BUILD SUCCESSFUL in 22s. Signed HAP: 141,737,672 bytes, SHA-256: 00139d3f..., 29 entries. Signed via existing DevEco Studio default debug certificate."
+    },
+    {
+      "name": "device_runtime",
+      "status": "NOT_RUN",
+      "command": null,
+      "exit_code": null,
+      "log": null,
+      "reason": "Requires real device connection"
+    }
+  ]
+}

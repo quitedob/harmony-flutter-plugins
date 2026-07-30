@@ -1,0 +1,31 @@
+{
+  "suite": "NiceImageView 鸿蒙适配测试",
+  "plugin_name": "nice_image_view",
+  "plugin_version": "1.0.5",
+  "test_points": [
+    {"id": "F-01-01", "module": "F-01", "title": "默认参数构建", "level": "L0", "category": "construction"},
+    {"id": "F-01-02", "module": "F-01", "title": "全参数构建", "level": "L0", "category": "construction"},
+    {"id": "F-01-03", "module": "F-01", "title": "自定义尺寸", "level": "L0", "category": "construction"},
+    {"id": "F-02-01", "module": "F-02", "title": "圆形模式渲染", "level": "L1", "category": "rendering"},
+    {"id": "F-02-02", "module": "F-02", "title": "圆形模式不崩溃", "level": "L0", "category": "rendering"},
+    {"id": "F-03-01", "module": "F-03", "title": "统一圆角", "level": "L1", "category": "rendering"},
+    {"id": "F-03-02", "module": "F-03", "title": "独立圆角", "level": "L1", "category": "rendering"},
+    {"id": "F-03-03", "module": "F-03", "title": "圆角+边框", "level": "L1", "category": "rendering"},
+    {"id": "F-04-01", "module": "F-04", "title": "外边框绘制", "level": "L1", "category": "rendering"},
+    {"id": "F-04-02", "module": "F-04", "title": "内边框绘制（仅圆形）", "level": "L1", "category": "rendering"},
+    {"id": "F-04-03", "module": "F-04", "title": "内边框矩形模式忽略", "level": "L2", "category": "edge_case"},
+    {"id": "F-05-01", "module": "F-05", "title": "边框覆盖图片", "level": "L1", "category": "rendering"},
+    {"id": "F-06-01", "module": "F-06", "title": "遮罩绘制", "level": "L1", "category": "rendering"},
+    {"id": "R-01", "module": "repaint", "title": "shouldRepaint: image变更", "level": "L0", "category": "logic"},
+    {"id": "R-02", "module": "repaint", "title": "shouldRepaint: 无变更不触发", "level": "L0", "category": "logic"},
+    {"id": "R-03", "module": "repaint", "title": "shouldRepaint: isCircle变更", "level": "L0", "category": "logic"},
+    {"id": "R-04", "module": "repaint", "title": "shouldRepaint: borderWidth变更", "level": "L0", "category": "logic"},
+    {"id": "R-05", "module": "repaint", "title": "shouldRepaint: cornerRadius变更", "level": "L0", "category": "logic"},
+    {"id": "R-06", "module": "repaint", "title": "shouldRepaint: maskColor变更", "level": "L0", "category": "logic"},
+    {"id": "E-01", "module": "edge", "title": "null image不崩溃", "level": "L2", "category": "edge_case"},
+    {"id": "E-02", "module": "edge", "title": "零borderWidth", "level": "L2", "category": "edge_case"},
+    {"id": "E-03", "module": "edge", "title": "零尺寸", "level": "L2", "category": "edge_case"},
+    {"id": "E-04", "module": "edge", "title": "透明遮罩", "level": "L2", "category": "edge_case"},
+    {"id": "E-05", "module": "edge", "title": "API默认值验证", "level": "L0", "category": "api"}
+  ]
+}

@@ -6,6 +6,8 @@ import 'package:media_scanner/media_scanner.dart';
 import 'zoom_drawer_test_page.dart';
 import 'media_scanner_full_test_page.dart';
 import 'flutter_zoom_drawer_full_test_page.dart';
+import 'discrollview_test_page.dart';
+import 'nice_image_view_test_page.dart';
 
 void main() {
   runApp(const TestHubApp());
@@ -72,6 +74,22 @@ class TestHubPage extends StatelessWidget {
               title: 'ZoomDrawer 完整测试',
               subtitle: '24 项测试用例一键覆盖',
               page: const ZoomDrawerFullTestPage(),
+            ),
+            const SizedBox(height: 12),
+            _testCard(
+              context,
+              icon: Icons.view_carousel,
+              title: 'Discrollview',
+              subtitle: '视差滚动动画效果测试（Alpha/Scale/Translation/Color）',
+              page: const DiscrollviewTestPage(),
+            ),
+            const SizedBox(height: 12),
+            _testCard(
+              context,
+              icon: Icons.circle_outlined,
+              title: 'NiceImageView',
+              subtitle: '圆角/圆形/边框/遮罩效果测试（pure_dart）',
+              page: const NiceImageViewTestPage(),
             ),
           ],
         ),

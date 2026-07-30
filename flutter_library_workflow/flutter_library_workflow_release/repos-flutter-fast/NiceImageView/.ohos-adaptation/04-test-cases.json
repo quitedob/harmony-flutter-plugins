@@ -1,0 +1,92 @@
+{
+  "suite": "NiceImageView 鸿蒙适配测试",
+  "expectation_metadata": {
+    "F-01-01": {"kind": "success", "reason": "默认参数构建应成功显示"},
+    "F-01-02": {"kind": "success", "reason": "全参数构建应成功显示"},
+    "F-01-03": {"kind": "success", "reason": "自定义尺寸应正确应用"},
+    "F-02-01": {"kind": "success", "reason": "圆形模式应正确渲染"},
+    "F-02-02": {"kind": "success", "reason": "圆形模式构建不应崩溃"},
+    "F-03-01": {"kind": "success", "reason": "统一圆角应正确渲染"},
+    "F-03-02": {"kind": "success", "reason": "独立圆角应正确渲染"},
+    "F-03-03": {"kind": "success", "reason": "圆角+边框应正确渲染"},
+    "F-04-01": {"kind": "success", "reason": "外边框应正确绘制"},
+    "F-04-02": {"kind": "success", "reason": "内边框仅圆形模式有效"},
+    "F-04-03": {"kind": "expected_rejection", "reason": "矩形模式下内边框自动忽略（设计如此）"},
+    "F-05-01": {"kind": "success", "reason": "边框覆盖模式应正确渲染"},
+    "F-06-01": {"kind": "success", "reason": "遮罩应正确渲染"},
+    "R-01": {"kind": "success", "reason": "image变更应触发repaint"},
+    "R-02": {"kind": "success", "reason": "无变更不应触发repaint"},
+    "R-03": {"kind": "success", "reason": "isCircle变更应触发repaint"},
+    "R-04": {"kind": "success", "reason": "borderWidth变更应触发repaint"},
+    "R-05": {"kind": "success", "reason": "cornerRadius变更应触发repaint"},
+    "R-06": {"kind": "success", "reason": "maskColor变更应触发repaint"},
+    "E-01": {"kind": "success", "reason": "null image应显示空白不崩溃"},
+    "E-02": {"kind": "success", "reason": "零borderWidth不绘制边框"},
+    "E-03": {"kind": "expected_rejection", "reason": "零尺寸应无可见内容但不崩溃"},
+    "E-04": {"kind": "success", "reason": "透明遮罩不绘制"},
+    "E-05": {"kind": "success", "reason": "默认值与Android一致"}
+  },
+  "modules": [
+    {
+      "moduleCode": "F-01",
+      "moduleName": "构造与初始化",
+      "moduleDescription": "验证组件能否以各种参数组合正确构建",
+      "priority": "P0",
+      "test_cases": [
+        {"id": "F-01-01", "title": "默认参数构建", "level": "L0", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView() 不带任何参数", "checkpoint": "find.byType 找到 NiceImageView widget"}], "expected_result": "组件构建成功，使用默认值", "postconditions": "无"},
+        {"id": "F-01-02", "title": "全参数构建", "level": "L0", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView 传入全部 16 个参数", "checkpoint": "组件构建成功"}], "expected_result": "全部参数正确赋值", "postconditions": "无"},
+        {"id": "F-01-03", "title": "自定义尺寸", "level": "L0", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView(width: 150, height: 80)", "checkpoint": "SizedBox.width=150, height=80"}], "expected_result": "尺寸正确应用", "postconditions": "无"}
+      ]
+    },
+    {
+      "moduleCode": "F-02",
+      "moduleName": "圆形展示模式",
+      "moduleDescription": "验证圆形裁剪渲染",
+      "priority": "P0",
+      "test_cases": [
+        {"id": "F-02-01", "title": "圆形+边框组合", "level": "L1", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView(isCircle: true, borderWidth: 4, borderColor: Colors.blue)", "checkpoint": "组件不崩溃"}], "expected_result": "圆形+边框正确渲染", "postconditions": "无"},
+        {"id": "F-02-02", "title": "圆形+内边框", "level": "L1", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView(isCircle: true, borderWidth: 4, innerBorderWidth: 2)", "checkpoint": "组件不崩溃"}], "expected_result": "圆形+双层边框正确渲染", "postconditions": "无"}
+      ]
+    },
+    {
+      "moduleCode": "F-03",
+      "moduleName": "圆角半径控制",
+      "moduleDescription": "验证统一圆角和独立圆角",
+      "priority": "P0",
+      "test_cases": [
+        {"id": "F-03-01", "title": "统一圆角", "level": "L1", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView(cornerRadius: 16)", "checkpoint": "组件不崩溃"}], "expected_result": "四角统一圆角", "postconditions": "无"},
+        {"id": "F-03-02", "title": "独立圆角", "level": "L1", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView 分别设置四角半径", "checkpoint": "组件不崩溃"}], "expected_result": "各角独立生效", "postconditions": "无"},
+        {"id": "F-03-03", "title": "圆角+边框", "level": "L1", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView(cornerRadius: 16, borderWidth: 4)", "checkpoint": "组件不崩溃"}], "expected_result": "圆角边框正确渲染", "postconditions": "无"}
+      ]
+    },
+    {
+      "moduleCode": "F-04",
+      "moduleName": "边框绘制",
+      "moduleDescription": "验证外边框和内边框绘制",
+      "priority": "P0",
+      "test_cases": [
+        {"id": "F-04-01", "title": "外边框", "level": "L1", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView(borderWidth: 3, borderColor: Colors.red)", "checkpoint": "组件不崩溃"}], "expected_result": "外边框正确绘制", "postconditions": "无"},
+        {"id": "F-04-02", "title": "内边框（圆形）", "level": "L1", "preconditions": "isCircle=true", "test_steps": [{"action": "创建 NiceImageView(isCircle: true, borderWidth: 4, innerBorderWidth: 2, innerBorderColor: Colors.white)", "checkpoint": "组件不崩溃"}], "expected_result": "内边框正确绘制", "postconditions": "无"},
+        {"id": "F-04-03", "title": "矩形模式忽略内边框", "level": "L2", "preconditions": "isCircle=false", "test_steps": [{"action": "创建 NiceImageView(isCircle: false, innerBorderWidth: 10)", "checkpoint": "组件不崩溃，内边框被忽略"}], "expected_result": "符合预期（设计如此）", "postconditions": "无"}
+      ]
+    },
+    {
+      "moduleCode": "F-05",
+      "moduleName": "边框覆盖控制",
+      "moduleDescription": "验证边框覆盖图片效果",
+      "priority": "P1",
+      "test_cases": [
+        {"id": "F-05-01", "title": "isCoverSrc=true", "level": "L1", "preconditions": "isCircle=true, borderWidth>0", "test_steps": [{"action": "创建 NiceImageView(isCircle: true, isCoverSrc: true, borderWidth: 6)", "checkpoint": "组件不崩溃"}], "expected_result": "边框覆盖图片", "postconditions": "无"}
+      ]
+    },
+    {
+      "moduleCode": "F-06",
+      "moduleName": "遮罩绘制",
+      "moduleDescription": "验证遮罩叠加效果",
+      "priority": "P1",
+      "test_cases": [
+        {"id": "F-06-01", "title": "半透明遮罩", "level": "L1", "preconditions": "isCircle=true", "test_steps": [{"action": "创建 NiceImageView(isCircle: true, maskColor: Colors.black45)", "checkpoint": "组件不崩溃"}], "expected_result": "遮罩正确绘制", "postconditions": "无"}
+      ]
+    }
+  ]
+}
