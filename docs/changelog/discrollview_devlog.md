@@ -355,6 +355,34 @@ git push origin main
 | discrollview 测试依赖 `package:test` | 因 OHOS SDK 无 `dart:ui` 桌面支持，纯 Dart 测试用 `package:test` 而非 `flutter_test`。`pubspec.yaml` 中 `test` 已加入 `dev_dependencies` |
 | HAP 未安装验证 | 当前无 OHOS 设备连接（`hdc list targets` 为空），HAP 签名构建成功但未在真机上安装/启动。此项在 `artifact-manifest.json` 中标记为 `NOT_RUN` |
 
+### 8.6 推送被拒与修复
+
+**第一次推送**（commit `d2bb1f1` + `0615ebd`）被 GitHub 拒绝：
+```
+GH001: Large files detected
+- output/flutter_zoom_drawer/flutter_zoom_drawer/测试用例hap.hap: 93.24 MB (>50MB recommended)
+- docs/example/d_stack.zip: 480.36 MB (>100MB hard limit)
+```
+
+**修复流程**：
+1. `git reset --soft c423de4` — 软重置到 nic_image_view 提交之前，保留所有改动
+2. 从索引中移除大文件：`output/`、`docs/example/d_stack.zip`、ZIP 归档
+3. 新增根 `.gitignore`：
+   ```
+   *.hap          # HAP 构建产物 (>50MB)
+   output/        # 输出交付目录
+   docs/example/d_stack.zip  # 480MB 示例 ZIP
+   ```
+4. `git add -A` + `git add -f repos-flutter-fast/discrollview/`（force-add 因 `repos-flutter-fast/` 在父级 `.gitignore` 中被排除）
+5. 重新提交为单个 commit `a695610`
+6. 再次 `git push origin main` → **成功**（`c423de4..a695610 main -> main`）
+
+**经验**：
+- GitHub 单文件硬限制为 100MB（推荐限制 50MB）
+- `output/` 目录应始终在 `.gitignore` 中——该目录包含交付 ZIP 和 HAP 等大二进制文件，由构建流程生成，不应通过 Git 分发
+- 嵌套 `.git` 目录（子仓库克隆产物）必须在 `git add` 前删除，否则会被 Git 当作 submodule 引用，导致内容不可访问
+- `git add -f` 是绕过父级 `.gitignore`（如 `repos-flutter-fast/`）的唯一方式
+
 ---
 
 *本日志记录 discrollview Android→Flutter 重新实现及 OHOS 适配的完整过程。核心收获：Android 原生库可通过 pure_dart 路径适配 OHOS，但需要完整的 Flutter Widget 重新设计和算法精确移植，而非简单的平台条件分支。*

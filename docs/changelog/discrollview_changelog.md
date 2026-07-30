@@ -106,6 +106,7 @@ discrollview/
 |------|------|
 | 2026-07-30 | 初始适配完成：Android→Flutter 纯 Dart Widget 重新实现、30 测试用例 100 分评审、签名 HAP 构建、完整 `.ohos-adaptation/` 产物、Demo 页面 semantic Key 标注 |
 | 2026-07-30 | **提交 & 推送**：移除 3 个子目录 `.git`（discrollview / flutter_zoom_drawer_ohos / scrollbar_ultima），统一作为主仓库文件提交。HAP 最终 clean rebuild 确认 SHA-256: a5fc1be2。详见 devlog 第八章 |
+| 2026-07-30 | **推送成功** (`c423de4..a695610` → `main`)：首次推送被 GitHub 拒绝（`d_stack.zip` 480MB + HAP 93MB 超限），软重置后在 `.gitignore` 中排除 `*.hap`、`output/`、`docs/example/d_stack.zip`，重新提交单 commit 推送成功。Commit: `a695610` |
 
 ---
 
