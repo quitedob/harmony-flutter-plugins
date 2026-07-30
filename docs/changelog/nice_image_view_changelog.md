@@ -147,6 +147,7 @@ node "/d/deveco/DevEco Studio/tools/hvigor/bin/hvigorw.js" \
 |------|------|
 | 2026-07-30 | 初始版本：Android NiceImageView → Flutter pure_dart 完整移植（16/16 API 覆盖，44 项管线产物，签名 HAP 构建成功，集成到 flutter_ohos_test Hub） |
 | 2026-07-30 | **P2 文档交付收尾**：Demo 页全中文化（12 个中文标签）、复制日志（`Clipboard.setData` + 双按钮）、示例图片（69 bytes 最小 PNG）、Example pubspec 创建、`05-demo-gen.json` 更新 |
+| 2026-07-30 | **PRD 重写 + Mermaid 验证**：PRD 按 Flutter pure_dart 插件标准完全重写（852→416 行，12 章），4 个 Mermaid 图全部通过 mmdc 11.16.0 渲染（architecture/graph + flowchart + sequenceDiagram + migration graph），`01-prd-mermaid-validation.json`：`status: PASS, syntax_errors: []`，Puppeteer→Chrome 修复在 devlog 记录 |
 
 ---
 
