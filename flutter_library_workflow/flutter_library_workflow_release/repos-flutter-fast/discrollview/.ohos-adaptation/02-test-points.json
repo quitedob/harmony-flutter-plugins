@@ -1,0 +1,295 @@
+{
+  "pluginInfo": {
+    "name": "discrollview",
+    "version": "0.0.2"
+  },
+  "modules": [
+    {
+      "moduleCode": "F-01",
+      "moduleName": "DiscrollveWidget 根滚动容器",
+      "priority": "P0",
+      "testPoints": [
+        {
+          "id": "F-01-01",
+          "testName": "验证 DiscrollveWidget 接受至少 2 个子 Widget 并正常构建",
+          "level": "L0",
+          "description": "创建包含 1 个静态头部和 1 个动画子 Widget 的 DiscrollveWidget，验证 Widget 树正常构建，无异常抛出",
+          "checkpoint": "Widget 构建成功，头部和动画子 Widget 均显示在界面上"
+        },
+        {
+          "id": "F-01-02",
+          "testName": "验证第一个子 Widget 占据 viewport 全高作为静态头部",
+          "level": "L0",
+          "description": "创建 DiscrollveWidget，第一个子 Widget 为静态头部（config: none），验证其高度等于 viewport 高度",
+          "checkpoint": "第一个子 Widget 高度等于屏幕可视区高度，不随滚动触发变换"
+        },
+        {
+          "id": "F-01-03",
+          "testName": "验证外部传入 ScrollController 正常工作",
+          "level": "L1",
+          "description": "传入外部创建的 ScrollController，验证控制器有客户端连接且可正常读取滚动位置",
+          "checkpoint": "ScrollController.hasClients 为 true，可获取滚动偏移量"
+        },
+        {
+          "id": "F-01-04",
+          "testName": "验证 DiscrollveWidget 构建时少于 2 个子 Widget 触发断言",
+          "level": "L2",
+          "description": "创建只有 0 个或 1 个子 Widget 的 DiscrollveWidget，验证断言失败",
+          "checkpoint": "构造时触发 AssertionError，消息提示至少需要 2 个子 Widget"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-02",
+      "moduleName": "DiscrollveContent 内容布局",
+      "priority": "P0",
+      "testPoints": [
+        {
+          "id": "F-02-01",
+          "testName": "验证 DiscrollveContent.child 工厂方法正确创建包含 config 和 child 的 Widget",
+          "level": "L0",
+          "description": "使用 DiscrollveContent.child 创建带 alpha 变换配置的子 Widget，验证 config 和 child 正确关联",
+          "checkpoint": "DiscrollveContent 的 config.alpha 为 true，child 为指定的 Widget"
+        },
+        {
+          "id": "F-02-02",
+          "testName": "验证 DiscrollveConfig.none 的子 Widget 不触发任何变换",
+          "level": "L0",
+          "description": "使用 config: DiscrollveConfig.none 创建子 Widget，滚动时验证其无任何视觉效果变化",
+          "checkpoint": "子 Widget 在滚动过程中保持原始状态，无透明度/缩放/平移变化"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-03",
+      "moduleName": "DiscrollveConfig 变换配置",
+      "priority": "P0",
+      "testPoints": [
+        {
+          "id": "F-03-01",
+          "testName": "验证 alpha 参数正确控制透明度",
+          "level": "L0",
+          "description": "配置 alpha: true，验证子 Widget 在滚动时从不可见（opacity 0.0）渐变为完全可见（opacity 1.0）",
+          "checkpoint": "滚动前子 Widget 不可见（opacity=0），滚动到触发位置后逐渐可见，完全触发后 opacity=1"
+        },
+        {
+          "id": "F-03-02",
+          "testName": "验证 scaleX 参数正确控制水平缩放",
+          "level": "L0",
+          "description": "配置 scaleX: true，验证子 Widget 在滚动时从水平宽度 0 展开为完整宽度",
+          "checkpoint": "子 Widget 从 scaleX=0 状态开始，随滚动逐渐展开至 scaleX=1"
+        },
+        {
+          "id": "F-03-03",
+          "testName": "验证 scaleY 参数正确控制垂直缩放",
+          "level": "L1",
+          "description": "配置 scaleY: true，验证子 Widget 在滚动时从垂直高度 0 展开为完整高度",
+          "checkpoint": "子 Widget 从 scaleY=0 状态开始，随滚动逐渐展开至 scaleY=1"
+        },
+        {
+          "id": "F-03-04",
+          "testName": "验证 scaleX 和 scaleY 同时启用时等比例缩放",
+          "level": "L1",
+          "description": "同时配置 scaleX: true 和 scaleY: true，验证子 Widget 等比例从 0 缩放至 1",
+          "checkpoint": "子 Widget 同时进行水平和垂直缩放，scaleX 和 scaleY 值始终相等"
+        },
+        {
+          "id": "F-03-05",
+          "testName": "验证 fromColor/toColor 背景色渐变变换",
+          "level": "L1",
+          "description": "配置 fromColor 和 toColor，验证子 Widget 背景色在滚动时从起始色平滑过渡到目标色",
+          "checkpoint": "子 Widget 背景色从 fromColor 渐变为 toColor，中间色为 Color.lerp 计算结果"
+        },
+        {
+          "id": "F-03-06",
+          "testName": "验证 DiscrollveConfig 默认构造函数所有变换均为关闭状态",
+          "level": "L2",
+          "description": "创建 DiscrollveConfig() 默认实例，验证所有变换属性均为 false/-1/0.0 默认值",
+          "checkpoint": "alpha/scaleX/scaleY 为 false，translation 为 -1，fromColor/toColor 为 -1，threshold 为 0.0"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-04",
+      "moduleName": "DiscrollveDirection 方向枚举",
+      "priority": "P1",
+      "testPoints": [
+        {
+          "id": "F-04-01",
+          "testName": "验证 fromBottom 方向平移效果",
+          "level": "L0",
+          "description": "配置 translation: fromBottom，验证子 Widget 从下方移入画面",
+          "checkpoint": "子 Widget 初始位置在画面下方，随滚动向上移动至原位"
+        },
+        {
+          "id": "F-04-02",
+          "testName": "验证 fromTop 方向平移效果",
+          "level": "L1",
+          "description": "配置 translation: fromTop，验证子 Widget 从上方移入画面",
+          "checkpoint": "子 Widget 初始位置在画面上方，随滚动向下移动至原位"
+        },
+        {
+          "id": "F-04-03",
+          "testName": "验证 fromLeft 方向平移效果",
+          "level": "L1",
+          "description": "配置 translation: fromLeft，验证子 Widget 从左方移入画面",
+          "checkpoint": "子 Widget 初始位置在画面左方，随滚动向右移动至原位"
+        },
+        {
+          "id": "F-04-04",
+          "testName": "验证 fromRight 方向平移效果",
+          "level": "L1",
+          "description": "配置 translation: fromRight，验证子 Widget 从右方移入画面",
+          "checkpoint": "子 Widget 初始位置在画面右方，随滚动向左移动至原位"
+        },
+        {
+          "id": "F-04-05",
+          "testName": "验证 fromBottom | fromLeft 方向组合平移效果",
+          "level": "L0",
+          "description": "配置 translation: fromBottom | fromLeft，验证子 Widget 从下方和左方同时移入画面",
+          "checkpoint": "子 Widget 同时从下方和左方移入，平移方向为对角线"
+        },
+        {
+          "id": "F-04-06",
+          "testName": "验证 fromTop+fromBottom 对立方向组合触发断言",
+          "level": "L2",
+          "description": "配置 translation: fromTop | fromBottom，验证构造时触发断言失败",
+          "checkpoint": "构造时触发 AssertionError，消息提示 fromTop+fromBottom 不允许"
+        },
+        {
+          "id": "F-04-07",
+          "testName": "验证 fromLeft+fromRight 对立方向组合触发断言",
+          "level": "L2",
+          "description": "配置 translation: fromLeft | fromRight，验证构造时触发断言失败",
+          "checkpoint": "构造时触发 AssertionError，消息提示 fromLeft+fromRight 不允许"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-05",
+      "moduleName": "滚动比例计算引擎",
+      "priority": "P0",
+      "testPoints": [
+        {
+          "id": "F-05-01",
+          "testName": "验证中心触发模式：子 Widget 中心到达视口中心时开始变换",
+          "level": "L0",
+          "description": "当剩余空间足够时，验证子 Widget 中心到达视口中心时 ratio 开始 > 0",
+          "checkpoint": "absoluteTop ≤ halfViewport 时 ratio > 0，否则 ratio 为 null（重置）"
+        },
+        {
+          "id": "F-05-02",
+          "testName": "验证顶部触发模式：剩余空间不足时子 Widget 顶部到达视口底部开始变换",
+          "level": "L1",
+          "description": "当剩余空间不足以中心触发时，验证子 Widget 顶部到达视口底部时 ratio 开始 > 0",
+          "checkpoint": "absoluteTop ≤ viewportHeight 时 ratio > 0"
+        },
+        {
+          "id": "F-05-03",
+          "testName": "验证 ratio 值在 [0.0, 1.0] 范围内",
+          "level": "L0",
+          "description": "验证 clampRatio 函数确保 ratio 不超出 [0.0, 1.0] 范围",
+          "checkpoint": "任何输入下 ratio 始终在 [0.0, 1.0] 区间内"
+        },
+        {
+          "id": "F-05-04",
+          "testName": "验证子 Widget 高度为 0 时返回 null",
+          "level": "L2",
+          "description": "当 childHeight 为 0 时，验证 calculateRatio 返回 null",
+          "checkpoint": "calculateRatio 返回 null，不触发变换"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-06",
+      "moduleName": "变换渲染器",
+      "priority": "P0",
+      "testPoints": [
+        {
+          "id": "F-06-01",
+          "testName": "验证多种变换同时生效",
+          "level": "L0",
+          "description": "配置 alpha + scaleX + scaleY + translation + fromColor/toColor 全组合，验证所有变换同时作用",
+          "checkpoint": "子 Widget 同时呈现透明度、缩放、平移、背景色渐变四种视觉效果"
+        },
+        {
+          "id": "F-06-02",
+          "testName": "验证 ratio=1 时所有变换达到终态",
+          "level": "L1",
+          "description": "子 Widget 完全触发（ratio=1.0）时，验证所有变换均达到终态：opacity=1, scale=1, translate=0, color=toColor",
+          "checkpoint": "子 Widget 处于完全可见且无偏移的最终状态"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-07",
+      "moduleName": "阈值控制",
+      "priority": "P1",
+      "testPoints": [
+        {
+          "id": "F-07-01",
+          "testName": "验证 threshold=0 时变换立即触发",
+          "level": "L0",
+          "description": "配置 threshold: 0.0，验证 ratio > 0 时变换立即开始",
+          "checkpoint": "ratio 一旦 > 0，变换立即生效，无延迟"
+        },
+        {
+          "id": "F-07-02",
+          "testName": "验证 threshold > 0 时变换延迟触发",
+          "level": "L0",
+          "description": "配置 threshold: 0.3，验证 ratio < 0.3 时无变换，ratio ≥ 0.3 时变换开始",
+          "checkpoint": "ratio < 0.3 时子 Widget 保持初始状态；ratio ≥ 0.3 时开始变换"
+        },
+        {
+          "id": "F-07-03",
+          "testName": "验证 withThreshold 重映射后 ratio=1 对应原始 ratio=1",
+          "level": "L1",
+          "description": "验证 withThreshold(1.0, threshold) 始终返回 1.0",
+          "checkpoint": "不论 threshold 值，withThreshold(1.0, t) = 1.0"
+        },
+        {
+          "id": "F-07-04",
+          "testName": "验证 threshold 超出 [0.0, 1.0] 范围触发断言",
+          "level": "L2",
+          "description": "配置 threshold: -0.1 或 1.1，验证构造时触发断言",
+          "checkpoint": "构造时触发 AssertionError"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-08",
+      "moduleName": "重置/恢复",
+      "priority": "P0",
+      "testPoints": [
+        {
+          "id": "F-08-01",
+          "testName": "验证子 Widget 滚出触发区后恢复初始状态",
+          "level": "L0",
+          "description": "子 Widget 向上滚出视口（ratio 变为 null），验证其恢复为初始变换状态",
+          "checkpoint": "子 Widget 恢复到 opacity=0（如启用 alpha）、scale=0（如启用 scale）、translation 偏移初始距离"
+        },
+        {
+          "id": "F-08-02",
+          "testName": "验证无变换配置的子 Widget 不受滚动影响",
+          "level": "L1",
+          "description": "配置 DiscrollveConfig.none，验证无论滚动位置如何，子 Widget 外观不变",
+          "checkpoint": "子 Widget 始终显示为原始状态，无闪烁或位置变化"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "totalModules": 8,
+    "totalTestPoints": 30,
+    "levelDistribution": {
+      "L0": 13,
+      "L1": 11,
+      "L2": 6
+    },
+    "levelPercentage": {
+      "L0": 43.3,
+      "L1": 36.7,
+      "L2": 20.0
+    }
+  }
+}

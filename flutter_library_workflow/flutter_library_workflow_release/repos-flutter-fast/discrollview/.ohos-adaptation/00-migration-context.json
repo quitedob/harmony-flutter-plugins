@@ -1,0 +1,28 @@
+{
+  "artifact_profile": "flutter",
+  "package": {
+    "name": "discrollview",
+    "version": "0.0.2",
+    "revision": "f46aea5",
+    "type": "android_native_library",
+    "flutter_equivalent": "pure_dart_widget",
+    "pubspec_exists": false
+  },
+  "target": {
+    "flutter_ohos_revision": "3.22+",
+    "api": 24,
+    "device_types": ["phone", "tablet", "2in1"]
+  },
+  "donor": {
+    "path_or_url": "https://github.com/flavienlaurent/discrollview",
+    "revision": "f46aea5",
+    "type": "android_java_library",
+    "maven": "com.github.flavienlaurent.discrollview:library:0.0.2@aar"
+  },
+  "source_strategy": "new_port",
+  "classification": "pure_dart",
+  "classification_reason": "Android native library reimplemented as pure Dart Flutter widget. Zero native code, zero MethodChannel. All transforms use Flutter Framework widgets (Opacity, Transform, AnimatedContainer).",
+  "authority_conflicts": [],
+  "created_at": "2026-07-30T14:00:00+08:00",
+  "notes": "Original discrollview is an Android ScrollView subclass (Java). This adaptation creates a Flutter Widget equivalent using ScrollController + NotificationListener, not a direct code port. The .ohos-adaptation deliverables follow the full flutter artifact profile."
+}

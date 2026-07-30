@@ -1,0 +1,54 @@
+{
+  "valid": false,
+  "source_hashes": {
+    "01-analysis.json": "274889af18b34a6d3b4ce993061652e01301428561f74c22f512c0195299151f",
+    "02-planning.json": "4ba0e4f5352153b1bac25496c9905e2feb6a683714ada418797a248594d18d31"
+  },
+  "summary": {
+    "total": 8,
+    "pass": 0,
+    "fail": 8
+  },
+  "checks": [
+    {
+      "name": "channel_name_consistency",
+      "status": "fail",
+      "details": "缺少 01 或 03"
+    },
+    {
+      "name": "plugin_type_skill_consistency",
+      "status": "fail",
+      "details": "缺少 02 或 03"
+    },
+    {
+      "name": "build_status_propagation",
+      "status": "fail",
+      "details": "缺少 03 或 05"
+    },
+    {
+      "name": "example_status_propagation",
+      "status": "fail",
+      "details": "缺少 04 或 05"
+    },
+    {
+      "name": "coverage_math_consistency",
+      "status": "fail",
+      "details": "缺少 03、05 或 coverage"
+    },
+    {
+      "name": "runtime_check_summary_consistency",
+      "status": "fail",
+      "details": "缺少 04 runtime_checks 或 05 runtime_check_summary"
+    },
+    {
+      "name": "device_test_summary_consistency",
+      "status": "fail",
+      "details": "缺少 04 设备结果或 05 device_test_summary"
+    },
+    {
+      "name": "quality_score_consistency",
+      "status": "fail",
+      "details": "缺少 03 或 05"
+    }
+  ]
+}

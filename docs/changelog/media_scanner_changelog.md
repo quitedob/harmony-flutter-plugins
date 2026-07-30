@@ -149,6 +149,7 @@ flutter build hap --debug
 | 2026-07-27 | 补全 `05-test-cases.xlsx`（18 条标准格式测试用例）到 repos-flutter-fast |
 | 2026-07-27 | **P0/P1 收尾**：DFX 质量扫描通过（dfx_dart + dfx_ets + dfx_channel_consistency 全部 0 告警）；修复 `Platform.isOhos` → `defaultTargetPlatform == TargetPlatform.ohos` + `print` → `debugPrint`；README 更新为 "Android + OpenHarmony"；CHANGELOG 新增 OHOS 条目；Hypium 自动化测试用例 9 条生成（`.ohos-adaptation/hypium-test-cases.md`）；白盒质量评估挂起待 DevEco CodeLinter；满编单元测试（182 行 / 18 条 Mock MC）从 `flutter_ohos_test/test/` 同步到 `repos-flutter-fast/media_scanner/test/` |
 | 2026-07-27 | **F-02-03 测试文案修正**：`.xyz` 返回 401 标注为【预定行为】— 这是系统层保护机制按预定工作，不是插件缺陷。文案明确 "这不是 Bug，系统层保护机制按预定工作"，避免测试人员困惑 |
+| 2026-07-29 | **输出交付包审计**：`output/media_scanner/` 已形成 `media_scanner-prd.md`、`media_scanner-test-cases.md`、`media_scanner.zip` 三文件结构；ZIP 为扁平项目根，15,622,420 bytes / 94 条，`unzip -t` 通过，Dart/Android/OHOS 源、`MediaScannerPlugin.ets` 与 `flutter.har` 齐全。历史 18/18 来自 federated donor/test harness，仅保留为历史记录，不能自动继承为当前 standalone ZIP 的通过证据；当前外部测试文档按 0/0/0、18 条 pending 记录。详细命令、错误和通配符诊断见 `media_scanner_devlog.md` 同日章节。 |
 
 ---
 

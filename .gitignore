@@ -1,0 +1,8 @@
+# HAP build artifacts (large binaries — GitHub 50MB limit)
+*.hap
+
+# Large example ZIPs
+docs/example/d_stack.zip
+
+# Output deliverables (large, kept locally)
+output/

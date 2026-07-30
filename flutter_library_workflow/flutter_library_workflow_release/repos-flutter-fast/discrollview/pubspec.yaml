@@ -1,0 +1,23 @@
+name: discrollview
+description: Discrollve parallax scrolling Flutter Widget. Reimplements the Android Discrollview pattern — child widgets fade, scale, translate, and color-shift based on scroll position.
+version: 0.0.2
+homepage: https://github.com/flavienlaurent/discrollview
+repository: https://github.com/flavienlaurent/discrollview
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+  flutter: '>=3.22.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  test: ^1.25.15
+
+flutter:
+  plugin:
+    platforms: {}

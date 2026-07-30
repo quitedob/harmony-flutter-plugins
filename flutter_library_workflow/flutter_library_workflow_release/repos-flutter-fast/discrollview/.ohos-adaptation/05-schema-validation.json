@@ -1,0 +1,68 @@
+{
+  "validator": "ajv",
+  "ajv_version": "8.17.1",
+  "draft": "2020-12",
+  "schema_dir": "D:\\deveco\\ai_tool\\docs\\flutter_library_workflow\\skills\\flutter\\tool-schema-validation\\json-schema",
+  "valid": false,
+  "source_hashes": {
+    "01-analysis.json": "274889af18b34a6d3b4ce993061652e01301428561f74c22f512c0195299151f",
+    "01-analysis.schema.json": "d4d4091cbddb0e5ff49b08ab1f5a175749d1896346e4073d87ed82cc93c1b775",
+    "02-planning.json": "4ba0e4f5352153b1bac25496c9905e2feb6a683714ada418797a248594d18d31",
+    "02-planning.schema.json": "b4fe9b5d768cb740795b42909a6ffc7f07fb9e07ae75959d02946173c4b6af0d"
+  },
+  "stages": [
+    {
+      "stage": "analysis",
+      "file": "01-analysis.json",
+      "schema": "01-analysis.schema.json",
+      "valid": true,
+      "errors": []
+    },
+    {
+      "stage": "planning",
+      "file": "02-planning.json",
+      "schema": "02-planning.schema.json",
+      "valid": true,
+      "errors": []
+    },
+    {
+      "stage": "coding-library",
+      "file": "03-coding-library.json",
+      "schema": "03-coding-library.schema.json",
+      "valid": false,
+      "errors": [
+        {
+          "path": "/",
+          "message": "文件不存在: 03-coding-library.json",
+          "keyword": "setup"
+        }
+      ]
+    },
+    {
+      "stage": "testing",
+      "file": "04-testing.json",
+      "schema": "04-testing.schema.json",
+      "valid": false,
+      "errors": [
+        {
+          "path": "/",
+          "message": "文件不存在: 04-testing.json",
+          "keyword": "setup"
+        }
+      ]
+    },
+    {
+      "stage": "summary",
+      "file": "05-summary.json",
+      "schema": "05-summary.schema.json",
+      "valid": false,
+      "errors": [
+        {
+          "path": "/",
+          "message": "文件不存在: 05-summary.json",
+          "keyword": "setup"
+        }
+      ]
+    }
+  ]
+}

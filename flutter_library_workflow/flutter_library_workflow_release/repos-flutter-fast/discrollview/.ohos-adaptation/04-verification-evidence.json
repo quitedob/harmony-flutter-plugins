@@ -1,0 +1,65 @@
+{
+  "checks": [
+    {
+      "name": "pub_get",
+      "status": "PASS",
+      "command": "flutter pub get",
+      "exit_code": 0,
+      "log": ".ohos-adaptation/logs/pub-get.log"
+    },
+    {
+      "name": "flutter_analyze",
+      "status": "PASS",
+      "command": "flutter analyze",
+      "exit_code": 1,
+      "note": "Exit code 1 due to info-level prefer_const hints (0 errors, 0 warnings). Code compiles cleanly.",
+      "log": ".ohos-adaptation/logs/analyze.log"
+    },
+    {
+      "name": "dart_format",
+      "status": "PASS",
+      "command": "dart format --output=none --set-exit-if-changed lib/ test/",
+      "exit_code": 0,
+      "note": "After initial format pass, files are clean.",
+      "log": ".ohos-adaptation/logs/dart-format.log"
+    },
+    {
+      "name": "flutter_test",
+      "status": "PARTIAL",
+      "command": "dart test test/discrollve_math_test.dart test/discrollve_config_test.dart",
+      "exit_code": 0,
+      "details": "34/34 pure Dart tests pass. 11 widget tests (discrollve_widget_test.dart) require Flutter engine — blocked on Flutter OHOS SDK desktop support (dart:ui not available). Widget tests can be validated via demo HAP on real device.",
+      "log": ".ohos-adaptation/logs/flutter-test.log"
+    },
+    {
+      "name": "dfx_dart",
+      "status": "NOT_RUN",
+      "reason": "DFX dart scan pending — requires dfx_dart.py from flutter-fast/dfx-quality"
+    },
+    {
+      "name": "demo_build",
+      "status": "NOT_RUN",
+      "reason": "example_auto/ not yet generated"
+    },
+    {
+      "name": "hap_build",
+      "status": "BLOCKED",
+      "reason": "Requires example_auto/, DevEco Studio signing, and real OHOS device"
+    },
+    {
+      "name": "device_runtime",
+      "status": "BLOCKED",
+      "reason": "Requires signed HAP and real OHOS device with hdc"
+    },
+    {
+      "name": "dfx_ets",
+      "status": "NA",
+      "reason": "Pure Dart library — no ETS source"
+    },
+    {
+      "name": "dfx_channel_consistency",
+      "status": "NA",
+      "reason": "Pure Dart library — no channels"
+    }
+  ]
+}

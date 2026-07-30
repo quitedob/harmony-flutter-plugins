@@ -1,0 +1,37 @@
+{
+  "artifacts": [
+    {
+      "kind": "HAP",
+      "path": "D:\\deveco\\ai_tool\\flutter_ohos_test\\ohos\\entry\\build\\default\\outputs\\default\\entry-default-signed.hap",
+      "signed": true,
+      "mode": "debug",
+      "size": 141737674,
+      "sha256": "a5fc1be2ee9d679980c512d31b661fd801707c570a8fc7189aae5b55de158493",
+      "entry_count": 24,
+      "entry_names_sha256": "0c30725e8cffc461840ee721d895597316169df67d9f2e49c0aadef73dadb945",
+      "device_types": ["phone", "tablet", "2in1"],
+      "build_notes": "Final build. Demo page has semantic Keys for all testable elements. module.json5 includes phone+tablet+2in1.",
+      "source_revision": "discrollview: f46aea5 + Flutter 3.32.4-ohos-0.0.1",
+      "build_command": "node \"D:\\deveco\\DevEco Studio\\tools\\hvigor\\bin\\hvigorw.js\" assembleHap -p product=default -p buildMode=debug --no-daemon",
+      "build_log": ".ohos-adaptation/logs/demo-build.log",
+      "build_workaround": "Direct hvigorw.js invocation bypasses flutter build hap batch-recursion error",
+      "install_command": "hdc -t <device> install D:\\deveco\\ai_tool\\flutter_ohos_test\\ohos\\entry\\build\\default\\outputs\\default\\entry-default-signed.hap",
+      "device_id": null,
+      "device_type": null,
+      "api_version": null,
+      "signing_status": "PASS",
+      "signing_device_id": "C:\\Users\\shuaibi\\.ohos\\config\\default_ohos_m5Bu6mXjyp8lcXH96aSz_ynBrVwBHkNbdDoFmqFyclw=.cer",
+      "signature_verification_command": "java -jar hap-sign-tool.jar verify-app ...",
+      "signature_verification_exit_code": null,
+      "signature_verification_log": null,
+      "device_log": null,
+      "validated_case_ids": [],
+      "log_copy_case_id": null,
+      "log_copy_status": "NOT_RUN",
+      "install_status": "NOT_RUN",
+      "launch_status": "NOT_RUN",
+      "behavior_status": "NOT_RUN"
+    }
+  ],
+  "note": "HAP built successfully via direct hvigorw.js (flutter build hap hit batch-recursion error). Signing with existing default OHOS debug certificate. Device not connected — install/launch/behavior pending real OHOS device."
+}

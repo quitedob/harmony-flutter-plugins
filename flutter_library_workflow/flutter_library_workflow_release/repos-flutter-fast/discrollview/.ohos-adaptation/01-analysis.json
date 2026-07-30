@@ -1,0 +1,161 @@
+{
+  "plugin_name": "discrollview",
+  "plugin_version": "0.0.2",
+  "description": "Discrollve 视差滚动 Flutter Widget——基于原始 Android Discrollview 库交互模式重新实现的纯 Dart Flutter 组件。在用户滚动时为列表中的每个子 Widget 提供基于滚动位置的透明度/缩放/平移/背景色渐变变换。",
+  "ohos_readiness": {
+    "status": "not_adapted",
+    "in_repo_ohos_dir": false,
+    "in_pubspec_platforms": false,
+    "in_reference_index": false,
+    "reference_url": null,
+    "in_local_repos": false,
+    "local_repo_name": null,
+    "notes": "原始库是 Android Java 库，非 Flutter 包。本项目将其重新实现为纯 Dart Flutter Widget，因此无已有 OHOS 适配。适配后为零原生代码的 pure_dart 库。",
+    "display_status": "新适配（Android 库→Flutter Widget 重新实现）"
+  },
+  "plugin_type": "dart",
+  "plugin_architecture": "standalone",
+  "communication_patterns": [],
+  "channels": [],
+  "functionality": {
+    "summary": "提供滚动驱动的视差动画效果（Discrollve 模式）：子 Widget 随滚动位置自动执行透明度、缩放、平移、背景色变换。",
+    "core_features": [
+      {
+        "name": "滚动驱动变换",
+        "description": "基于 ScrollController 监听滚动位置，为每个子 Widget 计算 0.0-1.0 的变换比例",
+        "related_methods": [],
+        "implementation": "纯 Dart（ScrollController + NotificationListener<ScrollNotification>）"
+      },
+      {
+        "name": "透明度变换",
+        "description": "子 Widget 随滚动从透明（0.0）渐变为不透明（1.0）",
+        "related_methods": [],
+        "implementation": "纯 Dart（Opacity Widget）"
+      },
+      {
+        "name": "缩放变换",
+        "description": "子 Widget 随滚动从 0.0 缩放至 1.0（support X/Y 轴独立控制）",
+        "related_methods": [],
+        "implementation": "纯 Dart（Transform.scale Widget）"
+      },
+      {
+        "name": "方向平移",
+        "description": "子 Widget 从指定方向（上/下/左/右）滑入原位，支持位掩码组合（对立方向互斥）",
+        "related_methods": [],
+        "implementation": "纯 Dart（Transform.translate Widget）"
+      },
+      {
+        "name": "背景色渐变",
+        "description": "子 Widget 背景色随滚动从起始色过渡到目标色",
+        "related_methods": [],
+        "implementation": "纯 Dart（Color.lerp + AnimatedContainer）"
+      },
+      {
+        "name": "阈值延迟触发",
+        "description": "设置触发阈值 [0.0, 1.0]，ratio < threshold 时不执行变换，≥ threshold 时重映射 ratio 区间",
+        "related_methods": [],
+        "implementation": "纯 Dart（withThreshold 数学函数）"
+      },
+      {
+        "name": "状态重置",
+        "description": "子 Widget 滚出可视区时恢复初始变换状态",
+        "related_methods": [],
+        "implementation": "纯 Dart（条件判断 + setState）"
+      }
+    ]
+  },
+  "native_dependencies": {},
+  "flutter_dependencies": [],
+  "permissions": {},
+  "has_example": false,
+  "example_deps": [],
+  "complexity_assessment": {
+    "level": "low",
+    "factors": {
+      "channel_method_count": 0,
+      "native_dependency_count": 0,
+      "blocking_deps_count": 0,
+      "communication_pattern_count": 0,
+      "has_platform_view": false,
+      "has_texture": false,
+      "has_ffi": false,
+      "platform_check_count": 0
+    },
+    "complexity_score": 0,
+    "estimated_effort": "2 天——纯 Dart Widget 实现，无需原生代码、无需权限、无 MethodChannel。核心工作为实现滚动比例算法和 6 种变换的 Flutter Widget 映射。",
+    "adaptation_recommendation": "proceed",
+    "blocking_reasons": [],
+    "risk_items": [
+      {
+        "description": "低端设备滚动性能——setState 每次触发重建可能影响帧率",
+        "severity": "medium",
+        "mitigation": "使用 AnimatedBuilder / ValueListenableBuilder 局部重建，或采用 RepaintBoundary 隔离重绘区域"
+      },
+      {
+        "description": "大列表场景遍历性能——子 Widget 过多时 onScrollChanged 循环计算开销",
+        "severity": "medium",
+        "mitigation": "限制同时计算变换的子 Widget 数量（可视区+缓冲区），超出部分跳过"
+      }
+    ]
+  },
+  "supported_platforms": ["android", "ios", "web"],
+  "platform_checks": [],
+  "code_metrics": {
+    "file_counts": {
+      "dart": 0,
+      "android": 4,
+      "ios": 0,
+      "cpp": 0
+    },
+    "line_counts": {
+      "dart": 0,
+      "android": 367,
+      "ios": 0,
+      "cpp": 0,
+      "example": 0
+    }
+  },
+  "ecosystem_compliance": {
+    "library_category": "other",
+    "library_category_desc": "纯 UI 动画/交互效果库，不涉及支付/账号/广告/地图/推送/分享/媒体播放/WebView/输入法/应用分发/深度链接/受限权限等生态规则领域",
+    "has_ecosystem_rules": false,
+    "has_ui": true,
+    "is_aggregation": false,
+    "application_requirements": [],
+    "huawei_capabilities": [],
+    "arkweb_requirement": {
+      "required": false,
+      "reason": "不涉及 Web 内容渲染"
+    },
+    "restricted_permissions": [],
+    "needs_architecture_upgrade": false,
+    "target_aggregation_type": null,
+    "compliance_notes": "纯 Dart UI Widget 库，无生态规则约束。"
+  },
+  "api_inventory": {
+    "adaptation_contracts": {
+      "method_channel_method_count": 0,
+      "basic_message_channel_method_count": 0,
+      "event_channel_count": 0,
+      "platform_view_count": 0,
+      "ffi_main_function_count": 0,
+      "ffi_helper_function_count": 0,
+      "ffi_total_scanned": 0,
+      "total_contracts": 0
+    },
+    "dart_public_api": {
+      "class_count": 4,
+      "method_count": 18,
+      "enum_count": 0,
+      "top_level_function_count": 0,
+      "typedef_count": 0,
+      "top_level_constant_count": 4,
+      "total_count": 26,
+      "core_count": 26,
+      "excluded_count": 0
+    }
+  },
+  "example_path": "example_auto/",
+  "example_notes": "待从 reviewed 04-test-cases.json 自动生成。将覆盖全部 L0-L3 测试用例，中文 UI，含复制日志功能。",
+  "conclusion": "纯 Dart Flutter Widget 重新实现，零原生代码、零权限、零阻塞依赖。复杂度 low，建议 proceed。核心风险为低端设备滚动性能和中大列表遍历开销，均可通过 Flutter 常规性能优化手段（局部重建/RepaintBoundary）缓解。OHOS 适配预期零代码改动。"
+}

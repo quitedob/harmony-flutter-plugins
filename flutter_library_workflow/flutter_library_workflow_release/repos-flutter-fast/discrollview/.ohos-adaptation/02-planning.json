@@ -1,0 +1,106 @@
+{
+  "sdk_environment": {
+    "needs_switch": false,
+    "flutter_version": "3.22"
+  },
+  "plugin_type_skill": "type-pure-dart",
+  "ohos_api_mapping": [],
+  "native_dependency_mapping": [],
+  "permission_mapping": [],
+  "reference_plugins": [
+    {
+      "name": "flutter_zoom_drawer",
+      "url": "https://github.com/flutter-fast/flutter_zoom_drawer_ohos",
+      "relevance": "similar",
+      "key_patterns": [
+        "纯 Dart UI Widget 适配 OHOS 的模式——仅需 defaultTargetPlatform 条件分支（如需）",
+        "使用 PopScope 处理 OHOS 返回导航（Discrollview 不涉及）",
+        "Demo 生成 → HAP 构建 → 设备验证的完整流程"
+      ]
+    }
+  ],
+  "implementation_strategy": {
+    "approach": "将原始 Android Discrollview 库的 4 个 Java 类重新实现为纯 Dart Flutter Widget。核心思路：(1) 用 ScrollController + NotificationListener<ScrollNotification> 替代 Android ScrollView.onScrollChanged；(2) 用声明式 Flutter Transform/Opacity/Color.lerp 替代 Android View.setAlpha/setTranslationX/setScaleX 等命令式 API；(3) 用 DiscrollveConfig 配置类替代 Android XML 自定义属性；(4) 保持原始数学算法（ratio 计算/clamp/withThreshold）不变。",
+    "architecture_decisions": [
+      {
+        "topic": "滚动事件监听",
+        "decision": "ScrollController.addListener + NotificationListener<ScrollNotification>",
+        "rationale": "Flutter 惯用法，无需 platform channel。ScrollNotification 可同时获取像素偏移和 viewport 尺寸。"
+      },
+      {
+        "topic": "变换执行",
+        "decision": "声明式 Widget 重建（Transform/Opacity/AnimatedContainer）",
+        "rationale": "完全符合 Flutter 声明式范式。避免命令式修改子树带来的状态不一致。"
+      },
+      {
+        "topic": "性能优化",
+        "decision": "AnimatedBuilder + ValueNotifier<ScrollMetrics> 局部重建",
+        "rationale": "避免 setState 导致整棵 Widget 树重建。仅重建变换受影响的 subtree。"
+      },
+      {
+        "topic": "子 Widget 包装",
+        "decision": "DiscrollveContent.child() 静态工厂方法",
+        "rationale": "清晰分离配置与渲染。开发者声明变换意图，框架负责执行。"
+      },
+      {
+        "topic": "OHOS 平台兼容",
+        "decision": "零平台分支——所有 Flutter Framework API 均为跨平台 API",
+        "rationale": "ScrollController/Transform/Opacity 在 Flutter OHOS Engine 中均可用。"
+      }
+    ],
+    "planned_files": [
+      {
+        "path": "lib/discrollve_widget.dart",
+        "purpose": "DiscrollveWidget (StatefulWidget) + DiscrollveContent (StatelessWidget) 定义"
+      },
+      {
+        "path": "lib/discrollve_config.dart",
+        "purpose": "DiscrollveConfig 配置类 + DiscrollveDirection 方向常量"
+      },
+      {
+        "path": "lib/discrollve_math.dart",
+        "purpose": "ratio 计算引擎（clamp/withThreshold/absoluteTop 计算）"
+      },
+      {
+        "path": "pubspec.yaml",
+        "purpose": "包元数据、依赖声明、平台注册"
+      },
+      {
+        "path": "test/discrollve_widget_test.dart",
+        "purpose": "Widget 构建测试、ScrollController 模拟测试"
+      },
+      {
+        "path": "test/discrollve_config_test.dart",
+        "purpose": "DiscrollveConfig 参数校验（threshold 范围、方向冲突检测）"
+      },
+      {
+        "path": "test/discrollve_math_test.dart",
+        "purpose": "ratio 计算逻辑单元测试（边界值、clamp、withThreshold）"
+      }
+    ],
+    "approach_detail": "## 实现方案\n\n### 1. 滚动比例计算引擎\n\n移植原始 DiscrollView.onScrollChanged() 算法：\n\n```dart\nvoid _onScroll(double scrollOffset) {\n  final viewportHeight = scrollMetrics.viewportDimension;\n  final halfHeight = viewportHeight / 2;\n  final totalHeight = scrollMetrics.maxScrollExtent + viewportHeight;\n\n  for (int i = 1; i < children.length; i++) {\n    final childTop = _childPositions[i];\n    final childHeight = _childHeights[i];\n    final absoluteTop = childTop - scrollOffset;\n\n    double ratio;\n    if (totalHeight - (childTop + childHeight) < childHeight + halfHeight) {\n      // 剩余空间不足——top 触发\n      if (absoluteTop <= viewportHeight) {\n        ratio = clamp(visibleGap(absoluteTop, viewportHeight) / childHeight, 0.0, 1.0);\n      } else {\n        ratio = -1; // reset\n      }\n    } else {\n      // 剩余空间足够——center 触发\n      if (absoluteTop <= halfHeight) {\n        ratio = clamp(visibleGap(absoluteTop, halfHeight) / childHeight, 0.0, 1.0);\n      } else {\n        ratio = -1;\n      }\n    }\n  }\n}\n```\n\n### 2. 变换渲染\n\n```dart\nWidget _applyTransforms(Widget child, DiscrollveConfig config, double ratio) {\n  if (ratio < 0 || ratio < config.threshold) return child; // 未触发或重置\n  final r = (ratio - config.threshold) / (1.0 - config.threshold); // withThreshold\n  Widget result = child;\n  if (config.alpha) result = Opacity(opacity: r, child: result);\n  if (config.scaleX || config.scaleY) result = Transform.scale(scale: r, ...);\n  if (config.translation > 0) result = Transform.translate(offset: _calcTranslation(r), ...);\n  if (config.fromColor != -1 && config.toColor != -1) {\n    result = Container(color: Color.lerp(from, to, r), child: result);\n  }\n  return result;\n}\n```\n\n### 3. 关键特性\n\n- 首个子 Widget 自动填充 viewport 全高（LayoutBuilder + state）\n- 位掩码 Translation 方向组合，运行时 assert 检测对立方向冲突\n- withThreshold 数学函数与原始 Java 实现字节等价\n- 公开 ScrollController 支持外部程序化控制滚动位置\n",
+    "supplemental_sections": [],
+    "module_json5_config": {}
+  },
+  "risk_items": [
+    {
+      "description": "低端 OHOS 设备上滚动驱动的 setState/AnimatedBuilder 重建可能达不到 60fps",
+      "severity": "medium",
+      "mitigation": "采用 ValueListenableBuilder + RepaintBoundary 局部重建策略；在 L0 测试中包含滚动性能（帧率）验证"
+    },
+    {
+      "description": "大子 Widget 数量（>50）时 onScrollChanged 遍历计算 O(n) 开销",
+      "severity": "low",
+      "mitigation": "限制可视区+前后各 N 个 Widget 参与变换计算；超出范围的直接跳过"
+    },
+    {
+      "description": "Flutter OHOS Engine 尚未大规模生产验证，基础 API 兼容性需确认",
+      "severity": "low",
+      "mitigation": "所有使用的 API（ScrollController/Transform/Opacity）均为 Framework 层基础 API，跨平台成熟度高；HAP 构建后立即在真实设备验证"
+    }
+  ],
+  "example_deps_solutions": [],
+  "ffi_strategy": "not_applicable",
+  "ffi_strategy_caveat": null,
+  "implementation_notes": "纯 Dart UI Widget 库，零原生代码。实现时遵循 Flutter Widget 惯用法（声明式 API、AnimatedBuilder 局部重建、LayoutBuilder 响应尺寸）。核心算法（ratio 计算）直接移植原始 Java 逻辑，数学精度一致。无需创建 ohos/ 目录。pubspec.yaml 不需要平台注册。"
+}

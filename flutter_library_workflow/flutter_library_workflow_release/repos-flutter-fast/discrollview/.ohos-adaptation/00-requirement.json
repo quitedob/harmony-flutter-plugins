@@ -1,0 +1,108 @@
+{
+  "plugin_name": "discrollview",
+  "plugin_version": "0.0.2",
+  "description": "Discrollve 视差滚动 Flutter Widget——基于原始 Android Discrollview 库的交互模式重新实现的纯 Dart Flutter 组件。在用户滚动时为列表中的每个子 Widget 提供基于滚动位置的透明度/缩放/平移/背景色渐变变换，创造出"元素从无到有浮入画面"的 Discrollve 视差效果。",
+  "artifact_profile": "flutter",
+  "plugin_type": "pure_dart",
+  "target_platforms": ["android", "ios", "web", "ohos"],
+  "functional_modules": [
+    {
+      "moduleCode": "F-01",
+      "moduleName": "DiscrollveWidget",
+      "description": "根滚动容器，监听滚动事件，计算各子 Widget 的滚动比例并分发给下层 Widget 执行变换",
+      "priority": "P0"
+    },
+    {
+      "moduleCode": "F-02",
+      "moduleName": "DiscrollveContent",
+      "description": "内容布局容器，纵向排列子 Widget，每个子 Widget 可独立配置 Discrollve 变换参数",
+      "priority": "P0"
+    },
+    {
+      "moduleCode": "F-03",
+      "moduleName": "DiscrollveConfig",
+      "description": "变换配置类，声明 alpha/scaleX/scaleY/translation/fromColor/toColor/threshold 七种参数",
+      "priority": "P0"
+    },
+    {
+      "moduleCode": "F-04",
+      "moduleName": "DiscrollveDirection",
+      "description": "Translation 方向枚举：fromTop/fromBottom/fromLeft/fromRight，位掩码组合，对立方向互斥",
+      "priority": "P1"
+    },
+    {
+      "moduleCode": "F-05",
+      "moduleName": "滚动比例计算引擎",
+      "description": "基于原始 Android 算法计算每个子 Widget 的 ratio（0.0-1.0），处理视图大小不足时的备选触发逻辑",
+      "priority": "P0"
+    },
+    {
+      "moduleCode": "F-06",
+      "moduleName": "变换渲染器",
+      "description": "根据 ratio + config 通过 Flutter Transform/Opacity/AnimatedContainer 应用视觉变换到子 Widget",
+      "priority": "P0"
+    },
+    {
+      "moduleCode": "F-07",
+      "moduleName": "阈值控制",
+      "description": "ratio < threshold 时不触发变换，使用 withThreshold() 重映射 ratio 区间",
+      "priority": "P1"
+    },
+    {
+      "moduleCode": "F-08",
+      "moduleName": "重置/恢复",
+      "description": "子 Widget 滚出可视区或被判定不应变换时恢复初始状态（onResetDiscrollve 等价逻辑）",
+      "priority": "P0"
+    }
+  ],
+  "public_apis": [
+    {
+      "name": "DiscrollveWidget",
+      "type": "StatefulWidget",
+      "description": "根滚动容器，提供 Discrollve 视差滚动效果。使用 ScrollController + NotificationListener 驱动。"
+    },
+    {
+      "name": "DiscrollveContent",
+      "type": "StatelessWidget",
+      "description": "内容包装 Widget，使用静态工厂方法 DiscrollveContent.child() 创建带变换配置的子 Widget。"
+    },
+    {
+      "name": "DiscrollveConfig",
+      "type": "configuration_class",
+      "description": "变换配置类：alpha(bool)/scaleX(bool)/scaleY(bool)/translation(int)/fromColor(int)/toColor(int)/threshold(double)"
+    },
+    {
+      "name": "DiscrollveDirection",
+      "type": "constants_class",
+      "description": "Translation 方向常量：fromTop(0x01)/fromBottom(0x02)/fromLeft(0x04)/fromRight(0x08)"
+    }
+  ],
+  "target_users": [
+    "Flutter 应用开发者",
+    "需要为列表/滚动视图添加视差动画效果的 UI 设计师",
+    "OHOS 平台 Flutter 应用开发者"
+  ],
+  "usage_scenarios": [
+    "应用引导页/欢迎页——滚动时文字和图片逐项淡入飞入",
+    "产品展示页——滚动时产品卡片从不同方向滑入并伴随透明度变化",
+    "故事/文章阅读页——滚动时段落逐段浮现，配合背景色渐变营造沉浸氛围",
+    "品牌营销落地页——首屏静态大图，滚动时品牌元素从四方向聚拢",
+    "OHOS 折叠屏设备——折叠/展开时视图重新布局，滚动效果自适应新尺寸"
+  ],
+  "constraints": [
+    "纯 Dart 实现，零 MethodChannel/FFI/原生依赖",
+    "第一个子 Widget 始终为静态头部（占据 viewport 全高）",
+    "fromTop+fromBottom 和 fromLeft+fromRight 不能同时使用",
+    "threshold 取值范围 [0.0, 1.0]",
+    "API 设计完全声明式，符合 Flutter Widget 惯用法"
+  ],
+  "acceptance_criteria": [
+    "所有原始 Discrollview 变换类型（6 种）在 Flutter Widget 中均可实现",
+    "滚动比例计算与原始 Android 算法逻辑等价",
+    "flutter analyze 零错误",
+    "flutter test 全部通过",
+    "在 OHOS 设备上签名 HAP 正常安装、启动、滚动效果流畅（60fps）",
+    "24 个 L0-L2 黑盒测试用例全部通过",
+    "AJV Schema 验证所有生产 JSON 通过"
+  ]
+}

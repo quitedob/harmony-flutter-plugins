@@ -1,0 +1,89 @@
+{
+  "docs_scan": {
+    "agent_id": "main-agent",
+    "assigned_roots": [".", "README.md"],
+    "status": "complete",
+    "file_count": 1,
+    "files": ["README.md"],
+    "findings": [
+      "README.md: repository is an Android library published on Maven Central",
+      "README.md: API 14+ compatibility declared",
+      "README.md: XML-based configuration via custom attributes (discrollve_alpha, discrollve_translation, etc.)",
+      "README.md: Six transform types: alpha, scaleX, scaleY, translation (4 directions), bgColor",
+      "README.md: threshold attribute for delayed animation trigger",
+      "README.md: First child is always a static header (full screen height)",
+      "README.md: Apache 2.0 License"
+    ],
+    "unknowns": [],
+    "conflicts": [],
+    "read_only": true,
+    "reliability": "authoritative - repository README"
+  },
+  "project_scans": [
+    {
+      "agent_id": "main-agent",
+      "assigned_roots": ["lib/src/main/java", "lib/src/main/res"],
+      "status": "complete",
+      "file_count": 6,
+      "files": [
+        "lib/src/main/java/com/flavienlaurent/discrollview/lib/DiscrollView.java",
+        "lib/src/main/java/com/flavienlaurent/discrollview/lib/DiscrollViewContent.java",
+        "lib/src/main/java/com/flavienlaurent/discrollview/lib/Discrollvable.java",
+        "lib/src/main/java/com/flavienlaurent/discrollview/lib/DiscrollvableView.java",
+        "lib/src/main/res/values/attrs.xml",
+        "lib/src/main/AndroidManifest.xml"
+      ],
+      "findings": [
+        "DiscrollView.java: extends ScrollView, single-child constraint, DiscrollViewContent required",
+        "DiscrollView.java: onScrollChanged iterates children index≥1, calculates ratio based on viewport position",
+        "DiscrollView.java: two trigger modes - center-reach (sufficient space) and top-reach (insufficient space)",
+        "DiscrollView.java: clamp(ratio, 0.0f, 1.0f) applied to all calculations",
+        "DiscrollViewContent.java: extends LinearLayout(VERTICAL), auto-wraps children with discrollve attrs into DiscrollvableView",
+        "DiscrollViewContent.LayoutParams: parses 7 XML custom attributes",
+        "Discrollvable.java: interface with onDiscrollve(float ratio) and onResetDiscrollve()",
+        "DiscrollvableView.java: extends FrameLayout, implements Discrollvable",
+        "DiscrollvableView.java: 6 transform types - alpha (setAlpha), scaleX (setScaleX), scaleY (setScaleY), translationX/Y (setTranslationX/Y), backgroundColor (ArgbEvaluator)",
+        "DiscrollvableView.java: translation direction bitmask (0x01=fromTop, 0x02=fromBottom, 0x04=fromLeft, 0x08=fromRight)",
+        "DiscrollvableView.java: withThreshold() remaps ratio: (ratio - threshold) / (1.0 - threshold)",
+        "DiscrollvableView.java: validates conflicting directions (top+bottom and left+right forbidden)",
+        "attrs.xml: 7 declare-styleable attributes + 4 translation flag values",
+        "build.gradle: compileSdkVersion 19, minSdkVersion 14, targetSdkVersion 19 - very old Android API"
+      ],
+      "unknowns": [],
+      "conflicts": [],
+      "read_only": true
+    },
+    {
+      "agent_id": "main-agent",
+      "assigned_roots": ["sample/src/main/java", "sample/src/main/res/layout"],
+      "status": "complete",
+      "file_count": 8,
+      "files": [
+        "sample/src/main/java/com/flavienlaurent/discrollview/sample/MainActivity.java",
+        "sample/src/main/java/com/flavienlaurent/discrollview/sample/DiscrollvableGreenLayout.java",
+        "sample/src/main/java/com/flavienlaurent/discrollview/sample/DiscrollvableLastLayout.java",
+        "sample/src/main/java/com/flavienlaurent/discrollview/sample/DiscrollvablePathLayout.java",
+        "sample/src/main/java/com/flavienlaurent/discrollview/sample/DiscrollvablePurpleLayout.java",
+        "sample/src/main/java/com/flavienlaurent/discrollview/sample/DiscrollvableRedLayout.java",
+        "sample/src/main/res/layout/activity_main.xml",
+        "sample/src/main/res/layout/simple.xml"
+      ],
+      "findings": [
+        "sample: demonstrates DiscrollView with 5 custom Discrollvable layouts (Green, Red, Purple, Path, Last)",
+        "sample: activity_main.xml shows full XML attribute usage pattern",
+        "sample: simple.xml shows minimal example with alpha+translation+scale+bgColor",
+        "sample: custom layouts extend DiscrollvableView and override onDiscrollve/onResetDiscrollve",
+        "sample: each layout applies custom Path-based clipping and Canvas transformations"
+      ],
+      "unknowns": [],
+      "conflicts": [],
+      "read_only": true
+    }
+  ],
+  "batching": {
+    "mode": "sequential",
+    "degraded": false,
+    "reason": "Single-agent sequential scanning - repository is small (4 Java files + 1 XML)"
+  },
+  "completed_at": "2026-07-30T14:00:00+08:00"
+}

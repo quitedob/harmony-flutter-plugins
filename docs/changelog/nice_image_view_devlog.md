@@ -369,6 +369,7 @@ module.json, pack.info, pkgSdkInfo.json
 |------|------|
 | 2026-07-30 | 初始日志：完整记录 Android→Flutter 移植全过程，包含路线决策、API 映射分析、BATCH RECURSION 诊断与解决、HAP 构建、管线产物生成 |
 | 2026-07-30 | **P2 文档交付收尾**：Demo 全中文化（12 个可见中文文本）、复制日志功能（`Key('btn_copy_log')` + `Clipboard.setData`）、示例占位图片生成（69 bytes 最小 PNG）、`example/pubspec.yaml` 创建、`05-demo-gen.json` 更新（`copy_log_supported: true` + `visible_texts` 中文列表 + `demo_source_files` 扩展至 4 个） |
+| 2026-07-30 | **Git 提交与推送**：`c423de4` → `origin/main`。61 files changed, 7,125 insertions。移除 `NiceImageView/.git`（避免嵌套 git 仓库），`git add -f` 绕过 `repos-flutter-fast/` 的 `.gitignore` 排除规则。commit message 包含完整路线决策、5 个关键问题解决记录、HAP 构建方法和 SHA-256。 |
 
 ---
 

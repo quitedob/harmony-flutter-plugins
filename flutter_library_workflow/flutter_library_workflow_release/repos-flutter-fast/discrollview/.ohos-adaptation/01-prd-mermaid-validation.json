@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "source": "01-analysis-prd.md",
+  "source_sha256": "386dc2087eb06aa62d7a214478361b1c2d364a9c7efd71fb039844fb78a04dff",
+  "alias": {
+    "path": "discrollview_prd.md",
+    "sha256": "386dc2087eb06aa62d7a214478361b1c2d364a9c7efd71fb039844fb78a04dff",
+    "byte_identical": true
+  },
+  "validator": {
+    "package": "@mermaid-js/mermaid-cli",
+    "executable": "C:\\Users\\shuaibi\\.claude\\skills\\migrate-flutter-plugins\\scripts\\node_modules\\.bin\\mmdc.cmd",
+    "version": "11.16.0"
+  },
+  "diagram_count": 5,
+  "required_types": {
+    "flowchart": true,
+    "sequenceDiagram": true
+  },
+  "diagrams": [
+    {
+      "index": 1,
+      "type": "graph",
+      "source_sha256": "582a091babd188d2d53f751fd2ccd8937ec1fab11b1dd09653efc1b31c4e5e8d",
+      "rendered_svg": "mermaid/01-analysis-prd-01.svg",
+      "rendered_sha256": "bbe286b07d04d8baea4b9ae08742122c5c78d7be6960f1cb8ec885e3ffbc9a4e",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "status": "PASS"
+    },
+    {
+      "index": 2,
+      "type": "flowchart",
+      "source_sha256": "eaf1fb3deb57a6826575e01bfaa0dbbb7a24ca0feaf8dd65394573dd5bb2518c",
+      "rendered_svg": "mermaid/01-analysis-prd-02.svg",
+      "rendered_sha256": "8ecc41b97a1247f3219b4d101cc94a525e767ac30a00c93462ae213806351bbd",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "status": "PASS"
+    },
+    {
+      "index": 3,
+      "type": "graph",
+      "source_sha256": "1565a03cf6adf6b98f82717b97cb92e3240d7f522efce31906ac10840a041155",
+      "rendered_svg": "mermaid/01-analysis-prd-03.svg",
+      "rendered_sha256": "76829ff33cc494ee938cea592a52fdada28d6abb384a5839413557bc17313a2d",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "status": "PASS"
+    },
+    {
+      "index": 4,
+      "type": "sequenceDiagram",
+      "source_sha256": "8173605aa63d5f24db06494ac0f892bf2f5f9b46ddf4c319e0cd2a568ef791a2",
+      "rendered_svg": "mermaid/01-analysis-prd-04.svg",
+      "rendered_sha256": "9ba128289d33dea713c57881ce65499321859003fbde9319aedf660717f9ba4a",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "status": "PASS"
+    },
+    {
+      "index": 5,
+      "type": "flowchart",
+      "source_sha256": "ad8b83285a3f806878951b67a27e331aa144e4173858df98b5d8e0999311878d",
+      "rendered_svg": "mermaid/01-analysis-prd-05.svg",
+      "rendered_sha256": "92d42d2ef6c238c7a9d220e81d47587f39f8079859b74972e36a3f24600ab0db",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "status": "PASS"
+    }
+  ],
+  "syntax_errors": [],
+  "status": "PASS"
+}
