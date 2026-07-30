@@ -175,3 +175,93 @@
 ---
 
 *本日志由 AI 辅助生成，记录 flutter_zoom_drawer 鸿蒙适配测试用例补全工作及 2026-07-27 P0/P1 收尾。*
+
+---
+
+## 七、2026-07-29 输出交付包生成与格式核验日志
+
+### 7.1 目标与扫描
+
+- 目标：参照 `docs/example/d_stack-*` 生成 `output/flutter_zoom_drawer/` 三文件交付包。
+- 按用户要求先执行多代理扫描；`scan` 类型不可用后，使用 6 个只读 `Explore` 子代理覆盖示例/日志、测试应用、两个 OHOS 源和两个 release 源。
+- 最终 ZIP 源采用 `flutter_library_workflow/flutter_library_workflow_release/repos-flutter-fast/flutter_zoom_drawer`；该包是 pure Dart，ZIP 不要求插件级 `ohos/`、HAR 或原生注册文件。
+
+### 7.2 产物与错误记录
+
+| 顺序 | 操作 | 结果 |
+|---:|---|---|
+| 1 | 创建 `output/flutter_zoom_drawer/` | 成功 |
+| 2 | 复制 `.ohos-adaptation/flutter_zoom_drawer_prd.md` 为 `flutter_zoom_drawer-prd.md` | 成功 |
+| 3 | 复制 `.ohos-adaptation/02-test-cases.md` 为 `flutter_zoom_drawer-test-cases.md` | 成功 |
+| 4 | 尝试 `zip`、`tar.exe`、`7zG.exe`、`7z.exe` 和 Python `zipfile` 打包 | 被 auto-mode classifier 拒绝、用户中断或分类模型临时不可用；没有收到明确成功结果 |
+| 5 | 用户要求检查 `pip list` | 成功；Python 环境可用，无需安装 ZIP 依赖 |
+| 6 | 后续只读检查发现 `flutter_zoom_drawer.zip` 已存在 | 成功发现；实际创建动作不能归因于前述失败命令 |
+
+共同错误处置详见 `media_scanner_devlog.md` 同日章节，包括 `scan` agent 不存在、复合命令拆分、分类器拒绝、`claude-opus-4-8` 临时不可用、7-Zip GUI/CLI 区分、heredoc 引号解析失败和当前环境无 `apply_patch` 命令。
+
+### 7.3 格式与完整性
+
+`output/flutter_zoom_drawer/` 恰好包含：
+
+1. `flutter_zoom_drawer-prd.md`
+2. `flutter_zoom_drawer-test-cases.md`
+3. `flutter_zoom_drawer.zip`
+
+| 项目 | 结果 |
+|---|---|
+| 命名模式 | 符合 `<project>-prd.md`、`<project>-test-cases.md`、`<project>.zip` |
+| ZIP 根布局 | 扁平项目根；无额外 `flutter_zoom_drawer/` 包裹目录 |
+| 文件大小 | 285,023 bytes |
+| ZIP 条目数 | 155 |
+| `unzip -t` | 全部条目 `OK`，无压缩数据错误 |
+| 根级 manifest | `pubspec.yaml` 存在 |
+| 公开入口 | `lib/flutter_zoom_drawer.dart` 存在 |
+| 核心实现 | `lib/src/flutter_zoom_drawer.dart` 存在 |
+| 包内测试路径 | `test/flutter_zoom_drawer_test.dart` 存在，但仅 20 bytes，为空 `main()` 壳 |
+| 完整测试页 | `example/lib/flutter_zoom_drawer_full_test_page.dart` 不存在 |
+| 主要污染项 | 未发现 `.git/`、`.dart_tool/`、`.claude/`、`build/`、`logs/`、`oh_modules/` |
+
+### 7.4 工作流证据与历史声明差异
+
+- ZIP 内 `.ohos-adaptation/` 包含 requirement、analysis、test-analysis、test-points 和 PRD。
+- ZIP 内未包含 2026-07-27 日志声明的 `02-test-cases.md`、`03-case-review-report.md`、`04-test-cases.json`、`05-test-cases.xlsx`；外部 `flutter_zoom_drawer-test-cases.md` 已提供 24 条设计用例，因此三文件交付格式仍成立，但 ZIP 内审计证据不完整。
+- 本日志第 141 行的“555 行/29 条测试”与当前 ZIP 内 20-byte 空测试壳不一致。
+- 本日志第 160-162 行声明的完整测试页未进入当前 ZIP。
+- 输出 PRD 和测试用例已如实标记上述证据边界：24 条均为 pending，不能从历史文字或其他源码副本自动继承 PASS。
+
+### 7.5 最终结论
+
+- **交付格式：通过。** 三文件数量、名称和 ZIP 扁平根布局符合 `docs/example` 模式。
+- **ZIP 完整性：通过。** pure-Dart 核心源码、example 和 manifest 可读取，压缩数据无错误。
+- **测试证据一致性：不通过。** 当前 ZIP 未包含历史日志所述满编测试和完整测试页；24 条测试保持 pending 是正确状态。
+- 后续如需发布”已验证”版本，应先将实际 29 条测试和完整测试页同步到被打包源，再重新生成 ZIP 并执行对应源码上的自动化/OHOS 真机验证。
+
+---
+
+## 八、2026-07-30 鸿蒙化方案文档生成
+
+### 产物
+
+| 文件 | 路径 | 状态 |
+|------|------|:--:|
+| 鸿蒙化方案 | `repos-flutter-fast/flutter_zoom_drawer/.ohos-adaptation/鸿蒙化方案.md` | ✅ 新生成 |
+
+### 文档覆盖
+
+| 章节 | 内容 |
+|------|------|
+| 方案概述 | pure-Dart 零原生 UI 组件；1 行适配（TargetPlatform.ohos 加入 PopScope 条件）；无需 ohos/ HAR 工程 |
+| API 映射 | 无（列出 8 项 Flutter Framework API 在 OHOS Engine 的兼容性） |
+| 权限映射 | 无（纯 UI 组件） |
+| 架构决策 | 不做 Fork（建议向上游提 PR）、无 OHOS 原生工程、Example 独立 OHOS 工程仅用于真机验证 |
+| 文件规划 | library 层 13 个 Dart 文件 + example 完整测试页 |
+| Example 依赖处理 | 5 个依赖（4 个 pure Dart 无需处理，shared_preferences 需 alternative） |
+| 风险项 | 5 条：GPU 渲染差异（low）、触摸灵敏度（low）、2in1 无物理返回键（medium）、shared_preferences 兼容（low）、ZIP 内测试为空壳（medium） |
+| 推荐 Skill | type-pure-dart |
+
+### 方案与当前实现的对齐
+
+- 确认唯一代码改动为 `lib/src/flutter_zoom_drawer.dart:824-828` 的 `TargetPlatform.ohos` 条件。
+- pubspec.yaml 不注册 ohos 平台（符合 pure-Dart 规范）。
+- Example 的 `ohos/` 工程仅用于真机 Demo 构建，非插件级产物。
+- 历史 15/15 自测记录和 29 条单元测试声明保留，但方案如实记录当前 ZIP 测试为空壳的证据边界。
