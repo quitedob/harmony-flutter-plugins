@@ -8,6 +8,8 @@ import 'media_scanner_full_test_page.dart';
 import 'flutter_zoom_drawer_full_test_page.dart';
 import 'discrollview_test_page.dart';
 import 'nice_image_view_test_page.dart';
+import 'pin_code_fields_test_page.dart';
+import 'device_imei_test_page.dart';
 
 void main() {
   runApp(const TestHubApp());
@@ -91,6 +93,22 @@ class TestHubPage extends StatelessWidget {
               subtitle: '圆角/圆形/边框/遮罩效果测试（pure_dart）',
               page: const NiceImageViewTestPage(),
             ),
+            const SizedBox(height: 12),
+            _testCard(
+              context,
+              icon: Icons.password,
+              title: 'PIN 输入组件完整测试',
+              subtitle: '输入、控制器、主题、表单、语义与 OHOS 选择控件',
+              page: const PinCodeFieldsTestPage(),
+            ),
+            const SizedBox(height: 12),
+            _testCard(
+              context,
+              icon: Icons.phone_android,
+              title: 'DeviceImei',
+              subtitle: '设备标识与设备信息（ODID / 版本 / JSON）',
+              page: const DeviceImeiTestPage(),
+            ),
           ],
         ),
       ),
@@ -111,10 +129,8 @@ class TestHubPage extends StatelessWidget {
         title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text(subtitle),
         trailing: const Icon(Icons.chevron_right),
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => page),
-        ),
+        onTap: () =>
+            Navigator.push(context, MaterialPageRoute(builder: (_) => page)),
       ),
     );
   }
@@ -189,7 +205,11 @@ class _MediaScannerTestPageState extends State<MediaScannerTestPage> {
                         fit: BoxFit.contain,
                         errorBuilder: (_, __, ___) => const Padding(
                           padding: EdgeInsets.all(48),
-                          child: Icon(Icons.broken_image, size: 64, color: Colors.grey),
+                          child: Icon(
+                            Icons.broken_image,
+                            size: 64,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                     ),
@@ -197,12 +217,19 @@ class _MediaScannerTestPageState extends State<MediaScannerTestPage> {
                       padding: const EdgeInsets.all(12),
                       child: Row(
                         children: [
-                          Icon(Icons.check_circle, size: 18, color: Colors.green.shade600),
+                          Icon(
+                            Icons.check_circle,
+                            size: 18,
+                            color: Colors.green.shade600,
+                          ),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
                               '已注册到系统相册',
-                              style: TextStyle(color: Colors.green.shade700, fontWeight: FontWeight.w600),
+                              style: TextStyle(
+                                color: Colors.green.shade700,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ],
@@ -226,9 +253,9 @@ class _MediaScannerTestPageState extends State<MediaScannerTestPage> {
                 child: SelectableText(
                   _lastFilePath!,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontFamily: 'monospace',
-                        fontSize: 11,
-                      ),
+                    fontFamily: 'monospace',
+                    fontSize: 11,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -238,9 +265,7 @@ class _MediaScannerTestPageState extends State<MediaScannerTestPage> {
               Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: Icon(
-                  _running
-                      ? Icons.hourglass_top
-                      : Icons.image_outlined,
+                  _running ? Icons.hourglass_top : Icons.image_outlined,
                   size: 72,
                   color: _running ? Colors.orange : cs.outline,
                 ),
@@ -251,8 +276,8 @@ class _MediaScannerTestPageState extends State<MediaScannerTestPage> {
               _status,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: _success ? Colors.green : null,
-                  ),
+                color: _success ? Colors.green : null,
+              ),
             ),
 
             const SizedBox(height: 24),
@@ -263,7 +288,10 @@ class _MediaScannerTestPageState extends State<MediaScannerTestPage> {
               icon: Icon(_success ? Icons.refresh : Icons.play_arrow),
               label: Text(_success ? '重新生成' : '生成测试图片并扫描'),
               style: FilledButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 14,
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -347,13 +375,20 @@ class _MediaScannerTestPageState extends State<MediaScannerTestPage> {
       0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, // PNG signature
       0x00, 0x00, 0x00, 0x0D, 0x49, 0x48, 0x44, 0x52, // IHDR len+type
       0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, // 1×1
-      0x08, 0x02, 0x00, 0x00, 0x00,                   // 8-bit RGB
-      0x90, 0x77, 0x53, 0xDE,                         // IHDR CRC
+      0x08, 0x02, 0x00, 0x00, 0x00, // 8-bit RGB
+      0x90, 0x77, 0x53, 0xDE, // IHDR CRC
       0x00, 0x00, 0x00, 0x0C, 0x49, 0x44, 0x41, 0x54, // IDAT len+type
-      0x08, 0xD7, 0x63, 0x60, 0x60, 0x60, 0x00, 0x00, // zlib+filter+RGB(255,0,0)
+      0x08,
+      0xD7,
+      0x63,
+      0x60,
+      0x60,
+      0x60,
+      0x00,
+      0x00, // zlib+filter+RGB(255,0,0)
       0x00, 0x04, 0x00, 0x01, 0x47, 0x61, 0x72, 0x0C, // adler32+CRC
       0x00, 0x00, 0x00, 0x00, 0x49, 0x45, 0x4E, 0x44, // IEND len+type
-      0xAE, 0x42, 0x60, 0x82,                         // IEND CRC
+      0xAE, 0x42, 0x60, 0x82, // IEND CRC
     ];
 
     File(filePath).writeAsBytesSync(pngBytes);

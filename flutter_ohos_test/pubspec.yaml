@@ -38,6 +38,10 @@ dependencies:
     path: ../flutter_library_workflow/flutter_library_workflow_release/repos-flutter-fast/discrollview
   nice_image_view:
     path: ../flutter_library_workflow/flutter_library_workflow_release/repos-flutter-fast/NiceImageView
+  pin_code_fields:
+    path: ../flutter_library_workflow/flutter_library_workflow_release/repos-flutter-fast/pin_code_fields/packages/pin_code_fields
+  device_imei:
+    path: ../flutter_library_workflow/flutter_library_workflow_release/repos-flutter-fast/device_imei
 
 dependency_overrides:
   media_scanner_ohos:
@@ -68,6 +72,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - ohos/entry/src/main/resources/rawfile/pin_code_fields/04-test-cases.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:
