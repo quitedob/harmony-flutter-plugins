@@ -149,7 +149,57 @@ flutter build hap --debug
 | 2026-07-27 | 补全 `05-test-cases.xlsx`（18 条标准格式测试用例）到 repos-flutter-fast |
 | 2026-07-27 | **P0/P1 收尾**：DFX 质量扫描通过（dfx_dart + dfx_ets + dfx_channel_consistency 全部 0 告警）；修复 `Platform.isOhos` → `defaultTargetPlatform == TargetPlatform.ohos` + `print` → `debugPrint`；README 更新为 "Android + OpenHarmony"；CHANGELOG 新增 OHOS 条目；Hypium 自动化测试用例 9 条生成（`.ohos-adaptation/hypium-test-cases.md`）；白盒质量评估挂起待 DevEco CodeLinter；满编单元测试（182 行 / 18 条 Mock MC）从 `flutter_ohos_test/test/` 同步到 `repos-flutter-fast/media_scanner/test/` |
 | 2026-07-27 | **F-02-03 测试文案修正**：`.xyz` 返回 401 标注为【预定行为】— 这是系统层保护机制按预定工作，不是插件缺陷。文案明确 "这不是 Bug，系统层保护机制按预定工作"，避免测试人员困惑 |
-| 2026-07-29 | **输出交付包审计**：`output/media_scanner/` 已形成 `media_scanner-prd.md`、`media_scanner-test-cases.md`、`media_scanner.zip` 三文件结构；ZIP 为扁平项目根，15,622,420 bytes / 94 条，`unzip -t` 通过，Dart/Android/OHOS 源、`MediaScannerPlugin.ets` 与 `flutter.har` 齐全。历史 18/18 来自 federated donor/test harness，仅保留为历史记录，不能自动继承为当前 standalone ZIP 的通过证据；当前外部测试文档按 0/0/0、18 条 pending 记录。详细命令、错误和通配符诊断见 `media_scanner_devlog.md` 同日章节。 |
+| 2026-07-29 | **输出交付包审计**：`output/media_scanner/` 已形成 `media_scanner-prd.md`、`media_scanner-test-cases.md`、`media_scanner.zip` 三文件结构；ZIP 为扁平项目根，15,622,420 bytes / 94 条，`unzip -t` 通过，Dart/Android/OHOS 源、`MediaScannerPlugin.ets` 与 `flutter.har` 齐全。历史 18/18 来自 federated donor/test harness，仅保留为历史记录，不能自动继承为当前 standalone ZIP 的通过证据；当前外部测试文档按 0/0/0、18 条 pending 记录。详细命令、错误和通配符诊断见同目录 `devlog.md` 同日章节。 |
+
+---
+
+## 六、2026-08-03 隔离 Demo 交付与完整档案核对
+
+> 日期：2026-08-03 | 分支：main | 设备：192.168.3.85:41665 (API 24, OpenHarmony 6.1.1.120)
+> 目标：为 media_scanner 建立**隔离**的 OHOS 测试 Demo（不放公共 hub），并按 `agent-flutter` skill 标准生成 demo，同时核对用例 ↔ XLSX 一致性。
+
+### 6.1 本次交付
+
+| 项 | 值 |
+|----|----|
+| Demo 工程 | `repos-flutter-fast/media_scanner/example_auto/`（隔离在插件仓库内，仅依赖 media_scanner） |
+| HAP | `example_auto/build/ohos/hap/media_scanner-ohos-demo.hap` |
+| HAP 大小 / SHA-256 | 141,453,205 B（~135 MB）/ `22d9b39c320dfbfe6ec020ff8bb6d6ea00960c071a7eda3487f098b9b6a4a726` |
+| 应用显示名 | **`MediaScanner 测试`**（en: `MediaScanner Test`）— 与其它插件 App 区分 |
+| bundleName | `com.example.flutter_ohos_test`（与已注册签名 profile 匹配，SignHap 必需） |
+| deviceTypes | `phone / tablet / 2in1` |
+| 权限 | `ohos.permission.WRITE_IMAGEVIDEO` + reason/usedScene |
+
+### 6.2 Demo 结构（符合 `flutter-plugin-example-generator2` 三级页面规范）
+
+| 级别 | 页面 | 语义 Key | 验证证据 |
+|:--:|------|------|:--:|
+| 1 | `ModuleIndexPage` 模块索引页（6 模块 F-01…F-06） | `module_F-01`…`module_F-06` | ✅ 真机截图 |
+| 2 | `CaseListPage` 模块用例列表页 | `case_F-01-01`… | ✅ Widget 导航测试 |
+| 3 | `CaseDetailPage` 用例详情页 + ResultPanel | `btn_run_<id>`、`result_panel`、`txt_result_status`、`txt_result`、`txt_result_detail`、`btn_copy_log` | ✅ Widget 导航测试 |
+
+- 18 条用例 ID / 标题 / 级别与 `.ohos-adaptation/05-test-cases.xlsx` **逐条一致**（脚本核对：ID 集合 18=18、标题 18/18、级别 18/18）。
+- `flutter analyze` 0 问题；`flutter test`（三级页面 smoke test）通过。
+
+### 6.3 遇到的问题与处理
+
+| # | 问题 | 原因 | 处理 |
+|:-:|------|------|------|
+| 1 | Hvigor 构建报 `00303053`：模块名 `media_scanner` 与 module.json5 不一致 | flutter-hvigor-plugin 按 pubspec 包名 `media_scanner` 注入模块，但插件 `ohos/src/main/module.json5` / `oh-package.json5` 声明为 `media_scanner_ohos` | 统一改为 `media_scanner`（仅这两个文件，不涉及类名/包注册），同时消除 ohpm 依赖名警告 |
+| 2 | Hvigor 报 `00306001`：路径超过 259 字符 | `repos-flutter-fast/media_scanner/example_auto/ohos/...` 绝对路径过长 | 使用短物理工作区 `D:\msbuild\media_scanner` 构建（**不用 subst/junction**，Hvigor 可能拒绝），产物复制回插件仓库 |
+| 3 | Hvigor SignHap 报 `00303074`：bundleName 与签名配置不匹配 | 签名 profile（`.p7b`）只注册了 `com.example.flutter_ohos_test` | build-profile + app.json5 的 bundleName 对齐为 `com.example.flutter_ohos_test` |
+| 4 | `Platform.isOhos` 在 host/单测上抛 `NoSuchMethodError` | `isOhos` 仅存在于 OHOS 目标 dart:io | 改用 `defaultTargetPlatform == TargetPlatform.ohos`（skill 推荐写法） |
+| 5 | 初版 demo 是单页扁平列表，不符合 skill 规范 | 未先读 `flutter-plugin-example-generator2` 就手写 | 重构为三级页面（ModuleIndex → CaseList → CaseDetail + ResultPanel + 复制日志），对齐 device_imei 模板 |
+| 6 | widget 测试找 F-03 失败 | 懒加载 ListView 只构建可视项 | 用 `scrollUntilVisible` 滚动后再断言 |
+| 7 | 设备截图 `/data/...` 被 Git Bash 改写 | MSYS 路径转换 | `MSYS_NO_PATHCONV=1` 或 `snapshot_display -f *.jpeg`（仅接受 .jpeg） |
+
+### 6.4 已交付文件的归档说明
+
+- `example_auto/lib/main.dart`：三级页面 Demo（18 用例 + 执行逻辑复用 `_scanFile` 等）。
+- `example_auto/test/widget_test.dart`：三级页面 smoke test。
+- `example_auto/ohos/`：entry 模块（deviceTypes、WRITE_IMAGEVIDEO、显示名、签名）。
+- 插件侧改动：`ohos/src/main/module.json5`、`ohos/oh-package.json5` 模块名 `media_scanner_ohos` → `media_scanner`。
+- 注意：上述改动先在 `D:\msbuild\media_scanner` 短工作区构建验证，再同步回 `repos-flutter-fast/media_scanner/example_auto`；短工作区为临时构建环境，源码以插件仓库为准。
 
 ---
 

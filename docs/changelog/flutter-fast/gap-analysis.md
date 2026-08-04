@@ -97,7 +97,7 @@
 
 ### 1.3 真机图库验证
 
-当前 `media_scanner_devlog.md` 记录的真机测试在 **HarmonyOS PC** 上完成，但 PC 文件管理器 ≠ 手机图库 App。
+当前 `media_scanner/devlog.md` 记录的真机测试在 **HarmonyOS PC** 上完成，但 PC 文件管理器 ≠ 手机图库 App。
 
 | # | 检查项 | 状态 |
 |---|--------|:--:|

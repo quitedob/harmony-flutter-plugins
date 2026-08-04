@@ -202,3 +202,51 @@ OHOS error(401) Invalid file type
 - 以当前 `repos-flutter-fast/media_scanner` 仓库实际代码为准：Dart 层 `loadMedia` + OHOS `loadMedia` Channel 方法、ArkTS 层 `MediaAssetChangeRequest` + `applyChanges`、双层权限防御。
 - 明确旧 donor `media_scanner_ohos` 仅作参考，不作为方案依据。
 - 注明合规备选路径（SaveButton 安全控件 / showAssetsCreationDialog 授权弹窗），但不改变当前实现策略。
+
+---
+
+## 2026-08-03 隔离 Demo 真机验证（设备 192.168.3.85:41665, API 24）
+
+> 目的：验证隔离交付的 `media_scanner` 三级页面 demo（非公共 hub），并核对用例 ↔ XLSX 一致性。
+
+### 构建与安装
+
+| 项 | 值 |
+|----|----|
+| 构建方式 | 短工作区 `D:\msbuild\media_scanner` → DevEco Node + `hvigorw.js assembleHap`（绕过 Windows 批处理递归 + 路径过长） |
+| HAP | `repos-flutter-fast/media_scanner/example_auto/build/ohos/hap/media_scanner-ohos-demo.hap` |
+| SHA-256 | `22d9b39c320dfbfe6ec020ff8bb6d6ea00960c071a7eda3487f098b9b6a4a726` |
+| 卸载 → 安装 | ✅ `hdc uninstall` / `hdc install` 均成功 |
+| 启动 | ✅ `aa start` 成功 |
+
+### 应用标识
+
+- 桌面显示名：**`MediaScanner 测试`**（en: `MediaScanner Test`）— 与其它插件 App 区分。
+- bundleName：`com.example.flutter_ohos_test`（对齐已注册签名 profile）。
+
+### 三级页面结构验证
+
+| 级别 | 页面 | 验证内容 | 结果/证据 |
+|:--:|------|------|:--:|
+| 1 | 模块索引页 | 6 模块卡片 F-01…F-06（4/3/4/3/3/1 条） | ✅ 真机截图 |
+| 2 | F-01 用例列表页 | F-01-01…F-01-04 共 4 条，含 ID/标题/级别/判定语义 | ✅ Widget 导航测试 |
+| 3 | F-01-01 详情页 | 标题 + 级别/模块 + 预期结果 + `btn_run` + ResultPanel + `btn_copy_log` | ✅ Widget 导航测试 |
+
+### 用例 ↔ XLSX 一致性核对（脚本）
+
+| 检查项 | 结果 |
+|--------|:--:|
+| XLSX 用例数 = demo 用例数 | 18 = 18 ✅ |
+| 用例 ID 集合 | 完全一致 ✅ |
+| 标题 | 18/18 一致 ✅ |
+| 级别（Level 0→L0 规范化后） | 18/18 一致 ✅ |
+
+### 截图证据
+
+- `example_auto/build/ohos/hap/ms_3level.jpeg`（模块索引页，真机截图 PASS）
+- `example_auto/build/ohos/hap/ms_f01_list.jpeg`、`ms_detail.jpeg` 实际仍停留在模块索引页，坐标点击未完成路由跳转，**不作为**二/三级页面真机证据。
+
+### 验证说明
+
+- 截图通过 `snapshot_display -f *.jpeg` 抓取（仅接受 .jpeg 后缀），Git Bash 需 `MSYS_NO_PATHCONV=1`。
+- Flutter 画布文本 `uitest dumpLayout` 不可见（已知限制）。坐标点击受分辨率/缩放影响，本轮未取得二/三级页面的有效真机截图；二/三级页面结构与导航仅由 widget test 证明，不能扩写为真机 PASS。

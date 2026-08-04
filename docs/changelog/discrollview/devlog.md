@@ -324,7 +324,7 @@ cd flutter_ohos_test\ohos
 - **Demo 页面**：`flutter_ohos_test/lib/discrollview_test_page.dart` (8 semantic Key)
 - **Entry 配置**：`flutter_ohos_test/ohos/entry/src/main/module.json5` (phone/tablet/2in1)
 - **Pubspec 更新**：`flutter_ohos_test/pubspec.yaml` (新增 discrollview path dep)
-- **变更日志**：`docs/changelog/discrollview_changelog.md` + `docs/changelog/discrollview_devlog.md`
+- **变更日志**：`docs/changelog/discrollview/changelog.md` + `docs/changelog/discrollview/devlog.md`
 
 ### 8.4 推送流程
 

@@ -177,4 +177,4 @@
 | 🔧 插件类型 | `docs/flutter_library_workflow/skills/flutter-fast/01-test-analysis/references/plugin-types.md` |
 | 📦 media_scanner 参考 | `flutter_library_workflow/.../repos-flutter-fast/media_scanner/.ohos-adaptation/` |
 | 📦 产物输出 | `{项目}/.ohos-adaptation/` |
-| 📋 本日志 | `docs/mermaid_changelog.md` |
+| 📋 本日志 | `docs/changelog/_shared/mermaid-changelog.md` |

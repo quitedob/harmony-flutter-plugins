@@ -151,4 +151,4 @@ node "/d/deveco/DevEco Studio/tools/hvigor/bin/hvigorw.js" \
 
 ---
 
-*本变更记录基于实际代码、构建日志和 HAP 产物核验。详细问题分析和思考过程见 `nice_image_view_devlog.md`。*
+*本变更记录基于实际代码、构建日志和 HAP 产物核验。详细问题分析和思考过程见 `devlog.md`。*
