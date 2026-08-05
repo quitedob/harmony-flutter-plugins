@@ -1,58 +1,136 @@
 {
   "plugin_name": "nice_image_view",
-  "plugin_version": "1.0.5",
-  "plugin_type": "pure_dart",
-  "implementation_status": "complete",
-  "test_status": "21 tests written, analyze PASS",
-  "build_status": "NOT_RUN",
-  "hap_status": "NOT_RUN",
-  "device_status": "NOT_RUN",
-  "delivery_files": [
+  "status": "partial",
+  "quality_score": "B",
+  "summary": {
+    "plugin_type": "dart",
+    "plugin_architecture": "standalone",
+    "plugin_type_skill": "type-pure-dart",
+    "description": "纯 Dart Flutter 图像组件：圆形/圆角裁剪、外边框、内边框与遮罩叠加效果，全部基于 CustomPainter/Canvas 渲染，零原生代码，全平台可用。",
+    "adaptation_approach": "将 Android NiceImageView.java 的 Canvas 绘制逻辑逐像素移植为纯 Dart Flutter Widget（CustomPaint + CustomPainter）。用 canvas.clipPath() 替代 Android PorterDuff 混合模式（DST_IN/DST_OUT）与 Path.Op.DIFFERENCE 差集；用 Path.addOval/Path.addRRect 构造圆形/圆角路径；canvas.save()/clipPath()/restore() 替代 saveLayer；translate+scale+translate 替代 Canvas.scale(sx,sy,px,py)；CustomPainter.shouldRepaint() 替代 View.invalidate()。零原生代码、零平台分支，无需 ohos/ HAR。",
+    "plugin_version": "1.0.5"
+  },
+  "coverage": {
+    "total_methods": 16,
+    "implemented": 16,
+    "not_implemented": 0,
+    "coverage_rate": "100%"
+  },
+  "implemented_methods": [
+    {"channel": "NiceImageView", "method": "image", "status": "implemented"},
+    {"channel": "NiceImageView", "method": "width", "status": "implemented"},
+    {"channel": "NiceImageView", "method": "height", "status": "implemented"},
+    {"channel": "NiceImageView", "method": "isCircle", "status": "implemented"},
+    {"channel": "NiceImageView", "method": "isCoverSrc", "status": "implemented"},
+    {"channel": "NiceImageView", "method": "cornerRadius", "status": "implemented"},
+    {"channel": "NiceImageView", "method": "cornerTopLeftRadius", "status": "implemented"},
+    {"channel": "NiceImageView", "method": "cornerTopRightRadius", "status": "implemented"},
+    {"channel": "NiceImageView", "method": "cornerBottomLeftRadius", "status": "implemented"},
+    {"channel": "NiceImageView", "method": "cornerBottomRightRadius", "status": "implemented"},
+    {"channel": "NiceImageView", "method": "borderWidth", "status": "implemented"},
+    {"channel": "NiceImageView", "method": "borderColor", "status": "implemented"},
+    {"channel": "NiceImageView", "method": "innerBorderWidth", "status": "implemented"},
+    {"channel": "NiceImageView", "method": "innerBorderColor", "status": "implemented"},
+    {"channel": "NiceImageView", "method": "maskColor", "status": "implemented"},
+    {"channel": "NiceImageView", "method": "fit", "status": "implemented"}
+  ],
+  "not_implemented": [],
+  "quality_issues": [],
+  "files_created": [
     "pubspec.yaml",
+    "analysis_options.yaml",
     "lib/nice_image_view.dart",
     "lib/src/nice_image_view.dart",
     "lib/src/nice_image_view_painter.dart",
     "test/nice_image_view_test.dart",
     "example/lib/main.dart",
-    "analysis_options.yaml",
-    "README.md",
-    "CHANGELOG.md",
-    ".ohos-adaptation/01-analysis-prd.md",
-    ".ohos-adaptation/00-migration-context.json",
-    ".ohos-adaptation/00-source-scan.json",
-    ".ohos-adaptation/00-requirement.json",
-    ".ohos-adaptation/00-requirement-report.md",
-    ".ohos-adaptation/01-analysis.json",
-    ".ohos-adaptation/01-analysis-report.md",
-    ".ohos-adaptation/02-planning.json",
-    ".ohos-adaptation/02-planning-report.md",
-    ".ohos-adaptation/03-coding-library.json",
-    ".ohos-adaptation/03-coding-library-report.md",
-    ".ohos-adaptation/04-testing.json",
-    ".ohos-adaptation/04-testing-report.md",
-    ".ohos-adaptation/04-verification-evidence.json",
-    ".ohos-adaptation/patch-manifest.json",
-    ".ohos-adaptation/patch-implementation-report.md",
-    ".ohos-adaptation/INTEGRATION_GUIDE.md"
+    "example_auto/pubspec.yaml",
+    "example_auto/lib/main.dart",
+    "example_auto/lib/demo_runner.dart",
+    "example_auto/lib/widgets/result_panel.dart",
+    "example_auto/lib/pages/module_index_page.dart",
+    "example_auto/lib/pages/module_f_01_page.dart",
+    "example_auto/lib/pages/module_f_02_page.dart",
+    "example_auto/lib/pages/module_f_03_page.dart",
+    "example_auto/lib/pages/module_f_04_page.dart",
+    "example_auto/lib/pages/module_f_05_page.dart",
+    "example_auto/lib/pages/module_f_06_page.dart",
+    "example_auto/lib/pages/module_f_07_page.dart",
+    "example_auto/lib/pages/module_f_08_page.dart",
+    "example_auto/lib/pages/testcase_f_01_01_page.dart",
+    "example_auto/lib/pages/testcase_f_01_02_page.dart",
+    "example_auto/lib/pages/testcase_f_01_03_page.dart",
+    "example_auto/lib/pages/testcase_f_02_01_page.dart",
+    "example_auto/lib/pages/testcase_f_02_02_page.dart",
+    "example_auto/lib/pages/testcase_f_03_01_page.dart",
+    "example_auto/lib/pages/testcase_f_03_02_page.dart",
+    "example_auto/lib/pages/testcase_f_03_03_page.dart",
+    "example_auto/lib/pages/testcase_f_04_01_page.dart",
+    "example_auto/lib/pages/testcase_f_04_02_page.dart",
+    "example_auto/lib/pages/testcase_f_04_03_page.dart",
+    "example_auto/lib/pages/testcase_f_05_01_page.dart",
+    "example_auto/lib/pages/testcase_f_06_01_page.dart",
+    "example_auto/lib/pages/testcase_f_07_01_page.dart",
+    "example_auto/lib/pages/testcase_f_07_02_page.dart",
+    "example_auto/lib/pages/testcase_f_07_03_page.dart",
+    "example_auto/lib/pages/testcase_f_07_04_page.dart",
+    "example_auto/lib/pages/testcase_f_07_05_page.dart",
+    "example_auto/lib/pages/testcase_f_07_06_page.dart",
+    "example_auto/lib/pages/testcase_f_08_01_page.dart",
+    "example_auto/lib/pages/testcase_f_08_02_page.dart",
+    "example_auto/lib/pages/testcase_f_08_03_page.dart",
+    "example_auto/lib/pages/testcase_f_08_04_page.dart",
+    "example_auto/lib/pages/testcase_f_08_05_page.dart"
   ],
-  "coverage": {
-    "api_completeness": "100% (16/16)",
-    "test_cases": 21,
-    "static_analysis": "PASS"
+  "files_modified": [],
+  "build_status": "pass",
+  "example_status": "pass",
+  "runtime_check_summary": {
+    "total": 0,
+    "pass": 0,
+    "warning": 0,
+    "fail": 0,
+    "details": []
   },
-  "known_limitations": [],
-  "deferred_gates": [
-    {"gate": "flutter_test", "status": "NOT_RUN", "reason": "VM snapshot env issue — 21 tests written"},
-    {"gate": "hap_build", "status": "NOT_RUN", "reason": "Requires real device + DevEco Studio"},
-    {"gate": "device_runtime", "status": "NOT_RUN", "reason": "Requires real device connection"},
-    {"gate": "dfx_dart", "status": "NOT_RUN", "reason": "DFX tool execution deferred"},
-    {"gate": "code_review", "status": "NOT_RUN", "reason": "Code review tool invocation deferred"}
+  "device_test_summary": {
+    "status": "skipped",
+    "total_methods": 0,
+    "pass_count": 0,
+    "fail_count": 0,
+    "pass_rate": "0%",
+    "crash_detected": false,
+    "skip_reason": "no_device — device/droidrun run deferred to demo/final stage"
+  },
+  "risk_items": [
+    {
+      "description": "纯 Dart 渲染与 Android 原版在圆角/边框内缩计算上可能存在亚像素级差异。",
+      "severity": "low",
+      "mitigation": "在 L0 测试中对四角半径、borderWidth 内缩与圆形半径做快照断言，并在真实设备上肉眼比对。"
+    },
+    {
+      "description": "maskColor 使用 Colors.transparent 表示无遮罩，需与 Android 的 maskColor != 0 语义对齐。",
+      "severity": "low",
+      "mitigation": "绘制前同时判断 maskColor != Colors.transparent 且 maskColor.a > 0 才执行遮罩填充。"
+    }
   ],
-  "next_actions": [
-    "Run flutter test on a machine with working Flutter VM",
-    "Connect real OHOS device and run flutter build hap --debug",
-    "Execute DFX dart scan when dfx-quality tools are available",
-    "Generate complete test-design artifacts (test points, cases, reviews, DroidRun)"
+  "adaptation_stats": {
+    "api_mapping_count": 12,
+    "api_confidence_distribution": {"high": 12, "medium": 0, "low": 0},
+    "compilation_fix_count": 0,
+    "library_fix_count": 2,
+    "example_method_coverage_rate": "100%",
+    "total_files_changed": 44
+  },
+  "known_limitations": [
+    "运行态逐用例行为验证 NOT_RUN：签名 HAP 已在 BRA-AL00（OHOS API 24）安装/启动 PASS，但全自动逐用例执行未完成（midscene 视觉模型未配置），behavior_status 保持 NOT_RUN。",
+    "Windows 下 flutter build hap 因 BATCH RECURSION 与 259 字符路径限制需在物理短工作区 D:\\niv_build\\NiceImageView\\example_auto 用 DevEco node 直接调用 hvigorw.js assembleHap。",
+    "HAP 使用兼容性 bundle 标识 com.example.flutter_ohos_test（DevEco 默认 debug 证书），非插件永久生产签名标识。"
   ],
-  "rollback": "Remove all .dart files, pubspec.yaml, and .ohos-adaptation directory; restore to original Android project state"
+  "recommendations": [
+    "配置 midscene/视觉模型或安排人工/半自动驱动，完成 24 条用例的真机逐条执行与「一键测试全部」汇总确认，将行为验证升级为 PASS。",
+    "为演示应用申请独立的正式 bundle 名称与发布签名证书后再进行生产分发。",
+    "补齐 04-verification-evidence.json 各 PASS 检查的 log_sha256 字段，并拆分 demo_build 与 hap_build 的独立日志以通过严格终态校验器。"
+  ],
+  "has_integration_guide": true,
+  "compilation_fixes": []
 }

@@ -47,6 +47,30 @@
       "target_adaptation": "Material 3 Flutter app with Slider/Switch controls to toggle NiceImageView properties",
       "validation": ["flutter analyze"],
       "rollback": "Remove file"
+    },
+    {
+      "target_file": "lib/src/nice_image_view.dart",
+      "intent": "BUG FIX (2026-08-04): _clearImage() called setState() during dispose(), failing Flutter assertion '_lifecycleState != _ElementLifecycle.defunct' (14 widget tests failed). Root cause: setState() is forbidden in dispose(); 'if (mounted)' still passes during dispose.",
+      "donor_evidence": "flutter test failure: package:flutter/src/widgets/framework.dart Failed assertion '_lifecycleState != _ElementLifecycle.defunct' at _NiceImageViewState.dispose",
+      "target_adaptation": "Added notify param to _clearImage({bool notify = true}); setState guarded by 'notify && mounted'; dispose() calls _clearImage(notify: false) so listeners are removed without any setState.",
+      "validation": ["flutter test (22/22 PASS)", "flutter analyze (0 issues)"],
+      "rollback": "Revert _clearImage to always setState; restore dispose() to call _clearImage()"
+    },
+    {
+      "target_file": "lib/src/nice_image_view.dart",
+      "intent": "BUG FIX (2026-08-04): _resolveImage() called createLocalImageConfiguration(context) from initState(), which depends on inherited widget MediaQuery — illegal before initState completes ('dependOnInheritedWidgetOfExactType<MediaQuery>() was called before initState() completed').",
+      "donor_evidence": "flutter test failure: dependOnInheritedWidgetOfExactType<MediaQuery>() called before _NiceImageViewState.initState() completed; stack _resolveImage -> createLocalImageConfiguration -> MediaQuery.maybeDevicePixelRatioOf",
+      "target_adaptation": "Removed the _resolveImage() call from initState(); image resolution now runs in didChangeDependencies() (called immediately after initState, where inherited lookups are legal). didUpdateWidget still re-resolves on image change.",
+      "validation": ["flutter test (22/22 PASS)", "flutter analyze (0 issues)"],
+      "rollback": "Restore _resolveImage() call in initState()"
+    },
+    {
+      "target_file": "lib/src/nice_image_view.dart (doc comment)",
+      "intent": "DFX false-positive fix (2026-08-04): dfx rule-6 regex Image\\s*\\(\\s*['\"] matched the doc-comment example 'AssetImage('assets/avatar.jpg')' even though the library never uses the Image widget (renders via CustomPainter canvas.drawImageRect).",
+      "donor_evidence": "dfx-quality fix_dart.py exit 2 with 1 warning on lib/; human review confirmed false positive on the API doc example",
+      "target_adaptation": "Changed the doc-comment example to use a provider variable (image: myAvatarProvider) instead of inline AssetImage('assets/avatar.jpg'); no API change.",
+      "validation": ["dfx-quality fix_dart.py --target lib --dry-run exit 0", "flutter analyze (0 issues)"],
+      "rollback": "Restore original doc-comment example text"
     }
   ],
   "rejected_donor_changes": [

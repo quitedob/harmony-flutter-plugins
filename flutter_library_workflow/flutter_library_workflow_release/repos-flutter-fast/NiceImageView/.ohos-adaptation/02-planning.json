@@ -1,85 +1,237 @@
 {
   "sdk_environment": {
-    "flutter_ohos_sdk_version": null,
-    "dart_sdk_constraint": ">=3.0.0 <4.0.0",
-    "flutter_constraint": ">=3.10.0",
-    "ohos_api_level": 12,
-    "target_devices": ["phone", "tablet", "2in1"]
+    "needs_switch": false,
+    "flutter_version": "3.32.4-ohos-0.0.1"
   },
   "plugin_type_skill": "type-pure-dart",
   "ohos_api_mapping": [
     {
-      "android_api": "NiceImageView extends AppCompatImageView",
-      "ohos_equivalent": "NiceImageView extends StatefulWidget -> CustomPaint(CustomPainter)",
-      "mapping_type": "direct_equivalent",
+      "feature": "图片圆角/圆形裁剪：PorterDuff.Mode.DST_IN 混合模式替换为 Flutter 原生 canvas.clipPath()",
+      "channel_method": null,
+      "android_api": "PorterDuff.Mode.DST_IN (API <= 27)；PorterDuffXfermode + canvas.drawPath()",
+      "ios_api": null,
+      "ohos_module": "dart:ui",
+      "ohos_api": "canvas.clipPath(Path path, {bool doAntiAlias = true})",
+      "ohos_import": "import 'dart:ui' show Canvas, Path;",
+      "file_path": null,
+      "since_version": null,
+      "syscap": null,
+      "required_permission": null,
+      "is_async": false,
       "confidence": "high",
-      "notes": "Flutter CustomPainter with canvas.clipPath() is a cleaner approach than Android PorterDuff xfermode"
+      "source": "sdk_search",
+      "verification_status": "verified",
+      "verification_source": "dart:ui Canvas API，Flutter OHOS Engine 内置支持",
+      "notes": "Android 在 saveLayer 内用 DST_IN xfermode 裁剪图片；Flutter 直接 canvas.clipPath() 即可，无需混合模式。"
     },
     {
-      "android_api": "Canvas.drawBitmap / super.onDraw",
-      "ohos_equivalent": "canvas.drawImageRect() with ui.Image from ImageProvider.resolve()",
-      "mapping_type": "direct_equivalent",
-      "confidence": "high"
-    },
-    {
-      "android_api": "PorterDuff.Mode.DST_IN (API <= 27)",
-      "ohos_equivalent": "canvas.clipPath() — native Flutter clipping, no blend mode needed",
-      "mapping_type": "improved",
-      "confidence": "high"
-    },
-    {
+      "feature": "图片裁剪：PorterDuff.Mode.DST_OUT (API > 27) 替换为 canvas.clipPath()",
+      "channel_method": null,
       "android_api": "PorterDuff.Mode.DST_OUT + Path.Op.DIFFERENCE (API > 27)",
-      "ohos_equivalent": "canvas.clipPath() — avoids both DST_OUT and DIFFERENCE entirely",
-      "mapping_type": "avoided",
-      "confidence": "high"
+      "ios_api": null,
+      "ohos_module": "dart:ui",
+      "ohos_api": "canvas.clipPath(Path path, {bool doAntiAlias = true})",
+      "ohos_import": "import 'dart:ui' show Canvas, Path;",
+      "file_path": null,
+      "since_version": null,
+      "syscap": null,
+      "required_permission": null,
+      "is_async": false,
+      "confidence": "high",
+      "source": "sdk_search",
+      "verification_status": "verified",
+      "verification_source": "dart:ui Canvas API，Flutter OHOS Engine 内置支持",
+      "notes": "Android 在 API>27 时改用 DST_OUT 并配合 DIFFERENCE 差集；Flutter 同一 clipPath 单次裁剪即可覆盖两个版本，无需按版本分支。"
     },
     {
-      "android_api": "Path.addCircle()",
-      "ohos_equivalent": "Path.addOval(Rect.fromCircle(...))",
-      "mapping_type": "direct_equivalent",
-      "confidence": "high"
+      "feature": "裁剪差集运算 Path.Op.DIFFERENCE 完全规避",
+      "channel_method": null,
+      "android_api": "Path.op(Path path, Path.Op.DIFFERENCE)",
+      "ios_api": null,
+      "ohos_module": "dart:ui",
+      "ohos_api": "canvas.clipPath(Path path)——直接裁剪目标区域，无需差集计算",
+      "ohos_import": "import 'dart:ui' show Canvas, Path;",
+      "file_path": null,
+      "since_version": null,
+      "syscap": null,
+      "required_permission": null,
+      "is_async": false,
+      "confidence": "high",
+      "source": "sdk_search",
+      "verification_status": "verified",
+      "verification_source": "dart:ui Canvas API，Flutter OHOS Engine 内置支持",
+      "notes": "Android 用 srcPath.op(path, DIFFERENCE) 计算裁剪区域差集；Flutter clipPath 原生支持裁剪，无需 Path.op 差集运算。"
     },
     {
-      "android_api": "Path.addRoundRect(RectF, radii[])",
-      "ohos_equivalent": "Path.addRRect(RRect.fromLTRBAndCorners(...))",
-      "mapping_type": "direct_equivalent",
-      "confidence": "high"
+      "feature": "圆形裁剪路径构造：Path.addCircle(RectF) 替换为 Path.addOval",
+      "channel_method": null,
+      "android_api": "Path.addCircle(float cx, float cy, float radius, Path.Direction.CCW)",
+      "ios_api": null,
+      "ohos_module": "dart:ui",
+      "ohos_api": "Path.addOval(Rect oval)",
+      "ohos_import": "import 'dart:ui' show Path, Rect, Offset;",
+      "file_path": null,
+      "since_version": null,
+      "syscap": null,
+      "required_permission": null,
+      "is_async": false,
+      "confidence": "high",
+      "source": "sdk_search",
+      "verification_status": "verified",
+      "verification_source": "dart:ui Path API，Flutter OHOS Engine 内置支持",
+      "notes": "Flutter 用 Path()..addOval(Rect.fromCircle(center: Offset(w/2, h/2), radius: min(w,h)/2)) 生成圆形裁剪路径。"
     },
     {
-      "android_api": "Canvas.saveLayer()",
-      "ohos_equivalent": "canvas.save() + canvas.clipPath() + canvas.restore()",
-      "mapping_type": "equivalent_pattern",
-      "confidence": "high"
+      "feature": "圆角矩形裁剪路径构造：Path.addRoundRect(RectF, float[]) 替换为 Path.addRRect",
+      "channel_method": null,
+      "android_api": "Path.addRoundRect(RectF rect, float[] radii, Path.Direction.CCW)",
+      "ios_api": null,
+      "ohos_module": "dart:ui",
+      "ohos_api": "Path.addRRect(RRect rrect)",
+      "ohos_import": "import 'dart:ui' show Path, RRect, Radius;",
+      "file_path": null,
+      "since_version": null,
+      "syscap": null,
+      "required_permission": null,
+      "is_async": false,
+      "confidence": "high",
+      "source": "sdk_search",
+      "verification_status": "verified",
+      "verification_source": "dart:ui Path API，Flutter OHOS Engine 内置支持",
+      "notes": "Flutter 用 RRect.fromLTRBAndCorners(0, 0, w, h, topLeft/topRight/bottomRight/bottomLeft) 构造四角圆角；保留 cornerRadius 统一优先级与 cornerRadius - borderWidth/2 内缩逻辑。"
     },
     {
-      "android_api": "canvas.scale(sx, sy, px, py)",
-      "ohos_equivalent": "canvas.translate() + canvas.scale() + canvas.translate()",
-      "mapping_type": "equivalent_pattern",
-      "confidence": "high"
+      "feature": "离屏裁剪：Canvas.saveLayer() 替换为 canvas.save() + canvas.clipPath() + canvas.restore()",
+      "channel_method": null,
+      "android_api": "Canvas.saveLayer(RectF bounds, Paint paint, int saveFlags)",
+      "ios_api": null,
+      "ohos_module": "dart:ui",
+      "ohos_api": "canvas.save(); canvas.clipPath(path); ...; canvas.restore()",
+      "ohos_import": "import 'dart:ui' show Canvas, Path;",
+      "file_path": null,
+      "since_version": null,
+      "syscap": null,
+      "required_permission": null,
+      "is_async": false,
+      "confidence": "high",
+      "source": "sdk_search",
+      "verification_status": "verified",
+      "verification_source": "dart:ui Canvas API，Flutter OHOS Engine 内置支持",
+      "notes": "Android 用 saveLayer 实现离屏混合裁剪；Flutter 用 canvas.save()/clipPath()/restore() 组合实现等价效果，无额外离屏缓冲。"
     },
     {
-      "android_api": "Utils.dp2px()",
-      "ohos_equivalent": "Not needed — Flutter uses logical pixels natively",
-      "mapping_type": "not_needed",
-      "confidence": "high"
+      "feature": "画布缩放避开边框：Canvas.scale(sx, sy, px, py) 替换为 translate+scale+translate 三点夹心",
+      "channel_method": null,
+      "android_api": "Canvas.scale(float sx, float sy, float px, float py)",
+      "ios_api": null,
+      "ohos_module": "dart:ui",
+      "ohos_api": "canvas.translate(cx, cy); canvas.scale(sx, sy); canvas.translate(-cx, -cy)",
+      "ohos_import": "import 'dart:ui' show Canvas;",
+      "file_path": null,
+      "since_version": null,
+      "syscap": null,
+      "required_permission": null,
+      "is_async": false,
+      "confidence": "high",
+      "source": "sdk_search",
+      "verification_status": "verified",
+      "verification_source": "dart:ui Canvas API，Flutter OHOS Engine 内置支持",
+      "notes": "isCoverSrc=false 时按 (w - 2*borderInset)/w 比例缩小画布避免图片被边框覆盖；Flutter 以中心点 (w/2, h/2) 做 translate/scale/translate 夹心变换等价实现。"
     },
     {
-      "android_api": "invalidate()",
-      "ohos_equivalent": "shouldRepaint() returns true on parameter change",
-      "mapping_type": "equivalent_pattern",
-      "confidence": "high"
+      "feature": "混合模式清理：Paint.setXfermode(null) 无需对应操作（Flutter 无混合模式）",
+      "channel_method": null,
+      "android_api": "Paint.setXfermode(null)",
+      "ios_api": null,
+      "ohos_module": "dart:ui",
+      "ohos_api": "无——Flutter Paint 默认不设置 blendMode，等价于 Android 的 setXfermode(null)",
+      "ohos_import": "import 'dart:ui' show Paint;",
+      "file_path": null,
+      "since_version": null,
+      "syscap": null,
+      "required_permission": null,
+      "is_async": false,
+      "confidence": "high",
+      "source": "sdk_search",
+      "verification_status": "verified",
+      "verification_source": "dart:ui Paint API，Flutter OHOS Engine 内置支持",
+      "notes": "Android 在裁剪绘制后调用 setXfermode(null) 清除混合模式；Flutter Paint 默认即为无混合模式，无需显式清理。"
     },
     {
-      "android_api": "TypedArray/XML attributes",
-      "ohos_equivalent": "Constructor parameters with matching defaults",
-      "mapping_type": "equivalent_pattern",
-      "confidence": "high"
+      "feature": "dp 到像素转换：Utils.dp2px() 无需对应操作（Flutter 逻辑像素）",
+      "channel_method": null,
+      "android_api": "Utils.dp2px(Context, int dp)",
+      "ios_api": null,
+      "ohos_module": "package:flutter/material.dart",
+      "ohos_api": "无——Flutter 原生使用逻辑像素（logical pixels），与 dp 语义一致",
+      "ohos_import": "import 'package:flutter/material.dart';",
+      "file_path": null,
+      "since_version": null,
+      "syscap": null,
+      "required_permission": null,
+      "is_async": false,
+      "confidence": "high",
+      "source": "sdk_search",
+      "verification_status": "verified",
+      "verification_source": "Flutter 布局体系逻辑像素，Flutter OHOS Engine 内置支持",
+      "notes": "Flutter 布局尺寸天然为逻辑像素，直接使用构造参数传入的值即可，无需 dp2px 转换。"
     },
     {
-      "android_api": "Paint.setAntiAlias(true)",
-      "ohos_equivalent": "Paint()..isAntiAlias = true",
-      "mapping_type": "direct_equivalent",
-      "confidence": "high"
+      "feature": "视图重绘：View.invalidate() 替换为 CustomPainter.shouldRepaint() 返回 true",
+      "channel_method": null,
+      "android_api": "View.invalidate()",
+      "ios_api": null,
+      "ohos_module": "package:flutter/rendering.dart",
+      "ohos_api": "bool shouldRepaint(covariant NiceImageViewPainter oldDelegate)",
+      "ohos_import": "import 'package:flutter/rendering.dart' show CustomPainter;",
+      "file_path": null,
+      "since_version": null,
+      "syscap": null,
+      "required_permission": null,
+      "is_async": false,
+      "confidence": "high",
+      "source": "sdk_search",
+      "verification_status": "verified",
+      "verification_source": "Flutter framework CustomPainter API，Flutter OHOS Engine 内置支持",
+      "notes": "参数（image/isCircle/isCoverSrc/cornerRadius/各角半径/borderWidth/borderColor/innerBorderWidth/innerBorderColor/maskColor/fit）任一变化时 shouldRepaint() 返回 true 触发重绘，等价于 Android invalidate()。"
+    },
+    {
+      "feature": "遮罩绘制：setColor + drawPath 替换为 clipPath 内 Paint() 颜色填充",
+      "channel_method": null,
+      "android_api": "Paint.setColor(maskColor) + canvas.drawPath(path, paint)",
+      "ios_api": null,
+      "ohos_module": "dart:ui",
+      "ohos_api": "canvas.drawPath(clipPath, Paint()..color = maskColor..style = PaintingStyle.fill..isAntiAlias = true)",
+      "ohos_import": "import 'dart:ui' show Paint, PaintingStyle;",
+      "file_path": null,
+      "since_version": null,
+      "syscap": null,
+      "required_permission": null,
+      "is_async": false,
+      "confidence": "high",
+      "source": "sdk_search",
+      "verification_status": "verified",
+      "verification_source": "dart:ui Canvas/Paint API，Flutter OHOS Engine 内置支持",
+      "notes": "在裁剪区域内用 fill 样式 Paint 填充遮罩颜色；图片本身用 canvas.drawImageRect(src, dst, Paint()..isAntiAlias = true) 替代 Android super.onDraw()/Canvas.drawBitmap；Paint.setAntiAlias(true) 对应 Paint()..isAntiAlias = true。"
+    },
+    {
+      "feature": "XML 自定义属性：TypedArray/XML attributes 替换为 Dart 构造函数命名参数",
+      "channel_method": null,
+      "android_api": "TypedArray/XML attributes（is_circle, is_cover_src, border_width, border_color, inner_border_width, inner_border_color, corner_radius, corner_top_left_radius, corner_top_right_radius, corner_bottom_left_radius, corner_bottom_right_radius, mask_color）",
+      "ios_api": null,
+      "ohos_module": "package:flutter/material.dart",
+      "ohos_api": "NiceImageView({ this.image, this.width, this.height, this.isCircle, this.isCoverSrc, this.cornerRadius, this.cornerTopLeftRadius, this.cornerTopRightRadius, this.cornerBottomLeftRadius, this.cornerBottomRightRadius, this.borderWidth, this.borderColor, this.innerBorderWidth, this.innerBorderColor, this.maskColor, this.fit })",
+      "ohos_import": "import 'package:flutter/material.dart';",
+      "file_path": null,
+      "since_version": null,
+      "syscap": null,
+      "required_permission": null,
+      "is_async": false,
+      "confidence": "high",
+      "source": "sdk_search",
+      "verification_status": "verified",
+      "verification_source": "包源码 lib/src/nice_image_view.dart 构造器定义",
+      "notes": "组件结构 NiceImageView extends StatefulWidget -> CustomPaint(CustomPainter) 替代 Android AppCompatImageView；全部 12 个 XML 属性映射为 Dart 构造参数及默认值。"
     }
   ],
   "native_dependency_mapping": [],
@@ -87,25 +239,100 @@
   "reference_plugins": [
     {
       "name": "flutter_zoom_drawer",
-      "type": "pure_dart",
-      "relevance": "Pure Dart Flutter UI widget with OHOS compatibility — same adaptation path"
+      "url": "local://repos-flutter-fast/flutter_zoom_drawer",
+      "relevance": "similar",
+      "key_patterns": [
+        "纯 Dart UI Widget 适配 OHOS 的模式——零原生代码，仅用 Flutter 跨平台 API",
+        "不为纯 Dart 库创建不必要的插件 HAR / ohos 目录",
+        "Demo 生成 → HAP 构建 → 设备验证的完整流程"
+      ]
     }
   ],
   "implementation_strategy": {
-    "approach": "pure_dart_port",
-    "description": "Port Android NiceImageView.java Canvas drawing logic to Flutter CustomPainter. Use canvas.clipPath() instead of PorterDuff xfermode for image clipping. Use canvas.clipRRect/clipOval native Flutter APIs for rounded corners and circles.",
-    "files_to_create": [
-      "lib/nice_image_view.dart",
-      "lib/src/nice_image_view.dart",
-      "lib/src/nice_image_view_painter.dart"
+    "approach": "将 Android NiceImageView.java 的 Canvas 绘制逻辑逐像素移植为纯 Dart Flutter Widget（CustomPaint + CustomPainter）。核心思路：(1) 用 Flutter Canvas 原生 canvas.clipPath() 替代 Android PorterDuff 混合模式（DST_IN/DST_OUT）与 Path.Op.DIFFERENCE 差集裁剪；(2) 用 Path.addOval/Path.addRRect 构造圆形/圆角矩形裁剪路径，替代 Path.addCircle/Path.addRoundRect；(3) 用 canvas.save()/clipPath()/restore() 组合替代 Canvas.saveLayer()，用 translate+scale+translate 三点夹心替代 Canvas.scale(sx,sy,px,py)；(4) 用 CustomPainter.shouldRepaint() 替代 View.invalidate()；(5) 全部 12 个 XML 属性映射为 Dart 构造函数命名参数。零原生代码、零平台分支，无需 ohos/ 目录。",
+    "architecture_decisions": [
+      {
+        "topic": "实现路径",
+        "decision": "pure_dart（type-pure-dart）",
+        "rationale": "源码仅依赖 Flutter SDK，无 Channel、FFI、PlatformView、原生依赖与权限，符合纯 Dart Widget 库适配标准。"
+      },
+      {
+        "topic": "图片裁剪方式",
+        "decision": "canvas.clipPath() 替代 PorterDuff xfermode",
+        "rationale": "Flutter Canvas 原生裁剪更简洁，避免 saveLayer + 混合模式的性能开销与 API>27 的版本分支差异。"
+      },
+      {
+        "topic": "原生工程",
+        "decision": "不新增插件级 ohos/ HAR",
+        "rationale": "纯 Dart 库渲染逻辑全部在 Flutter framework 内完成，不需要 Dart↔ArkTS 通信。"
+      },
+      {
+        "topic": "平台兼容",
+        "decision": "零平台分支，所有 API 均为跨平台 Flutter API",
+        "rationale": "dart:ui Canvas/Path/Paint 与 CustomPaint 在 Flutter OHOS Engine 中均可用，无需 TargetPlatform 条件分支。"
+      },
+      {
+        "topic": "性能优化",
+        "decision": "CustomPaint + 条件 shouldRepaint",
+        "rationale": "参数不变时 shouldRepaint() 返回 false 避免无谓重绘；clipPath 裁剪优于离屏混合。"
+      }
     ],
-    "files_to_modify": [],
-    "no_native_code": true,
-    "estimated_effort": "low"
+    "planned_files": [
+      {
+        "path": "lib/nice_image_view.dart",
+        "purpose": "包导出文件，统一导出 NiceImageView 与 NiceImageViewPainter"
+      },
+      {
+        "path": "lib/src/nice_image_view.dart",
+        "purpose": "NiceImageView StatefulWidget 定义，含 ImageProvider 图片解析与 CustomPaint 组装"
+      },
+      {
+        "path": "lib/src/nice_image_view_painter.dart",
+        "purpose": "NiceImageViewPainter CustomPainter，paint() 实现裁剪/缩放/遮罩/边框绘制"
+      },
+      {
+        "path": "test/nice_image_view_test.dart",
+        "purpose": "组件构建与渲染测试（圆角/圆形/边框/内边框/遮罩）"
+      },
+      {
+        "path": "example/lib/main.dart",
+        "purpose": "中文可运行示例，覆盖圆角/圆形/边框/内边框/遮罩场景"
+      }
+    ],
+    "approach_detail": "## 实现方案\n\n### 1. 裁剪路径构造\n\n- 圆形：`Path()..addOval(Rect.fromCircle(center: Offset(w/2, h/2), radius: min(w,h)/2))`，替代 Android `path.addCircle(...)`。\n- 圆角矩形：`RRect.fromLTRBAndCorners(0, 0, w, h, topLeft/..., )`，替代 Android `path.addRoundRect(srcRectF, srcRadii, CCW)`；保留 `cornerRadius` 统一优先级与 `cornerRadius - borderWidth/2` 内缩逻辑。\n\n### 2. 图片绘制\n\n`canvas.drawImageRect(src, dst, Paint()..isAntiAlias = true)`，dst 由 `applyBoxFit(fit ?? BoxFit.cover, source, container)` 居中计算，替代 Android `super.onDraw(canvas)` 内部 Bitmap 绘制。\n\n### 3. 画布缩放（isCoverSrc=false）\n\n```dart\nfinal sx = (w - 2 * totalBorderInset) / w;\nfinal sy = (h - 2 * totalBorderInset) / h;\ncanvas.save();\ncanvas.translate(w/2, h/2);\ncanvas.scale(sx, sy);\ncanvas.translate(-w/2, -h/2);\n_drawImage(canvas, size);\ncanvas.restore();\n```\n\n等价于 Android `canvas.scale(sx, sy, width/2, height/2)`。\n\n### 4. 遮罩\n\n```dart\ncanvas.drawPath(clipPath, Paint()..color = maskColor..style = PaintingStyle.fill..isAntiAlias = true);\n```\n\n替代 Android `paint.setColor(maskColor); canvas.drawPath(path, paint);`。\n\n### 5. 边框\n\n圆形模式支持外边框 + 内边框；圆角矩形模式仅外边框（Android 语义：矩形模式不支持 inner_border，需置 0）。\n\n### 6. 平台\n\n所有 API 均为 Flutter 跨平台 API，无需 TargetPlatform 分支，无需 ohos/ 目录，无需 pubspec 平台注册。",
+    "supplemental_sections": [
+      {
+        "title": "矩形模式 inner_border",
+        "body": "Android 在非圆形模式下将 inner_border 强制置 0（clearInnerBorderWidth），Flutter 端保持一致：effectiveInnerBorder = isCircle ? innerBorderWidth : 0.0。"
+      },
+      {
+        "title": "重绘控制",
+        "body": "shouldRepaint 逐字段比较（image/isCircle/isCoverSrc/cornerRadius/各角半径/borderWidth/borderColor/innerBorderWidth/innerBorderColor/maskColor/fit），任何变化才返回 true。"
+      }
+    ],
+    "module_json5_config": {
+      "permissions": [],
+      "syscap_requirements": []
+    }
   },
-  "risk_items": [],
+  "risk_items": [
+    {
+      "description": "纯 Dart 渲染与 Android 原版在圆角/边框内缩计算上可能存在亚像素级差异。",
+      "severity": "low",
+      "mitigation": "在 L0 测试中对四角半径、borderWidth 内缩与圆形半径做快照断言，并在真实设备上肉眼比对。"
+    },
+    {
+      "description": "maskColor 使用 Colors.transparent 表示无遮罩，需与 Android 的 maskColor != 0 语义对齐。",
+      "severity": "low",
+      "mitigation": "绘制前同时判断 maskColor != Colors.transparent 且 maskColor.a > 0 才执行遮罩填充。"
+    }
+  ],
   "example_deps_solutions": [],
   "ffi_strategy": "not_applicable",
   "ffi_strategy_caveat": null,
-  "ffi_library_name": null
+  "ffi_library_name": null,
+  "ffi_so_files": null,
+  "ffi_source_project": null,
+  "ffi_source_version": null,
+  "implementation_notes": "纯 Dart Widget 库，零原生代码、零平台分支。渲染逻辑在 lib/src/nice_image_view_painter.dart 的 paint() 内完成：canvas.clipPath() 裁剪 + canvas.drawImageRect 绘制图片 + Paint fill 遮罩 + drawCircle/drawRRect 边框。无需创建 ohos/ 目录，无需 pubspec 平台注册，无需 Channel/FFI/权限。"
 }

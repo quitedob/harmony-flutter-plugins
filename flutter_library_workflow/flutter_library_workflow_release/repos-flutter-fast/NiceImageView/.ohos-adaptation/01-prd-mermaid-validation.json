@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
   "source": "01-analysis-prd.md",
-  "source_sha256": "da9dff9aef079559251fe307ee9f94a7994bfd7c94f719a680ee86eac73382fc",
+  "source_sha256": "960492ce104f656241ae663f523613035c538124eaed8ab7a61090404a5cb91e",
   "alias": {
     "path": "nice_image_view_prd.md",
-    "sha256": "da9dff9aef079559251fe307ee9f94a7994bfd7c94f719a680ee86eac73382fc",
+    "sha256": "960492ce104f656241ae663f523613035c538124eaed8ab7a61090404a5cb91e",
     "byte_identical": true
   },
   "validator": {
@@ -34,7 +34,7 @@
       "type": "flowchart",
       "source_sha256": "a1df50f43945028f10c3215ffd93b99b771a4f1df5f01cc6849c7adccaf29c3d",
       "rendered_svg": "mermaid/01-analysis-prd-02.svg",
-      "rendered_sha256": "d6b09afd2298b7a5a695d0e99d2e5fbc73e888d0069296995a02de6b3958b32d",
+      "rendered_sha256": "32f53250d2d2ea3d3a004df6db2a09f646f040ec3db7a53e3b3317d1019ca85b",
       "returncode": 0,
       "stdout": "",
       "stderr": "",

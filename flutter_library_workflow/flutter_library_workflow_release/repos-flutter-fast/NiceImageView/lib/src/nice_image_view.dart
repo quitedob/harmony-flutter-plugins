@@ -14,7 +14,7 @@ import 'nice_image_view_painter.dart';
 /// Example:
 /// ```dart
 /// NiceImageView(
-///   image: AssetImage('assets/avatar.jpg'),
+///   image: myAvatarProvider,
 ///   width: 100,
 ///   height: 100,
 ///   isCircle: true,
@@ -127,7 +127,9 @@ class _NiceImageViewState extends State<NiceImageView> {
   @override
   void initState() {
     super.initState();
-    _resolveImage();
+    // Image resolution must not start here: createLocalImageConfiguration(context)
+    // depends on inherited widgets (MediaQuery), which is illegal in initState().
+    // didChangeDependencies() runs immediately after initState and resolves.
   }
 
   @override
@@ -152,7 +154,8 @@ class _NiceImageViewState extends State<NiceImageView> {
     }
 
     _imageStream?.removeListener(_imageListener!);
-    _imageStream = imageProvider.resolve(createLocalImageConfiguration(context));
+    _imageStream =
+        imageProvider.resolve(createLocalImageConfiguration(context));
     _imageListener = ImageStreamListener(
       _onImageResolved,
       onError: (dynamic error, StackTrace? stackTrace) {
@@ -170,13 +173,14 @@ class _NiceImageViewState extends State<NiceImageView> {
     }
   }
 
-  void _clearImage() {
+  void _clearImage({bool notify = true}) {
     if (_imageStream != null && _imageListener != null) {
       _imageStream!.removeListener(_imageListener!);
     }
     _imageStream = null;
     _imageListener = null;
-    if (mounted) {
+    // setState is forbidden during dispose(); pass notify: false there.
+    if (notify && mounted) {
       setState(() {
         _resolvedImage = null;
       });
@@ -185,7 +189,7 @@ class _NiceImageViewState extends State<NiceImageView> {
 
   @override
   void dispose() {
-    _clearImage();
+    _clearImage(notify: false);
     super.dispose();
   }
 

@@ -5,61 +5,101 @@
       "status": "PASS",
       "command": "flutter pub get",
       "exit_code": 0,
-      "log": ".ohos-adaptation/logs/pub-get.log"
-    },
-    {
-      "name": "flutter_analyze",
-      "status": "PASS",
-      "command": "flutter analyze",
-      "exit_code": 1,
-      "note": "Exit code 1 due to info-level prefer_const hints (0 errors, 0 warnings). Code compiles cleanly.",
-      "log": ".ohos-adaptation/logs/analyze.log"
+      "log": ".ohos-adaptation/logs/pub-get.log",
+      "log_sha256": "defe165a7475e113f58c8fb6047e5426d16e78b96fc0e4a37a368eb81c848520"
     },
     {
       "name": "dart_format",
       "status": "PASS",
-      "command": "dart format --output=none --set-exit-if-changed lib/ test/",
+      "command": "dart format --output=none --set-exit-if-changed lib test",
       "exit_code": 0,
-      "note": "After initial format pass, files are clean.",
-      "log": ".ohos-adaptation/logs/dart-format.log"
+      "log": ".ohos-adaptation/logs/dart-format.log",
+      "log_sha256": "72bf2b300eafdc268d8f23e9555d2dc6dc45d4743bdfe2e1ffa45166ccadb98f"
+    },
+    {
+      "name": "flutter_analyze",
+      "status": "PASS",
+      "command": "flutter analyze lib test",
+      "exit_code": 0,
+      "log": ".ohos-adaptation/logs/analyze.log",
+      "log_sha256": "4b01e555ecb226865dafd27861dc8f01285db8d954c823e8a08923155b266996",
+      "detail": "插件作用域 lib+test 零问题"
     },
     {
       "name": "flutter_test",
-      "status": "PARTIAL",
-      "command": "dart test test/discrollve_math_test.dart test/discrollve_config_test.dart",
+      "status": "PASS",
+      "command": "flutter test",
       "exit_code": 0,
-      "details": "34/34 pure Dart tests pass. 11 widget tests (discrollve_widget_test.dart) require Flutter engine — blocked on Flutter OHOS SDK desktop support (dart:ui not available). Widget tests can be validated via demo HAP on real device.",
-      "log": ".ohos-adaptation/logs/flutter-test.log"
+      "log": ".ohos-adaptation/logs/flutter-test.log",
+      "log_sha256": "44e186030728029bdfbc26bd605202379d7bcc84dde35dccd0e41452ce85e5c6",
+      "detail": "40/40 测试全部通过（34 pure-Dart + 6 widget，含 translation 回归测试）"
     },
     {
       "name": "dfx_dart",
-      "status": "NOT_RUN",
-      "reason": "DFX dart scan pending — requires dfx_dart.py from flutter-fast/dfx-quality"
+      "status": "PASS",
+      "command": "python C:/Users/shuaibi/.claude/skills/dfx-quality/tool/fix_dart.py --target lib --json",
+      "exit_code": 0,
+      "warning_count": 0,
+      "log": ".ohos-adaptation/logs/dfx-dart.log",
+      "log_sha256": "856f4a37ccbe48730167e12753a586a3757c1be0705a85a5a3141346b5c9213f"
     },
     {
       "name": "demo_build",
-      "status": "NOT_RUN",
-      "reason": "example_auto/ not yet generated"
+      "status": "PASS",
+      "command": "flutter analyze",
+      "exit_code": 0,
+      "log": ".ohos-adaptation/logs/demo-analyze.log",
+      "log_sha256": "f3c4000188a7053899109a0837726ff20f31fd90edfefe9ab555d7934a47a6bb",
+      "detail": "example_auto Demo flutter analyze 0 issues"
     },
     {
       "name": "hap_build",
-      "status": "BLOCKED",
-      "reason": "Requires example_auto/, DevEco Studio signing, and real OHOS device"
+      "status": "PASS",
+      "command": "node \"D:\\deveco\\DevEco Studio\\tools\\hvigor\\bin\\hvigorw.js\" assembleHap -p product=default -p buildMode=debug --no-daemon",
+      "exit_code": 0,
+      "log": ".ohos-adaptation/logs/demo-build.log",
+      "log_sha256": "830006fbb77a9a42bad1a6e9bea1cfc4f8915ddd8aea842384e7f791ca9e03de",
+      "detail": "直接 hvigorw.js 构建并签名 entry-default-signed.hap (142,409,586 B)，BUILD SUCCESSFUL"
     },
     {
       "name": "device_runtime",
-      "status": "BLOCKED",
-      "reason": "Requires signed HAP and real OHOS device with hdc"
+      "status": "NOT_RUN",
+      "command": null,
+      "exit_code": null,
+      "log": null,
+      "reason": "on-device 逐用例 VLM 执行被阻塞：未配置 MIDSCENE_MODEL_NAME（无可用视觉模型），且坐标注入（uitest/uinput）无法可靠到达 Flutter 应用。HAP 已安装并启动成功、UI 正常渲染，但逐用例行为验证未能执行；以 Demo 确定性 widget 测试（31/31 PASS）作为用例执行证据，真机行为门禁保持 NOT_RUN。"
     },
     {
       "name": "dfx_ets",
       "status": "NA",
-      "reason": "Pure Dart library — no ETS source"
+      "command": null,
+      "exit_code": null,
+      "log": null,
+      "reason": "pure_dart 分类 — 无 ETS/ArkTS 源文件"
     },
     {
       "name": "dfx_channel_consistency",
       "status": "NA",
-      "reason": "Pure Dart library — no channels"
+      "command": null,
+      "exit_code": null,
+      "log": null,
+      "reason": "pure_dart 分类 — 无 MethodChannel"
+    },
+    {
+      "name": "code_linter",
+      "status": "NA",
+      "command": null,
+      "exit_code": null,
+      "log": null,
+      "reason": "pure_dart 分类 — 无 ArkTS 白盒评估（DEGRADED_CUSTOM 人工审查）"
+    },
+    {
+      "name": "hypium",
+      "status": "NA",
+      "command": null,
+      "exit_code": null,
+      "log": null,
+      "reason": "pure_dart 分类 — 无原生/系统行为需 Hypium"
     }
   ]
 }

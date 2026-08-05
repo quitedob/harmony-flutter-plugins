@@ -1,15 +1,52 @@
-# Code Review Log — nice_image_view
-Date: 2026-07-30
-Engine: flutter analyze (Dart static analysis)
-Result: 0 issues found
+# Code Review Log — nice_image_view (pure-Dart)
+Date: 2026-08-04T12:16:00+08:00
+Mode: full（flutter analyze 自动扫描 + 全量人工代码阅读审查）
+ArkTS scan: NOT_APPLICABLE（无 ETS/ArkTS 源文件，纯 Dart 库）
+Scope: lib/ + test/ + example_auto/lib/
 
-Files reviewed:
-- pubspec.yaml
-- lib/nice_image_view.dart
-- lib/src/nice_image_view.dart
-- lib/src/nice_image_view_painter.dart
-- test/nice_image_view_test.dart
-- example/lib/main.dart
-- analysis_options.yaml
+[Command 1] flutter analyze
+[Result] Analyzing NiceImageView... No issues found! (ran in 1.5s)
+[EXIT] EXIT_CODE=0
 
-No issues detected.
+[Command 2] flutter test
+[Result] +22: All tests passed!
+[EXIT] EXIT_CODE=0
+
+[Dimension 1] 平台通路完整性 (P0)
+Rules: cr-dart-missing-ohos-branch / cr-dart-whitelist-block / cr-dart-no-exclusion-detect / cr-dart-no-string-platform
+Scan: grep 'Platform.isAndroid|Platform.isIOS|TargetPlatform|UnsupportedError|PlatformException' lib/
+Hits: 0 — 纯 Dart CustomPainter 组件，无平台判断分支，天然跨平台
+Verdict: PASS
+
+[Dimension 2] 公开 API 不变性 (P0)
+Rules: cr-dart-api-signature / cr-dart-api-no-delete / cr-dart-api-return-type / cr-dart-api-no-side-effect / cr-dart-ohos-isolated
+Scan: git diff lib/ 对比公开 API 签名与构造参数
+Hits: 0 — 构造参数与 Android 原版一致，未删除/变更公开 API，无其他平台副作用
+Verdict: PASS
+
+[Dimension 3] 类型安全 (P1)
+Rules: cr-dart-invoke-no-generic / cr-dart-no-dynamic-cast / cr-dart-null-check / cr-dart-dynamic-to-double 等
+Scan: grep 'invokeMethod|receiveBroadcastStream|as List|as Map|\.toList()' lib/
+Hits: 0 — 无 MethodChannel/EventChannel，无 dynamic 强转风险
+Verdict: PASS
+
+[Dimension 4] 生命周期与资源释放
+Rules: dispose 期 setState / initState 依赖继承 Widget / ImageStream listener 对称释放
+Findings: 已修复 2 项历史缺陷 — ① _clearImage 在 dispose 期间调用 setState（改为 notify:false）；② initState 中调用 createLocalImageConfiguration(context) 依赖 MediaQuery（改为 didChangeDependencies 延迟解析）
+Remaining: 0
+Verdict: PASS
+
+[Dimension 5] 导入与依赖 (P3)
+Rules: cr-dart-unused-import / cr-dart-io-import / cr-dart-platform-leak
+Scan: flutter analyze + 人工阅读 import 段
+Hits: 0 — 无未使用 import，无平台特有包泄漏到公共层
+Verdict: PASS
+
+[Dimension 6] 示例工程 example_auto/lib/ 代码质量
+Scan: 全量阅读 24 个用例详情页 + 8 个模块页 + demo_runner + main + widgets/result_panel
+Hits: 0 — Key 命名规范（btn_run_f-XX-YY / actual_f-XX-YY / expected_f-XX-YY）、ValueNotifier 释放正确、runCase 异常捕获完整、按钮绑定共享执行器
+Verdict: PASS
+
+[Scan Summary] findings=0 | p0=0 p1=0 p2=0 p3=0 auto_fixed=0
+[EXIT] EXIT_CODE=0（无 P0/P1 阻断）
+[Gate] 审查通过 — P0/P1 remaining = 0

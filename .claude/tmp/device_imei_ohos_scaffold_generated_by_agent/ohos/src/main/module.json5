@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "device_imei",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

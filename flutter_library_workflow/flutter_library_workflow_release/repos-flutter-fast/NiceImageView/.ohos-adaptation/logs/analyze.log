@@ -1,1 +1,5 @@
-0 issues found
+$ flutter analyze
+Flutter assets will be downloaded from https://storage.flutter-io.cn. Make sure you trust this source!
+Analyzing NiceImageView...                                      
+No issues found! (ran in 1.5s)
+EXIT_CODE=0

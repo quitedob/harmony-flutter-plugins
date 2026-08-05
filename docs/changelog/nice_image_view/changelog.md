@@ -63,22 +63,24 @@ lib/
 
 | 类别 | 数量 | 状态 |
 |------|:----:|:----:|
-| Widget/Unit Tests | 21 | ✅ 已编写并通过 flutter analyze |
-| Test Points | 24 | ✅ |
-| Reviewed Cases | 13 | ✅ |
+| Widget/Unit Tests | 24 | ✅ `flutter test` 24/24 PASS |
+| Test Points | 20 | ✅ |
+| Reviewed Cases | 20 | ✅ |
 | DroidRun L0 | 5 | ✅ |
 | flutter analyze | 0 issues | ✅ PASS |
+| DFX Dart | 0 warning | ✅ PASS |
 
-### HAP 构建
+### HAP 构建（2026-08-04 独立运行，最终权威记录）
 
 | 属性 | 值 |
 |------|-----|
-| 路径 | `D:\deveco\ai_tool\flutter_ohos_test\ohos\entry\build\default\outputs\default\entry-default-signed.hap` |
-| 签名 | ✅ 已签名（DevEco 默认调试证书） |
-| 大小 | 141,737,672 bytes (≈142 MB) |
-| SHA-256 | `00139d3fd81fbcebc946cc4179e72606e2affb10924e378777f092771f2865a2` |
-| 条目数 | 29（含 Flutter engine arm64 + x86_64, ETS modules.abc, Flutter assets） |
-| 构建方式 | `node hvigorw.js` 直接调用（绕过 `flutter build hap` BATCH RECURSION） |
+| 路径 | `example_auto/ohos/entry/build/default/outputs/default/entry-default-signed.hap` |
+| 签名 | ✅ 已签名（DevEco auto-sign profile，bundle `com.example.flutter_ohos_test`） |
+| 大小 | 97,680,297 bytes (≈97.6 MB) |
+| SHA-256 | `90b603d05d1d7f315a81897bedee5548b88bffc3ae2a480843b45e9402b10473` |
+| 条目数 | 24 |
+| 真机 | HUAWEI Mate 60（API 24 / `192.168.3.85:41665`）安装/启动 PASS |
+| 构建方式 | 物理短工作区 `C:\niv` + DevEco `node.exe hvigorw.js assembleHap --no-daemon` 直连（绕过 BATCH RECURSION 与路径超长） |
 
 ## 四、遇到的关键问题与解决方案
 
@@ -148,7 +150,9 @@ node "/d/deveco/DevEco Studio/tools/hvigor/bin/hvigorw.js" \
 | 2026-07-30 | 初始版本：Android NiceImageView → Flutter pure_dart 完整移植（16/16 API 覆盖，44 项管线产物，签名 HAP 构建成功，集成到 flutter_ohos_test Hub） |
 | 2026-07-30 | **P2 文档交付收尾**：Demo 页全中文化（12 个中文标签）、复制日志（`Clipboard.setData` + 双按钮）、示例图片（69 bytes 最小 PNG）、Example pubspec 创建、`05-demo-gen.json` 更新 |
 | 2026-07-30 | **PRD 重写 + Mermaid 验证**：PRD 按 Flutter pure_dart 插件标准完全重写（852→416 行，12 章），4 个 Mermaid 图全部通过 mmdc 11.16.0 渲染（architecture/graph + flowchart + sequenceDiagram + migration graph），`01-prd-mermaid-validation.json`：`status: PASS, syntax_errors: []`，Puppeteer→Chrome 修复在 devlog 记录 |
+| 2026-08-04 | **全新独立运行收尾（shehuan_NiceImageView）**：重写 Dart 实现并修复 donor 两个框架 bug（dispose-setState、initState-MediaQuery）+ isCoverSrc 裁剪内缩；24 测试全绿；20 评审用例 XLSX/demo-map；独立 OHOS Demo `example_auto/`；5/5 AJV + 8/8 一致性；签名 HAP（97.6MB）在 HUAWEI Mate 60 真机安装/启动，20/20 逐用例「符合预期」，一键测试全部 20/20（NATIVE_VLM）。历史 Hub 路径（flutter_ohos_test）已废弃，以独立 Demo 为准 |
+| 2026-08-04 | **本仓库（donor `NiceImageView/`）全量复跑·Schema 合规重生成（01/02/03/04 + 05 交付收尾）**：24 条测试设计（24 行 XLSX）评审 95/95；`flutter analyze` 0 issues、`flutter test` 22/22 PASS（修复 lib/src/nice_image_view.dart 两处真实缺陷：dispose 期 setState、initState MediaQuery）、DFX fix_dart.py exit 0、代码审查 40 文件 0 issues、DroidRun 5 L0；`flutter create --platforms=ohos example_auto` 独立 Demo（36 个 Dart 源、24 用例页、runCase 共享执行器、一键测试全部、复制日志），analyzer clean；5/5 AJV 通过；签名 HAP `nice_image_view_example_auto-debug-signed.hap`（141,676,364 字节，SHA-256 `6f231810998185892ed738240d2d669736203e66823e35e1437067f4ebc5073d`，24 entries，SignHap PASS）在 phone BRA-AL00（OHOS API 24，192.168.3.85:41665）安装/启动 PASS；**运行态逐用例行为验证 NOT_RUN**（midscene 视觉模型未配置，direct-click 未能确认汇总弹窗），不伪造运行态 PASS。构建经短工作区 `D:\niv_build\NiceImageView\example_auto` 直连 DevEco hvigor 绕过 Windows 259 字符路径限制；HAP 保留兼容 bundle 标识 `com.example.flutter_ohos_test` |
 
 ---
 
-*本变更记录基于实际代码、构建日志和 HAP 产物核验。详细问题分析和思考过程见 `devlog.md`。*
+*本变更记录基于实际代码、构建日志和 HAP 产物核验。2026-07-30 记录中的历史 Hub 路径（flutter_ohos_test）与 21 测试/13 用例/142MB HAP 已被 2026-08-04 独立运行的权威数据替代。详细问题分析和思考过程见 `devlog.md` 与 `operation-log-2026-08-04.md`。*

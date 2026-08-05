@@ -1,54 +1,57 @@
 {
-  "valid": false,
+  "valid": true,
   "source_hashes": {
-    "01-analysis.json": "274889af18b34a6d3b4ce993061652e01301428561f74c22f512c0195299151f",
-    "02-planning.json": "4ba0e4f5352153b1bac25496c9905e2feb6a683714ada418797a248594d18d31"
+    "01-analysis.json": "0913f6308fdb454e50c68457833338895512bb762d3a61065da96bafb7abba2a",
+    "02-planning.json": "4ba0e4f5352153b1bac25496c9905e2feb6a683714ada418797a248594d18d31",
+    "03-coding-library.json": "7546fc2faa655d35b49e52b4dc3df877f1688d0331d7ad6fe2d3d9f07286e381",
+    "04-testing.json": "f2241c7962e122d9c5ed971888ee89b59a7463ac723bb483b177a03b70084c65",
+    "05-summary.json": "b5b7f6b2b083c3a59ad755b08b3fb6afcd2618b9b26a62620d4d12d3cdc1a127"
   },
   "summary": {
     "total": 8,
-    "pass": 0,
-    "fail": 8
+    "pass": 8,
+    "fail": 0
   },
   "checks": [
     {
       "name": "channel_name_consistency",
-      "status": "fail",
-      "details": "缺少 01 或 03"
+      "status": "pass",
+      "details": "03 的 channel 均来自 01"
     },
     {
       "name": "plugin_type_skill_consistency",
-      "status": "fail",
-      "details": "缺少 02 或 03"
+      "status": "pass",
+      "details": "02=type-pure-dart; 03=type-pure-dart"
     },
     {
       "name": "build_status_propagation",
-      "status": "fail",
-      "details": "缺少 03 或 05"
+      "status": "pass",
+      "details": "03=pass; 05=pass"
     },
     {
       "name": "example_status_propagation",
-      "status": "fail",
-      "details": "缺少 04 或 05"
+      "status": "pass",
+      "details": "04=pass; 05=pass"
     },
     {
       "name": "coverage_math_consistency",
-      "status": "fail",
-      "details": "缺少 03、05 或 coverage"
+      "status": "pass",
+      "details": "03=7/7; 05=7/7, rate=100%"
     },
     {
       "name": "runtime_check_summary_consistency",
-      "status": "fail",
-      "details": "缺少 04 runtime_checks 或 05 runtime_check_summary"
+      "status": "pass",
+      "details": "04={\"total\":10,\"pass\":10,\"warning\":0,\"fail\":0}; 05={\"total\":10,\"pass\":10,\"warning\":0,\"fail\":0}"
     },
     {
       "name": "device_test_summary_consistency",
-      "status": "fail",
-      "details": "缺少 04 设备结果或 05 device_test_summary"
+      "status": "pass",
+      "details": "04 status=pass, total/pass/fail=31/31/0; 05=pass/31/31/0"
     },
     {
       "name": "quality_score_consistency",
-      "status": "fail",
-      "details": "缺少 03 或 05"
+      "status": "pass",
+      "details": "score=B; build=pass; coverage=100%"
     }
   ]
 }

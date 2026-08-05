@@ -64,16 +64,20 @@ class DiscrollveConfig {
     this.fromColor = -1,
     this.toColor = -1,
     this.threshold = 0.0,
-  }) : assert(threshold >= 0.0 && threshold <= 1.0,
-             'threshold must be in range [0.0, 1.0]'),
-       assert(translation == -1 ||
-              !((translation & 0x01 != 0 && translation & 0x02 != 0) ||
-                (translation & 0x04 != 0 && translation & 0x08 != 0)),
-              'fromTop+fromBottom and fromLeft+fromRight are forbidden');
+  })  : assert(threshold >= 0.0 && threshold <= 1.0,
+            'threshold must be in range [0.0, 1.0]'),
+        assert(
+            translation == -1 ||
+                !((translation & 0x01 != 0 && translation & 0x02 != 0) ||
+                    (translation & 0x04 != 0 && translation & 0x08 != 0)),
+            'fromTop+fromBottom and fromLeft+fromRight are forbidden');
 
   /// Whether any transform is active.
   bool get hasTransforms =>
-      alpha || scaleX || scaleY || translation != -1 ||
+      alpha ||
+      scaleX ||
+      scaleY ||
+      translation != -1 ||
       (fromColor != -1 && toColor != -1);
 }
 

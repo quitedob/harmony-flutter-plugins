@@ -816,3 +816,33 @@ WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
 > hvigor [32mFinished :entry:default@CollectDebugSymbol... after 2 ms [39m
 > hvigor [32mFinished :entry:assembleHap... after 1 ms [39m
 > hvigor [32mBUILD SUCCESSFUL in 22 s 958 ms [39m
+
+================================================================================
+=== NiceImageView example_auto -- hvigor assembleHap (signed debug) -- 2026-08-04
+=== Workspace : D:\niv_build\NiceImageView\example_auto   (fresh physical short workspace,
+===             Windows 259-char path-limit fallback; staged plugin + demo preserving path: ../)
+=== Command   : D:\deveco\DevEco Studio\tools\node\node.exe D:\deveco\DevEco Studio\tools\hvigor\bin\hvigorw.js assembleHap -p product=default -p buildMode=debug --no-daemon
+=== Direct DevEco node hvigorw.js invocation (bypasses .bat recursion / BATCH RECURSION).
+------------------------------------------------------------------------------------------
+> hvigor start to execute ohpm install
+> hvigor Finished :entry:default@FlutterTask... after 4 s 425 ms
+> hvigor Finished :entry:default@CompileArkTS... after 6 s 893 ms
+> hvigor Finished :entry:default@GeneratePkgModuleJson... after 5 ms
+> hvigor Finished :entry:default@ProcessCompiledResources... after 1 ms
+> hvigor WARN: WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::arrayBaseOffset has been called by com.alibaba.fastjson2.util.JDKUtils (file:/D:/deveco/DevEco%20Studio/sdk/default/openharmony/toolchains/lib/app_packing_tool.jar)
+WARNING: Please consider reporting this to the maintainers of class com.alibaba.fastjson2.util.JDKUtils
+WARNING: sun.misc.Unsafe::arrayBaseOffset will be removed in a future release
+> hvigor Finished :entry:default@PackageHap... after 600 ms
+> hvigor Finished :entry:default@PackingCheck... after 11 ms
+> hvigor Finished :entry:default@SignHap... after 2 s 612 ms
+> hvigor Finished :entry:default@CollectDebugSymbol... after 2 ms
+> hvigor Finished :entry:assembleHap... after 1 ms
+> hvigor BUILD SUCCESSFUL in 20 s 306 ms
+------------------------------------------------------------------------------------------
+HAP 产物:
+  .ohos-adaptation/hap/nice_image_view_example_auto-debug-signed.hap
+  size 141,676,364 bytes, SHA-256 6f231810998185892ed738240d2d669736203e66823e35e1437067f4ebc5073d
+  entries 24 (libflutter.so arm64-v8a / x86_64 + kernel_blob.bin 等)
+  signing: SignHap PASS (DevEco default debug cert, bundle com.example.flutter_ohos_test)
+EXIT_CODE=0

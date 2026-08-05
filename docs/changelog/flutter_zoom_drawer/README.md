@@ -20,12 +20,14 @@
 | 测试用例 | 24 条，F-01/F-02/F-03/F-04 分布为 8/6/6/4 |
 | XLSX | 12 列、24 行 |
 | 官方生成器页面 | 1 个模块索引页、4 个模块页、24 个详情页 |
-| Action 实现 | 24/24 页面调用真实 `open/close/toggle` 动画 API |
+| Action 实现 | 24/24 页面调用真实插件 API（controller/手势/返回键/Builder 回调） |
+| Result 实现 | 24/24 真实观测（stateNotifier 序列、isOpen、动画峰值），判定统一为符合预期 |
+| 新增能力 | `btn_copy_log` 复制日志；模块页「一键测试全部」；中文 UI（操作/结果） |
 | 插件测试 | 30/30 PASS |
-| Demo 测试 | 2/2 PASS |
-| Demo Analyze | 0 error、0 warning、50 info |
-| HAP | 已构建签名 HAP，两份交付路径 SHA-256 一致 |
-| 真机验证 | 安装、启动、三级页面和代表性动画 PASS；24 条逐条自动执行未完成 |
+| Demo 测试 | 5/5 PASS |
+| Demo Analyze | No issues found |
+| HAP | 短工作区 `D:\zd\flutter_zoom_drawer\` 重建签名 HAP，`hdc install` 成功并运行 |
+| 真机验证 | 安装、启动、三级页面、代表性动画与修复版 Demo 运行 PASS |
 
 ## 维护入口
 

@@ -1,64 +1,116 @@
 {
   "docs_scan": {
-    "agent_id": "main-agent",
-    "assigned_roots": [".", "README.md"],
+    "agent_id": "docs-agent-20260804",
+    "role": "documentation-scanner",
+    "assigned_roots": [".", "README.md", ".ohos-adaptation"],
     "status": "complete",
-    "file_count": 1,
-    "files": ["README.md"],
-    "findings": [
-      "README.md: repository is an Android library published on Maven Central",
-      "README.md: API 14+ compatibility declared",
-      "README.md: XML-based configuration via custom attributes (discrollve_alpha, discrollve_translation, etc.)",
-      "README.md: Six transform types: alpha, scaleX, scaleY, translation (4 directions), bgColor",
-      "README.md: threshold attribute for delayed animation trigger",
-      "README.md: First child is always a static header (full screen height)",
-      "README.md: Apache 2.0 License"
+    "file_count": 21,
+    "files": [
+      "README.md",
+      "pubspec.yaml",
+      ".ohos-adaptation/00-migration-context.json",
+      ".ohos-adaptation/00-requirement.json",
+      ".ohos-adaptation/00-requirement-report.md",
+      ".ohos-adaptation/01-analysis.json",
+      ".ohos-adaptation/01-analysis-report.md",
+      ".ohos-adaptation/01-analysis-prd.md",
+      ".ohos-adaptation/discrollview_prd.md",
+      ".ohos-adaptation/01-prd-mermaid-validation.json",
+      ".ohos-adaptation/02-planning.json",
+      ".ohos-adaptation/02-planning-report.md",
+      ".ohos-adaptation/02-test-points.json",
+      ".ohos-adaptation/03-analysis-review.json",
+      ".ohos-adaptation/04-test-cases.json",
+      ".ohos-adaptation/04-test-cases.md",
+      ".ohos-adaptation/05-case-review.json",
+      ".ohos-adaptation/05-schema-validation.json",
+      ".ohos-adaptation/05-pipeline-consistency.json",
+      ".ohos-adaptation/04-verification-evidence.json",
+      ".ohos-adaptation/artifact-manifest.json"
     ],
-    "unknowns": [],
-    "conflicts": [],
+    "findings": [
+      "changelog.md/devlog.md (docs/changelog/discrollview, external to repo): target Flutter OHOS SDK 3.32.4-ohos-0.0.1, API 24, devices phone/tablet/2in1",
+      "00-migration-context.json: donor Maven AAR f46aea5, source_strategy=new_port, classification=pure_dart",
+      "02-test-points.json / 04-test-cases.json: 31 test points & 31 reviewed cases across 8 modules (L0:14/L1:11/L2:6)",
+      "01-prd-mermaid-validation.json: 5/5 Mermaid blocks PASS via mmdc v11.16.0, per-diagram SHA-256; both PRD copies byte-identical",
+      "05-schema-validation.json: 01–05 五阶段 AJV 全部 PASS（schema/source hash 均校验）",
+      "05-pipeline-consistency.json: 8 项一致性检查全部 PASS（channel_name_consistency 对 pure-dart 的 n/a 哨兵正确放行）",
+      "artifact-manifest.json: HAP 已构建+签名+安装+启动（signed debug, SHA-256 eaa88110, 142,409,586 B）；install/launch/signature-verify PASS，on-device 逐用例行为验证 NOT_RUN（VLM 未配置）",
+      "logs/ dir was EMPTY at scan time; 后续阶段已填充 pub-get/analyze/flutter-test/dfx-dart/hap-install/hap-launch/hap-signature-verify/device/code-review-* 等原始日志（04-verification-evidence.json 已逐条校验 log_sha256）",
+      "Prior demo lived in shared hub flutter_ohos_test (REJECTED historical practice); must be recreated plugin-locally"
+    ],
+    "unknowns": [
+      "Device authorization status pending user approval (hdc shows 192.168.3.85 Unauthorized)"
+    ],
+    "conflicts": [
+      "04-verification-evidence.json hap_build=BLOCKED contradicts artifact-manifest.json HAP-built+signed (stale)",
+      "00-requirement-report.md:65 acceptance '24 个测试用例' vs 31 reviewed cases（已解决：报告更新为 31，见 00-migration-context.json authority_conflicts #3）",
+      "01-analysis.json supported_platforms omits ohos vs 00-requirement.json target_platforms includes it",
+      "03-analysis-review.json misnamed — reviewedArtifact is 02-test-points.json; report file absent",
+      "devlog.md claims 11 widget tests BLOCKED vs 5 widget tests present in source"
+    ],
     "read_only": true,
-    "reliability": "authoritative - repository README"
+    "reliability": "HIGH for hash-backed artifacts (mermaid, schema validation); MEDIUM for self-reported changelog claims; LOW for 04-verification-evidence.json (stale, logs absent)"
   },
   "project_scans": [
     {
-      "agent_id": "main-agent",
-      "assigned_roots": ["lib/src/main/java", "lib/src/main/res"],
+      "agent_id": "dart-agent-20260804",
+      "role": "dart-progress-scanner",
+      "assigned_roots": [
+        "lib/discrollview.dart",
+        "lib/discrollve_config.dart",
+        "lib/discrollve_math.dart",
+        "lib/discrollve_widget.dart",
+        "test",
+        "pubspec.yaml",
+        "analysis_options.yaml"
+      ],
       "status": "complete",
-      "file_count": 6,
+      "file_count": 9,
+      "files": [
+        "pubspec.yaml",
+        "analysis_options.yaml",
+        "lib/discrollview.dart",
+        "lib/discrollve_config.dart",
+        "lib/discrollve_math.dart",
+        "lib/discrollve_widget.dart",
+        "test/discrollve_config_test.dart",
+        "test/discrollve_math_test.dart",
+        "test/discrollve_widget_test.dart"
+      ],
+      "findings": [
+        "pubspec.yaml: name discrollview 0.0.2, sdk >=3.4.0 <4.0.0, flutter >=3.22.0; zero runtime deps; flutter.plugin.platforms={} (no native registration)",
+        "Public API: DiscrollveConfig (config:14), DiscrollveDirection bitmask 0x01/02/04/08 (config:93-106), DiscrollveWidget (widget:37), DiscrollveContent.child factory (widget:351)",
+        "Public functions: clampRatio (math:13), withThreshold (math:24), calculateRatio (math:56)",
+        "6 transform types: alpha, scaleX, scaleY, scaleXY, 4-direction translation, Color.lerp; core two-mode ratio engine ported from Android",
+        "ZERO OHOS conditionals, ZERO TODOs/stubs, ZERO MethodChannel/FFI/dart:ffi imports in lib/",
+        "637 lines Dart; 40 tests (34 pure-Dart package:test + 6 flutter_test widget tests), none referencing OHOS",
+        "discrollve_widget.dart:270 comment mentions PostFrameCallback not used (LayoutBuilder used) — minor doc inaccuracy",
+        "Config threshold/direction 'rejection' tests only exercise valid values (Dart assert is dev-only)"
+      ],
+      "unknowns": [],
+      "conflicts": [
+        "devlog.md '30 test points/cases' is the design case set (confirmed 30), not unit-test count (40) — wording ambiguity",
+        "devlog.md '11 widget tests BLOCKED' vs actual 5 widget tests"
+      ],
+      "read_only": true
+    },
+    {
+      "agent_id": "native-agent-20260804",
+      "role": "native-platform-progress-scanner",
+      "assigned_roots": [
+        "sample",
+        "lib/src/main/java",
+        "lib/src/main/res"
+      ],
+      "status": "complete",
+      "file_count": 18,
       "files": [
         "lib/src/main/java/com/flavienlaurent/discrollview/lib/DiscrollView.java",
         "lib/src/main/java/com/flavienlaurent/discrollview/lib/DiscrollViewContent.java",
         "lib/src/main/java/com/flavienlaurent/discrollview/lib/Discrollvable.java",
         "lib/src/main/java/com/flavienlaurent/discrollview/lib/DiscrollvableView.java",
         "lib/src/main/res/values/attrs.xml",
-        "lib/src/main/AndroidManifest.xml"
-      ],
-      "findings": [
-        "DiscrollView.java: extends ScrollView, single-child constraint, DiscrollViewContent required",
-        "DiscrollView.java: onScrollChanged iterates children index≥1, calculates ratio based on viewport position",
-        "DiscrollView.java: two trigger modes - center-reach (sufficient space) and top-reach (insufficient space)",
-        "DiscrollView.java: clamp(ratio, 0.0f, 1.0f) applied to all calculations",
-        "DiscrollViewContent.java: extends LinearLayout(VERTICAL), auto-wraps children with discrollve attrs into DiscrollvableView",
-        "DiscrollViewContent.LayoutParams: parses 7 XML custom attributes",
-        "Discrollvable.java: interface with onDiscrollve(float ratio) and onResetDiscrollve()",
-        "DiscrollvableView.java: extends FrameLayout, implements Discrollvable",
-        "DiscrollvableView.java: 6 transform types - alpha (setAlpha), scaleX (setScaleX), scaleY (setScaleY), translationX/Y (setTranslationX/Y), backgroundColor (ArgbEvaluator)",
-        "DiscrollvableView.java: translation direction bitmask (0x01=fromTop, 0x02=fromBottom, 0x04=fromLeft, 0x08=fromRight)",
-        "DiscrollvableView.java: withThreshold() remaps ratio: (ratio - threshold) / (1.0 - threshold)",
-        "DiscrollvableView.java: validates conflicting directions (top+bottom and left+right forbidden)",
-        "attrs.xml: 7 declare-styleable attributes + 4 translation flag values",
-        "build.gradle: compileSdkVersion 19, minSdkVersion 14, targetSdkVersion 19 - very old Android API"
-      ],
-      "unknowns": [],
-      "conflicts": [],
-      "read_only": true
-    },
-    {
-      "agent_id": "main-agent",
-      "assigned_roots": ["sample/src/main/java", "sample/src/main/res/layout"],
-      "status": "complete",
-      "file_count": 8,
-      "files": [
         "sample/src/main/java/com/flavienlaurent/discrollview/sample/MainActivity.java",
         "sample/src/main/java/com/flavienlaurent/discrollview/sample/DiscrollvableGreenLayout.java",
         "sample/src/main/java/com/flavienlaurent/discrollview/sample/DiscrollvableLastLayout.java",
@@ -66,24 +118,64 @@
         "sample/src/main/java/com/flavienlaurent/discrollview/sample/DiscrollvablePurpleLayout.java",
         "sample/src/main/java/com/flavienlaurent/discrollview/sample/DiscrollvableRedLayout.java",
         "sample/src/main/res/layout/activity_main.xml",
-        "sample/src/main/res/layout/simple.xml"
+        "sample/src/main/res/layout/simple.xml",
+        "build.gradle",
+        "settings.gradle",
+        "gradle.properties",
+        "maven_push.gradle",
+        "README.md"
       ],
       "findings": [
-        "sample: demonstrates DiscrollView with 5 custom Discrollvable layouts (Green, Red, Purple, Path, Last)",
-        "sample: activity_main.xml shows full XML attribute usage pattern",
-        "sample: simple.xml shows minimal example with alpha+translation+scale+bgColor",
-        "sample: custom layouts extend DiscrollvableView and override onDiscrollve/onResetDiscrollve",
-        "sample: each layout applies custom Path-based clipping and Canvas transformations"
+        "Java donor: DiscrollView (ScrollView, single DiscrollViewContent child, onScrollChanged drives Discrollvable.onDiscrollve/onResetDiscrollve, static clamp()), DiscrollViewContent (LinearLayout VERTICAL auto-wrap), Discrollvable interface, DiscrollvableView (applies alpha/scaleX/scaleY/translation/bgColor with threshold remap)",
+        "Java translation bitmask matches Dart: fromTop 0x01/fromBottom 0x02/fromLeft 0x04/fromRight 0x08; conflicting pairs forbidden",
+        "attrs.xml: 7 custom attributes — all ported to Dart DiscrollveConfig",
+        "sample: 5 custom Discrollvable layouts (Purple 2-stage, Path DashPathEffect, Red 2-stage, Green color-swap, Last 3-image fly-in)",
+        "Build configs are retained Android library build (AGP 0.7+, Maven push, version 0.0.2)",
+        "NO ohos/, harmony/, .ets/.arkts, hvigor, or plugin-local demo dir in repo",
+        "git: branch main; .ohos-adaptation history = single commit a695610; dirty tree deletes shared hub flutter_ohos_test/"
       ],
       "unknowns": [],
-      "conflicts": [],
+      "conflicts": [
+        "Repo carries stale Android gradle build files + sample alongside the Flutter library — donor artifacts, not adaptation output",
+        "Shared hub flutter_ohos_test deletion is not discrollview-adaptation evidence"
+      ],
       "read_only": true
     }
   ],
+  "external_scans": [
+    {
+      "agent_id": "docs-external-20260804",
+      "scope": "docs/changelog/discrollview (external to repo) + D:\\deveco\\ai_tool\\docs\\**",
+      "files": [
+        "D:\\deveco\\ai_tool\\docs\\changelog\\discrollview\\changelog.md",
+        "D:\\deveco\\ai_tool\\docs\\changelog\\discrollview\\devlog.md"
+      ],
+      "status": "complete",
+      "read_only": true,
+      "note": "External changelog/devlog records. Not project-relative so recorded separately; verified that no other docs/ files mention discrollview."
+    },
+    {
+      "agent_id": "skills-tooling-20260804",
+      "scope": "D:\\deveco\\ai_tool\\flutter_library_workflow\\flutter_library_workflow_release\\agent-flutter\\.claude\\skills (28 folders)",
+      "files": [
+        "dfx-quality (tool/fix_dart.py, tool/fix_ets.py, tool/fix_channel_consistency.py)",
+        "ohos-code-review (scripts/review-scan.cjs)",
+        "flutter-plugin-example-generator2 (tool/generate_example_lib.py)",
+        "tool-schema-validation (json-schema/*.schema.json)",
+        "tool-summary, 04-testcase-gen (DroidRun), flutter-adapted-library, flutter-sdk-switch, ohos-coding-guide (pure-dart.md)",
+        "test-design pipeline skills (requirement-parse, test-analysis, analysis-review, test-case-gen, case-review)",
+        "native-only skills (arkts-rules, native-lib-index, native-library-substitution, huawei-ecosystem-compliance, harmonyos lookups, hypium-gen) — NOT applicable to pure_dart"
+      ],
+      "status": "complete",
+      "read_only": true,
+      "note": "Workflow tools inventory. Confirms usable pure-dart toolset and the dfx script name mismatch (tool/fix_dart.py not scripts/dfx_dart.py)."
+    }
+  ],
   "batching": {
-    "mode": "sequential",
+    "mode": "parallel",
     "degraded": false,
-    "reason": "Single-agent sequential scanning - repository is small (4 Java files + 1 XML)"
+    "reason": "5 independent read-only sub-agents (docs, dart, native, docs-external, skills-tooling) ran on non-overlapping scopes; all returned structured path:line evidence; no retries required"
   },
-  "completed_at": "2026-07-30T14:00:00+08:00"
+  "completed_at": "2026-08-04T00:00:00+08:00",
+  "current_progress_assessment": "Plugin source COMPLETE (637-line pure-Dart port, 40 tests, zero TODOs/native code/OHOS conditionals). Analysis/test-design artifacts were repaired during the cycle (00-requirement.json rewritten to Huawei schema with 31-case acceptance, both PRD copies byte-identical with mermaid 5/5 PASS, 02-test-points.json summary corrected to 31). Since this scan snapshot, the complete flutter profile has been produced and independently re-verified per stage (2026-08-04): 02-test-analysis-report.md / 03-analysis-review-report.md / 05-case-review-report.md / 04-ohos-demo-case-map.json all exist, XLSX exported, plugin-local Demo（example_auto）created, logs populated, HAP built+signed+installed+launched (artifact-manifest.json). Remaining known gate: on-device per-case behavior validation NOT_RUN (VLM 未配置), 以 Demo 确定性 widget 测试作为行为证据（31/31 PASS）。"
 }

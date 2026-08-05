@@ -1,45 +1,56 @@
 {
   "validator": "ajv",
-  "version": "8.x",
-  "schema_draft": "2020-12",
-  "schema_dir": "<flutter-tool-schema-validation>/json-schema",
-  "results": {
-    "01-analysis.json": {
-      "schema": "01-analysis.schema.json",
-      "status": "PENDING",
-      "errors": [],
-      "json_sha256": "placeholder",
-      "schema_sha256": "placeholder"
-    },
-    "02-planning.json": {
-      "schema": "02-planning.schema.json",
-      "status": "PENDING",
-      "errors": [],
-      "json_sha256": "placeholder",
-      "schema_sha256": "placeholder"
-    },
-    "03-coding-library.json": {
-      "schema": "03-coding-library.schema.json",
-      "status": "PENDING",
-      "errors": [],
-      "json_sha256": "placeholder",
-      "schema_sha256": "placeholder"
-    },
-    "04-testing.json": {
-      "schema": "04-testing.schema.json",
-      "status": "PENDING",
-      "errors": [],
-      "json_sha256": "placeholder",
-      "schema_sha256": "placeholder"
-    },
-    "05-summary.json": {
-      "schema": "05-summary.schema.json",
-      "status": "PENDING",
-      "errors": [],
-      "json_sha256": "placeholder",
-      "schema_sha256": "placeholder"
-    }
+  "ajv_version": "8.17.1",
+  "draft": "2020-12",
+  "schema_dir": "D:\\deveco\\ai_tool\\flutter_library_workflow\\flutter_library_workflow_release\\agent-flutter\\.claude\\skills\\tool-schema-validation\\json-schema",
+  "valid": true,
+  "source_hashes": {
+    "01-analysis.json": "f190adc6479cb32c34c3e28aaf5bac5be2f321e3f8f647bc7c816d2bef35e0c5",
+    "01-analysis.schema.json": "d4d4091cbddb0e5ff49b08ab1f5a175749d1896346e4073d87ed82cc93c1b775",
+    "02-planning.json": "18aefbb6979b24923e7213ae5c6ad4d7b472a9cea707c37a963318798821523f",
+    "02-planning.schema.json": "b4fe9b5d768cb740795b42909a6ffc7f07fb9e07ae75959d02946173c4b6af0d",
+    "03-coding-library.json": "1b04fe41c369f502a49ab6e4d99fdfc143690a4df9a22bc4aa97fb98c7f096ff",
+    "03-coding-library.schema.json": "5b32089f315feac748a378cd6e05e496b703b4126dad78bce26cc3384dd19ee0",
+    "04-testing.json": "e04226478be5e07fd7ac22ca98101a377adc88f9cb4fabd61a66723590e425ca",
+    "04-testing.schema.json": "f7d16195e82b477ac93734479b2727f6169916a8eeb40509263009df4275ef56",
+    "05-summary.json": "aead1ef761c43a7a3b18e89e4f35387945e0a2f0c8dd816b2856f165accb06b7",
+    "05-summary.schema.json": "3d258d4205b5106074bc3ac29e24158066a8ae494c5f1e0797eaf3ec9b7ec6e0"
   },
-  "overall_status": "PENDING",
-  "notes": "AJV validation requires running node validate_json_ajv.cjs script. All production JSON files created but not yet AJV-validated due to npm dependency not installed in this session."
+  "stages": [
+    {
+      "stage": "analysis",
+      "file": "01-analysis.json",
+      "schema": "01-analysis.schema.json",
+      "valid": true,
+      "errors": []
+    },
+    {
+      "stage": "planning",
+      "file": "02-planning.json",
+      "schema": "02-planning.schema.json",
+      "valid": true,
+      "errors": []
+    },
+    {
+      "stage": "coding-library",
+      "file": "03-coding-library.json",
+      "schema": "03-coding-library.schema.json",
+      "valid": true,
+      "errors": []
+    },
+    {
+      "stage": "testing",
+      "file": "04-testing.json",
+      "schema": "04-testing.schema.json",
+      "valid": true,
+      "errors": []
+    },
+    {
+      "stage": "summary",
+      "file": "05-summary.json",
+      "schema": "05-summary.schema.json",
+      "valid": true,
+      "errors": []
+    }
+  ]
 }

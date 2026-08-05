@@ -178,3 +178,28 @@
 | 📦 media_scanner 参考 | `flutter_library_workflow/.../repos-flutter-fast/media_scanner/.ohos-adaptation/` |
 | 📦 产物输出 | `{项目}/.ohos-adaptation/` |
 | 📋 本日志 | `docs/changelog/_shared/mermaid-changelog.md` |
+
+---
+
+## 2026-08-04：nice_image_view OHOS 适配 — 独立运行 PRD Mermaid 验证
+
+### 涉及文件
+
+| 文件 | 位置 | Mermaid 图数 | 状态 |
+|------|------|:--:|:--:|
+| `01-analysis-prd.md`（= `nice_image_view_prd.md`，字节一致） | `shehuan_NiceImageView/.ohos-adaptation/` | **4** | ✅ PASS |
+
+### 图表分布
+
+| 序号 | 类型 | 章节 |
+|------|------|------|
+| 01 | `graph TB` | §1.6 组件架构图 |
+| 02 | `sequenceDiagram` | §7.1 图片加载与渲染时序 |
+| 03 | `flowchart TD` | §7.2 渲染管线流程图 |
+| 04 | `graph LR` | §9.1 生命周期状态机 |
+
+### 验证
+
+- 工具：`@mermaid-js/mermaid-cli` 11.16.0（`mmdc`），Puppeteer 浏览器修复（`PUPPETEER_EXECUTABLE_PATH` → 缓存 headless Chrome，规避 mmdc 默认浏览器启动失败）。
+- `validate_mermaid_markdown.py`：4/4 图渲染 SVG 成功，`status: PASS`，`syntax_errors: []`，双 PRD 文件 `byte_identical: true`。
+- SVG 合计约 113 KB（01=25KB / 02=29KB / 03=34KB / 04=23KB）。

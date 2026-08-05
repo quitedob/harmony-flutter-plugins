@@ -101,10 +101,11 @@ class NiceImageViewPainter extends CustomPainter {
   Path _buildClipPath(double w, double h, double totalBorderInset) {
     if (isCircle) {
       final double radius = (w < h ? w : h) / 2.0;
-      return Path()..addOval(Rect.fromCircle(
-        center: Offset(w / 2.0, h / 2.0),
-        radius: radius,
-      ));
+      return Path()
+        ..addOval(Rect.fromCircle(
+          center: Offset(w / 2.0, h / 2.0),
+          radius: radius,
+        ));
     } else {
       return Path()..addRRect(_buildRRect(w, h, totalBorderInset));
     }
@@ -129,7 +130,10 @@ class NiceImageViewPainter extends CustomPainter {
     }
 
     return RRect.fromLTRBAndCorners(
-      0, 0, w, h,
+      0,
+      0,
+      w,
+      h,
       topLeft: Radius.circular(tl),
       topRight: Radius.circular(tr),
       bottomRight: Radius.circular(br),
@@ -161,10 +165,14 @@ class NiceImageViewPainter extends CustomPainter {
   // Corner radius resolution (matches Android cornerRadius priority)
   // ---------------------------------------------------------------------------
 
-  double _resolveCornerTL() => cornerRadius > 0 ? cornerRadius : cornerTopLeftRadius;
-  double _resolveCornerTR() => cornerRadius > 0 ? cornerRadius : cornerTopRightRadius;
-  double _resolveCornerBR() => cornerRadius > 0 ? cornerRadius : cornerBottomRightRadius;
-  double _resolveCornerBL() => cornerRadius > 0 ? cornerRadius : cornerBottomLeftRadius;
+  double _resolveCornerTL() =>
+      cornerRadius > 0 ? cornerRadius : cornerTopLeftRadius;
+  double _resolveCornerTR() =>
+      cornerRadius > 0 ? cornerRadius : cornerTopRightRadius;
+  double _resolveCornerBR() =>
+      cornerRadius > 0 ? cornerRadius : cornerBottomRightRadius;
+  double _resolveCornerBL() =>
+      cornerRadius > 0 ? cornerRadius : cornerBottomLeftRadius;
 
   // ---------------------------------------------------------------------------
   // Image drawing
@@ -175,7 +183,8 @@ class NiceImageViewPainter extends CustomPainter {
     if (image == null) return;
 
     final Rect src = Rect.fromLTWH(
-      0, 0,
+      0,
+      0,
       image!.width.toDouble(),
       image!.height.toDouble(),
     );
@@ -199,9 +208,10 @@ class NiceImageViewPainter extends CustomPainter {
 
     // Center the fitted image
     return Offset(
-      (container.width - fitted.destination.width) / 2.0,
-      (container.height - fitted.destination.height) / 2.0,
-    ) & fitted.destination;
+          (container.width - fitted.destination.width) / 2.0,
+          (container.height - fitted.destination.height) / 2.0,
+        ) &
+        fitted.destination;
   }
 
   // ---------------------------------------------------------------------------
@@ -221,8 +231,7 @@ class NiceImageViewPainter extends CustomPainter {
         );
       }
       if (inner > 0) {
-        final double innerRadius =
-            _min(w, h) / 2.0 - borderWidth - inner / 2.0;
+        final double innerRadius = _min(w, h) / 2.0 - borderWidth - inner / 2.0;
         canvas.drawCircle(
           Offset(w / 2.0, h / 2.0),
           innerRadius,

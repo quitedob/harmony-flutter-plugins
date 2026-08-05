@@ -1,92 +1,413 @@
 {
-  "suite": "NiceImageView 鸿蒙适配测试",
-  "expectation_metadata": {
-    "F-01-01": {"kind": "success", "reason": "默认参数构建应成功显示"},
-    "F-01-02": {"kind": "success", "reason": "全参数构建应成功显示"},
-    "F-01-03": {"kind": "success", "reason": "自定义尺寸应正确应用"},
-    "F-02-01": {"kind": "success", "reason": "圆形模式应正确渲染"},
-    "F-02-02": {"kind": "success", "reason": "圆形模式构建不应崩溃"},
-    "F-03-01": {"kind": "success", "reason": "统一圆角应正确渲染"},
-    "F-03-02": {"kind": "success", "reason": "独立圆角应正确渲染"},
-    "F-03-03": {"kind": "success", "reason": "圆角+边框应正确渲染"},
-    "F-04-01": {"kind": "success", "reason": "外边框应正确绘制"},
-    "F-04-02": {"kind": "success", "reason": "内边框仅圆形模式有效"},
-    "F-04-03": {"kind": "expected_rejection", "reason": "矩形模式下内边框自动忽略（设计如此）"},
-    "F-05-01": {"kind": "success", "reason": "边框覆盖模式应正确渲染"},
-    "F-06-01": {"kind": "success", "reason": "遮罩应正确渲染"},
-    "R-01": {"kind": "success", "reason": "image变更应触发repaint"},
-    "R-02": {"kind": "success", "reason": "无变更不应触发repaint"},
-    "R-03": {"kind": "success", "reason": "isCircle变更应触发repaint"},
-    "R-04": {"kind": "success", "reason": "borderWidth变更应触发repaint"},
-    "R-05": {"kind": "success", "reason": "cornerRadius变更应触发repaint"},
-    "R-06": {"kind": "success", "reason": "maskColor变更应触发repaint"},
-    "E-01": {"kind": "success", "reason": "null image应显示空白不崩溃"},
-    "E-02": {"kind": "success", "reason": "零borderWidth不绘制边框"},
-    "E-03": {"kind": "expected_rejection", "reason": "零尺寸应无可见内容但不崩溃"},
-    "E-04": {"kind": "success", "reason": "透明遮罩不绘制"},
-    "E-05": {"kind": "success", "reason": "默认值与Android一致"}
+  "$schema": "https://raw.githubusercontent.com/huawei-test-design-agent/schema/main/test-cases.schema.json",
+  "suite": {
+    "id": "nice_image_view-ohos",
+    "name": "NiceImageView 鸿蒙适配测试套件",
+    "app_package": "nice_image_view",
+    "app_card": "nice_image_view demo"
   },
   "modules": [
     {
       "moduleCode": "F-01",
-      "moduleName": "构造与初始化",
-      "moduleDescription": "验证组件能否以各种参数组合正确构建",
+      "moduleName": "构造函数与初始化",
+      "moduleDescription": "验证组件以默认参数、全参数及自定义尺寸构建，各项初始化属性正确生效",
       "priority": "P0",
       "test_cases": [
-        {"id": "F-01-01", "title": "默认参数构建", "level": "L0", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView() 不带任何参数", "checkpoint": "find.byType 找到 NiceImageView widget"}], "expected_result": "组件构建成功，使用默认值", "postconditions": "无"},
-        {"id": "F-01-02", "title": "全参数构建", "level": "L0", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView 传入全部 16 个参数", "checkpoint": "组件构建成功"}], "expected_result": "全部参数正确赋值", "postconditions": "无"},
-        {"id": "F-01-03", "title": "自定义尺寸", "level": "L0", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView(width: 150, height: 80)", "checkpoint": "SizedBox.width=150, height=80"}], "expected_result": "尺寸正确应用", "postconditions": "无"}
+        {
+          "id": "F-01-01",
+          "title": "默认参数构建",
+          "level": "L0",
+          "preconditions": "进入示例页面，组件区域显示占位内容",
+          "test_steps": [
+            {"action": "使用默认参数创建 NiceImageView 组件，不传入任何参数", "checkpoint": "组件构建成功，无异常抛出"},
+            {"action": "观察组件默认展示效果", "checkpoint": "图片按原始属性显示，无边框、无圆角、无遮罩"}
+          ],
+          "expected_result": "组件正常构建，默认属性与 Android 默认值一致",
+          "postconditions": "重置组件为默认状态",
+          "devices": "phone,tablet,2in1"
+        },
+        {
+          "id": "F-01-02",
+          "title": "全参数构建",
+          "level": "L0",
+          "preconditions": "进入示例页面，组件区域显示占位内容",
+          "test_steps": [
+            {"action": "传入全部16个构造参数创建 NiceImageView 组件", "checkpoint": "组件构建成功，无异常抛出"},
+            {"action": "逐一核对各参数对应的展示效果", "checkpoint": "全部参数被正确应用"}
+          ],
+          "expected_result": "组件构建成功且全部参数正确生效",
+          "postconditions": "重置组件为默认状态",
+          "devices": "phone,tablet,2in1"
+        },
+        {
+          "id": "F-01-03",
+          "title": "自定义尺寸",
+          "level": "L0",
+          "preconditions": "进入示例页面，组件区域显示占位内容",
+          "test_steps": [
+            {"action": "指定 width 为120、height 为120 创建 NiceImageView 组件", "checkpoint": "组件占用区域与设定的宽高一致"},
+            {"action": "修改宽高数值并重新构建组件", "checkpoint": "组件尺寸随 width 和 height 参数同步变化"}
+          ],
+          "expected_result": "组件尺寸与设定的 width 和 height 一致",
+          "postconditions": "重置组件为默认状态",
+          "devices": "phone,tablet,2in1"
+        }
       ]
     },
     {
       "moduleCode": "F-02",
       "moduleName": "圆形展示模式",
-      "moduleDescription": "验证圆形裁剪渲染",
+      "moduleDescription": "验证圆形模式下的裁剪渲染与参数组合稳定性",
       "priority": "P0",
       "test_cases": [
-        {"id": "F-02-01", "title": "圆形+边框组合", "level": "L1", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView(isCircle: true, borderWidth: 4, borderColor: Colors.blue)", "checkpoint": "组件不崩溃"}], "expected_result": "圆形+边框正确渲染", "postconditions": "无"},
-        {"id": "F-02-02", "title": "圆形+内边框", "level": "L1", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView(isCircle: true, borderWidth: 4, innerBorderWidth: 2)", "checkpoint": "组件不崩溃"}], "expected_result": "圆形+双层边框正确渲染", "postconditions": "无"}
+        {
+          "id": "F-02-01",
+          "title": "圆形模式渲染",
+          "level": "L1",
+          "preconditions": "进入示例页面，打开“圆形模式”开关",
+          "test_steps": [
+            {"action": "确认“圆形模式”开关已开启", "checkpoint": "组件区域图片按圆形裁剪显示"},
+            {"action": "观察图片边缘与四角区域", "checkpoint": "图片以圆形区域显示且无矩形溢出"}
+          ],
+          "expected_result": "图片按圆形区域裁剪渲染，无矩形溢出",
+          "postconditions": "关闭圆形模式，恢复为矩形显示",
+          "devices": "phone,tablet,2in1"
+        },
+        {
+          "id": "F-02-02",
+          "title": "圆形模式不崩溃",
+          "level": "L0",
+          "preconditions": "进入示例页面，打开“圆形模式”开关",
+          "test_steps": [
+            {"action": "在圆形模式下设置边框宽度为4并开启半透明遮罩", "checkpoint": "组件正常渲染，无异常抛出"},
+            {"action": "反复切换圆形模式与矩形模式", "checkpoint": "组件不崩溃，渲染稳定"}
+          ],
+          "expected_result": "圆形模式结合边框与遮罩参数渲染不崩溃",
+          "postconditions": "重置组件为默认状态",
+          "devices": "phone,tablet,2in1"
+        }
       ]
     },
     {
       "moduleCode": "F-03",
       "moduleName": "圆角半径控制",
-      "moduleDescription": "验证统一圆角和独立圆角",
+      "moduleDescription": "验证统一圆角与四角独立圆角的渲染效果，以及圆角加边框的绘制",
       "priority": "P0",
       "test_cases": [
-        {"id": "F-03-01", "title": "统一圆角", "level": "L1", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView(cornerRadius: 16)", "checkpoint": "组件不崩溃"}], "expected_result": "四角统一圆角", "postconditions": "无"},
-        {"id": "F-03-02", "title": "独立圆角", "level": "L1", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView 分别设置四角半径", "checkpoint": "组件不崩溃"}], "expected_result": "各角独立生效", "postconditions": "无"},
-        {"id": "F-03-03", "title": "圆角+边框", "level": "L1", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView(cornerRadius: 16, borderWidth: 4)", "checkpoint": "组件不崩溃"}], "expected_result": "圆角边框正确渲染", "postconditions": "无"}
+        {
+          "id": "F-03-01",
+          "title": "统一圆角渲染",
+          "level": "L1",
+          "preconditions": "进入示例页面，关闭“圆形模式”切换为矩形模式",
+          "test_steps": [
+            {"action": "在矩形模式下将统一圆角参数设置为32", "checkpoint": "图片四角呈现统一圆角"},
+            {"action": "观察四个角的圆角半径", "checkpoint": "四角圆角半径与 cornerRadius 参数一致"}
+          ],
+          "expected_result": "四角应用统一的圆角半径",
+          "postconditions": "将统一圆角参数复位为0",
+          "devices": "phone,tablet,2in1"
+        },
+        {
+          "id": "F-03-02",
+          "title": "独立圆角渲染",
+          "level": "L1",
+          "preconditions": "进入示例页面，关闭“圆形模式”切换为矩形模式",
+          "test_steps": [
+            {"action": "分别设置左上、右上、右下、左下四个独立圆角参数", "checkpoint": "各角圆角半径独立生效"},
+            {"action": "修改其中某一个角的圆角半径", "checkpoint": "仅对应角发生变化，其余角保持不变"}
+          ],
+          "expected_result": "每个角的圆角半径与对应参数一致",
+          "postconditions": "将全部圆角参数复位为0",
+          "devices": "phone,tablet,2in1"
+        },
+        {
+          "id": "F-03-03",
+          "title": "圆角加边框",
+          "level": "L1",
+          "preconditions": "进入示例页面，关闭“圆形模式”切换为矩形模式",
+          "test_steps": [
+            {"action": "在矩形模式下设置统一圆角为32并设置边框宽度为4", "checkpoint": "边框沿圆角路径完整绘制"},
+            {"action": "观察圆角与边框的衔接处", "checkpoint": "边框平滑贴合圆角路径，无直角突刺"}
+          ],
+          "expected_result": "边框沿圆角路径完整绘制",
+          "postconditions": "重置组件为默认状态",
+          "devices": "phone,tablet,2in1"
+        }
       ]
     },
     {
       "moduleCode": "F-04",
       "moduleName": "边框绘制",
-      "moduleDescription": "验证外边框和内边框绘制",
+      "moduleDescription": "验证外边框与内边框的绘制行为，以及矩形模式下内边框的忽略规则",
       "priority": "P0",
       "test_cases": [
-        {"id": "F-04-01", "title": "外边框", "level": "L1", "preconditions": "无", "test_steps": [{"action": "创建 NiceImageView(borderWidth: 3, borderColor: Colors.red)", "checkpoint": "组件不崩溃"}], "expected_result": "外边框正确绘制", "postconditions": "无"},
-        {"id": "F-04-02", "title": "内边框（圆形）", "level": "L1", "preconditions": "isCircle=true", "test_steps": [{"action": "创建 NiceImageView(isCircle: true, borderWidth: 4, innerBorderWidth: 2, innerBorderColor: Colors.white)", "checkpoint": "组件不崩溃"}], "expected_result": "内边框正确绘制", "postconditions": "无"},
-        {"id": "F-04-03", "title": "矩形模式忽略内边框", "level": "L2", "preconditions": "isCircle=false", "test_steps": [{"action": "创建 NiceImageView(isCircle: false, innerBorderWidth: 10)", "checkpoint": "组件不崩溃，内边框被忽略"}], "expected_result": "符合预期（设计如此）", "postconditions": "无"}
+        {
+          "id": "F-04-01",
+          "title": "外边框绘制",
+          "level": "L1",
+          "preconditions": "进入示例页面，组件区域正常显示图片",
+          "test_steps": [
+            {"action": "设置边框宽度为3并选择边框颜色为红色", "checkpoint": "图片外围出现红色外边框，宽度为3"},
+            {"action": "修改边框颜色", "checkpoint": "外边框颜色随之更新，与设定一致"}
+          ],
+          "expected_result": "外边框宽度和颜色与设定一致",
+          "postconditions": "将边框宽度复位为0",
+          "devices": "phone,tablet,2in1"
+        },
+        {
+          "id": "F-04-02",
+          "title": "内边框绘制",
+          "level": "L1",
+          "preconditions": "进入示例页面，打开“圆形模式”开关",
+          "test_steps": [
+            {"action": "在圆形模式下设置内边框宽度为2、内边框颜色为白色", "checkpoint": "内边框在圆形区域边缘绘制且颜色正确"},
+            {"action": "调整内边框宽度", "checkpoint": "内边框宽度随之更新"}
+          ],
+          "expected_result": "内边框在圆形区域边缘绘制且颜色正确",
+          "postconditions": "将内边框宽度复位为0",
+          "devices": "phone,tablet,2in1"
+        },
+        {
+          "id": "F-04-03",
+          "title": "矩形模式忽略内边框",
+          "level": "L2",
+          "preconditions": "进入示例页面，关闭“圆形模式”切换为矩形模式",
+          "test_steps": [
+            {"action": "在矩形模式下设置内边框宽度为10", "checkpoint": "组件区域不绘制内边框"},
+            {"action": "观察图片边缘", "checkpoint": "无内边框出现，仅外边框（如有）生效"}
+          ],
+          "expected_result": "矩形模式下内边框参数被忽略且不接受绘制，不绘制内边框，符合预期",
+          "postconditions": "将内边框宽度复位为0",
+          "devices": "phone,tablet,2in1"
+        }
       ]
     },
     {
       "moduleCode": "F-05",
       "moduleName": "边框覆盖控制",
-      "moduleDescription": "验证边框覆盖图片效果",
+      "moduleDescription": "验证边框覆盖图片内容区域的开关行为",
       "priority": "P1",
       "test_cases": [
-        {"id": "F-05-01", "title": "isCoverSrc=true", "level": "L1", "preconditions": "isCircle=true, borderWidth>0", "test_steps": [{"action": "创建 NiceImageView(isCircle: true, isCoverSrc: true, borderWidth: 6)", "checkpoint": "组件不崩溃"}], "expected_result": "边框覆盖图片", "postconditions": "无"}
+        {
+          "id": "F-05-01",
+          "title": "边框覆盖图片",
+          "level": "L1",
+          "preconditions": "进入示例页面，组件区域正常显示图片",
+          "test_steps": [
+            {"action": "打开“边框覆盖图片”开关并设置边框宽度为6", "checkpoint": "边框绘制在图片之上"},
+            {"action": "观察图片与边框的重叠关系", "checkpoint": "图片被缩放适配，边框覆盖图片内容区域"}
+          ],
+          "expected_result": "边框绘制在图片之上且图片被缩放适配",
+          "postconditions": "关闭“边框覆盖图片”开关并复位边框宽度",
+          "devices": "phone,tablet,2in1"
+        }
       ]
     },
     {
       "moduleCode": "F-06",
       "moduleName": "遮罩绘制",
-      "moduleDescription": "验证遮罩叠加效果",
+      "moduleDescription": "验证非透明遮罩在裁剪区域的叠加绘制效果",
       "priority": "P1",
       "test_cases": [
-        {"id": "F-06-01", "title": "半透明遮罩", "level": "L1", "preconditions": "isCircle=true", "test_steps": [{"action": "创建 NiceImageView(isCircle: true, maskColor: Colors.black45)", "checkpoint": "组件不崩溃"}], "expected_result": "遮罩正确绘制", "postconditions": "无"}
+        {
+          "id": "F-06-01",
+          "title": "遮罩叠加绘制",
+          "level": "L1",
+          "preconditions": "进入示例页面，组件区域正常显示图片",
+          "test_steps": [
+            {"action": "开启半透明遮罩并使用非透明遮罩颜色", "checkpoint": "裁剪区域上叠加了遮罩颜色"},
+            {"action": "观察图片明暗变化", "checkpoint": "遮罩颜色正确叠加且透明度符合预期"}
+          ],
+          "expected_result": "遮罩正确叠加在裁剪区域，透明度符合预期",
+          "postconditions": "关闭半透明遮罩",
+          "devices": "phone,tablet,2in1"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-07",
+      "moduleName": "重绘逻辑",
+      "moduleDescription": "验证各属性变更时 shouldRepaint 重绘触发的正确性",
+      "priority": "P0",
+      "test_cases": [
+        {
+          "id": "F-07-01",
+          "title": "图片变更触发重绘",
+          "level": "L0",
+          "preconditions": "进入示例页面，组件区域正常显示图片",
+          "test_steps": [
+            {"action": "将 image 属性更换为另一张图片", "checkpoint": "shouldRepaint 返回 true，画面更新为新图片"},
+            {"action": "观察组件画面", "checkpoint": "新图片完整显示"}
+          ],
+          "expected_result": "修改 image 属性后触发重绘，画面更新",
+          "postconditions": "恢复原始图片",
+          "devices": "phone,tablet,2in1"
+        },
+        {
+          "id": "F-07-02",
+          "title": "无变更不触发重绘",
+          "level": "L0",
+          "preconditions": "进入示例页面，组件区域正常显示图片",
+          "test_steps": [
+            {"action": "保持所有属性不变并刷新页面", "checkpoint": "shouldRepaint 返回 false，无重绘发生"},
+            {"action": "对比重绘前后的画面", "checkpoint": "画面无任何变化"}
+          ],
+          "expected_result": "属性不变时 shouldRepaint 返回 false，不触发重绘",
+          "postconditions": "保持组件当前状态",
+          "devices": "phone,tablet,2in1"
+        },
+        {
+          "id": "F-07-03",
+          "title": "圆形属性变更重绘",
+          "level": "L0",
+          "preconditions": "进入示例页面，组件区域正常显示图片",
+          "test_steps": [
+            {"action": "将“圆形模式”开关从关闭切换为开启", "checkpoint": "shouldRepaint 返回 true"},
+            {"action": "观察画面由矩形切换为圆形", "checkpoint": "圆形与矩形切换生效"}
+          ],
+          "expected_result": "切换 isCircle 属性触发重绘，圆形与矩形切换生效",
+          "postconditions": "关闭“圆形模式”开关",
+          "devices": "phone,tablet,2in1"
+        },
+        {
+          "id": "F-07-04",
+          "title": "边框宽度变更重绘",
+          "level": "L0",
+          "preconditions": "进入示例页面，组件区域正常显示图片",
+          "test_steps": [
+            {"action": "将边框宽度参数从0调整为6", "checkpoint": "shouldRepaint 返回 true"},
+            {"action": "观察边框显示", "checkpoint": "边框宽度更新为新值"}
+          ],
+          "expected_result": "修改 borderWidth 属性触发重绘，边框宽度更新",
+          "postconditions": "将边框宽度复位为0",
+          "devices": "phone,tablet,2in1"
+        },
+        {
+          "id": "F-07-05",
+          "title": "圆角半径变更重绘",
+          "level": "L0",
+          "preconditions": "进入示例页面，关闭“圆形模式”切换为矩形模式",
+          "test_steps": [
+            {"action": "将统一圆角参数从0调整为32", "checkpoint": "shouldRepaint 返回 true"},
+            {"action": "观察圆角显示", "checkpoint": "圆角半径更新为新值"}
+          ],
+          "expected_result": "修改 cornerRadius 属性触发重绘，圆角更新",
+          "postconditions": "将统一圆角参数复位为0",
+          "devices": "phone,tablet,2in1"
+        },
+        {
+          "id": "F-07-06",
+          "title": "遮罩颜色变更重绘",
+          "level": "L0",
+          "preconditions": "进入示例页面，组件区域正常显示图片",
+          "test_steps": [
+            {"action": "将遮罩颜色从透明改为非透明", "checkpoint": "shouldRepaint 返回 true"},
+            {"action": "观察遮罩显示", "checkpoint": "遮罩颜色更新"}
+          ],
+          "expected_result": "修改 maskColor 属性触发重绘，遮罩更新",
+          "postconditions": "将遮罩颜色恢复为透明",
+          "devices": "phone,tablet,2in1"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-08",
+      "moduleName": "边界条件",
+      "moduleDescription": "验证空图片、零边框宽度、零尺寸、透明遮罩等边界场景与默认值一致性",
+      "priority": "P1",
+      "test_cases": [
+        {
+          "id": "F-08-01",
+          "title": "空图片渲染",
+          "level": "L2",
+          "preconditions": "进入示例页面，组件区域显示占位内容",
+          "test_steps": [
+            {"action": "将 image 属性设置为 null 并构建组件", "checkpoint": "组件渲染空区域且无异常"},
+            {"action": "观察组件区域", "checkpoint": "无图片内容显示，组件正常存在"}
+          ],
+          "expected_result": "image 为 null 时组件正常渲染不崩溃",
+          "postconditions": "恢复图片显示",
+          "devices": "phone,tablet,2in1"
+        },
+        {
+          "id": "F-08-02",
+          "title": "零边框宽度",
+          "level": "L2",
+          "preconditions": "进入示例页面，组件区域正常显示图片",
+          "test_steps": [
+            {"action": "设置边框宽度为0", "checkpoint": "无边框绘制，图片完整显示"},
+            {"action": "观察组件边缘", "checkpoint": "无边框线条，图片边缘干净"}
+          ],
+          "expected_result": "borderWidth 为0时不绘制边框，图片完整显示",
+          "postconditions": "保持边框宽度为0",
+          "devices": "phone,tablet,2in1"
+        },
+        {
+          "id": "F-08-03",
+          "title": "零尺寸渲染",
+          "level": "L2",
+          "preconditions": "进入示例页面，组件区域显示占位内容",
+          "test_steps": [
+            {"action": "将 width 和 height 设置为0并构建组件", "checkpoint": "组件零尺寸渲染不崩溃"},
+            {"action": "观察页面状态", "checkpoint": "组件区域不显示内容但应用无异常"}
+          ],
+          "expected_result": "width 和 height 为0时组件正常渲染不崩溃",
+          "postconditions": "恢复组件默认尺寸",
+          "devices": "phone,tablet,2in1"
+        },
+        {
+          "id": "F-08-04",
+          "title": "透明遮罩无效果",
+          "level": "L2",
+          "preconditions": "进入示例页面，组件区域正常显示图片",
+          "test_steps": [
+            {"action": "将遮罩颜色设置为透明色", "checkpoint": "图片正常显示且无遮罩叠加"},
+            {"action": "对比有遮罩与无遮罩的画面", "checkpoint": "透明遮罩不产生任何视觉变化"}
+          ],
+          "expected_result": "maskColor 为透明时不叠加遮罩，图片正常显示",
+          "postconditions": "保持遮罩颜色为透明",
+          "devices": "phone,tablet,2in1"
+        },
+        {
+          "id": "F-08-05",
+          "title": "默认值验证",
+          "level": "L0",
+          "preconditions": "进入示例页面，组件区域显示占位内容",
+          "test_steps": [
+            {"action": "使用默认参数创建组件并核对各项属性默认值", "checkpoint": "isCircle 为 false、borderWidth 为0、maskColor 为透明等"},
+            {"action": "逐一核对全部构造参数的默认值", "checkpoint": "各参数默认值与 Android 完全一致"}
+          ],
+          "expected_result": "全部构造参数默认值与 Android 默认值一致",
+          "postconditions": "重置组件为默认状态",
+          "devices": "phone,tablet,2in1"
+        }
       ]
     }
-  ]
+  ],
+  "expectation_metadata": {
+    "F-01-01": {"kind": "success", "reason": "默认参数构建应成功，默认属性与 Android 默认值一致"},
+    "F-01-02": {"kind": "success", "reason": "全部16个构造参数应正确生效，组件构建成功"},
+    "F-01-03": {"kind": "success", "reason": "自定义 width 和 height 应正确约束组件尺寸"},
+    "F-02-01": {"kind": "success", "reason": "圆形模式应按圆形区域裁剪渲染且无矩形溢出"},
+    "F-02-02": {"kind": "success", "reason": "圆形模式结合边框与遮罩参数渲染不应崩溃"},
+    "F-03-01": {"kind": "success", "reason": "统一圆角参数应使四角应用相同的圆角半径"},
+    "F-03-02": {"kind": "success", "reason": "四角独立圆角参数应各自独立生效"},
+    "F-03-03": {"kind": "success", "reason": "圆角模式下的外边框应沿圆角路径完整绘制"},
+    "F-04-01": {"kind": "success", "reason": "外边框的宽度和颜色应与设定参数一致"},
+    "F-04-02": {"kind": "success", "reason": "圆形模式下内边框应在圆形区域边缘正确绘制"},
+    "F-04-03": {"kind": "expected_rejection", "reason": "矩形模式下内边框参数被忽略且不接受绘制，符合设计预期"},
+    "F-05-01": {"kind": "success", "reason": "边框覆盖模式应使边框绘制在图片之上且图片被缩放适配"},
+    "F-06-01": {"kind": "success", "reason": "非透明遮罩应正确叠加在裁剪区域且透明度符合预期"},
+    "F-07-01": {"kind": "success", "reason": "image 变更应触发 shouldRepaint 重绘并更新画面"},
+    "F-07-02": {"kind": "success", "reason": "属性不变时 shouldRepaint 应返回 false 不触发重绘"},
+    "F-07-03": {"kind": "success", "reason": "isCircle 变更应触发 shouldRepaint 重绘并完成圆形矩形切换"},
+    "F-07-04": {"kind": "success", "reason": "borderWidth 变更应触发 shouldRepaint 重绘并更新边框宽度"},
+    "F-07-05": {"kind": "success", "reason": "cornerRadius 变更应触发 shouldRepaint 重绘并更新圆角"},
+    "F-07-06": {"kind": "success", "reason": "maskColor 变更应触发 shouldRepaint 重绘并更新遮罩"},
+    "F-08-01": {"kind": "success", "reason": "image 为 null 时组件应正常渲染空区域且不崩溃"},
+    "F-08-02": {"kind": "success", "reason": "borderWidth 为0时应不绘制边框且图片完整显示"},
+    "F-08-03": {"kind": "success", "reason": "width 和 height 为0时组件应零尺寸渲染不崩溃"},
+    "F-08-04": {"kind": "success", "reason": "透明遮罩应不产生遮罩效果且图片正常显示"},
+    "F-08-05": {"kind": "success", "reason": "全部构造参数默认值应与 Android 默认值完全一致"}
+  }
 }

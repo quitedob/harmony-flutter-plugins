@@ -1,73 +1,120 @@
 {
   "suite": {
-    "name": "NiceImageView DroidRun L0 测试套件",
-    "description": "NiceImageView 鸿蒙适配 DroidRun 自动化测试（≤5 L0 用例）",
-    "version": "1.0.5",
-    "agent_prompt_file": "./04-droidrun--agent-prompt.md",
-    "app_card_file": "./04-droidrun--app-card.md"
+    "id": "NIV-DROIDRUN-L0",
+    "name": "NiceImageView 鸿蒙适配 DroidRun L0 冒烟测试套件",
+    "app_package": "com.example.example_auto",
+    "app_card": "file:./04-droidrun--app-card.md",
+    "agent_prompt": "file:./04-droidrun--agent-prompt.md"
   },
   "test_cases": [
     {
       "id": "DR-01",
-      "title": "圆形模式冒烟测试",
+      "title": "应用启动与一键测试全部冒烟测试",
       "level": "L0",
-      "preconditions": "Demo 应用已启动并显示 NiceImageView 组件",
+      "preconditions": "Demo 应用（com.example.example_auto）已安装并成功启动，首页模块索引列表可见",
       "test_steps": [
-        {"action": "确认页面显示 【圆形模式开关】", "checkpoint": "开关可见"},
-        {"action": "点击 【圆形模式开关】 切换为开启", "checkpoint": "NiceImageView 显示为圆形"},
-        {"action": "检查页面无崩溃或错误提示", "checkpoint": "组件正常渲染"}
+        {
+          "action": "确认首页显示【NiceImageView 功能模块】标题与八个功能模块索引列表",
+          "checkpoint": "首页标题正确显示，模块索引列表可见"
+        },
+        {
+          "action": "点击首页【一键测试全部】按钮，触发全部用例批量执行",
+          "checkpoint": "弹出『一键测试全部』结果对话框，显示用例执行统计"
+        },
+        {
+          "action": "点击结果对话框中的【确定】按钮关闭对话框，确认 (API: NiceImageView) 组件在各参数组合下全部构建渲染成功",
+          "checkpoint": "全部用例执行完成，通过数量与总用例数量一致"
+        }
       ],
-      "expected_result": "圆形模式切换后组件正常渲染为圆形，无崩溃",
-      "api": "isCircle"
+      "expected_result": "一键测试全部执行完成，全部用例判定为符合预期（PASS），无失败用例，NiceImageView 组件在各参数组合下均正常构建与渲染"
     },
     {
       "id": "DR-02",
-      "title": "边框显示冒烟测试",
+      "title": "圆形展示模式渲染冒烟测试",
       "level": "L0",
-      "preconditions": "圆形模式开启",
+      "preconditions": "Demo 应用已启动，首页模块索引列表可见",
       "test_steps": [
-        {"action": "向右拖动 【边框宽度滑块】 到非零值", "checkpoint": "滑块值 > 0"},
-        {"action": "观察 NiceImageView 组件", "checkpoint": "图片周围出现橙色圆形边框"}
+        {
+          "action": "进入 F-02 圆形展示模块，打开【F-02-01 圆形模式渲染】用例页",
+          "checkpoint": "用例页显示组件展示区域，图片按圆形裁剪显示"
+        },
+        {
+          "action": "观察【组件展示】区域图片边缘与四角",
+          "checkpoint": "图片以圆形区域显示且无矩形溢出"
+        },
+        {
+          "action": "点击【执行用例】按钮，验证 (API: isCircle) 圆形模式用例执行结果",
+          "checkpoint": "实际结果文本显示符合预期（PASS）"
+        }
       ],
-      "expected_result": "边框正确显示在图片周围",
-      "api": "borderWidth, borderColor"
+      "expected_result": "圆形模式下图片按圆形区域裁剪渲染，无矩形溢出；执行用例后判定为符合预期（PASS）"
     },
     {
       "id": "DR-03",
-      "title": "圆角模式切换冒烟测试",
+      "title": "圆角半径渲染冒烟测试",
       "level": "L0",
-      "preconditions": "Demo 应用已启动",
+      "preconditions": "Demo 应用已启动，首页模块索引列表可见",
       "test_steps": [
-        {"action": "点击 【圆形模式开关】 切换为关闭", "checkpoint": "开关显示关闭状态"},
-        {"action": "向右拖动 【圆角半径滑块】 到较大值", "checkpoint": "滑块值 > 0"},
-        {"action": "观察 NiceImageView 组件", "checkpoint": "图片四角变为圆角矩形"}
+        {
+          "action": "进入 F-03 圆角半径控制模块，打开【F-03-01 统一圆角渲染】用例页",
+          "checkpoint": "用例页组件展示区域显示统一圆角图片"
+        },
+        {
+          "action": "观察【组件展示】区域四角圆角效果",
+          "checkpoint": "四角呈现一致的圆角半径"
+        },
+        {
+          "action": "点击【执行用例】按钮，验证 (API: cornerRadius) 统一圆角用例执行结果",
+          "checkpoint": "实际结果文本显示符合预期（PASS）"
+        }
       ],
-      "expected_result": "矩形模式+圆角正常渲染",
-      "api": "isCircle, cornerRadius"
+      "expected_result": "统一圆角参数 cornerRadius 生效，四角圆角半径一致；用例执行结果为符合预期（PASS）"
     },
     {
       "id": "DR-04",
-      "title": "封面模式冒烟测试",
+      "title": "边框绘制与覆盖冒烟测试",
       "level": "L0",
-      "preconditions": "圆形模式开启，边框宽度 > 0",
+      "preconditions": "Demo 应用已启动，首页模块索引列表可见",
       "test_steps": [
-        {"action": "点击 【isCoverSrc 开关】 切换为开启", "checkpoint": "开关显示开启"},
-        {"action": "观察 NiceImageView 组件", "checkpoint": "边框显示在图片上方覆盖"}
+        {
+          "action": "进入 F-05 边框覆盖控制模块，打开【F-05-01 边框覆盖图片】用例页",
+          "checkpoint": "用例页组件展示区域显示带边框图片"
+        },
+        {
+          "action": "观察【组件展示】区域边框与图片的重叠关系",
+          "checkpoint": "边框绘制在图片之上且图片被缩放适配"
+        },
+        {
+          "action": "点击【执行用例】按钮，验证 (API: isCoverSrc) 边框覆盖用例执行结果",
+          "checkpoint": "实际结果文本显示符合预期（PASS）"
+        }
       ],
-      "expected_result": "isCoverSrc=true 时边框覆盖图片内容",
-      "api": "isCoverSrc"
+      "expected_result": "isCoverSrc=true 时边框覆盖图片内容区域且图片缩放适配；用例执行结果为符合预期（PASS）"
     },
     {
       "id": "DR-05",
-      "title": "内边框（圆形模式）冒烟测试",
+      "title": "遮罩绘制与重绘判定冒烟测试",
       "level": "L0",
-      "preconditions": "圆形模式开启，边框宽度 > 0",
+      "preconditions": "Demo 应用已启动，首页模块索引列表可见",
       "test_steps": [
-        {"action": "向右拖动 【内边框宽度滑块】 到非零值", "checkpoint": "滑块值 > 0"},
-        {"action": "观察 NiceImageView 组件", "checkpoint": "双层边框可见（外边框颜色+白色内边框）"}
+        {
+          "action": "进入 F-06 遮罩绘制模块，打开【F-06-01 遮罩叠加绘制】用例页",
+          "checkpoint": "用例页组件展示区域显示半透明遮罩效果"
+        },
+        {
+          "action": "点击【执行用例】按钮，验证 (API: maskColor) 遮罩用例执行结果",
+          "checkpoint": "实际结果文本显示遮罩正确叠加且符合预期（PASS）"
+        },
+        {
+          "action": "返回首页进入 F-07 重绘逻辑模块，打开【F-07-02 无变更不触发重绘】用例页并点击【执行用例】按钮",
+          "checkpoint": "实际结果显示 shouldRepaint 返回 false，画面无变化"
+        },
+        {
+          "action": "在 F-07 模块打开【F-07-03 圆形属性变更重绘】用例页并点击【执行用例】按钮，验证 (API: NiceImageViewPainter) shouldRepaint 重绘判定",
+          "checkpoint": "实际结果文本显示符合预期（PASS）"
+        }
       ],
-      "expected_result": "圆形模式下双层边框正确显示",
-      "api": "innerBorderWidth, innerBorderColor"
+      "expected_result": "遮罩正确叠加在裁剪区域；重绘逻辑中属性不变时 shouldRepaint 返回 false、属性变更时返回 true，用例执行结果均符合预期（PASS）"
     }
   ]
 }

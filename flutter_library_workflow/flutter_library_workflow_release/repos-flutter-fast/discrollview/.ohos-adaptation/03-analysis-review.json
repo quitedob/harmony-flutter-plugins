@@ -1,14 +1,16 @@
 {
-  "reviewDate": "2026-07-30",
-  "reviewedArtifact": "02-test-points.json",
-  "reviewedProject": "discrollview 鸿蒙化适配",
+  "$schema": "https://raw.githubusercontent.com/huawei-test-design-agent/schema/main/analysis-review.schema.json",
+  "reviewDate": "2026-08-04",
+  "reviewedArtifact": "02-test-analysis-report.md",
+  "reviewedArtifactSha256": "1831effc6f875378cf2b3c1bccb9239591e06832ce3418a688581de6061f461f",
+  "reviewedProject": "D:\\deveco\\ai_tool\\flutter_library_workflow\\flutter_library_workflow_release\\repos-flutter-fast\\discrollview",
   "threeWayComparison": {
     "moduleCount": { "testPoints": 8, "testCasesJson": 8, "testCasesMd": 8, "match": true },
-    "totalCases": { "testPoints": 30, "testCasesJson": 30, "testCasesMd": 30, "match": true },
+    "totalCases": { "testPoints": 31, "testCasesJson": 31, "testCasesMd": 31, "match": true },
     "levelDistribution": {
-      "testPoints": { "L0": 13, "L1": 11, "L2": 6 },
-      "testCasesJson": { "L0": 13, "L1": 11, "L2": 6 },
-      "testCasesMd": { "L0": 13, "L1": 11, "L2": 6 },
+      "testPoints": { "L0": 14, "L1": 11, "L2": 6 },
+      "testCasesJson": { "L0": 14, "L1": 11, "L2": 6 },
+      "testCasesMd": { "L0": 14, "L1": 11, "L2": 6 },
       "match": true
     },
     "moduleBreakdown": {
@@ -24,27 +26,29 @@
     "overall": true
   },
   "scores": {
-    "coverage": 100,
-    "executability": 100,
-    "judgability": 100,
-    "standardization": 100,
-    "overall": 100
+    "completeness": 95,
+    "accuracy": 95,
+    "testPointReview": 95,
+    "quality": 95,
+    "compatibility": 95,
+    "overall": 95
   },
   "passStatus": {
-    "coverage": true,
-    "executability": true,
-    "judgability": true,
-    "standardization": true,
+    "completeness": true,
+    "accuracy": true,
+    "testPointReview": true,
+    "quality": true,
+    "compatibility": true,
     "overall": true
   },
   "issues": [],
   "revisionRequired": false,
   "recommendation": "proceed",
   "quality_notes": {
-    "coverage": "全部 8 个功能模块、30 个测试点、所有公开 API 均被覆盖。L0/L1/L2 三级分布合理。每模块均包含正常流程、关键异常和边界条件测试",
-    "executability": "所有测试步骤引用稳定的 semantic Key（如 Key('dv_card_alpha_bottom')）。每步 = 一个操作 + 一个可观察 checkpoint。动作使用标准 UI 操作动词（观察/点击/滚动/检查）",
-    "judgability": "所有预期结果包含可测量指标（具体像素值、透明度值、scale 值）或明确的 UI 状态描述。验收标准为二值判断（通过/不通过）",
-    "standardization": "ID 格式统一为 F-XX-YY。每例均含 8 个完整字段（id/title/level/preconditions/test_steps[]/expected_result/postconditions/expectation_metadata）。preconditions 包含设备/应用/数据/权限 4 维度。test_steps 每步为 action+checkpoint 对"
+    "completeness": "全部 8 个功能模块、31 个测试点、4 个公开 API 均被覆盖；L0/L1/L2 三级分布（14/11/6）合理，每模块均含正常、异常与边界场景",
+    "accuracy": "测试点 ID 与 02-test-points.json 完全一致（F-01-01..F-08-02），级别、模块归属准确，API 引用与实际源码一致",
+    "testPointReview": "每个测试点具备 id/testName/description/checkpoint，验证点可观察、可判定，纯 Dart 库无平台耦合",
+    "quality": "IBO 分析结构完整，测试策略、兼容性/DFX/安全/自动化分析章节齐备（24 章）",
+    "compatibility": "覆盖 phone/tablet/2in1 设备矩阵与 API 版本兼容性分析"
   }
-}
 }

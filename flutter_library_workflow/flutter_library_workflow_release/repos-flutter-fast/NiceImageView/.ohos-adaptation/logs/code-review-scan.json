@@ -1,10 +1,36 @@
 {
-  "engine": "flutter_analyze",
+  "engine": {
+    "mode": "NOT_APPLICABLE",
+    "plugin_type": "pure_dart",
+    "reason": "纯 Dart 插件（nice_image_view v1.0.5），仓库内无 ArkTS/ETS 源文件，CodeArts Check 机械扫描不适用。质量门禁改由 flutter analyze 自动扫描 + 全量人工代码阅读审查完成。",
+    "coverage": {
+      "codelinter": "N/A",
+      "custom_scanner": "N/A",
+      "rule_sets": [
+        "cr-dart-missing-ohos-branch",
+        "cr-dart-whitelist-block",
+        "cr-dart-no-exclusion-detect",
+        "cr-dart-no-string-platform",
+        "cr-dart-api-signature",
+        "cr-dart-api-no-delete",
+        "cr-dart-api-return-type",
+        "cr-dart-api-no-side-effect",
+        "cr-dart-ohos-isolated",
+        "cr-dart-invoke-no-generic",
+        "cr-dart-no-dynamic-cast",
+        "cr-dart-null-check",
+        "cr-dart-unused-import",
+        "cr-dart-io-import",
+        "cr-dart-platform-leak"
+      ]
+    }
+  },
   "findings": [],
   "summary": {
-    "files_scanned": 7,
-    "errors": 0,
-    "warnings": 0,
-    "info": 0
+    "p0": 0,
+    "p1": 0,
+    "p2": 0,
+    "p3": 0,
+    "auto_fixed": 0
   }
 }

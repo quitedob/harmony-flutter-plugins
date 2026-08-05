@@ -1,31 +1,243 @@
 {
-  "suite": "NiceImageView 鸿蒙适配测试",
-  "plugin_name": "nice_image_view",
-  "plugin_version": "1.0.5",
-  "test_points": [
-    {"id": "F-01-01", "module": "F-01", "title": "默认参数构建", "level": "L0", "category": "construction"},
-    {"id": "F-01-02", "module": "F-01", "title": "全参数构建", "level": "L0", "category": "construction"},
-    {"id": "F-01-03", "module": "F-01", "title": "自定义尺寸", "level": "L0", "category": "construction"},
-    {"id": "F-02-01", "module": "F-02", "title": "圆形模式渲染", "level": "L1", "category": "rendering"},
-    {"id": "F-02-02", "module": "F-02", "title": "圆形模式不崩溃", "level": "L0", "category": "rendering"},
-    {"id": "F-03-01", "module": "F-03", "title": "统一圆角", "level": "L1", "category": "rendering"},
-    {"id": "F-03-02", "module": "F-03", "title": "独立圆角", "level": "L1", "category": "rendering"},
-    {"id": "F-03-03", "module": "F-03", "title": "圆角+边框", "level": "L1", "category": "rendering"},
-    {"id": "F-04-01", "module": "F-04", "title": "外边框绘制", "level": "L1", "category": "rendering"},
-    {"id": "F-04-02", "module": "F-04", "title": "内边框绘制（仅圆形）", "level": "L1", "category": "rendering"},
-    {"id": "F-04-03", "module": "F-04", "title": "内边框矩形模式忽略", "level": "L2", "category": "edge_case"},
-    {"id": "F-05-01", "module": "F-05", "title": "边框覆盖图片", "level": "L1", "category": "rendering"},
-    {"id": "F-06-01", "module": "F-06", "title": "遮罩绘制", "level": "L1", "category": "rendering"},
-    {"id": "R-01", "module": "repaint", "title": "shouldRepaint: image变更", "level": "L0", "category": "logic"},
-    {"id": "R-02", "module": "repaint", "title": "shouldRepaint: 无变更不触发", "level": "L0", "category": "logic"},
-    {"id": "R-03", "module": "repaint", "title": "shouldRepaint: isCircle变更", "level": "L0", "category": "logic"},
-    {"id": "R-04", "module": "repaint", "title": "shouldRepaint: borderWidth变更", "level": "L0", "category": "logic"},
-    {"id": "R-05", "module": "repaint", "title": "shouldRepaint: cornerRadius变更", "level": "L0", "category": "logic"},
-    {"id": "R-06", "module": "repaint", "title": "shouldRepaint: maskColor变更", "level": "L0", "category": "logic"},
-    {"id": "E-01", "module": "edge", "title": "null image不崩溃", "level": "L2", "category": "edge_case"},
-    {"id": "E-02", "module": "edge", "title": "零borderWidth", "level": "L2", "category": "edge_case"},
-    {"id": "E-03", "module": "edge", "title": "零尺寸", "level": "L2", "category": "edge_case"},
-    {"id": "E-04", "module": "edge", "title": "透明遮罩", "level": "L2", "category": "edge_case"},
-    {"id": "E-05", "module": "edge", "title": "API默认值验证", "level": "L0", "category": "api"}
-  ]
+  "$schema": "https://raw.githubusercontent.com/huawei-test-design-agent/schema/main/test-points.schema.json",
+  "pluginInfo": {
+    "name": "nice_image_view",
+    "version": "1.0.5"
+  },
+  "modules": [
+    {
+      "moduleCode": "F-01",
+      "moduleName": "构造函数与初始化",
+      "priority": "P0",
+      "testPoints": [
+        {
+          "id": "F-01-01",
+          "testName": "默认参数构建",
+          "description": "使用默认参数创建NiceImageView组件，验证组件能够正常构建",
+          "checkpoint": "组件构建成功且默认属性与Android默认值一致",
+          "level": "L0"
+        },
+        {
+          "id": "F-01-02",
+          "testName": "全参数构建",
+          "description": "传入全部16个构造参数创建组件，验证各参数正确生效",
+          "checkpoint": "组件构建成功且全部参数被正确应用",
+          "level": "L0"
+        },
+        {
+          "id": "F-01-03",
+          "testName": "自定义尺寸",
+          "description": "指定width和height创建组件，验证尺寸约束生效",
+          "checkpoint": "组件尺寸与设定的width和height一致",
+          "level": "L0"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-02",
+      "moduleName": "圆形展示模式",
+      "priority": "P0",
+      "testPoints": [
+        {
+          "id": "F-02-01",
+          "testName": "圆形模式渲染",
+          "description": "设置isCircle为true，验证图片按圆形区域裁剪渲染",
+          "checkpoint": "图片以圆形区域显示且无矩形溢出",
+          "level": "L1"
+        },
+        {
+          "id": "F-02-02",
+          "testName": "圆形模式不崩溃",
+          "description": "圆形模式下结合边框与遮罩参数，验证渲染不崩溃",
+          "checkpoint": "组件正常渲染且无异常抛出",
+          "level": "L0"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-03",
+      "moduleName": "圆角半径控制",
+      "priority": "P0",
+      "testPoints": [
+        {
+          "id": "F-03-01",
+          "testName": "统一圆角渲染",
+          "description": "仅设置cornerRadius，验证四角应用统一圆角半径",
+          "checkpoint": "四角圆角半径与cornerRadius一致",
+          "level": "L1"
+        },
+        {
+          "id": "F-03-02",
+          "testName": "独立圆角渲染",
+          "description": "设置四个独立圆角参数，验证各角半径独立生效",
+          "checkpoint": "每个角的圆角半径与对应参数一致",
+          "level": "L1"
+        },
+        {
+          "id": "F-03-03",
+          "testName": "圆角加边框",
+          "description": "圆角模式同时设置外边框，验证边框沿圆角路径绘制",
+          "checkpoint": "边框沿圆角路径完整绘制",
+          "level": "L1"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-04",
+      "moduleName": "边框绘制",
+      "priority": "P0",
+      "testPoints": [
+        {
+          "id": "F-04-01",
+          "testName": "外边框绘制",
+          "description": "设置borderWidth和borderColor，验证外边框绘制",
+          "checkpoint": "外边框宽度颜色与设定一致",
+          "level": "L1"
+        },
+        {
+          "id": "F-04-02",
+          "testName": "内边框绘制",
+          "description": "圆形模式设置innerBorderWidth和innerBorderColor，验证内边框绘制",
+          "checkpoint": "内边框在圆形区域边缘绘制且颜色正确",
+          "level": "L1"
+        },
+        {
+          "id": "F-04-03",
+          "testName": "内边框矩形忽略",
+          "description": "矩形模式设置内边框参数，验证内边框被忽略",
+          "checkpoint": "矩形模式不绘制内边框",
+          "level": "L2"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-05",
+      "moduleName": "边框覆盖控制",
+      "priority": "P1",
+      "testPoints": [
+        {
+          "id": "F-05-01",
+          "testName": "边框覆盖图片",
+          "description": "设置isCoverSrc为true，验证边框覆盖图片内容区域",
+          "checkpoint": "边框绘制在图片之上且图片被缩放适配",
+          "level": "L1"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-06",
+      "moduleName": "遮罩绘制",
+      "priority": "P1",
+      "testPoints": [
+        {
+          "id": "F-06-01",
+          "testName": "遮罩叠加绘制",
+          "description": "设置非透明maskColor，验证遮罩叠加在裁剪区域",
+          "checkpoint": "遮罩颜色正确叠加且透明度符合预期",
+          "level": "L1"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-07",
+      "moduleName": "重绘逻辑",
+      "priority": "P0",
+      "testPoints": [
+        {
+          "id": "F-07-01",
+          "testName": "图片变更触发重绘",
+          "description": "修改image属性后验证painter触发重绘",
+          "checkpoint": "shouldRepaint返回true且画面更新",
+          "level": "L0"
+        },
+        {
+          "id": "F-07-02",
+          "testName": "无变更不触发重绘",
+          "description": "属性不变时验证painter不触发重绘",
+          "checkpoint": "shouldRepaint返回false",
+          "level": "L0"
+        },
+        {
+          "id": "F-07-03",
+          "testName": "圆形属性变更重绘",
+          "description": "切换isCircle属性验证重绘触发",
+          "checkpoint": "shouldRepaint返回true且圆形矩形切换生效",
+          "level": "L0"
+        },
+        {
+          "id": "F-07-04",
+          "testName": "边框宽度变更重绘",
+          "description": "修改borderWidth验证重绘触发",
+          "checkpoint": "shouldRepaint返回true且边框宽度更新",
+          "level": "L0"
+        },
+        {
+          "id": "F-07-05",
+          "testName": "圆角半径变更重绘",
+          "description": "修改cornerRadius验证重绘触发",
+          "checkpoint": "shouldRepaint返回true且圆角更新",
+          "level": "L0"
+        },
+        {
+          "id": "F-07-06",
+          "testName": "遮罩颜色变更重绘",
+          "description": "修改maskColor验证重绘触发",
+          "checkpoint": "shouldRepaint返回true且遮罩更新",
+          "level": "L0"
+        }
+      ]
+    },
+    {
+      "moduleCode": "F-08",
+      "moduleName": "边界条件",
+      "priority": "P1",
+      "testPoints": [
+        {
+          "id": "F-08-01",
+          "testName": "空图片渲染",
+          "description": "image为null时验证组件正常渲染不崩溃",
+          "checkpoint": "组件渲染空区域且无异常",
+          "level": "L2"
+        },
+        {
+          "id": "F-08-02",
+          "testName": "零边框宽度",
+          "description": "borderWidth为0时验证不绘制边框",
+          "checkpoint": "无边框绘制且图片完整显示",
+          "level": "L2"
+        },
+        {
+          "id": "F-08-03",
+          "testName": "零尺寸渲染",
+          "description": "width和height为0时验证组件正常渲染",
+          "checkpoint": "组件零尺寸渲染不崩溃",
+          "level": "L2"
+        },
+        {
+          "id": "F-08-04",
+          "testName": "透明遮罩无效果",
+          "description": "maskColor为透明时验证无遮罩效果",
+          "checkpoint": "图片正常显示且无遮罩叠加",
+          "level": "L2"
+        },
+        {
+          "id": "F-08-05",
+          "testName": "默认值验证",
+          "description": "验证全部构造参数默认值与Android默认值一致",
+          "checkpoint": "各参数默认值与Android完全一致",
+          "level": "L0"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "totalModules": 8,
+    "totalTestPoints": 24,
+    "levelDistribution": {
+      "L0": 11,
+      "L1": 8,
+      "L2": 5,
+      "L3": 0
+    }
+  }
 }

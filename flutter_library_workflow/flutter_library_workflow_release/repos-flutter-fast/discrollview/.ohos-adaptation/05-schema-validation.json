@@ -2,13 +2,19 @@
   "validator": "ajv",
   "ajv_version": "8.17.1",
   "draft": "2020-12",
-  "schema_dir": "D:\\deveco\\ai_tool\\docs\\flutter_library_workflow\\skills\\flutter\\tool-schema-validation\\json-schema",
-  "valid": false,
+  "schema_dir": "D:\\deveco\\ai_tool\\flutter_library_workflow\\flutter_library_workflow_release\\agent-flutter\\.claude\\skills\\tool-schema-validation\\json-schema",
+  "valid": true,
   "source_hashes": {
-    "01-analysis.json": "274889af18b34a6d3b4ce993061652e01301428561f74c22f512c0195299151f",
+    "01-analysis.json": "0913f6308fdb454e50c68457833338895512bb762d3a61065da96bafb7abba2a",
     "01-analysis.schema.json": "d4d4091cbddb0e5ff49b08ab1f5a175749d1896346e4073d87ed82cc93c1b775",
     "02-planning.json": "4ba0e4f5352153b1bac25496c9905e2feb6a683714ada418797a248594d18d31",
-    "02-planning.schema.json": "b4fe9b5d768cb740795b42909a6ffc7f07fb9e07ae75959d02946173c4b6af0d"
+    "02-planning.schema.json": "b4fe9b5d768cb740795b42909a6ffc7f07fb9e07ae75959d02946173c4b6af0d",
+    "03-coding-library.json": "7546fc2faa655d35b49e52b4dc3df877f1688d0331d7ad6fe2d3d9f07286e381",
+    "03-coding-library.schema.json": "5b32089f315feac748a378cd6e05e496b703b4126dad78bce26cc3384dd19ee0",
+    "04-testing.json": "f2241c7962e122d9c5ed971888ee89b59a7463ac723bb483b177a03b70084c65",
+    "04-testing.schema.json": "f7d16195e82b477ac93734479b2727f6169916a8eeb40509263009df4275ef56",
+    "05-summary.json": "b5b7f6b2b083c3a59ad755b08b3fb6afcd2618b9b26a62620d4d12d3cdc1a127",
+    "05-summary.schema.json": "3d258d4205b5106074bc3ac29e24158066a8ae494c5f1e0797eaf3ec9b7ec6e0"
   },
   "stages": [
     {
@@ -29,40 +35,22 @@
       "stage": "coding-library",
       "file": "03-coding-library.json",
       "schema": "03-coding-library.schema.json",
-      "valid": false,
-      "errors": [
-        {
-          "path": "/",
-          "message": "文件不存在: 03-coding-library.json",
-          "keyword": "setup"
-        }
-      ]
+      "valid": true,
+      "errors": []
     },
     {
       "stage": "testing",
       "file": "04-testing.json",
       "schema": "04-testing.schema.json",
-      "valid": false,
-      "errors": [
-        {
-          "path": "/",
-          "message": "文件不存在: 04-testing.json",
-          "keyword": "setup"
-        }
-      ]
+      "valid": true,
+      "errors": []
     },
     {
       "stage": "summary",
       "file": "05-summary.json",
       "schema": "05-summary.schema.json",
-      "valid": false,
-      "errors": [
-        {
-          "path": "/",
-          "message": "文件不存在: 05-summary.json",
-          "keyword": "setup"
-        }
-      ]
+      "valid": true,
+      "errors": []
     }
   ]
 }

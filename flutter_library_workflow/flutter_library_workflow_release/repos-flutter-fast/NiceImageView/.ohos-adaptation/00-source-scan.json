@@ -1,68 +1,147 @@
 {
   "docs_scan": {
-    "agent_id": "docs-agent",
-    "assigned_roots": [".", "README.md"],
+    "agent_id": "a54bb40beaf61a505",
+    "assigned_roots": [
+      "D:/deveco/ai_tool/docs/changelog/nice_image_view",
+      ".",
+      "README.md",
+      ".ohos-adaptation"
+    ],
     "status": "complete",
-    "file_count": 3,
+    "file_count": 13,
     "files": [
       "README.md",
-      "niceimageview/src/main/res/values/attrs.xml",
-      "LICENSE"
+      ".ohos-adaptation/00-migration-context.json",
+      ".ohos-adaptation/00-requirement-report.md",
+      ".ohos-adaptation/01-analysis-prd.md",
+      ".ohos-adaptation/nice_image_view_prd.md",
+      ".ohos-adaptation/01-prd-mermaid-validation.json",
+      ".ohos-adaptation/05-summary.json",
+      ".ohos-adaptation/05-summary-report.md",
+      ".ohos-adaptation/05-pipeline-consistency.json",
+      ".ohos-adaptation/05-schema-validation.json",
+      ".ohos-adaptation/04-verification-evidence.json",
+      ".ohos-adaptation/patch-implementation-report.md",
+      ".ohos-adaptation/03-code-review.json"
     ],
     "findings": [
-      "Android AppCompatImageView extension library",
-      "Supports circle, rounded corners (uniform and individual), border, inner border, mask",
-      "12 XML custom attributes declared in attrs.xml",
-      "15 public Java methods (3 constructors + 12 setters)",
-      "Uses PorterDuff Xfermode (DST_IN/DST_OUT) for image clipping",
-      "Apache 2.0 license"
+      "External docs scanned at D:/deveco/ai_tool/docs/changelog/nice_image_view/ (changelog.md 155 lines, devlog.md 379 lines): claimed route pure_dart new_port; original SheHuan/NiceImageView v1.0.5 Android View (335-line Java) rewritten as Flutter CustomPainter (clipPath instead of PorterDuff).",
+      "Source/donor revision b16945686600f7471b14db10368ef17ade5bf4ed; Flutter OHOS SDK 3.32.4-ohos-0.0.1 (JSON field was null, now verified via flutter --version); target OHOS API 12, devices phone/tablet/2in1; branch main, commit c423de4 (61 files, +7125).",
+      "Key decisions: route D (CustomPainter rewrite), clipPath vs xfermode, BATCH RECURSION fixed by direct node hvigorw.js assembleHap --no-daemon (demo-build.log confirms BUILD SUCCESSFUL 22s 958ms + SignHap), VM-snapshot blocked flutter test (NOT_RUN), PRD rewritten to 12-chapter pure_dart standard, 4 Mermaid diagrams validated via mmdc 11.16.0 (SVGs on disk ~219KB), demo localized to Chinese with Clipboard copy-log and 69-byte PNG asset.",
+      "Docs claim completed milestones: 00-05 stages, 44 files, 16/16 API, 12 high-confidence API mappings, 24 test points, 13 cases, 100/100 reviews, 21 tests, signed 142MB HAP SHA-256 00139d3f...2865a2 (29 entries), 8/8 pipeline consistency.",
+      "Deferred/pending per docs: P0 real-device install/launch/behavior (NOT_RUN), P1 flutter test (VM snapshot) + AJV schema (05-schema-validation.json PENDING), P2 dfx_dart NOT_RUN, P3 pub.dev publish.",
+      "Reliability: changelog MEDIUM, devlog MEDIUM, README LOW (still Android original), stage reports MEDIUM, PRDs MEDIUM, 01-prd-mermaid-validation.json MEDIUM-HIGH, artifact-manifest.json LOW (HAP path no longer exists), demo-build/analyze/code-review logs HIGH."
     ],
-    "unknowns": [],
-    "conflicts": [],
+    "unknowns": [
+      "Actual production build command recorded in logs used the flutter_ohos_test Hub path; the new standalone demo must regenerate its own ohos/ project and HAP.",
+      "No existing 05-demo-gen.json user_decision field records acceptance; user accepted demo creation via directive on 2026-08-04 (flutter create -> OHOS HAP following XLSX)."
+    ],
+    "conflicts": [
+      "Docs claim 21 tests / ~370 lib lines / 192 painter / 130 example; actual code has 22 tests, 499 lib lines, 272 painter, 299 example lines (docs stale within commit c423de4).",
+      "PRD byte-identity broken: worktree nice_image_view_prd.md (sha 5aaafd65...) has uncommitted cosmetic reformat vs 01-analysis-prd.md (sha da9dff9a...); mermaid validation byte_identical:true reflects pre-diff state.",
+      "HAP claimed verified but file missing: recorded path lives in deleted flutter_ohos_test Hub; install/launch/behavior all NOT_RUN; no .hap exists on disk.",
+      "05-summary.json / 05-summary-report.md / 04-testing.json say build/hap NOT_RUN, contradicting artifact-manifest.json + demo-build.log (BUILD SUCCESSFUL + SignHap PASS).",
+      "05-case-review.json says '48 test case entries' but 04-test-cases.json has 13 F- cases and 24 test points.",
+      "03-code-review.json claims 0 issues but 04-verification-evidence.json and 04-testing.json mark code_review NOT_RUN.",
+      "Many sha256 fields across 05-demo-gen.json, 03-code-review.json, 05-schema-validation.json are literal 'placeholder'.",
+      "05-schema-validation.json overall_status PENDING (AJV never run) although changelog marks it complete.",
+      "NiceImageView/README.md still Android JitPack README, not Flutter; no CHANGELOG.md on disk though 05-summary lists one."
+    ],
     "read_only": true
   },
   "project_scans": [
     {
-      "agent_id": "dart-agent",
-      "assigned_roots": ["lib", "test"],
+      "agent_id": "aaba6f1358e87a0fc",
+      "assigned_roots": ["lib", "test", "example", "pubspec.yaml", "pubspec.lock", "analysis_options.yaml"],
       "status": "complete",
-      "file_count": 5,
+      "file_count": 15,
       "files": [
+        "pubspec.yaml",
+        "pubspec.lock",
+        "analysis_options.yaml",
         "lib/nice_image_view.dart",
         "lib/src/nice_image_view.dart",
         "lib/src/nice_image_view_painter.dart",
         "test/nice_image_view_test.dart",
-        "pubspec.yaml"
+        "example/pubspec.yaml",
+        "example/lib/main.dart",
+        "example/assets/cat.jpg",
+        ".ohos-adaptation/patch-implementation-report.md",
+        ".ohos-adaptation/03-coding-library-report.md",
+        ".ohos-adaptation/04-testing-report.md",
+        "niceimageview/src/main/java/com/shehuan/niv/NiceImageView.java",
+        "niceimageview/src/main/res/values/attrs.xml"
       ],
       "findings": [
-        "Pure Dart Flutter package with no native dependencies",
-        "NiceImageView StatefulWidget with 16 constructor parameters matching Android API",
-        "NiceImageViewPainter CustomPainter implementing draw logic",
-        "Uses canvas.clipPath() instead of PorterDuff xfermode (cleaner Flutter approach)",
-        "21 test cases covering construction, rendering modes, repaint logic, edge cases",
-        "flutter analyze passes with 0 issues"
+        "Package identity verified: name nice_image_view, version 1.0.5, pure-Dart with only flutter SDK dependency; dev deps flutter_test + flutter_lints ^3.0.0; resolved lockfile Dart >=3.7.0-0 / Flutter >=3.18.0-18.0.pre.54.",
+        "Public API: NiceImageView StatefulWidget constructor with 16 non-key params; 12 Android attrs mapped 1:1 with Java-identical defaults, plus image/width/height/fit Flutter-level params; painter defaults fit null->BoxFit.cover.",
+        "Implementation complete and committed: working tree == HEAD (c423de4). No TODO/FIXME/placeholder/stub anywhere in lib/test/example.",
+        "Painter faithful: canvas.clipPath() (line 61), circle addOval, roundRect addRRect with borderWidth/2 reduction mirroring Java calculateRadii(), mask fill, innerBorder only in circle mode, isCoverSrc translate/scale sandwich, shouldRepaint compares all 14 fields.",
+        "Actual sizes: lib 499 lines (9 + 218 + 272), test 350 lines with 22 test cases (construction 3, rendering 6, repaint 6, edge 5, API 2), example/lib/main.dart 299 lines with Chinese labels + copy-log (Key btn_copy_log / btn_copy_log_2) + 69-byte PNG misnamed cat.jpg.",
+        "flutter analyze recorded 0 issues (logs/analyze.log); flutter test NOT_RUN due to OHOS-Flutter VM snapshot environment issue, no code-level blocker in the 22 tests.",
+        "Fidelity nuance: in isCoverSrc mode Android insets clip rect by borderWidth/2 (NiceImageView.java:222-226) but Flutter clip always uses full rect (painter lines 101-138); visually near-equivalent, only cover-src path differs."
       ],
       "unknowns": [],
-      "conflicts": [],
+      "conflicts": [
+        "Docs understate code: lib total 499 vs claimed 370; painter 272 vs 192; test 350 with 22 vs claimed 21/280; example 299 vs 130. 04-testing.json rendering_modes=5 vs actual 6.",
+        "Wording '16/16 Android API parameters' is loose: Android exposes 12 XML attrs; the other 4 Dart params are widget-level equivalents.",
+        "example/assets/cat.jpg is a PNG (magic 89 50 4E 47) despite .jpg extension."
+      ],
       "read_only": true
     },
     {
-      "agent_id": "platform-agent",
-      "assigned_roots": ["example", "android", "ohos"],
+      "agent_id": "a7979c0a4c063fac7",
+      "assigned_roots": [".ohos-adaptation", "app", "niceimageview", "build", ".dart_tool", "gradle"],
       "status": "complete",
-      "file_count": 2,
+      "file_count": 26,
       "files": [
-        "example/lib/main.dart",
-        "niceimageview/src/main/java/com/shehuan/niv/NiceImageView.java"
+        ".ohos-adaptation/00-migration-context.json",
+        ".ohos-adaptation/01-analysis.json",
+        ".ohos-adaptation/02-planning.json",
+        ".ohos-adaptation/03-coding-library.json",
+        ".ohos-adaptation/03-code-review.json",
+        ".ohos-adaptation/04-testing.json",
+        ".ohos-adaptation/04-verification-evidence.json",
+        ".ohos-adaptation/04-droidrun-test-cases.json",
+        ".ohos-adaptation/04-droidrun--agent-prompt.md",
+        ".ohos-adaptation/04-droidrun--app-card.md",
+        ".ohos-adaptation/05-demo-gen.json",
+        ".ohos-adaptation/05-summary.json",
+        ".ohos-adaptation/05-pipeline-consistency.json",
+        ".ohos-adaptation/artifact-manifest.json",
+        ".ohos-adaptation/patch-manifest.json",
+        ".ohos-adaptation/INTEGRATION_GUIDE.md",
+        ".ohos-adaptation/logs/demo-build.log",
+        ".ohos-adaptation/logs/analyze.log",
+        ".ohos-adaptation/logs/code-review.log",
+        "app/build.gradle",
+        "niceimageview/build.gradle",
+        "niceimageview/src/main/java/com/shehuan/niv/NiceImageView.java",
+        "niceimageview/src/main/res/values/attrs.xml",
+        "build.gradle",
+        "settings.gradle",
+        "gradle.properties"
       ],
       "findings": [
-        "Original Android source: NiceImageView.java (335 lines), Utils.java (11 lines)",
-        "Flutter example/demo created with interactive controls",
-        "No OHOS native directory needed (pure_dart path)",
-        "No Android Flutter platform directory needed (pure_dart path)"
+        ".ohos-adaptation has 49 files. Canonical present: 00-01-02-03-04-05 stage JSONs+reports, dual PRDs, mermaid validation + 4 SVGs, DroidRun 4 files, code-review 4 files, patch-manifest, INTEGRATION_GUIDE, artifact-manifest.",
+        "CANONICAL GAPS: 04-ohos-demo-case-map.json, 05-test-cases.xlsx, 05-xlsx-demo-binding.json, and .ohos-adaptation/tool/ are ABSENT. 05-schema-validation.json is PENDING (AJV not run).",
+        "No ohos/ at plugin root (consistent pure_dart); Android Gradle leftovers app/, niceimageview/, build.gradle remain from the original repo.",
+        "05-demo-gen.json status=PASS but demo_source_files reference deleted flutter_ohos_test/lib/nice_image_view_test_page.dart; all sha256 values are literal 'placeholder'; no standalone <demo-root> exists (only example/ interactive demo).",
+        "artifact-manifest.json records 1 signed HAP: path in deleted flutter_ohos_test, size 141737672, sha256 00139d3fd81fbcebc946cc4179e72606e2affb10924e378777f092771f2865a2, entry_count 29, signing PASS, build_command node hvigorw.js assembleHap --no-daemon; install/launch/behavior/log_copy all NOT_RUN, device_id null. HAP file does NOT exist on disk.",
+        "logs/demo-build.log (818 lines) corroborates historical Hub build: SignHap -> BUILD SUCCESSFUL in 22s 958ms, built inside flutter_ohos_test referencing media_scanner_ohos HAR.",
+        "00-migration-context.json: artifact_profile flutter, classification pure_dart, source_strategy new_port, version 1.0.5, target api 12, device_types phone/tablet/2in1.",
+        "02-planning.json: plugin_type_skill type-pure-dart, 12 ohos_api_mapping all confidence high, no_native_code True, ffi not_applicable. 03-coding-library.json: implementation_status complete, files_created 7, files_modified 0, ported_apis 16/16=100%.",
+        "04-verification-evidence.json: 11 checks - PASS pub_get/dart_format/flutter_analyze/demo_build/hap_build; NOT_RUN flutter_test/dfx_dart/code_review/device_runtime; NA dfx_ets/dfx_channel_consistency. 05-pipeline-consistency.json all_pass true 8/8.",
+        "No BLOCKED marker anywhere; case-count inconsistency 13 vs 48 (05-case-review.json) vs 24 (reports); 05-summary.json build_status NOT_RUN contradicts demo-build.log."
       ],
       "unknowns": [],
-      "conflicts": [],
+      "conflicts": [
+        "Recorded signed HAP no longer exists (flutter_ohos_test Hub deleted); git status shows entire flutter_ohos_test tree as deleted.",
+        "05-summary.json/04-testing.json mark hap/build NOT_RUN though logs prove a successful signed build.",
+        "05-case-review.json '48 test case entries' vs 13 actual cases.",
+        "changelog claims 44 files; disk has 49.",
+        "PRD line claims (416/852) both wrong: current files are 556 (01-analysis-prd.md) and 680 (nice_image_view_prd.md worktree)."
+      ],
       "read_only": true
     }
   ],

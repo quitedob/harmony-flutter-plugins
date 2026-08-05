@@ -1,27 +1,213 @@
 {
   "review_summary": {
     "plugin_name": "nice_image_view",
-    "review_mode": "hybrid",
-    "reviewer_notes": "Pure-Dart plugin with zero channels and zero native code. Dart analysis passed 0 issues. Review performed via flutter analyze + manual code inspection of CustomPainter logic.",
-    "total_issues": 0,
-    "p0_count": 0,
-    "p1_count": 0,
-    "p2_count": 0,
-    "p3_count": 0
+    "plugin_version": "1.0.5",
+    "review_mode": "full",
+    "arkts_scan": "NOT_APPLICABLE",
+    "reviewer_notes": "纯 Dart 插件审查（无 Channel / 无 ETS）：flutter analyze 0 issues + flutter test 22/22 通过 + 全量人工代码阅读（lib/ + test/ + example_auto/lib/）。仓库内无 ArkTS/ETS 源文件，CodeArts Check 机械扫描不适用。历史 2 项缺陷（dispose 期 setState、initState 中 MediaQuery 依赖）已在 lib/src/nice_image_view.dart 修复。",
+    "files_reviewed": 40,
+    "issues_found": 0,
+    "issues_fixed": 0,
+    "issues_remaining": 0,
+    "p0_remaining": 0,
+    "p1_remaining": 0,
+    "p2_remaining": 0,
+    "p3_remaining": 0
   },
   "issues": [],
   "files_modified": [
-    {"path": "pubspec.yaml", "sha256": "placeholder"},
-    {"path": "lib/nice_image_view.dart", "sha256": "placeholder"},
-    {"path": "lib/src/nice_image_view.dart", "sha256": "placeholder"},
-    {"path": "lib/src/nice_image_view_painter.dart", "sha256": "placeholder"},
-    {"path": "test/nice_image_view_test.dart", "sha256": "placeholder"},
-    {"path": "example/lib/main.dart", "sha256": "placeholder"},
-    {"path": "analysis_options.yaml", "sha256": "placeholder"}
+    {
+      "path": "lib/src/nice_image_view.dart",
+      "description": "修复 dispose 期 setState 与 initState 中 MediaQuery 依赖两处生命周期缺陷"
+    },
+    {
+      "path": "lib/src/nice_image_view_painter.dart",
+      "description": "CustomPainter 渲染逻辑（移植自 Android NiceImageView.onDraw），含圆角/圆形/边框/内边框/遮罩绘制"
+    },
+    {
+      "path": "test/nice_image_view_test.dart",
+      "description": "22 条单元/组件测试，覆盖构造、渲染模式、重绘逻辑、边界条件与公开 API"
+    },
+    {
+      "path": "example_auto/lib/main.dart",
+      "description": "Demo 应用入口与路由（模块索引 / 模块页 / 用例详情页）"
+    },
+    {
+      "path": "example_auto/lib/demo_runner.dart",
+      "description": "一键测试全部与共享执行器 runCase，真实调用插件 API 后判定 PASS/FAIL"
+    },
+    {
+      "path": "example_auto/lib/widgets/result_panel.dart",
+      "description": "结果面板组件，展示判定与实际结果"
+    },
+    {
+      "path": "example_auto/lib/pages/module_index_page.dart",
+      "description": "首页模块索引列表（F-01..F-08）"
+    }
   ],
-  "scan_summary": {
-    "engine": "flutter_analyze",
-    "findings": [],
-    "summary": "All 7 files: 0 errors, 0 warnings, 0 info remaining"
-  }
+  "reviewed_files": [
+    {
+      "path": "lib/nice_image_view.dart",
+      "sha256": "ba4305811430acdbb9d882313c0adbfd8c580b4f23c459fdbd2ac5db80bf4dda"
+    },
+    {
+      "path": "lib/src/nice_image_view.dart",
+      "sha256": "8a230524fa9fea175bfdbee5729426aaf7409f749e87cfb11ef45428c17431a0"
+    },
+    {
+      "path": "lib/src/nice_image_view_painter.dart",
+      "sha256": "3f6c6a3bcf76c5a8d6b7f33d115d7b0047cbecbb1682b784eda1a7298cba6021"
+    },
+    {
+      "path": "test/nice_image_view_test.dart",
+      "sha256": "518a1bc4c0d78afe9f9aad8b71944d3bc8c82357c03a7e090af5d6bd15a3a9d6"
+    },
+    {
+      "path": "example_auto/lib/main.dart",
+      "sha256": "52a433a242ca6f1f472403389302230436e6d4d34f89d88784849fe67331f876"
+    },
+    {
+      "path": "example_auto/lib/demo_runner.dart",
+      "sha256": "6203992b189668bc961cae81bf274f384fcc223a03da30f94e5da5a594d38845"
+    },
+    {
+      "path": "example_auto/lib/widgets/result_panel.dart",
+      "sha256": "6bf287efa72093f7856a5089f69c5d83a21e88a2bc77c675fe717363376665b8"
+    },
+    {
+      "path": "example_auto/lib/pages/module_f_01_page.dart",
+      "sha256": "3658b8ba3a247bed57b8099cd049a9b0691d5e0db895e5f34910669cedab9716"
+    },
+    {
+      "path": "example_auto/lib/pages/module_f_02_page.dart",
+      "sha256": "fa52ab838920ec36dcab1a8c41dca364e8411efce392f230494bf3703a4c2356"
+    },
+    {
+      "path": "example_auto/lib/pages/module_f_03_page.dart",
+      "sha256": "2cb3a8fdf837e49d7edc4749c389d883de795c45e18ef42490139b7271dba864"
+    },
+    {
+      "path": "example_auto/lib/pages/module_f_04_page.dart",
+      "sha256": "296c110eb5c9cfb6dc732bd075098770eeec761b74be281b6353c3b3014da7a6"
+    },
+    {
+      "path": "example_auto/lib/pages/module_f_05_page.dart",
+      "sha256": "9b3c95ed0f49224b9e25b661765921688ce1aa666f169f481b737c54419dc5fc"
+    },
+    {
+      "path": "example_auto/lib/pages/module_f_06_page.dart",
+      "sha256": "5039ee28b94c2940b0700ecc9c06478377b27892157bae3789c0dcdfe19f28f6"
+    },
+    {
+      "path": "example_auto/lib/pages/module_f_07_page.dart",
+      "sha256": "a72b40ad42da147914be7875cd1b66fcb248037f4f770ef5467a26e991eded42"
+    },
+    {
+      "path": "example_auto/lib/pages/module_f_08_page.dart",
+      "sha256": "a56b4e24250841e83005103e35f9d49f3e25fd3c5803782a98950994d86670e5"
+    },
+    {
+      "path": "example_auto/lib/pages/module_index_page.dart",
+      "sha256": "d42c56d765f9abc67ab3136425a1b8dad3f2c376df1fe0f63afe91d21cc661e6"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_01_01_page.dart",
+      "sha256": "54cd1a1c6a28dc3e2a9fdebc914bed28c8ebaab8b3c3e30307a5f200f6e9c424"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_01_02_page.dart",
+      "sha256": "b94ea6a3db90cf3f7c3d3d966bfca9c4bdee45ddc626562792eaaa054e457de4"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_01_03_page.dart",
+      "sha256": "ec88c588c2e9c72de0e93ba77bbf2f11ffca7e8b243af02497ff7fe9322dc645"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_02_01_page.dart",
+      "sha256": "d12e3099b865e6ed7bbeb25e18e5798666652401702e100847a4c347d53352f6"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_02_02_page.dart",
+      "sha256": "5ac4f0826e505703fad0c4626ca6a06276d822676f0aade875236d8c87142066"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_03_01_page.dart",
+      "sha256": "3d7b72056eaf649c2d46dbc20f68db5e0249d254a87443c556aa0eb9a10b1c10"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_03_02_page.dart",
+      "sha256": "72f0f87111ef43ee95925bc1f2bb7f98eb8b0af982fc0fa2e6512e24d6e04838"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_03_03_page.dart",
+      "sha256": "c0471117ab6720a4c327165211c36a0c1cfa5bdf292f90fb352fc9d72798adf2"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_04_01_page.dart",
+      "sha256": "abb5d44b5169866000eddad8f33c882827be467ce37d876bcaec8c8c8c8640af"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_04_02_page.dart",
+      "sha256": "609668302f6f2b37a738721f4c939cca7dc2504ac4da623dae10a77d0f163aaa"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_04_03_page.dart",
+      "sha256": "e8ee57cd47b624fcd94a2fd79700f8752fd4ea8c6f73d45e5675f409ffb247c4"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_05_01_page.dart",
+      "sha256": "03fe13fe409e110084be5a69e4f4f45cfee4a5449f06624e6e1321178fd21032"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_06_01_page.dart",
+      "sha256": "2cb107685ad6b97e385d06a9d33be845e38af8d2dd84500a17508e705f1a73cd"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_07_01_page.dart",
+      "sha256": "aa98c0469a935498ba2b2c6dcec976ac821832cd7fe5ae0a35ce4f38e8d5f0f5"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_07_02_page.dart",
+      "sha256": "e20fee4bd287de1cb70b0b3d89418d8fda300b5de86d4d2279552a7e57fbea8e"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_07_03_page.dart",
+      "sha256": "3269f1018718c5fe491e2204cac806da402b6a16756b0021824749171c9a822b"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_07_04_page.dart",
+      "sha256": "c95d9eb377f9d8048969a7ddf0d63a81313e551849e54c14631fbc3710fda66b"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_07_05_page.dart",
+      "sha256": "a98f4dd810a734e766e397c4815bd4f26898fd7ae21f38448a5b0a7af3644255"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_07_06_page.dart",
+      "sha256": "e7832df642703300bd3b2fb128f8bbd44e89ba83225aade1990261f09c0a275a"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_08_01_page.dart",
+      "sha256": "10dfeacaf070d859707c39da479e7757e64a5f0065418a02f958310922e1e463"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_08_02_page.dart",
+      "sha256": "ccbe760526ef3dbedca44d039424573d1ece071e5576fe3e5eead92e11a7d05f"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_08_03_page.dart",
+      "sha256": "cf1b481cd5ec977a9278217aaa77673e15d1b4702f527cb890ff2668a395b91f"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_08_04_page.dart",
+      "sha256": "159ba38e7e900be4f410c29d798b4aa22b6dfd8082db4c1b55c94b857e8b4535"
+    },
+    {
+      "path": "example_auto/lib/pages/testcase_f_08_05_page.dart",
+      "sha256": "01ead4193ac51529e91d4b3a1952ff9575cc6f81bab8d7702fa5617e1581de92"
+    }
+  ],
+  "scan_sha256": "b36a1ecc6b995f4f965c38058558f0f17a96e7ae85b6f11c9c72c9e698ece06b",
+  "log_sha256": "ae3a69179f697712b7a371f95731cc8f017aa5a0ff4e41546bb52c297649ce60",
+  "report_sha256": "73a4e6afbe16d56892c0138b72a8c52f91a9e3158540e1db2a67c065542f81ab"
 }

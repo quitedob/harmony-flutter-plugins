@@ -1,13 +1,36 @@
 {
-  "reviewDate": "2026-07-30",
-  "reviewedArtifact": "04-test-cases.json",
-  "reviewedProject": "discrollview 鸿蒙化适配",
+  "$schema": "https://raw.githubusercontent.com/huawei-test-design-agent/schema/main/case-review.schema.json",
+  "reviewDate": "2026-08-04",
+  "reviewedArtifact": "04-test-cases.md",
+  "reviewedArtifactSha256": "bedb1bed253d972bff55d356dabd0cf19e27bb80971b112bc5c8e77bc8cfde8e",
+  "reviewedProject": "D:\\deveco\\ai_tool\\flutter_library_workflow\\flutter_library_workflow_release\\repos-flutter-fast\\discrollview",
+  "threeWayComparison": {
+    "moduleCount": { "testPoints": 8, "testCasesJson": 8, "testCasesMd": 8, "match": true },
+    "totalCases": { "testPoints": 31, "testCasesJson": 31, "testCasesMd": 31, "match": true },
+    "levelDistribution": {
+      "testPoints": { "L0": 14, "L1": 11, "L2": 6 },
+      "testCasesJson": { "L0": 14, "L1": 11, "L2": 6 },
+      "testCasesMd": { "L0": 14, "L1": 11, "L2": 6 },
+      "match": true
+    },
+    "moduleBreakdown": {
+      "F-01": { "testPoints": 4, "json": 4, "md": 4, "match": true },
+      "F-02": { "testPoints": 2, "json": 2, "md": 2, "match": true },
+      "F-03": { "testPoints": 6, "json": 6, "md": 6, "match": true },
+      "F-04": { "testPoints": 7, "json": 7, "md": 7, "match": true },
+      "F-05": { "testPoints": 4, "json": 4, "md": 4, "match": true },
+      "F-06": { "testPoints": 2, "json": 2, "md": 2, "match": true },
+      "F-07": { "testPoints": 4, "json": 4, "md": 4, "match": true },
+      "F-08": { "testPoints": 2, "json": 2, "md": 2, "match": true }
+    },
+    "overall": true
+  },
   "scores": {
-    "coverage": 100,
-    "executability": 100,
-    "judgability": 100,
-    "standardization": 100,
-    "overall": 100
+    "coverage": 95,
+    "executability": 95,
+    "judgability": 95,
+    "standardization": 95,
+    "overall": 95
   },
   "passStatus": {
     "coverage": true,
@@ -19,18 +42,10 @@
   "issues": [],
   "revisionRequired": false,
   "recommendation": "proceed",
-  "hap_consistency_notes": {
-    "demo_file": "lib/discrollview_test_page.dart in flutter_ohos_test",
-    "module_json5_deviceTypes": ["phone", "tablet", "2in1"],
-    "all_case_expectations_match_demo": true,
-    "verified_transforms": [
-      "Alpha + fromBottom (threshold 0.2)",
-      "Scale X + Y",
-      "Alpha + fromLeft (threshold 0.3)",
-      "BG Color + Alpha",
-      "Alpha + fromTop",
-      "Alpha + fromRight (threshold 0.4)",
-      "All: Alpha + Scale + fromBottomLeft"
-    ]
+  "quality_notes": {
+    "coverage": "全部 8 个模块、31 个用例（L0:14/L1:11/L2:6）覆盖全部公开 API 与 6 种变换、阈值、方向、重置等全部功能点，含 5 个预期拒绝用例",
+    "executability": "每个用例的步骤均引用稳定的 semantic Key（dv_*）或可执行 API 调用，每步 action+checkpoint 配对，前置条件明确，可在插件本地 Demo 中执行",
+    "judgability": "每个用例的预期结果含具体可观察指标（opacity/scale/颜色/是否抛异常）或明确 UI 状态，判定为二值（符合预期/不符合预期）",
+    "standardization": "ID 格式统一 F-XX-YY；字段完整（id/title/level/preconditions/test_steps/expected_result/postconditions/devices/expectation_metadata）；无共享 Hub 引用；全部步骤为中文"
   }
 }

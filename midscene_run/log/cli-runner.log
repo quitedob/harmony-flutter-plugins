@@ -1,0 +1,30 @@
+[2026-08-04T12:31:00.600+08:00] CLI invoked: midscene-harmony --help
+[2026-08-04T12:31:00.634+08:00] showing help (no command or --help flag)
+[2026-08-04T12:31:10.308+08:00] CLI invoked: midscene-harmony connect --deviceId 192.168.3.85:41665
+[2026-08-04T12:31:10.329+08:00] command: connect, args: {"harmony.deviceId":"192.168.3.85:41665"}
+[2026-08-04T12:31:11.596+08:00] command connect completed, isError: false
+[2026-08-04T12:31:20.192+08:00] CLI invoked: midscene-harmony act --prompt 点击模块卡片 F-01 构造函数与初始化，进入模块用例列表页
+[2026-08-04T12:31:20.216+08:00] command: act, args: {"prompt":"点击模块卡片 F-01 构造函数与初始化，进入模块用例列表页"}
+[2026-08-04T12:31:20.698+08:00] command act completed, isError: true
+[2026-08-04T12:31:23.466+08:00] CLI invoked: midscene-harmony take_screenshot
+[2026-08-04T12:31:23.489+08:00] command: take_screenshot, args: {}
+[2026-08-04T12:31:25.047+08:00] command take_screenshot completed, isError: false
+[2026-08-04T12:32:19.337+08:00] CLI invoked: midscene-harmony take_screenshot
+[2026-08-04T12:32:19.361+08:00] command: take_screenshot, args: {}
+[2026-08-04T12:32:20.503+08:00] command take_screenshot completed, isError: false
+[2026-08-04T14:00:13.200+08:00] CLI invoked: midscene-harmony --help
+[2026-08-04T14:00:13.218+08:00] showing help (no command or --help flag)
+[2026-08-04T14:11:59.413+08:00] CLI invoked: midscene-harmony --version
+[2026-08-04T14:12:12.661+08:00] CLI invoked: midscene-harmony --version
+[2026-08-04T14:16:23.388+08:00] CLI invoked: midscene-harmony --help
+[2026-08-04T14:16:23.405+08:00] showing help (no command or --help flag)
+[2026-08-04T14:16:31.442+08:00] CLI invoked: midscene-harmony connect --deviceId 192.168.3.85:41665
+[2026-08-04T14:16:31.460+08:00] command: connect, args: {"harmony.deviceId":"192.168.3.85:41665"}
+[2026-08-04T14:16:32.640+08:00] command connect completed, isError: false
+[2026-08-04T14:16:42.189+08:00] CLI invoked: midscene-harmony assert --help
+[2026-08-04T14:16:42.204+08:00] showing command help for: assert
+[2026-08-04T14:16:42.730+08:00] CLI invoked: midscene-harmony act --help
+[2026-08-04T14:16:42.746+08:00] showing command help for: act
+[2026-08-04T14:16:46.970+08:00] CLI invoked: midscene-harmony assert --prompt 页面显示标题 NiceImageView 功能模块，并且存在 一键测试全部 按钮和 复制日志 按钮
+[2026-08-04T14:16:46.986+08:00] command: assert, args: {"prompt":"页面显示标题 NiceImageView 功能模块，并且存在 一键测试全部 按钮和 复制日志 按钮"}
+[2026-08-04T14:16:47.267+08:00] command assert completed, isError: true

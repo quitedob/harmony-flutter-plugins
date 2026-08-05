@@ -8,9 +8,10 @@
     "revision": "b16945686600f7471b14db10368ef17ade5bf4ed"
   },
   "target": {
-    "flutter_ohos_revision": null,
+    "flutter_ohos_revision": "3.32.4-ohos-0.0.1",
     "api": 12,
-    "device_types": ["phone", "tablet", "2in1"]
+    "device_types": ["phone", "tablet", "2in1"],
+    "source_evidence": "flutter --version (Dart 3.8.1, engine 8cd19e509d); docs/changelog/nice_image_view/changelog.md:132"
   },
   "donor": {
     "path_or_url": "https://github.com/shehuan/NiceImageView",
@@ -21,7 +22,33 @@
   "classification": "pure_dart",
   "implementation_path": "pure_dart",
   "classification_reason": "Original Android Canvas drawing logic (PorterDuff xfermode clipping, Path operations) ported to Flutter CustomPainter using canvas.clipPath(). No MethodChannel, native platform code, or permissions required. All rendering uses standard Flutter framework Canvas API.",
-  "authority_conflicts": [],
-  "created_at": "2026-07-30T00:00:00+08:00",
+  "authority_conflicts": [
+    {
+      "claim": "PRD dual files byte-identical",
+      "evidence": "01-analysis-prd.md sha da9dff9a...; nice_image_view_prd.md worktree sha 5aaafd65... (uncommitted cosmetic reformat +278/-154 broke identity)",
+      "resolution": "Restore byte-identity for final run or keep both regenerated from same source"
+    },
+    {
+      "claim": "Signed 142MB HAP verified",
+      "evidence": "artifact-manifest.json path under deleted flutter_ohos_test; no .hap on disk; install/launch/behavior NOT_RUN",
+      "resolution": "New standalone demo must build a fresh signed HAP and run device gates"
+    },
+    {
+      "claim": "21 tests / 370 lib lines",
+      "evidence": "actual 22 tests, 499 lib lines (working tree == HEAD c423de4)",
+      "resolution": "Regenerate test counts from source"
+    },
+    {
+      "claim": "AJV schema validation complete",
+      "evidence": "05-schema-validation.json overall_status PENDING; sha256 fields are 'placeholder'",
+      "resolution": "Run AJV validate_json_ajv.cjs against pinned schemas"
+    },
+    {
+      "claim": "HAP build PASS in summary",
+      "evidence": "05-summary.json build_status NOT_RUN contradicts logs/demo-build.log BUILD SUCCESSFUL",
+      "resolution": "Refresh 05-summary/04-testing from current evidence"
+    }
+  ],
+  "created_at": "2026-08-04T00:00:00+08:00",
   "notes": "Original NiceImageView is an Android native View library. This migration creates a NEW Flutter pure-Dart package from scratch, porting the Canvas rendering logic directly rather than wrapping the Android code. The Flutter package uses CustomPainter + clipPath which is a cleaner approach than the original PorterDuff xfermode technique."
 }

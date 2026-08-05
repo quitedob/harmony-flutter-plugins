@@ -24,6 +24,20 @@ Discrollview 是 Flavien Laurent 开发的一个 Android 原生滚动视差动�
 | 鸿蒙验证 | 在 OHOS 真实设备上构建签名 HAP 并完成 L0-L3 级别黑盒测试用例 |
 | 交付物 | `.ohos-adaptation/` 完整产物（分析/规划/编码/测试/Demo/HAP） |
 
+### 1.3 插件概述
+
+Discrollview 是一个**纯 Dart Flutter Widget 库**，将 Android 原生 Discrollview 视差滚动交互模式移植到 Flutter 多平台（Android / iOS / Web / OHOS）。核心组件为 `DiscrollveWidget`（根滚动容器，内部使用 `ScrollController` 监听滚动）、`DiscrollveContent`（子内容包装，`DiscrollveContent.child()` 静态工厂创建带变换配置的子项）与 `DiscrollveConfig`（不可变变换配置类）。插件零 MethodChannel、零 FFI、零原生依赖，`flutter.plugin.platforms = {}`，通过 pub 声明式集成，在 OHOS 上无需任何原生 HAR。
+
+### 1.4 功能需求总览
+
+| 需求 | 说明 | 关联模块 |
+|------|------|----------|
+| 滚动驱动变换 | 滚动位置映射为子 Widget 变换比例 ratio（0.0-1.0） | F-01 / F-05 |
+| 6 种变换 | alpha / scaleX / scaleY / translation（4 方向）/ 背景色渐变 / 阈值延迟 | F-03 / F-06 / F-07 |
+| 首屏静态头部 | 第一个子 Widget 占据 viewport 全高，不参与变换 | F-01 |
+| 声明式配置 | 通过 `DiscrollveConfig` 逐子项声明变换参数，const 构造 + assert 校验 | F-03 |
+| 重置恢复 | 子 Widget 滚出可视区或未达触发条件时恢复初始状态 | F-08 |
+
 ---
 
 ## 第二章 原始库分析
@@ -341,6 +355,28 @@ class DiscrollveDirection {
 
 **API 总数**: 3 个 Widget（DiscrollveWidget / DiscrollveContent）+ 2 个配置类 + 1 个枚举类 = 6 个公开类
 
+### 5.4 公开 API 规格
+
+| 公开符号 | 类型 | 文件 | 职责 |
+|----------|------|------|------|
+| `DiscrollveWidget` | StatefulWidget | `lib/discrollve_widget.dart` | 根滚动容器：`children`（必填，≥2）、`controller?`、`scrollDirection`（默认 vertical）、`physics?` |
+| `DiscrollveContent.child` | 静态工厂 | `lib/discrollve_widget.dart` | 创建带变换配置的子项：`child`（必填）、`config`（默认 `DiscrollveConfig.none`） |
+| `DiscrollveConfig` | 不可变配置 | `lib/discrollve_config.dart` | 七种参数：alpha/scaleX/scaleY/translation/fromColor/toColor/threshold |
+| `DiscrollveDirection` | 常量类 | `lib/discrollve_config.dart` | 位掩码：fromTop 0x01 / fromBottom 0x02 / fromLeft 0x04 / fromRight 0x08 |
+| `clampRatio` | 顶层函数 | `lib/discrollve_math.dart` | 比例裁剪到 [min, max] |
+| `withThreshold` | 顶层函数 | `lib/discrollve_math.dart` | 阈值重映射 [threshold,1.0] → [0.0,1.0] |
+| `calculateRatio` | 顶层函数 | `lib/discrollve_math.dart` | 双触发模式 ratio 计算（center-reach / top-reach） |
+
+### 5.5 错误处理规格
+
+| 触发条件 | 行为 | 处理方式 |
+|----------|------|----------|
+| `children.length < 2` | 构造断言失败 | `assert` 抛出断言错误，提示至少需要头部 + 1 个子项 |
+| threshold 超出 [0.0, 1.0] | 构造断言失败 | `assert` 运行期检查（debug 模式生效） |
+| fromTop+fromBottom 或 fromLeft+fromRight 同时设置 | 构造断言失败 | `assert` 禁止对立方向组合 |
+| 子 Widget 高度为 0 / 不可见 | ratio 计算返回 null | 保持重置状态，不执行变换，避免除零 |
+| 外部 controller 已绑定其他滚动视图 | 共享监听 | 库不销毁外部 controller（仅 addListener/removeListener 配对） |
+
 ---
 
 ## 第六章 鸿蒙适配策略
@@ -387,6 +423,16 @@ flowchart LR
     style H fill:#fff3e0,stroke:#ff9800
     style J fill:#e8f5e9,stroke:#4caf50
 ```
+
+### 6.4 适配要点提示和平台差异对照
+
+| 平台 | 滚动容器 | 变换执行 | 差异提示 |
+|------|----------|----------|----------|
+| Android | `ScrollView` + XML 属性 | `DiscrollvableView.onDiscrollve()` 直接改 View 属性 | 原始 Android 在运行时遍历子 View |
+| Flutter 多平台 | `ScrollController` + `NotificationListener` | `Transform` / `Opacity` / `Color.lerp` 声明式重建 | 无差异——库不依赖任何平台特定行为 |
+| OHOS | Flutter OHOS Engine 提供相同 Framework API | 与 Flutter 一致 | **零条件分支**：`defaultTargetPlatform` / `Platform.isOhos` 均无需判断 |
+
+**适配要点**：库为纯 Dart，唯一需要确认的是 OHOS 上 Flutter Framework 基础 API（`ScrollController`、`Transform`、`Opacity`、`Color.lerp`、`Matrix4`）可用性——经 `flutter_zoom_drawer` 案例验证，这些 API 在 Flutter OHOS 3.32.4-ohos-0.0.1 上全部可用。无需在 `pubspec.yaml` 注册任何原生平台。
 
 ---
 
@@ -440,18 +486,28 @@ flowchart LR
 | Flutter Framework | 🟢 无 | 仅依赖 Framework 原生 Widget，零第三方依赖 |
 | Flutter OHOS Engine | 🟢 低 | OHOS 版本已发布稳定版本 |
 
+### 8.3 非功能性需求
+
+| 类别 | 需求 | 验证方式 |
+|------|------|----------|
+| 性能 | 滚动时单帧变换计算开销可控，目标 60fps | 设备滚动实测 + DFX Dart 扫描（无重建热点） |
+| 稳定性 | 滚动监听 addListener/removeListener 配对，无泄漏；外部 controller 不销毁 | 静态 DFX + widget 测试 |
+| 兼容性 | Android / iOS / Web / OHOS 行为一致，零平台条件分支 | `flutter test` + OHOS HAP 设备验证 |
+| 可维护性 | API 声明式、纯函数 ratio 计算可单测 | 单元测试覆盖率 |
+| 可移植性 | 无 `dart:io`、无原生依赖，纯 pub 包 | 依赖清单 + 源码扫描 |
+
 ---
 
 ## 第九章 测试策略
 
 ### 9.1 测试层次
 
-| 层次 | 类型 | 范围 | 数量预估 |
+| 层次 | 类型 | 范围 | 数量（与评审用例集一致） |
 |------|------|------|----------|
-| L0 | 核心功能 | 滚动驱动 / alpha 变换 / scale 变换 / translation 变换 | ~8 个 |
-| L1 | 重要功能 | bgColor 变换 / threshold / 混合变换 / 方向验证 | ~8 个 |
-| L2 | 边界条件 | 空列表 / 单子 / 极值 ratio / 快速滚动 | ~4 个 |
-| **合计** | | | **~20 个** |
+| L0 | 核心功能 | 滚动驱动 / alpha 变换 / scale 变换 / translation 变换 | 14 个 |
+| L1 | 重要功能 | bgColor 变换 / threshold / 混合变换 / 方向验证 | 11 个 |
+| L2 | 边界条件 | 空列表 / 单子 / 极值 ratio / 快速滚动 | 6 个 |
+| **合计** | | | **31 个** |
 
 ### 9.2 测试类型分布
 
@@ -571,7 +627,7 @@ example_auto/
 
 ---
 
-## 第十二章 完整性审计
+## 第十二章 完整性自检清单
 
 ### 12.1 需求覆盖
 
@@ -605,7 +661,7 @@ example_auto/
 
 ### 12.4 审计结论
 
-- ✅ 12 章节结构完整
+- ✅ 12 章节结构完整（含插件概述 / 功能需求总览 / 公开 API 规格 / 错误处理规格 / 非功能性需求 / 适配要点提示和平台差异对照）
 - ✅ ≥ 4 个 Mermaid 图表（共 5 个）
 - ✅ 包含 `graph TB`（架构图）、`flowchart TD`（流程图）、`sequenceDiagram`（时序图）
 - ✅ 中文撰写

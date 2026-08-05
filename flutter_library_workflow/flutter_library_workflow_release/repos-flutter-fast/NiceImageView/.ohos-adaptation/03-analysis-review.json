@@ -1,17 +1,60 @@
 {
-  "review": {
-    "review_id": "analysis-review-niv-001",
-    "stage": "analysis-review",
-    "plugin_name": "nice_image_view",
-    "dimensions": {
-      "coverage": {"score": 100, "weight": 35, "pass": true, "notes": "All 6 modules, 24 test points covered"},
-      "correctness": {"score": 100, "weight": 30, "pass": true, "notes": "All test points traceable to PRD functional requirements"},
-      "consistency": {"score": 100, "weight": 20, "pass": true, "notes": "Test point IDs consistent across MD, JSON, and test code"},
-      "executability": {"score": 100, "weight": 15, "pass": true, "notes": "All test cases are widget/unit tests with clear actions and checkpoints"}
+  "$schema": "https://raw.githubusercontent.com/huawei-test-design-agent/schema/main/analysis-review.schema.json",
+  "reviewId": "analysis-review-niv-20260804",
+  "reviewedArtifact": "02-test-analysis-report.md",
+  "reviewedArtifactSha256": "abf4eba6407a98b9e316633421b4164a3823e621377a0b3aeb8e0bd3d7103652",
+  "reviewedProject": "D:\\deveco\\ai_tool\\flutter_library_workflow\\flutter_library_workflow_release\\repos-flutter-fast\\NiceImageView",
+  "reviewDate": "2026-08-04",
+  "reviewer": "huawei-test-design-agent",
+  "reviewedBy": "cases-stage-verifier",
+  "tool": "migrate-flutter-plugins analysis-review",
+  "pluginName": "nice_image_view",
+  "reviewSummary": "对 02-test-analysis-report.md 进行三方比对评审。该报告覆盖 8 个功能模块、24 个测试点，级别分布 L0=11、L1=8、L2=5、L3=0，16 个公开 API 参数全部映射到测试点，测试策略、环境、准入准出与风险说明完整。未发现阻塞性问题，评审通过，建议进入测试用例设计阶段。",
+  "scores": {
+    "completeness": 96,
+    "accuracy": 95,
+    "testPointReview": 94,
+    "quality": 95,
+    "compatibility": 92,
+    "overall": 95
+  },
+  "passStatus": {
+    "completeness": true,
+    "accuracy": true,
+    "testPointReview": true,
+    "quality": true,
+    "compatibility": true,
+    "overall": true
+  },
+  "threeWayComparison": {
+    "overall": true,
+    "moduleCount": {
+      "count": 8,
+      "reviewed": 8,
+      "match": true
     },
-    "overall_score": 100,
-    "all_dimensions_pass": true,
-    "revisionRequired": false,
-    "resolved_issue_ids": []
-  }
+    "totalCases": {
+      "count": 24,
+      "reviewed": 24,
+      "match": true
+    },
+    "levelDistribution": {
+      "count": 24,
+      "reviewed": 24,
+      "match": true
+    },
+    "moduleBreakdown": {
+      "F-01": {"count": 3, "reviewed": 3, "match": true},
+      "F-02": {"count": 2, "reviewed": 2, "match": true},
+      "F-03": {"count": 3, "reviewed": 3, "match": true},
+      "F-04": {"count": 3, "reviewed": 3, "match": true},
+      "F-05": {"count": 1, "reviewed": 1, "match": true},
+      "F-06": {"count": 1, "reviewed": 1, "match": true},
+      "F-07": {"count": 6, "reviewed": 6, "match": true},
+      "F-08": {"count": 5, "reviewed": 5, "match": true}
+    }
+  },
+  "issues": [],
+  "revisionRequired": false,
+  "recommendation": "proceed"
 }

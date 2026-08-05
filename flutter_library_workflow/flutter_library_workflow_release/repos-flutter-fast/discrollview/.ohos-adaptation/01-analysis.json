@@ -67,7 +67,7 @@
   "native_dependencies": {},
   "flutter_dependencies": [],
   "permissions": {},
-  "has_example": false,
+  "has_example": true,
   "example_deps": [],
   "complexity_assessment": {
     "level": "low",
@@ -98,18 +98,18 @@
       }
     ]
   },
-  "supported_platforms": ["android", "ios", "web"],
+  "supported_platforms": ["android", "ios", "web", "ohos"],
   "platform_checks": [],
   "code_metrics": {
     "file_counts": {
-      "dart": 0,
+      "dart": 4,
       "android": 4,
       "ios": 0,
       "cpp": 0
     },
     "line_counts": {
-      "dart": 0,
-      "android": 367,
+      "dart": 637,
+      "android": 417,
       "ios": 0,
       "cpp": 0,
       "example": 0
@@ -145,17 +145,17 @@
     },
     "dart_public_api": {
       "class_count": 4,
-      "method_count": 18,
+      "method_count": 4,
       "enum_count": 0,
-      "top_level_function_count": 0,
+      "top_level_function_count": 3,
       "typedef_count": 0,
       "top_level_constant_count": 4,
-      "total_count": 26,
-      "core_count": 26,
+      "total_count": 15,
+      "core_count": 15,
       "excluded_count": 0
     }
   },
   "example_path": "example_auto/",
-  "example_notes": "待从 reviewed 04-test-cases.json 自动生成。将覆盖全部 L0-L3 测试用例，中文 UI，含复制日志功能。",
+  "example_notes": "已生成插件本地 Demo（example_auto/，包名 discrollview_demo），覆盖全部 31 个 L0-L2 测试用例，中文 UI，含复制日志功能。",
   "conclusion": "纯 Dart Flutter Widget 重新实现，零原生代码、零权限、零阻塞依赖。复杂度 low，建议 proceed。核心风险为低端设备滚动性能和中大列表遍历开销，均可通过 Flutter 常规性能优化手段（局部重建/RepaintBoundary）缓解。OHOS 适配预期零代码改动。"
 }

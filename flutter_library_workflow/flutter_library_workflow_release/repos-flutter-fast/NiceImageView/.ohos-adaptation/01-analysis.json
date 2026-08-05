@@ -1,17 +1,17 @@
 {
   "plugin_name": "nice_image_view",
   "plugin_version": "1.0.5",
-  "description": "Flutter widget providing rounded corners, circle display, border, inner border, and mask overlay effects for images. Pure-Dart port of Android NiceImageView library using CustomPainter.",
+  "description": "纯 Dart Flutter 图像组件：圆形/圆角裁剪、外边框、内边框与遮罩叠加效果，全部基于 CustomPainter/Canvas 渲染，零原生代码，全平台可用。",
   "ohos_readiness": {
-    "score": 100,
-    "level": "ready",
-    "recommendations": [
-      "No native code required — pure Dart CustomPainter implementation",
-      "All Android Canvas operations have direct Flutter equivalents or cleaner alternatives",
-      "Zero platform dependencies, zero permissions"
-    ],
-    "blockers": [],
-    "risks": []
+    "status": "fully_adapted",
+    "in_repo_ohos_dir": false,
+    "in_pubspec_platforms": false,
+    "in_reference_index": false,
+    "reference_url": null,
+    "in_local_repos": false,
+    "local_repo_name": null,
+    "notes": "就绪度评分 100/100。纯 Dart 库，仅依赖 flutter SDK；无 MethodChannel/FFI/PlatformView/原生代码，无需 ohos/ HAR。painter 使用 Flutter 原生 canvas.clipPath() 替代 Android PorterDuff 实现裁剪与遮罩，无平台分支，TargetPlatform.ohos 无需引入。适配目标：OHOS API 12，设备类型 phone/tablet/2in1，Flutter OHOS SDK 3.32.4-ohos-0.0.1（Dart 3.8.1）。测试：22 个用例，flutter analyze 0 issues；flutter test 因环境 VM-snapshot 问题未运行（NOT_RUN）。",
+    "display_status": "已完全兼容 ✓"
   },
   "plugin_type": "dart",
   "plugin_architecture": "standalone",
@@ -21,91 +21,144 @@
   "platform_views": [],
   "ffi_bindings": [],
   "functionality": {
-    "modules": [
+    "summary": "提供图片圆形/圆角裁剪、外边框、内边框与遮罩叠加效果，纯 Dart CustomPainter 渲染，全平台可用。",
+    "core_features": [
       {
-        "id": "F-01",
-        "name": "构造函数与初始化",
-        "description": "支持代码创建和参数初始化，所有12个属性均提供默认值",
-        "priority": "P0",
-        "api_count": 1
+        "name": "F-01 构造与初始化",
+        "description": "支持代码创建与参数初始化，16 个构造参数全部提供默认值；image 为 null 时不渲染任何内容。",
+        "related_methods": [],
+        "android_apis": ["View"],
+        "ios_apis": [],
+        "implementation": "纯 Dart / StatefulWidget"
       },
       {
-        "id": "F-02",
-        "name": "圆形展示模式",
-        "description": "将图片裁剪为圆形区域展示，支持切换到矩形模式",
-        "priority": "P0",
-        "api_count": 1
+        "name": "F-02 圆形展示模式",
+        "description": "isCircle=true 时通过 canvas.addOval 将图片裁剪为圆形区域展示，支持切换回矩形模式。",
+        "related_methods": [],
+        "android_apis": ["Canvas.clipPath", "Path.addCircle"],
+        "ios_apis": [],
+        "implementation": "Flutter CustomPainter / canvas.clipPath"
       },
       {
-        "id": "F-03",
-        "name": "圆角半径控制",
-        "description": "支持统一圆角和四角独立圆角两种配置方式",
-        "priority": "P0",
-        "api_count": 5
+        "name": "F-03 圆角半径控制",
+        "description": "支持统一 cornerRadius 与四角独立 cornerTopLeftRadius/cornerTopRightRadius/cornerBottomRightRadius/cornerBottomLeftRadius；cornerRadius>0 时统一值优先。",
+        "related_methods": [],
+        "android_apis": ["Path.addRoundRect"],
+        "ios_apis": [],
+        "implementation": "Flutter RRect.fromLTRBAndCorners"
       },
       {
-        "id": "F-04",
-        "name": "边框绘制",
-        "description": "支持外边框（矩形/圆形均支持）和内边框（仅圆形）",
-        "priority": "P0",
-        "api_count": 4
+        "name": "F-04 边框绘制",
+        "description": "外边框矩形/圆形均支持，内边框仅圆形模式；描边以 borderWidth/2 内缩居中于图像边缘。",
+        "related_methods": [],
+        "android_apis": ["Canvas.drawCircle", "Canvas.drawRoundRect"],
+        "ios_apis": [],
+        "implementation": "Flutter CustomPainter stroke Paint"
       },
       {
-        "id": "F-05",
-        "name": "边框覆盖控制",
-        "description": "控制边框是否覆盖图片内容区域",
-        "priority": "P1",
-        "api_count": 1
+        "name": "F-05 边框覆盖控制",
+        "description": "isCoverSrc=false 时图像按边框内缩缩放避开边框；true 时边框直接覆盖图像内容区域。",
+        "related_methods": [],
+        "android_apis": ["Canvas.scale", "Canvas.saveLayer"],
+        "ios_apis": [],
+        "implementation": "canvas.translate/scale 缩放"
       },
       {
-        "id": "F-06",
-        "name": "遮罩绘制",
-        "description": "在图片裁剪区域上绘制纯色遮罩",
-        "priority": "P1",
-        "api_count": 1
+        "name": "F-06 遮罩绘制",
+        "description": "maskColor 非透明时在裁剪区域上绘制纯色遮罩，替代 Android PorterDuff DST_IN。",
+        "related_methods": [],
+        "android_apis": ["PorterDuffXfermode", "Canvas.drawPath"],
+        "ios_apis": [],
+        "implementation": "Flutter canvas.drawPath + Paint"
       }
-    ],
-    "total_apis": 16
+    ]
   },
   "native_dependencies": {
     "android": [],
     "ios": [],
-    "total_android": 0,
-    "total_ios": 0,
-    "has_platform_specific_deps": false
+    "cpp": []
   },
   "flutter_dependencies": [
     {
       "name": "flutter",
-      "type": "sdk",
-      "ohos_supported": true
+      "version_constraint": ">=3.10.0",
+      "is_platform_plugin": false,
+      "ohos_status": "adapted",
+      "reference_url": "https://gitcode.com/openharmony-tpc/flutter_flutter",
+      "is_blocking": false,
+      "notes": "唯一运行时依赖；当前环境为 Flutter OHOS 3.32.4-ohos-0.0.1（Dart 3.8.1）。"
     }
   ],
   "permissions": {
     "android": [],
-    "ios": [],
-    "total": 0,
-    "has_permissions": false
+    "ios": []
   },
+  "dart_plugin_class": null,
+  "supported_platforms": ["android", "ios", "linux", "macos", "web", "windows"],
+  "platform_checks": [],
   "has_example": true,
+  "example_deps": [],
+  "example_path": "example/",
+  "example_notes": "示例应用覆盖圆形模式、统一圆角、边框覆盖开关、外边框宽度与颜色、内边框（圆形模式）、半透明遮罩等交互，并提供复制测试报告能力。",
   "complexity_assessment": {
+    "level": "low",
+    "factors": {
+      "channel_method_count": 0,
+      "native_dependency_count": 0,
+      "blocking_deps_count": 0,
+      "communication_pattern_count": 0,
+      "has_platform_view": false,
+      "has_texture": false,
+      "has_ffi": false,
+      "platform_check_count": 0
+    },
     "complexity_score": 2,
-    "complexity_level": "low",
+    "estimated_effort": "无需原生工程与 Channel，零平台分支；主要工作量在 painter 渲染的 OHOS 设备验证与 22 个测试用例跑通。",
     "adaptation_recommendation": "proceed",
-    "risk_items": []
+    "blocking_reasons": [],
+    "risk_items": [
+      {
+        "description": "flutter test 因环境 VM-snapshot 问题未运行（NOT_RUN），painter 渲染行为缺少自动化测试验证。",
+        "severity": "medium",
+        "mitigation": "在 phone/tablet/2in1 的签名 HAP 上运行示例，核对圆形/圆角/边框/遮罩渲染效果与日志。"
+      }
+    ]
   },
-  "supported_platforms": ["android", "ios", "ohos", "web", "windows", "macos", "linux"],
   "code_metrics": {
-    "dart": {"files": 3, "lines": 450},
-    "test": {"files": 1, "lines": 280, "test_count": 21},
-    "example": {"files": 1, "lines": 130}
+    "file_counts": {
+      "dart": 3,
+      "android": 0,
+      "ios": 0,
+      "cpp": 0
+    },
+    "line_counts": {
+      "dart": 499,
+      "android": 0,
+      "ios": 0,
+      "cpp": 0,
+      "example": 299
+    }
   },
   "ecosystem_compliance": {
+    "library_category": "other",
+    "library_category_desc": "纯 Dart 自定义图像 UI 组件，不涉及支付/账号/广告/地图/推送等华为生态能力，无受限权限。",
     "has_ecosystem_rules": false,
-    "mandatory_capabilities": [],
+    "has_ui": true,
+    "is_aggregation": false,
+    "application_requirements": [],
+    "huawei_capabilities": [],
+    "arkweb_requirement": {
+      "required": false,
+      "reason": "纯 Canvas 绘制组件，不涉及 Web 内容或 ArkWeb 内核。",
+      "web_usage_scenario": "无"
+    },
     "restricted_permissions": [],
-    "substitution_items": []
+    "needs_architecture_upgrade": false,
+    "target_aggregation_type": null,
+    "ui_priority_requirement": null,
+    "compliance_notes": "零权限、零原生依赖、无生态规则约束，可直接集成到 OHOS 应用。"
   },
+  "conclusion": "nice_image_view v1.0.5 是纯 Dart 图像组件库：无原生代码、无 Channel、无 FFI、无 PlatformView，仅依赖 flutter SDK。仓库保留原 Android 库（app/niceimageview 目录）作为移植参考，但 Flutter 包本身完全由 CustomPainter + canvas.clipPath() 实现，等价替换 Android PorterDuff 裁剪/遮罩，无需任何平台分支。适配目标 OHOS API 12（phone/tablet/2in1），Flutter OHOS 3.32.4-ohos-0.0.1。测试 22 个用例，flutter analyze 0 issues，flutter test 因环境 VM-snapshot 问题未运行。就绪度评分 100/100，建议直接 proceed，无需创建 ohos/ HAR。",
   "api_inventory": {
     "adaptation_contracts": {
       "method_channel_method_count": 0,
@@ -113,30 +166,51 @@
       "event_channel_count": 0,
       "platform_view_count": 0,
       "ffi_main_function_count": 0,
+      "ffi_helper_function_count": 0,
+      "ffi_total_scanned": 0,
       "total_contracts": 0
     },
     "dart_public_api": {
-      "class_count": 1,
+      "class_count": 2,
       "method_count": 16,
       "enum_count": 0,
       "top_level_function_count": 0,
       "typedef_count": 0,
       "top_level_constant_count": 0,
-      "excluded_count": 0,
-      "core_count": 16
+      "total_count": 18,
+      "core_count": 16,
+      "excluded_count": 2
     },
     "cross_validation": {
       "dart_only_methods": [],
       "native_only_methods": [],
       "name_mismatches": [],
-      "readme_feature_gaps": []
+      "readme_feature_gaps": [],
+      "api_mapping": [
+        {"dart_param": "image", "android_attr": null, "note": "widget 级参数，无 Android 对应"},
+        {"dart_param": "width", "android_attr": null, "note": "widget 级参数，无 Android 对应"},
+        {"dart_param": "height", "android_attr": null, "note": "widget 级参数，无 Android 对应"},
+        {"dart_param": "fit", "android_attr": null, "note": "widget 级参数（BoxFit），无 Android 对应"},
+        {"dart_param": "isCircle", "android_attr": "is_circle"},
+        {"dart_param": "isCoverSrc", "android_attr": "is_cover_src"},
+        {"dart_param": "cornerRadius", "android_attr": "corner_radius"},
+        {"dart_param": "cornerTopLeftRadius", "android_attr": "corner_top_left_radius"},
+        {"dart_param": "cornerTopRightRadius", "android_attr": "corner_top_right_radius"},
+        {"dart_param": "cornerBottomRightRadius", "android_attr": "corner_bottom_right_radius"},
+        {"dart_param": "cornerBottomLeftRadius", "android_attr": "corner_bottom_left_radius"},
+        {"dart_param": "borderWidth", "android_attr": "border_width"},
+        {"dart_param": "borderColor", "android_attr": "border_color"},
+        {"dart_param": "innerBorderWidth", "android_attr": "inner_border_width"},
+        {"dart_param": "innerBorderColor", "android_attr": "inner_border_color"},
+        {"dart_param": "maskColor", "android_attr": "mask_color"}
+      ]
     },
     "prd_coverage": {
-      "contract_coverage_percent": 100,
-      "dart_api_coverage_percent": 100,
-      "api_to_module_coverage_percent": 100,
-      "module_to_api_coverage_percent": 100,
-      "dart_api_coverage_gap_notes": null
+      "contract_coverage_percent": 100.0,
+      "dart_api_coverage_percent": 100.0,
+      "api_to_module_coverage_percent": 100.0,
+      "module_to_api_coverage_percent": 100.0,
+      "counting_note": "16 个公开构造参数为核心 API 覆盖率分母（core_count=16）；6 个功能模块 F-01~F-06 全部覆盖；NiceImageViewPainter（public CustomPainter）作为渲染实现细节计入 excluded_count=2（类及其构造/shouldRepaint 等方法），不进入核心覆盖率分母。测试 22 个用例，flutter analyze 0 issues，flutter test NOT_RUN。"
     }
   }
 }

@@ -3,15 +3,27 @@
   "package": {
     "name": "discrollview",
     "version": "0.0.2",
-    "revision": "f46aea5",
-    "type": "android_native_library",
+    "revision": "a695610 (父仓库 commit，包目录无独立 .git；Android donor 源 revision 为 f46aea5)",
+    "type": "flutter_pure_dart_library",
     "flutter_equivalent": "pure_dart_widget",
-    "pubspec_exists": false
+    "pubspec_exists": true,
+    "pubspec_dependencies": "flutter SDK only; dev: flutter_test, flutter_lints ^4.0.0, test ^1.25.15",
+    "lib_line_count": 637,
+    "unit_test_count": 40
   },
   "target": {
-    "flutter_ohos_revision": "3.22+",
+    "flutter_ohos_revision": "3.32.4-ohos-0.0.1",
     "api": 24,
-    "device_types": ["phone", "tablet", "2in1"]
+    "device_types": ["phone", "tablet", "2in1"],
+    "connected_device": {
+      "serial": "192.168.3.85:41665",
+      "model": "BRA-AL00",
+      "brand": "HUAWEI",
+      "api_version": 24,
+      "connection": "TCP",
+      "authorized": true,
+      "checked_at": "2026-08-04"
+    }
   },
   "donor": {
     "path_or_url": "https://github.com/flavienlaurent/discrollview",
@@ -21,8 +33,52 @@
   },
   "source_strategy": "new_port",
   "classification": "pure_dart",
-  "classification_reason": "Android native library reimplemented as pure Dart Flutter widget. Zero native code, zero MethodChannel. All transforms use Flutter Framework widgets (Opacity, Transform, AnimatedContainer).",
-  "authority_conflicts": [],
+  "classification_reason": "Android native library reimplemented as pure Dart Flutter widget. Zero native code, zero MethodChannel, zero FFI. All transforms use Flutter Framework widgets (Opacity, Transform, Color.lerp, Matrix4). flutter.plugin.platforms = {}. No OHOS conditional needed — platform-agnostic widget.",
+  "authority_conflicts": [
+    {
+      "topic": "hap_build status",
+      "docs": "04-verification-evidence.json hap_build=BLOCKED",
+      "evidence": "artifact-manifest.json HAP built + signed (SHA-256 a5fc1be2, 135.2MB) via direct hvigorw.js fallback",
+      "resolution": "evidence file is stale (written before the hvigorw fallback build); rebuild 04-verification-evidence.json from current reproducible logs",
+      "status": "resolved",
+      "resolved_at": "2026-08-04",
+      "resolution_evidence": "04-verification-evidence.json hap_build 已重建为 PASS（command/exit_code 0/log_sha256 均校验），与 artifact-manifest.json 的签名 HAP（SHA-256 eaa88110, 142,409,586 B）一致"
+    },
+    {
+      "topic": "widget test count",
+      "docs": "devlog.md claims 11 widget tests BLOCKED",
+      "evidence": "current source has 6 widget tests (test/discrollve_widget_test.dart), none referencing OHOS",
+      "resolution": "regenerate test counts from source; 6 widget tests present, 34 pure-Dart tests present (40 total)",
+      "status": "resolved"
+    },
+    {
+      "topic": "acceptance test-case count",
+      "docs": "00-requirement-report.md:65 says '24 个测试用例通过'",
+      "evidence": "02-test-points.json and 04-test-cases.json record 31 test points/cases (L0:14/L1:11/L2:6)",
+      "resolution": "updated requirement report acceptance criteria to the reviewed 31-case set; corrected 02-test-points.json summary to 31"
+    },
+    {
+      "topic": "supported platforms",
+      "docs": "01-analysis.json supported_platforms omits ohos",
+      "evidence": "00-requirement.json target_platforms = android/ios/web/ohos",
+      "resolution": "01-analysis.json was scanned pre-reimplementation (donor-only); re-scope supported_platforms to include ohos",
+      "status": "resolved",
+      "resolution_evidence": "01-analysis.json supported_platforms 已重建为 [android, ios, web, ohos]（2026-08-04）"
+    },
+    {
+      "topic": "03-analysis-review.json naming",
+      "docs": "file named 03-analysis-review but reviewedArtifact is 02-test-points.json",
+      "evidence": "03-analysis-review.json:reviewedArtifact field; missing 03-analysis-review-report.md",
+      "resolution": "treat it as the test-design review it is; add missing 03-analysis-review-report.md; do not re-review analysis under a wrong name"
+    },
+    {
+      "topic": "prior demo placement",
+      "docs": "devlog.md/changelog.md describe demo at shared hub flutter_ohos_test/lib/discrollview_test_page.dart",
+      "evidence": "git status shows flutter_ohos_test/ deleted",
+      "resolution": "shared-Hub demo is rejected historical practice per skill; recreate demo plugin-locally at <repo>/discrollview/ (flutter create + ohos)"
+    }
+  ],
   "created_at": "2026-07-30T14:00:00+08:00",
-  "notes": "Original discrollview is an Android ScrollView subclass (Java). This adaptation creates a Flutter Widget equivalent using ScrollController + NotificationListener, not a direct code port. The .ohos-adaptation deliverables follow the full flutter artifact profile."
+  "updated_at": "2026-08-04T00:00:00+08:00",
+  "notes": "Original discrollview is an Android ScrollView subclass (Java). This adaptation creates a Flutter Widget equivalent using ScrollController + NotificationListener, not a direct code port. The .ohos-adaptation deliverables follow the full flutter artifact profile. Source scan refreshed 2026-08-04 via 5 read-only sub-agents (see 00-source-scan.json). 2026-08-04 独立逐阶段复核修正：测试计数 39→40（6 widget + 34 pure-Dart）、lib 行数 590→637、01-analysis.json 补 ohos 平台与真实 code_metrics/api_inventory、DiscrollveConfig 签名更正、revision 来源澄清（父仓库 a695610 / donor f46aea5）。"
 }

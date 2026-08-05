@@ -1,54 +1,57 @@
 {
+  "valid": true,
+  "source_hashes": {
+    "01-analysis.json": "f190adc6479cb32c34c3e28aaf5bac5be2f321e3f8f647bc7c816d2bef35e0c5",
+    "02-planning.json": "18aefbb6979b24923e7213ae5c6ad4d7b472a9cea707c37a963318798821523f",
+    "03-coding-library.json": "1b04fe41c369f502a49ab6e4d99fdfc143690a4df9a22bc4aa97fb98c7f096ff",
+    "04-testing.json": "e04226478be5e07fd7ac22ca98101a377adc88f9cb4fabd61a66723590e425ca",
+    "05-summary.json": "aead1ef761c43a7a3b18e89e4f35387945e0a2f0c8dd816b2856f165accb06b7"
+  },
+  "summary": {
+    "total": 8,
+    "pass": 8,
+    "fail": 0
+  },
   "checks": [
     {
-      "id": "channel_name_consistency",
-      "name": "Channel 名称一致性",
-      "result": "pass",
-      "detail": "N/A — pure_dart plugin has zero channels"
+      "name": "channel_name_consistency",
+      "status": "pass",
+      "details": "03 的 channel 均来自 01"
     },
     {
-      "id": "plugin_type_skill_consistency",
-      "name": "插件类型与 Skill 一致性",
-      "result": "pass",
-      "detail": "plugin_type=dart matches plugin_type_skill=type-pure-dart"
+      "name": "plugin_type_skill_consistency",
+      "status": "pass",
+      "details": "02=type-pure-dart; 03=type-pure-dart"
     },
     {
-      "id": "build_status_propagation",
-      "name": "构建状态传播",
-      "result": "pass",
-      "detail": "flutter pub get + analyze PASS propagated to all stage JSON files"
+      "name": "build_status_propagation",
+      "status": "pass",
+      "details": "03=pass; 05=pass"
     },
     {
-      "id": "example_status_propagation",
-      "name": "Example 状态传播",
-      "result": "pass",
-      "detail": "example/lib/main.dart created, flutter analyze passes"
+      "name": "example_status_propagation",
+      "status": "pass",
+      "details": "04=pass; 05=pass"
     },
     {
-      "id": "coverage_math_consistency",
-      "name": "覆盖率算术一致性",
-      "result": "pass",
-      "detail": "16/16 API = 100%; 24/24 test points covered; counts match across stages"
+      "name": "coverage_math_consistency",
+      "status": "pass",
+      "details": "03=16/16; 05=16/16, rate=100%"
     },
     {
-      "id": "runtime_check_summary_consistency",
-      "name": "运行时检查摘要一致性",
-      "result": "pass",
-      "detail": "NOT_RUN statuses propagated correctly to summary"
+      "name": "runtime_check_summary_consistency",
+      "status": "pass",
+      "details": "04={\"total\":0,\"pass\":0,\"warning\":0,\"fail\":0}; 05={\"total\":0,\"pass\":0,\"warning\":0,\"fail\":0}"
     },
     {
-      "id": "device_test_summary_consistency",
-      "name": "真机测试摘要一致性",
-      "result": "pass",
-      "detail": "HAP/device status=NOT_RUN, device count=0, consistent with artifact-manifest"
+      "name": "device_test_summary_consistency",
+      "status": "pass",
+      "details": "04 status=skipped, total/pass/fail=0/0/0; 05=skipped/0/0/0"
     },
     {
-      "id": "quality_score_consistency",
-      "name": "质量评分一致性",
-      "result": "pass",
-      "detail": "Review scores 100 across analysis-review (100) and case-review (100)"
+      "name": "quality_score_consistency",
+      "status": "pass",
+      "details": "score=B; build=pass; coverage=100%"
     }
-  ],
-  "all_pass": true,
-  "timestamp": "2026-07-30T00:00:00+08:00"
+  ]
 }

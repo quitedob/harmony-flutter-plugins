@@ -286,7 +286,11 @@ class _DemoPageState extends State<DemoPage> {
                     width: selected ? 3 : 1,
                   ),
                   boxShadow: selected
-                      ? [BoxShadow(color: _borderColors[i].withValues(alpha: 0.4), blurRadius: 6)]
+                      ? [
+                          BoxShadow(
+                              color: _borderColors[i].withValues(alpha: 0.4),
+                              blurRadius: 6)
+                        ]
                       : null,
                 ),
               ),

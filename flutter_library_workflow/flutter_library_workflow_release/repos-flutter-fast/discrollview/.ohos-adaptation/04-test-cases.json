@@ -2,7 +2,7 @@
   "suite": {
     "id": "discrollview-test-suite",
     "name": "Discrollview 黑盒测试用例集",
-    "app_package": "com.example.flutter_ohos_test",
+    "app_package": "discrollview",
     "app_card": "./04-droidrun--app-card.md"
   },
   "expectation_metadata": {
@@ -41,7 +41,7 @@
   "modules": [
     {
       "moduleCode": "F-01",
-      "moduleName": "DiscrollveWidget",
+      "moduleName": "DiscrollveWidget 根滚动容器",
       "moduleDescription": "根滚动容器，提供 Discrollve 视差滚动效果。使用 ScrollController 驱动，第一子 Widget 为静态全高头部",
       "priority": "P0",
       "test_cases": [
@@ -49,9 +49,10 @@
           "id": "F-01-01",
           "title": "DiscrollveWidget 页面正常构建并展示静态头部与首个动画卡片",
           "level": "L0",
-          "preconditions": "设备: HarmonyOS phone/tablet/2in1, API≥19；应用: flutter_ohos_test v1.0.0 已安装启动；屏幕: 竖屏, 亮度默认；网络: 离线可用；权限: 无需特殊权限",
+          "devices": ["phone", "tablet", "2in1"],
+          "preconditions": "设备: HarmonyOS phone/tablet/2in1, API≥19；应用: discrollview 演示 Demo 已安装启动；屏幕: 竖屏, 亮度默认；网络: 离线可用；权限: 无需特殊权限",
           "test_steps": [
-            { "action": "从 Test Hub 页面点击 'Discrollview' 卡片进入 Demo 页面", "checkpoint": "页面跳转至 Discrollview Demo，AppBar 标题为 'Discrollview Demo'，Key('dv_appbar') 可见" },
+            { "action": "打开 Discrollview 演示应用并进入 DiscrollveWidget 演示页", "checkpoint": "页面成功进入 Discrollview 演示应用；AppBar 标题为 'Discrollview Demo'，Key('dv_appbar') 可见" },
             { "action": "观察页面顶部静态头部区域 Key('dv_header_static')", "checkpoint": "深蓝渐变背景可见；Key('dv_label_title') 文字为 'Discrollview Demo'；Key('dv_label_subtitle') 文字为 'Scroll down to see discrollve effects'" },
             { "action": "检查静态头部下方是否可见第一个动画卡片 Key('dv_card_alpha_bottom')", "checkpoint": "静态头部完全占据 viewport，第一个动画卡片不可见（隐藏在屏幕底部以下）" }
           ],
@@ -62,6 +63,7 @@
           "id": "F-01-02",
           "title": "静态头部 Key('dv_header_static') 占据完整 viewport 高度",
           "level": "L0",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "同 F-01-01；页面位于顶部（scrollOffset=0）",
           "test_steps": [
             { "action": "测量静态头部 Key('dv_header_static') 的渲染高度", "checkpoint": "头部高度 = 设备可视区高度（允许 ±2px 误差）。头部底部边缘与屏幕底部边缘对齐" },
@@ -74,6 +76,7 @@
           "id": "F-01-03",
           "title": "程序化滚动通过 ScrollController 驱动变换效果更新",
           "level": "L1",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "同 F-01-01；应用代码持有对外部传入 ScrollController 的引用",
           "test_steps": [
             { "action": "通过代码执行 controller.animateTo(scrollExtent * 0.3, duration: 300ms)", "checkpoint": "页面平滑滚动到 30% 位置；过程中 Key('dv_card_alpha_bottom') 开始出现淡入+上移效果" },
@@ -86,19 +89,20 @@
           "id": "F-01-04",
           "title": "DiscrollveWidget 构造时子 Widget 少于 2 个触发 AssertionError",
           "level": "L2",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "编写单元测试；在 debug 模式下执行（assert 启用）",
           "test_steps": [
-            { "action": "执行代码 DiscrollveWidget(children: [])", "checkpoint": "抛出 AssertionError，错误消息包含 'at least 2 children'" },
-            { "action": "执行代码 DiscrollveWidget(children: [singleChild])", "checkpoint": "抛出 AssertionError，错误消息包含 'at least 2 children'" }
+            { "action": "执行代码 DiscrollveWidget(children: [])", "checkpoint": "构造阶段参数校验拒绝非法构造：抛出 AssertionError（错误消息包含 'at least 2 children'），符合预期" },
+            { "action": "执行代码 DiscrollveWidget(children: [singleChild])", "checkpoint": "同上：参数校验拒绝非法构造，抛出 AssertionError（错误消息包含 'at least 2 children'），符合预期" }
           ],
-          "expected_result": "两种无效构造均在 debug 模式下抛出 AssertionError，不会渲染异常状态的 Widget 树",
+          "expected_result": "两种无效构造均在 debug 模式下触发参数校验：抛出 AssertionError 拒绝非法构造，符合预期。不会渲染异常状态的 Widget 树",
           "postconditions": "异常被正常捕获，不影响测试框架或其他测试用例执行"
         }
       ]
     },
     {
       "moduleCode": "F-02",
-      "moduleName": "DiscrollveContent",
+      "moduleName": "DiscrollveContent 内容布局",
       "moduleDescription": "包装子 Widget 并关联 DiscrollveConfig。通过静态工厂 child() 创建实例",
       "priority": "P0",
       "test_cases": [
@@ -106,6 +110,7 @@
           "id": "F-02-01",
           "title": "DiscrollveContent.child() 工厂方法正确绑定 config 与 child",
           "level": "L0",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "编写单元测试；debug 模式",
           "test_steps": [
             { "action": "调用 DiscrollveContent.child(config: DiscrollveConfig(alpha: true, threshold: 0.3), child: SizedBox(key: Key('test_child')))", "checkpoint": "返回的 Widget 非 null；.config.alpha == true；.config.threshold == 0.3；.child.key == Key('test_child')" }
@@ -117,7 +122,8 @@
           "id": "F-02-02",
           "title": "config.none 子 Widget Key('dv_footer_static') 在滚动全过程中无任何视觉变化",
           "level": "L0",
-          "preconditions": "设备: HarmonyOS phone/tablet/2in1；进入 Discrollview Demo 页面",
+          "devices": ["phone", "tablet", "2in1"],
+          "preconditions": "设备: HarmonyOS phone/tablet/2in1；进入 Discrollview 演示应用 Demo 页面",
           "test_steps": [
             { "action": "定位底部静态文本 Key('dv_footer_static')，记录其初始屏幕位置和透明度", "checkpoint": "Key('dv_label_reset_hint') 文字 'Scroll back up to reset — all transforms reverse' 完全可见" },
             { "action": "从顶部向下连续滚动至页面底部", "checkpoint": "滚动全程中 Key('dv_footer_static') 始终完全可见：无透明度变化、无位置跳动、无缩放变形、无背景色变化" },
@@ -130,7 +136,7 @@
     },
     {
       "moduleCode": "F-03",
-      "moduleName": "DiscrollveConfig",
+      "moduleName": "DiscrollveConfig 变换配置",
       "moduleDescription": "声明式变换配置：alpha(bool)/scaleX(bool)/scaleY(bool)/translation(int)/fromColor(int)/toColor(int)/threshold(double)",
       "priority": "P0",
       "test_cases": [
@@ -138,7 +144,8 @@
           "id": "F-03-01",
           "title": "卡片 Key('dv_card_alpha_bottom') 的 alpha 透明度从 0.0 平滑过渡到 1.0",
           "level": "L0",
-          "preconditions": "HarmonyOS 设备；进入 Discrollview Demo 页面；页面位于顶部；该卡片 config: alpha=true, fromBottom, threshold=0.2",
+          "devices": ["phone", "tablet", "2in1"],
+          "preconditions": "HarmonyOS 设备；进入 Discrollview 演示应用 Demo 页面；页面位于顶部；该卡片 config: alpha=true, fromBottom, threshold=0.2",
           "test_steps": [
             { "action": "在 scrollOffset=0 时检查卡片 Key('dv_card_alpha_bottom')", "checkpoint": "卡片基于 alpha 变换处于不可见状态——其渲染树中存在 Opacity(opacity: 0.0) 包裹" },
             { "action": "缓慢向下滚动（约 100px/秒），观察卡片", "checkpoint": "卡片逐渐变得可见：透明度平滑增加，无跳变。因 threshold=0.2，前 20% 触发区间内无变化，20% 后开始淡入" },
@@ -151,6 +158,7 @@
           "id": "F-03-02",
           "title": "卡片 Key('dv_card_scale_xy') 的 scaleX 从 0 平滑展开到 1",
           "level": "L0",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "HarmonyOS 设备；进入 Demo 页面；该卡片 config: scaleX=true, scaleY=true",
           "test_steps": [
             { "action": "在卡片未触发前观察其渲染宽度", "checkpoint": "卡片 scaleX=0.0（水平方向不可见）" },
@@ -164,6 +172,7 @@
           "id": "F-03-03",
           "title": "卡片 Key('dv_card_scale_xy') 的 scaleY 从 0 平滑展开到 1",
           "level": "L1",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "同 F-03-02",
           "test_steps": [
             { "action": "未触发时检查卡片渲染高度", "checkpoint": "卡片 scaleY=0.0（垂直方向不可见）" },
@@ -176,6 +185,7 @@
           "id": "F-03-04",
           "title": "scaleX 和 scaleY 同时启用时保持等比例缩放",
           "level": "L1",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "同 F-03-02；使用工具或视觉比较缩放过程中的宽高比",
           "test_steps": [
             { "action": "在卡片缩放过程中（ratio ≈ 0.5）测量其渲染宽度和高度", "checkpoint": "宽度/高度 的比值 = (300-24*2) / 180 = 252/180 = 1.4（与原始卡片宽高比一致）。此时的 scaleX = scaleY = 0.5" },
@@ -188,6 +198,7 @@
           "id": "F-03-05",
           "title": "卡片 Key('dv_card_bgcolor') 背景色从 #88EE66 渐变至 #000000",
           "level": "L1",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "HarmonyOS 设备；进入 Demo 页面；该卡片 config: fromColor=0xFF88EE66, toColor=0xFF000000, alpha=true",
           "test_steps": [
             { "action": "卡片未触发时检查其背景色", "checkpoint": "卡片背景色为 fromColor：RGB(136, 238, 102) = 亮绿色 #88EE66" },
@@ -201,9 +212,10 @@
           "id": "F-03-06",
           "title": "DiscrollveConfig() 默认构造函数所有变换属性为关闭状态",
           "level": "L2",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "单元测试环境",
           "test_steps": [
-            { "action": "执行 const DiscrollveConfig(); 并逐属性断言", "checkpoint": "alpha=false; scaleX=false; scaleY=false; translation=-1; fromColor=-1; toColor=-1; threshold=0.0; hasTransforms==false" }
+            { "action": "执行 const DiscrollveConfig(); 并逐属性断言", "checkpoint": "断言全部默认关闭值：alpha=false; scaleX=false; scaleY=false; translation=-1; fromColor=-1; toColor=-1; threshold=0.0; hasTransforms==false" }
           ],
           "expected_result": "全部 7 个属性为默认关闭值。hasTransforms getter 返回 false",
           "postconditions": "无"
@@ -212,7 +224,7 @@
     },
     {
       "moduleCode": "F-04",
-      "moduleName": "DiscrollveDirection",
+      "moduleName": "DiscrollveDirection 方向枚举",
       "moduleDescription": "平移方向位掩码常量：fromTop(0x01)/fromBottom(0x02)/fromLeft(0x04)/fromRight(0x08)。对立方向组合被拒绝",
       "priority": "P1",
       "test_cases": [
@@ -220,6 +232,7 @@
           "id": "F-04-01",
           "title": "卡片 Key('dv_card_alpha_bottom') 从屏幕下方 (fromBottom) 移入原位",
           "level": "L0",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "HarmonyOS 设备；Demo 页面；卡片 config: translation=fromBottom(0x02), alpha=true, threshold=0.2",
           "test_steps": [
             { "action": "卡片未触发时检查其垂直位置", "checkpoint": "卡片 translateY = +卡片高度（即位于自身高度下方的偏移位置，对于 h=200: translateY≈+200px）" },
@@ -233,6 +246,7 @@
           "id": "F-04-02",
           "title": "卡片 Key('dv_card_alpha_top') 从屏幕上方 (fromTop) 移入原位",
           "level": "L1",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "HarmonyOS 设备；Demo 页面；卡片 config: translation=fromTop(0x01), alpha=true",
           "test_steps": [
             { "action": "卡片未触发时", "checkpoint": "卡片 translateY = -卡片高度（位于上方偏移，h=200: translateY≈-200px）" },
@@ -245,6 +259,7 @@
           "id": "F-04-03",
           "title": "卡片 Key('dv_card_alpha_left') 从屏幕左方 (fromLeft) 移入原位",
           "level": "L1",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "HarmonyOS 设备；Demo 页面；卡片 config: translation=fromLeft(0x04), alpha=true, threshold=0.3",
           "test_steps": [
             { "action": "卡片未触发时", "checkpoint": "卡片 translateX = -卡片宽度（位于左方偏移，w≈viewportW-48: translateX≈-(viewportW-48)px）" },
@@ -257,6 +272,7 @@
           "id": "F-04-04",
           "title": "卡片 Key('dv_card_alpha_right') 从屏幕右方 (fromRight) 移入原位",
           "level": "L1",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "HarmonyOS 设备；Demo 页面；卡片 config: translation=fromRight(0x08), alpha=true, threshold=0.4",
           "test_steps": [
             { "action": "卡片未触发时", "checkpoint": "卡片 translateX = +卡片宽度（位于右方偏移）" },
@@ -269,6 +285,7 @@
           "id": "F-04-05",
           "title": "卡片 Key('dv_card_all_combined') 从对角线方向 (fromBottom|fromLeft) 移入",
           "level": "L0",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "HarmonyOS 设备；Demo 页面；卡片 config: translation=fromBottom|fromLeft(0x02|0x04=0x06), alpha+scaleX+scaleY, threshold=0.2",
           "test_steps": [
             { "action": "卡片未触发时检查位置", "checkpoint": "卡片同时存在 translateY=+220 和 translateX=-(vw-48) 的偏移——位于视口右下对角方向" },
@@ -281,22 +298,24 @@
           "id": "F-04-06",
           "title": "构造 DiscrollveConfig(translation: fromTop|fromBottom) 触发 AssertionError",
           "level": "L2",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "单元测试；debug 模式",
           "test_steps": [
-            { "action": "执行 const DiscrollveConfig(translation: 0x01|0x02)", "checkpoint": "编译时或构造时触发 AssertionError。错误消息包含 'fromTop+fromBottom and fromLeft+fromRight are forbidden'" }
+            { "action": "执行 const DiscrollveConfig(translation: 0x01|0x02)", "checkpoint": "构造阶段参数校验拒绝该对立组合：编译时或构造时触发 AssertionError（错误消息包含 'fromTop+fromBottom and fromLeft+fromRight are forbidden'），符合预期" }
           ],
-          "expected_result": "构造被拒绝，不产生有效的 DiscrollveConfig 实例",
+          "expected_result": "fromTop+fromBottom 对立组合在构造阶段被参数校验拒绝：抛出 AssertionError，不产生有效的 DiscrollveConfig 实例，符合预期",
           "postconditions": "异常正常传播，不产生无效状态"
         },
         {
           "id": "F-04-07",
           "title": "构造 DiscrollveConfig(translation: fromLeft|fromRight) 触发 AssertionError",
           "level": "L2",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "单元测试；debug 模式",
           "test_steps": [
-            { "action": "执行 const DiscrollveConfig(translation: 0x04|0x08)", "checkpoint": "编译时或构造时触发 AssertionError。错误消息同 F-04-06" }
+            { "action": "执行 const DiscrollveConfig(translation: 0x04|0x08)", "checkpoint": "构造阶段参数校验拒绝该对立组合：编译时或构造时触发 AssertionError（错误消息同 F-04-06），符合预期" }
           ],
-          "expected_result": "构造被拒绝。fromLeft+fromRight 组合与 fromTop+fromBottom 组合被等效拒绝",
+          "expected_result": "fromLeft+fromRight 对立组合在构造阶段被参数校验拒绝：抛出 AssertionError，与 fromTop+fromBottom 组合被等效拒绝，符合预期",
           "postconditions": "异常正常传播"
         }
       ]
@@ -311,6 +330,7 @@
           "id": "F-05-01",
           "title": "中心触发模式——剩余空间充足时卡片中心到达视口中心触发",
           "level": "L0",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "单元测试；参数: viewportHeight=400, childHeight=200, totalHeight=1000, childBottom=300",
           "test_steps": [
             { "action": "调用 calculateRatio(absoluteTop=100, ...)", "checkpoint": "满足 center-reach 条件（remaining≥childH+halfViewport）。absoluteTop(100) ≤ halfViewport(200)。ratio = (200-100)/200 = 0.5" },
@@ -324,10 +344,11 @@
           "id": "F-05-02",
           "title": "顶部触发模式——剩余空间不足时卡片顶部到达视口底部触发",
           "level": "L1",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "单元测试；参数: viewportHeight=400, childHeight=200, totalHeight=550, childBottom=500",
           "test_steps": [
             { "action": "调用 calculateRatio(absoluteTop=300, ...)", "checkpoint": "满足 top-reach 条件（remaining<childH+halfViewport）。absoluteTop(300) ≤ viewportHeight(400)。ratio = (400-300)/200 = 0.5" },
-            { "action": "调用 calculateRatio(absoluteTop=0, ...)", "checkpoint": "ratio = clamp(400/200, 0, 1) = 1.0" },
+            { "action": "调用 calculateRatio(absoluteTop=0, ...)", "checkpoint": "ratio = clamp(400/200, 0, 1) = 1.0（卡片顶部到达视口底部，完全触发）" },
             { "action": "调用 calculateRatio(absoluteTop=500, ...)", "checkpoint": "返回 null（未触发——卡片顶部尚未到达视口底部）" }
           ],
           "expected_result": "剩余空间不足时自动切换为 top-reach 模式。ratio 变化范围和 clamp 行为与 center-reach 一致",
@@ -337,13 +358,14 @@
           "id": "F-05-03",
           "title": "clampRatio 在所有输入下将 ratio 限制在 [0.0, 1.0]",
           "level": "L0",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "单元测试",
           "test_steps": [
-            { "action": "clampRatio(-0.5, 0.0, 1.0)", "checkpoint": "返回 0.0" },
-            { "action": "clampRatio(0.0, 0.0, 1.0)", "checkpoint": "返回 0.0" },
-            { "action": "clampRatio(0.5, 0.0, 1.0)", "checkpoint": "返回 0.5" },
-            { "action": "clampRatio(1.0, 0.0, 1.0)", "checkpoint": "返回 1.0" },
-            { "action": "clampRatio(1.5, 0.0, 1.0)", "checkpoint": "返回 1.0" }
+            { "action": "调用 clampRatio(-0.5, 0.0, 1.0) 验证负值被裁剪为 0.0", "checkpoint": "返回 0.0" },
+            { "action": "调用 clampRatio(0.0, 0.0, 1.0) 验证下边界 0.0 保持不变", "checkpoint": "返回 0.0" },
+            { "action": "调用 clampRatio(0.5, 0.0, 1.0) 验证区间内值原样返回", "checkpoint": "返回 0.5" },
+            { "action": "调用 clampRatio(1.0, 0.0, 1.0) 验证上边界 1.0 保持不变", "checkpoint": "返回 1.0" },
+            { "action": "调用 clampRatio(1.5, 0.0, 1.0) 验证超过上界的值被裁剪为 1.0", "checkpoint": "返回 1.0" }
           ],
           "expected_result": "所有 5 个测试点精确通过。ratio 永远不会超出 [0.0, 1.0] 区间",
           "postconditions": "无"
@@ -352,11 +374,12 @@
           "id": "F-05-04",
           "title": "childHeight=0 时 calculateRatio 返回 null 而不抛出异常",
           "level": "L2",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "单元测试",
           "test_steps": [
-            { "action": "调用 calculateRatio(childHeight: 0, absoluteTop: 0, childBottom: 0, viewportHeight: 400, totalHeight: 800)", "checkpoint": "返回 null。无异常抛出，无除零错误" }
+            { "action": "调用 calculateRatio(childHeight: 0, absoluteTop: 0, childBottom: 0, viewportHeight: 400, totalHeight: 800)", "checkpoint": "参数校验不接受零高度子 Widget 参与计算：返回 null（静默跳过），无异常抛出，无除零错误，符合预期" }
           ],
-          "expected_result": "零高度子 Widget 被静默跳过，不参与变换计算，不触发异常",
+          "expected_result": "参数校验不接受零高度子 Widget 参与变换计算：calculateRatio 返回 null 静默跳过，不触发异常，符合预期",
           "postconditions": "无"
         }
       ]
@@ -371,6 +394,7 @@
           "id": "F-06-01",
           "title": "全组合卡片 Key('dv_card_all_combined') 四种变换同时生效且协调",
           "level": "L0",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "HarmonyOS 设备；Demo 页面；该卡片 config: alpha+scaleX+scaleY+fromBottom|fromLeft, threshold=0.2, h=220",
           "test_steps": [
             { "action": "卡片未触发时（ratio<0.2）检查", "checkpoint": "卡片不可见（opacity=0.0）+ 尺寸为零（scale=0.0）+ 位置偏移（translateY≈+220, translateX≈-(vw-48)）。四种效果同时处于初始态" },
@@ -384,11 +408,12 @@
           "id": "F-06-02",
           "title": "ratio=1.0 时所有已启用变换均精确达到设计终态",
           "level": "L1",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "HarmonyOS 设备；滚动至任意卡片完全触发位置（ratio=1.0）",
           "test_steps": [
-            { "action": "对卡片 Key('dv_card_alpha_bottom')（alpha+fromBottom,th=0.2）检查", "checkpoint": "opacity==1.0, translateY==0" },
-            { "action": "对卡片 Key('dv_card_scale_xy')（scaleX+scaleY）检查", "checkpoint": "scaleX==1.0, scaleY==1.0" },
-            { "action": "对卡片 Key('dv_card_bgcolor')（fromColor+toColor+alpha）检查", "checkpoint": "background-color==toColor(#000000), opacity==1.0" }
+            { "action": "对卡片 Key('dv_card_alpha_bottom')（alpha+fromBottom,th=0.2）检查", "checkpoint": "断言 alpha 卡片终态：opacity==1.0, translateY==0" },
+            { "action": "对卡片 Key('dv_card_scale_xy')（scaleX+scaleY）检查", "checkpoint": "断言 scale 卡片终态：scaleX==1.0, scaleY==1.0" },
+            { "action": "对卡片 Key('dv_card_bgcolor')（fromColor+toColor+alpha）检查", "checkpoint": "断言背景色卡片终态：background-color==toColor(#000000), opacity==1.0" }
           ],
           "expected_result": "每一张已完全触发的卡片，其所有启用的变换属性均达到终态值（opacity=1.0, scale=1.0, translate=0, color=toColor）。不因 threshold 值而偏离终态",
           "postconditions": "各卡片保持终态直到用户回滚"
@@ -405,6 +430,7 @@
           "id": "F-07-01",
           "title": "threshold=0（默认）变换在 ratio 刚 >0 时立即触发",
           "level": "L0",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "HarmonyOS 设备；Demo 页面；卡片 Key('dv_card_scale_xy') 的 threshold=默认 0.0，无延迟配置",
           "test_steps": [
             { "action": "缓慢向下滚动，观察卡片在刚进入触发区域时的行为", "checkpoint": "卡片在 ratio 刚开始 >0（绝对位置刚 ≤ halfViewport）的第一时间即出现缩放效果。无任何延迟区间" }
@@ -416,6 +442,7 @@
           "id": "F-07-02",
           "title": "threshold=0.2(Key dv_card_alpha_bottom) 与 threshold=0.4(Key dv_card_alpha_right) 延迟对比验证",
           "level": "L0",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "HarmonyOS 设备；Demo 页面；两卡片分别配置 threshold=0.2 和 0.4，均为 alpha 变换",
           "test_steps": [
             { "action": "向下滚动，观察两张卡片的触发顺序", "checkpoint": "threshold=0.2 的卡片先开始变换；threshold=0.4 的卡片后开始变换。两者触发时机相差约 0.2 的 ratio 区间" },
@@ -428,6 +455,7 @@
           "id": "F-07-03",
           "title": "withThreshold(1.0, anyThreshold) 始终精确返回 1.0",
           "level": "L1",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "单元测试",
           "test_steps": [
             { "action": "withThreshold(1.0, 0.0) → 期望 1.0", "checkpoint": "返回 1.0" },
@@ -442,12 +470,13 @@
           "id": "F-07-04",
           "title": "const DiscrollveConfig(threshold: 越界值) 在编译时或构造时被拒绝",
           "level": "L2",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "单元测试；debug 模式",
           "test_steps": [
-            { "action": "const DiscrollveConfig(threshold: -0.1)", "checkpoint": "编译时或构造时触发 AssertionError。消息为 'threshold must be in range [0.0, 1.0]'" },
-            { "action": "const DiscrollveConfig(threshold: 1.1)", "checkpoint": "同上。threshold 上界也受约束" }
+            { "action": "执行 const DiscrollveConfig(threshold: -0.1) 验证下界越界被参数校验拒绝", "checkpoint": "构造阶段参数校验拒绝越界值：编译时或构造时触发 AssertionError（消息为 'threshold must be in range [0.0, 1.0]'），符合预期" },
+            { "action": "执行 const DiscrollveConfig(threshold: 1.1) 验证上界越界被参数校验拒绝", "checkpoint": "同上：threshold 上界越界同样在构造阶段被参数校验拒绝，抛出 AssertionError，符合预期" }
           ],
-          "expected_result": "threshold ∈ [0.0, 1.0] 的约束在构造阶段强制执行。越界值不会进入运行时",
+          "expected_result": "threshold ∈ [0.0, 1.0] 的约束在构造阶段被参数校验强制执行：越界值抛出 AssertionError 被拒绝，不会进入运行时，符合预期",
           "postconditions": "异常正常传播"
         }
       ]
@@ -462,6 +491,7 @@
           "id": "F-08-01",
           "title": "向上回滚时已触发卡片的变换效果平滑反向播放至初始状态",
           "level": "L0",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "HarmonyOS 设备；Demo 页面；页面已向下滚动至至少一张动画卡片完全触发（ratio=1.0）的位置",
           "test_steps": [
             { "action": "以约 100px/秒 的速度缓慢向上回滚", "checkpoint": "之前完全触发的卡片随回滚逐渐反向变换：opacity 从 1→0 降低；scale 从 1→0 缩小；translate 从 0→初始偏移。变化为正向滚动的逆过程" },
@@ -474,6 +504,7 @@
           "id": "F-08-02",
           "title": "config.none 子 Widget Key('dv_footer_static') 在正向/反向滚动中持续稳定",
           "level": "L1",
+          "devices": ["phone", "tablet", "2in1"],
           "preconditions": "HarmonyOS 设备；Demo 页面；底部静态文本 config: none",
           "test_steps": [
             { "action": "从顶部向下完整滚动到底部", "checkpoint": "Key('dv_footer_static') 和 Key('dv_label_reset_hint') 全程持续可见：无透明度变化、无位移动画、无缩放、无着色变化" },

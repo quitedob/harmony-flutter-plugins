@@ -1,7 +1,7 @@
 # 需求解析报告
 
 **项目**: discrollview 鸿蒙化适配
-**生成日期**: 2026-07-30
+**生成日期**: 2026-08-04
 **需求来源**: GitHub flavienlaurent/discrollview + flutter-fast 适配工作流 PRD
 
 ---
@@ -29,10 +29,10 @@
 | F-02 | DiscrollveContent 内容布局 | P0 | `DiscrollveContent.child()` |
 | F-03 | DiscrollveConfig 变换配置 | P0 | `DiscrollveConfig` |
 | F-04 | DiscrollveDirection 方向枚举 | P1 | `DiscrollveDirection` |
-| F-05 | 滚动比例计算引擎 | P0 | `_calculateRatio()` |
-| F-06 | 变换渲染器 | P0 | `_applyTransforms()` |
+| F-05 | 滚动比例计算引擎 | P0 | `calculateRatio()` |
+| F-06 | 变换渲染器 | P0 | `_buildDiscrollvableChild()` |
 | F-07 | 阈值控制 | P1 | `DiscrollveConfig.threshold` |
-| F-08 | 重置/恢复 | P0 | `_resetTransforms()` |
+| F-08 | 重置/恢复 | P0 | `_resetTranslation()` |
 
 ## 4. 目标用户与场景
 
@@ -62,5 +62,5 @@
 | 3 | `flutter analyze` 零错误 | CI 命令 |
 | 4 | `flutter test` 全通过 | CI 命令 |
 | 5 | OHOS HAP 签名安装启动 | 真实设备验证 |
-| 6 | 24 个测试用例通过 | 用例评审 + Demo 执行 |
+| 6 | 31 个测试用例通过（L0-L2，与 `02-test-points.json`/`04-test-cases.json` 一致） | 用例评审 + Demo 执行 |
 | 7 | AJV Schema 验证通过 | `validate_json_ajv.cjs` |

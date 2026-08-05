@@ -58,9 +58,10 @@ class DiscrollveWidget extends StatefulWidget {
     this.controller,
     this.scrollDirection = Axis.vertical,
     this.physics,
-  }) : assert(children.length >= 2,
-             'DiscrollveWidget requires at least 2 children '
-             '(header + one animated child)');
+  }) : assert(
+            children.length >= 2,
+            'DiscrollveWidget requires at least 2 children '
+            '(header + one animated child)');
 
   @override
   State<DiscrollveWidget> createState() => _DiscrollveWidgetState();
@@ -73,8 +74,7 @@ class _DiscrollveWidgetState extends State<DiscrollveWidget> {
   double _viewportHeight = 0;
   double _totalHeight = 0;
 
-  ScrollController get _controller =>
-      widget.controller ?? (_scrollController);
+  ScrollController get _controller => widget.controller ?? (_scrollController);
 
   @override
   void initState() {
@@ -117,9 +117,10 @@ class _DiscrollveWidgetState extends State<DiscrollveWidget> {
       if (box == null || !box.hasSize) continue;
 
       // Position in the scrollable coordinate space.
-      final childTop =
-          box.localToGlobal(Offset.zero, ancestor: context.findRenderObject()).dy +
-              scrollOffset;
+      final childTop = box
+              .localToGlobal(Offset.zero, ancestor: context.findRenderObject())
+              .dy +
+          scrollOffset;
       final childHeight = box.size.height;
       final childBottom = childTop + childHeight;
       final absoluteTop = childTop - scrollOffset;
@@ -170,6 +171,7 @@ class _DiscrollveWidgetState extends State<DiscrollveWidget> {
             return false;
           },
           child: ListView.builder(
+            addAutomaticKeepAlives: false,
             controller: _controller,
             scrollDirection: widget.scrollDirection,
             physics: widget.physics ?? const ClampingScrollPhysics(),
@@ -234,7 +236,8 @@ class _DiscrollveWidgetState extends State<DiscrollveWidget> {
     }
 
     if (config.scaleX && config.scaleY) {
-      child = Transform.scale(scale: r, alignment: Alignment.center, child: child);
+      child =
+          Transform.scale(scale: r, alignment: Alignment.center, child: child);
     } else if (config.scaleX) {
       child = Transform(
         transform: Matrix4.identity()..setEntry(0, 0, r),
@@ -288,9 +291,15 @@ class _DiscrollveWidgetState extends State<DiscrollveWidget> {
 }
 
 /// Internal widget that applies discrollve translation based on its
-/// own size, matching the original Android behavior where
+/// child's real laid-out size, matching the original Android behavior where
 /// [DiscrollvableView] measures itself before translating.
-class _DiscrollveTranslation extends StatelessWidget {
+///
+/// A `LayoutBuilder` cannot be used here: inside a vertical `ListView` the
+/// child receives unbounded height constraints, so its own size would be
+/// infinite and the translation would be skipped. Instead this widget
+/// measures the child's render box after layout and applies a paint-only
+/// [Transform.translate] from that measured size.
+class _DiscrollveTranslation extends StatefulWidget {
   final int translation;
   final double ratioInverse;
   final Widget child;
@@ -302,39 +311,73 @@ class _DiscrollveTranslation extends StatelessWidget {
   });
 
   @override
+  State<_DiscrollveTranslation> createState() => _DiscrollveTranslationState();
+}
+
+class _DiscrollveTranslationState extends State<_DiscrollveTranslation> {
+  final GlobalKey _childKey = GlobalKey();
+  Size? _childSize;
+
+  @override
+  void initState() {
+    super.initState();
+    _scheduleMeasure();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _scheduleMeasure();
+  }
+
+  /// Measures the child's laid-out size after the current frame and updates
+  /// the translation offset. Converges: setState only fires when the measured
+  /// size actually changes, so there is no rebuild loop.
+  void _scheduleMeasure() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final element = _childKey.currentContext;
+      if (element == null) return;
+      final render = element.findRenderObject();
+      if (render is RenderBox) {
+        final size = render.size;
+        if (_childSize != size) {
+          setState(() => _childSize = size);
+        }
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final w = constraints.maxWidth;
-        final h = constraints.maxHeight;
-        if (!w.isFinite || !h.isFinite) return child;
+    final size = _childSize;
+    double dx = 0, dy = 0;
+    if (size != null) {
+      final w = size.width;
+      final h = size.height;
+      if (_hasTranslation(DiscrollveDirection.fromBottom)) {
+        dy = h * widget.ratioInverse;
+      }
+      if (_hasTranslation(DiscrollveDirection.fromTop)) {
+        dy = -h * widget.ratioInverse;
+      }
+      if (_hasTranslation(DiscrollveDirection.fromLeft)) {
+        dx = -w * widget.ratioInverse;
+      }
+      if (_hasTranslation(DiscrollveDirection.fromRight)) {
+        dx = w * widget.ratioInverse;
+      }
+    }
 
-        double dx = 0, dy = 0;
-
-        if (_hasTranslation(DiscrollveDirection.fromBottom)) {
-          dy = h * ratioInverse;
-        }
-        if (_hasTranslation(DiscrollveDirection.fromTop)) {
-          dy = -h * ratioInverse;
-        }
-        if (_hasTranslation(DiscrollveDirection.fromLeft)) {
-          dx = -w * ratioInverse;
-        }
-        if (_hasTranslation(DiscrollveDirection.fromRight)) {
-          dx = w * ratioInverse;
-        }
-
-        return Transform.translate(
-          offset: Offset(dx, dy),
-          child: child,
-        );
-      },
+    return Transform.translate(
+      offset: Offset(dx, dy),
+      child: KeyedSubtree(key: _childKey, child: widget.child),
     );
   }
 
   bool _hasTranslation(int mask) {
-    if (translation == -1) return false;
-    return (translation & mask) == mask;
+    if (widget.translation == -1) return false;
+    return (widget.translation & mask) == mask;
   }
 }
 

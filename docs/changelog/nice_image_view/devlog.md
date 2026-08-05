@@ -375,4 +375,69 @@ module.json, pack.info, pkgSdkInfo.json
 
 ---
 
-*本日志由 AI 辅助生成，记录 nice_image_view 鸿蒙适配的完整开发过程、问题诊断和解决方案。*
+## 十、2026-08-04 独立运行收尾（shehuan_NiceImageView）
+
+> 目标根目录：`flutter_library_workflow/flutter_library_workflow_release/repos-flutter-fast/shehuan_NiceImageView`
+> 与 2026-07-30 donor（`NiceImageView/`）为同一上游，但为**全新独立运行**，修复 donor 未暴露问题并补齐缺失证据。
+
+### 10.1 发现的 donor 缺陷（flutter test 实际运行后暴露）
+
+donor 的 `flutter test` 从未真正运行（历史 VM snapshot 问题），本运行实际跑通后暴露两个框架 bug：
+
+1. **dispose 中 setState**：donor `_clearImage()` 在 dispose 路径调用 setState，卸载时触发 `_lifecycleState != defunct` 断言崩溃；
+2. **initState 依赖 MediaQuery**：donor 在 initState 调用 `createLocalImageConfiguration`（内部依赖 InheritedWidget），触发框架断言。
+
+**修复**：① 拆分 `_removeImageListener`/`_clearImage`，dispose 仅移除监听；② 图片改到 `didChangeDependencies` 解析。另补齐 isCoverSrc 矩形裁剪内缩（对齐 Android `srcRectF = borderRectF`）。
+
+### 10.2 Windows 构建故障与绕过
+
+- `flutter build hap --debug` → `BATCH RECURSION`（.bat 包装递归）→ DevEco `node.exe hvigorw.js assembleHap --no-daemon` 直连成功；
+- 路径超长（>259）→ 物理短工作区 `C:\niv` 暂存插件 + `example_auto`，重新生成 metadata 后构建。
+
+### 10.3 真机验证
+
+- HUAWEI Mate 60（API 24 / `192.168.3.85:41665`）：签名 HAP 安装/启动 PASS；
+- 20 条用例逐条驱动（`uitest uiInput` + `snapshot_display`），NATIVE_VLM 逐张核对 → 全部「符合预期」；
+- `一键测试全部` → 通过 20 条，失败 0 条，共 20 条。
+
+### 10.4 管线与验证
+
+- 5/5 生产 JSON AJV VALID；8/8 一致性 PASS；
+- PRD 双文件字节一致 + 4 张 Mermaid `mmdc` 渲染 PASS（Chrome headless 修复）；
+- 20 用例 XLSX + demo-map + 三级导航 Demo；
+- 最终验证器 2 类 over-strict demo 文本检查未通过（非中文字段值 + 合法 ASCII 字面量），与 exporter field-for-field 及 skill 自身格式冲突，已如实记录。
+
+## 十一、2026-08-04 本仓库（donor `NiceImageView/`）全量复跑·最终交付收尾
+
+> 目标根目录：`flutter_library_workflow/flutter_library_workflow_release/repos-flutter-fast/NiceImageView/`
+> 对 donor 仓库本身按 schema 合规流程重跑 01/02/03/04 并补齐 05 交付记录，独立构建签名 HAP 并完成真机安装/启动验证。
+
+### 11.1 Schema 合规重生成
+
+- `01-analysis.json` / `02-planning.json` / `03-coding-library.json` / `04-testing.json` 保持生产记录不动（受保护），对 `05-summary.json` / `05-demo-gen.json` 做全量重生成聚合；
+- **5/5 生产 JSON AJV VALID**（AJV 8.17.1 / Draft 2020-12）；8 项跨阶段一致性检查 7/8 pass，`channel_name_consistency` 因 donor 的 01.channels 为空而 03 引用 channel `NiceImageView` 被脚本判为 fail（受保护文件，未改动）。
+
+### 11.2 测试设计与独立 Demo
+
+- 24 条测试用例 + `05-test-cases.xlsx`（24 行），评审 95/95（analysis-review overall 95、case-review overall 95）；
+- `flutter test` **22/22 PASS**（修复 `lib/src/nice_image_view.dart` 两处真实缺陷：dispose 期 setState、initState 依赖 MediaQuery）；`flutter analyze` 0 issues；DFX fix_dart.py exit 0；代码审查 40 文件 0 issues；DroidRun 5 L0；
+- `flutter create --platforms=ohos example_auto` 独立 Demo：pubspec 名 `nice_image_view_example_auto`，36 个 Dart 源（24 用例页 + 8 模块页 + 首页 + demo_runner + result_panel），`path: ../` 引用插件，中文 UI，共享执行器 `runCase`，「一键测试全部」(`Key('btn_test_all')`)、「复制日志」(`Key('btn_copy_log')` → `Clipboard.setData`)。
+
+### 11.3 签名 HAP 与真机验证
+
+- 构建：短工作区 `D:\niv_build\NiceImageView\example_auto` + DevEco `node hvigorw.js assembleHap -p product=default -p buildMode=debug --no-daemon`（绕过 Windows 259 字符路径与 BATCH RECURSION），**BUILD SUCCESSFUL ~20s**，SignHap PASS；
+- HAP：`.ohos-adaptation/hap/nice_image_view_example_auto-debug-signed.hap`，141,676,364 字节，SHA-256 `6f231810998185892ed738240d2d669736203e66823e35e1437067f4ebc5073d`，24 entries（libflutter.so arm64/x86_64 + kernel_blob.bin）；
+- 真机：phone **BRA-AL00**（OHOS API 24，Wi-Fi 192.168.3.85:41665）——先卸载旧 bundle 后 `hdc install` PASS、`aa start` 启动 PASS，Flutter engine 初始化、首页语义树渲染（`NiceImageView 功能模块` / `一键测试全部` / `复制日志`）；
+- **运行态行为 NOT_RUN（诚实）**：midscene 视觉模型本会话未配置，direct-click 点按未能确认汇总弹窗，`test_all_run=NOT_RUN`、`individually_executed_case_ids=[]`，不将运行态伪造成 PASS；
+- HAP 保留兼容 bundle 标识 `com.example.flutter_ohos_test`（DevEco 默认 debug 证书），非插件永久生产签名。
+
+### 11.4 文档与证据
+
+- `05-demo-gen.json` / `05-demo-gen-report.md`：24 用例三清单一致、`user_decision=ACCEPTED`、`demo_source_files` 36 个真实 Dart 源（含 SHA-256）、`status=PARTIAL`（运行态 NOT_RUN）；
+- `05-summary.json` / `05-summary-report.md`：聚合 01–04，16/16 API、22 测试、HAP 哈希、设备 install/launch PASS + behavior NOT_RUN、deferred gates、回滚方案；
+- `INTEGRATION_GUIDE.md` 刷新（path/pub 依赖、16 参数用法、平台/权限/已知限制）；
+- 日志：`demo-build.log` 追加 hvigor 构建尾（EXIT_CODE=0）、`hap-install.log` / `hap-launch.log` / `device-test.log`（EXIT_CODE=0）。
+
+---
+
+*本日志由 AI 辅助生成，记录 nice_image_view 鸿蒙适配的完整开发过程、问题诊断和解决方案。2026-07-30 历史记录中的 Hub 路径/计数以 2026-08-04 独立运行为准。donor `NiceImageView/` 复跑记录见第十一节，运行态行为验证（behavior_status）仍为 NOT_RUN，待全自动逐用例运行后升级为 PASS。*

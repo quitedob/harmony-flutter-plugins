@@ -313,3 +313,49 @@ set "PATH=D:\deveco\DevEco Studio\tools\node;D:\deveco\DevEco Studio\tools\hvigo
 6. **每个阶段产物写入后立即运行 verifier**，不要积累到最后
 7. **DFX scan 的 CLI 参数格式因脚本版本而异**（`--target` vs 位置参数），先 `--help` 再执行
 8. **CodeLinter 机械发现不等于真实缺陷**——每个 finding 都需要语义复核（跨方法控制流、封闭数据类型等）
+
+---
+
+## 十一、2026-08-04 最终阶段收尾（final-stage close-out）
+
+### 11.1 目标与产物
+
+补齐 `flutter` 完整 profile 的最终阶段交付物，并对齐跨阶段记录。新增：`05-summary.json`、`05-summary-report.md`、`05-schema-validation.json`、`05-pipeline-consistency.json`、`INTEGRATION_GUIDE.md`、`04-testing-report.md`，以及最终门禁报告 `logs/final-gate-2026-08-04.json`。
+
+### 11.2 记录一致性
+
+- 早期 `04-testing.json`（example fail / device skipped）与 `artifact-manifest.json`（build PASS / LAUNCHED）、`05-demo-gen.json`（failed）三者相互矛盾。
+- 以 `artifact-manifest.json` 的签名 HAP 真机证据为 ground truth，将 `04-testing.json` 对齐为 `example_build_status=pass`、`device_test_status=partial`（3 个 API 真机核对通过，自动套件未执行）；`05-demo-gen.json` 对齐为 `partial`。
+- `validate_json_ajv.cjs` 重跑：01–05 AJV 全 PASS，8 项 pipeline 一致性检查全 pass，exit 0。
+
+### 11.3 工程重建与 HAP 构建
+
+按用户要求执行 `flutter create --platforms ohos` → `flutter build hap` 流程（遵循 XLSX 测试矩阵）：
+
+1. 原路径 `flutter build hap --debug`：触发 Git Bash → `flutter.bat` → `hvigorw.bat` batch recursion，ohpm install 中断。
+2. 切 DevEco Node + `hvigorw.js` 直调（PowerShell，非 Git Bash）：绕过 recursion，FlutterTask 完成 kernel 编译、native 编译通过，但在长路径（120 字符）下触发 **259 字符路径上限**。
+3. 建立物理短工作区 `D:/dimei_build_20260804`（37 字符），按原仓库布局放置插件包与 `example_auto/`，删除陈旧 `.dart_tool`/`oh_modules`/`package-lock` 后 `flutter pub get` + `npm install` 重装 `flutter-hvigor-plugin`。
+4. 短工作区直调 hvigorw.js → **BUILD SUCCESSFUL**（53.6s，SignHap 因无签名配置跳过，符合预期）。
+5. 产物 `entry-default-unsigned.hap`（97,016,805 bytes）复制为 `artifacts/device_imei-example-debug-unsigned-20260804.hap`（SHA `ef41bb1b…daefec96`，21 entries：module.json、pack.info、libflutter.so、kernel_blob.bin 含 26 用例 Dart demo）。
+6. XLSX 26 用例 demo 文件（`lib/main.dart`、`test/widget_test.dart`、`module.json5`、`app.json5`、`pubspec.yaml`）在 `flutter create` 前后哈希不变。
+
+### 11.4 工程清理
+
+- 移除 `example_auto/ohos/entry/src/main/module.json5` 的 `ohos.permission.INTERNET`（本插件无网络需求）。
+- README 补 OHOS 支持与 ODID 语义；CHANGELOG 补 OHOS 条目。
+- 临时短工作区 `D:/dimei_build_20260804` 保留用于后续真机签名构建（provenance 记录于此）。
+
+### 11.5 最终门禁（verify_adaptation_artifacts.py --stage final）结果
+
+**FAIL（exit 1）**——失败项全部为记录在案的待办，非本次改动引入：
+
+- 预存在测试设计缺口：`04-ohos-demo-case-map.json`、`05-xlsx-demo-binding.json` 缺失；`04-test-cases.json` expectation_metadata 4/26、devices 为空、个别 preconditions 非中文。
+- 运行态缺口：`04-testing.json` device_test_status=partial（门禁要求 pass）、case_results 未覆盖 26 条、`05-demo-gen.json` 无逐条执行证据（status 非 PASS）。
+- 设备/签名缺口：独立 example_auto 无签名配置（签名 HAP 在宿主工程、外部路径，不被项目内 HAP 模式扫描命中）。
+- 本次交付物（05-summary / 05-schema / 05-pipeline / INTEGRATION_GUIDE / 04-testing-report）均通过各自检查，无新增错误。
+
+### 11.6 下一步（需真机 / DevEco Studio / 执行模型）
+
+1. DevEco Studio 打开 `D:/dimei_build_20260804/example_auto/ohos`，登录并连接真机，启用自动签名 → 构建签名 HAP 并安装启动。
+2. 运行 DroidRun 4 L0 与 Hypium 11 用例，补齐运行态证据。
+3. 回填 `04-test-cases.json` 的 expectation_metadata 与 devices，并补齐 demo-case-map 与 xlsx-binding 后重跑最终门禁。

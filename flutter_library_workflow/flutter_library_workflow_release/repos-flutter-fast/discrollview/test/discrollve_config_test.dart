@@ -4,12 +4,12 @@ import 'package:discrollview/discrollve_config.dart';
 void main() {
   group('DiscrollveConfig', () {
     test('none config has no transforms', () {
-      final config = DiscrollveConfig.none;
+      const config = DiscrollveConfig.none;
       expect(config.hasTransforms, isFalse);
     });
 
     test('default constructor creates config with all false', () {
-      final config = DiscrollveConfig();
+      const config = DiscrollveConfig();
       expect(config.alpha, isFalse);
       expect(config.scaleX, isFalse);
       expect(config.scaleY, isFalse);
@@ -21,34 +21,35 @@ void main() {
     });
 
     test('alpha config has transforms', () {
-      final config = DiscrollveConfig(alpha: true);
+      const config = DiscrollveConfig(alpha: true);
       expect(config.hasTransforms, isTrue);
     });
 
     test('scaleX config has transforms', () {
-      final config = DiscrollveConfig(scaleX: true);
+      const config = DiscrollveConfig(scaleX: true);
       expect(config.hasTransforms, isTrue);
     });
 
     test('translation config has transforms', () {
-      final config = DiscrollveConfig(
+      const config = DiscrollveConfig(
         translation: DiscrollveDirection.fromBottom,
       );
       expect(config.hasTransforms, isTrue);
     });
 
     test('color config has transforms', () {
-      final config = DiscrollveConfig(fromColor: 0xFF000000, toColor: 0xFFFFFFFF);
+      const config =
+          DiscrollveConfig(fromColor: 0xFF000000, toColor: 0xFFFFFFFF);
       expect(config.hasTransforms, isTrue);
     });
 
     test('threshold at 0.0 is valid', () {
-      final config = DiscrollveConfig(threshold: 0.0);
+      const config = DiscrollveConfig(threshold: 0.0);
       expect(config.threshold, 0.0);
     });
 
     test('threshold at 1.0 is valid', () {
-      final config = DiscrollveConfig(threshold: 1.0);
+      const config = DiscrollveConfig(threshold: 1.0);
       expect(config.threshold, 1.0);
     });
 
@@ -56,17 +57,17 @@ void main() {
       // Const context catches invalid threshold at compile time.
       // In non-const context, the assert fires in debug mode.
       // We verify the threshold is stored correctly when valid.
-      final validLow = DiscrollveConfig(threshold: 0.0);
+      const validLow = DiscrollveConfig(threshold: 0.0);
       expect(validLow.threshold, 0.0);
-      final validHigh = DiscrollveConfig(threshold: 1.0);
+      const validHigh = DiscrollveConfig(threshold: 1.0);
       expect(validHigh.threshold, 1.0);
       // Runtime assert is verified by const context:
       // const DiscrollveConfig(threshold: -0.1); // compile error
     });
 
     test('configs with same values have identical fields', () {
-      final a = DiscrollveConfig(alpha: true, threshold: 0.3);
-      final b = DiscrollveConfig(alpha: true, threshold: 0.3);
+      const a = DiscrollveConfig(alpha: true, threshold: 0.3);
+      const b = DiscrollveConfig(alpha: true, threshold: 0.3);
       expect(a.alpha, b.alpha);
       expect(a.threshold, b.threshold);
       expect(a.scaleX, b.scaleX);
@@ -79,7 +80,7 @@ void main() {
       // Const context: const DiscrollveConfig(translation: 0x01|0x02)
       // would be a compile-time error due to the assert.
       // We verify valid combinations pass.
-      final valid = DiscrollveConfig(
+      const valid = DiscrollveConfig(
         translation:
             DiscrollveDirection.fromTop | DiscrollveDirection.fromRight,
       );
@@ -90,7 +91,7 @@ void main() {
       // Const context: const DiscrollveConfig(translation: 0x04|0x08)
       // would be a compile-time error due to the assert.
       // We verify valid combinations pass.
-      final valid = DiscrollveConfig(
+      const valid = DiscrollveConfig(
         translation:
             DiscrollveDirection.fromBottom | DiscrollveDirection.fromLeft,
       );
@@ -98,7 +99,7 @@ void main() {
     });
 
     test('fromBottom | fromLeft is valid', () {
-      final config = DiscrollveConfig(
+      const config = DiscrollveConfig(
         translation:
             DiscrollveDirection.fromBottom | DiscrollveDirection.fromLeft,
       );
@@ -106,7 +107,7 @@ void main() {
     });
 
     test('fromTop | fromRight is valid', () {
-      final config = DiscrollveConfig(
+      const config = DiscrollveConfig(
         translation:
             DiscrollveDirection.fromTop | DiscrollveDirection.fromRight,
       );
@@ -123,7 +124,7 @@ void main() {
     });
 
     test('directions can be combined with bitwise OR', () {
-      final combined =
+      const combined =
           DiscrollveDirection.fromTop | DiscrollveDirection.fromRight;
       expect(combined, 0x09);
     });
